@@ -1,7 +1,9 @@
 package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.TournamentDTO;
+import com.mp.footballtournamentsandleaguesmanager.model.Team;
 import com.mp.footballtournamentsandleaguesmanager.model.Tournament;
+import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +16,13 @@ import java.util.stream.Collectors;
 @Service
 public class TournamentService {
     private final TournamentRepository tournamentRepository;
+    private final TeamRepository teamRepository;
 
     @Autowired
-    public TournamentService(TournamentRepository tournamentRepository) {
+    public TournamentService(TournamentRepository tournamentRepository,
+                             TeamRepository teamRepository) {
         this.tournamentRepository = tournamentRepository;
+        this.teamRepository = teamRepository;
     }
     public TournamentDTO getTournamentById(Long tournamentId){
         return convertToDTO(tournamentRepository.findById(tournamentId).orElseThrow()); //TODO
@@ -35,6 +40,17 @@ public class TournamentService {
     public Boolean deleteTournamentById(Long tournamentId){
         if(tournamentRepository.existsById(tournamentId)){
             tournamentRepository.deleteById(tournamentId);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public Boolean addTeamToTournamentByIds(Long teamId, Long tournamentId){
+        if (teamRepository.existsById(teamId) && tournamentRepository.existsById(tournamentId)) {
+            Team team = teamRepository.findById(teamId).orElseThrow();
+            Tournament tournament = tournamentRepository.findById(tournamentId).orElseThrow();
+            tournament.addTeamToTournament(team);
+            tournamentRepository.save(tournament);
             return true;
         }else{
             return false;

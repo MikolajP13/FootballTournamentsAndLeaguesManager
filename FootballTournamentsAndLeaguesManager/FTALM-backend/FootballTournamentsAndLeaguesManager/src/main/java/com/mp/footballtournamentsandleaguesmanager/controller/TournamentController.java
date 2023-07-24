@@ -1,6 +1,7 @@
 package com.mp.footballtournamentsandleaguesmanager.controller;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.TournamentDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.TournamentTeamDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Tournament;
 import com.mp.footballtournamentsandleaguesmanager.service.TournamentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,12 @@ public class TournamentController {
     public ResponseEntity<Tournament> addTournament(@RequestBody Tournament tournament){
         Tournament newTournament = tournamentService.addTournament(tournament);
         return new ResponseEntity<>(newTournament, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/addTeam")
+    public ResponseEntity<String> addTeamToTournamentByIds(@RequestBody TournamentTeamDTO tournamentTeamDTO){
+        return tournamentService.addTeamToTournamentByIds(tournamentTeamDTO.getTeamId(), tournamentTeamDTO.getTournamentId()) ?
+                ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/delete/{tournamentId}")

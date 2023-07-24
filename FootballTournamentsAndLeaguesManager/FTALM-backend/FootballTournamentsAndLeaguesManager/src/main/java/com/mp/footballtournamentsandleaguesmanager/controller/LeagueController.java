@@ -1,6 +1,7 @@
 package com.mp.footballtournamentsandleaguesmanager.controller;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueTeamDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.League;
 import com.mp.footballtournamentsandleaguesmanager.service.LeagueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,12 @@ public class LeagueController {
     public ResponseEntity<League> addLeague(@RequestBody League league){
         League newLeague = leagueService.addLeague(league);
         return new ResponseEntity<>(newLeague, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/addTeam")
+    public ResponseEntity<String> addTeamToLeagueByIds(@RequestBody LeagueTeamDTO leagueTeamDTO){
+        return leagueService.addTeamToLeagueByIds(leagueTeamDTO.getTeamId(), leagueTeamDTO.getLeagueId()) ?
+                ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/delete/{leagueId}")

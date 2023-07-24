@@ -2,7 +2,9 @@ package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.League;
+import com.mp.footballtournamentsandleaguesmanager.model.Team;
 import com.mp.footballtournamentsandleaguesmanager.repository.LeagueRepository;
+import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,13 @@ import java.util.stream.Collectors;
 @Service
 public class LeagueService {
     private final LeagueRepository leagueRepository;
+    private final TeamRepository teamRepository;
 
     @Autowired
-    public LeagueService(LeagueRepository leagueRepository) {
+    public LeagueService(LeagueRepository leagueRepository,
+                         TeamRepository teamRepository) {
         this.leagueRepository = leagueRepository;
+        this.teamRepository = teamRepository;
     }
 
     public LeagueDTO getLeagueById(Long leagueId){
@@ -39,6 +44,17 @@ public class LeagueService {
             return true;
         }else {
             System.out.println("Nie istnieje");
+            return false;
+        }
+    }
+    public Boolean addTeamToLeagueByIds(Long teamId, Long leagueId){
+        if(leagueRepository.existsById(leagueId) && teamRepository.existsById(teamId)){
+            League league = leagueRepository.findById(leagueId).orElseThrow();
+            Team team = teamRepository.findById(teamId).orElseThrow();
+            league.addTeamToLeague(team);
+            leagueRepository.save(league);
+            return true;
+        }else{
             return false;
         }
     }

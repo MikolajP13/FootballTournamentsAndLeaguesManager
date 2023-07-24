@@ -2,6 +2,9 @@ package com.mp.footballtournamentsandleaguesmanager.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "Teams")
 public class Team {
@@ -11,6 +14,10 @@ public class Team {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+    @ManyToMany(mappedBy = "teams")
+    private Set<League> leagues = new HashSet<>();
+    @ManyToMany(mappedBy = "teams")
+    private Set<Tournament> tournaments = new HashSet<>();
     private String name;
     private Long captainId;
 
@@ -46,6 +53,22 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<League> getLeagues() {
+        return leagues;
+    }
+
+    public void setLeagues(Set<League> leagues) {
+        this.leagues = leagues;
+    }
+
+    public Set<Tournament> getTournaments() {
+        return tournaments;
+    }
+
+    public void setTournaments(Set<Tournament> tournaments) {
+        this.tournaments = tournaments;
     }
 
     public Long getCaptainId() {
