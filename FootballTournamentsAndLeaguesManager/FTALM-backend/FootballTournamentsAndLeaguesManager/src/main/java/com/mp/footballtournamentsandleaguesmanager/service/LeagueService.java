@@ -43,7 +43,6 @@ public class LeagueService {
             leagueRepository.deleteById(leagueId);
             return true;
         }else {
-            System.out.println("Nie istnieje");
             return false;
         }
     }
