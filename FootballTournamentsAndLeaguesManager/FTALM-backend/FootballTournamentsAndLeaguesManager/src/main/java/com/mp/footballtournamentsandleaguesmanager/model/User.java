@@ -14,16 +14,18 @@ public class User {
     private String lastName;
     private String emailAddress;
     private String password;
+    private boolean isEnabled;
 
     public User() {
     }
-    public User(Long id, String userName, String firstName, String lastName, String emailAddress, String password) {
+    public User(Long id, String userName, String firstName, String lastName, String emailAddress, String password, boolean isEnabled) {
         this.id = id;
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.password = password;
+        this.isEnabled = false;
     }
 
     public Long getId() {
@@ -74,6 +76,14 @@ public class User {
         this.password = password;
     }
 
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("User{");
@@ -83,6 +93,7 @@ public class User {
         sb.append(", lastName='").append(lastName).append('\'');
         sb.append(", emailAddress='").append(emailAddress).append('\'');
         sb.append(", password='").append(password).append('\'');
+        sb.append(", isEnabled=").append(isEnabled);
         sb.append('}');
         return sb.toString();
     }

@@ -31,7 +31,11 @@ public class UserService {
     }
 
     public User findUserByUserName(String userName) {
-        return userRepository.findUserByUserName(userName).orElseThrow(()-> new UserNotFoundException("User " + userName + " was not found"));
+        return userRepository.findUserByUserName(userName).orElseThrow(() -> new UserNotFoundException("User " + userName + " was not found"));
+    }
+
+    public User findUserByEmailAddress(String emailAddress){
+        return userRepository.findUserByEmailAddress(emailAddress).orElseThrow(() -> new UserNotFoundException("User " + emailAddress + " was not found"));
     }
 
     public User findPasswordByUserName(String userName){

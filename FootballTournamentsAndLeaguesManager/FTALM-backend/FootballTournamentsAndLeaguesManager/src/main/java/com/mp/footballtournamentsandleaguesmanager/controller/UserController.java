@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Boolean> userLogin(@RequestBody User user){
-        boolean isValid = authService.loginValidation(user.getUserName(), user.getPassword());
+        boolean isValid = authService.loginValidation(user.getUserName(), user.getEmailAddress(), user.getPassword());
         return isValid ? ResponseEntity.ok(true) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
     }
 
@@ -40,9 +40,15 @@ public class UserController {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @GetMapping("/find/{userName}")
+    @GetMapping("/findUserByName/{userName}")
     public ResponseEntity<User> getUserByUserName(@PathVariable("userName") String userName){
         User user = userService.findUserByUserName(userName);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/findUserByEmail/{emailAddress}")
+    public ResponseEntity<User> getUserByEmailAddress(@PathVariable("emailAddress") String emailAddress){
+        User user = userService.findUserByEmailAddress(emailAddress);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
