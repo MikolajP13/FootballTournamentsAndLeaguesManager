@@ -1,0 +1,22 @@
+<div class="auth-form">
+  <div class="auth-form-header">
+    <h1>Sign in to FTAML</h1>
+  </div>
+  <div class="auth-form-body">
+    <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)" method="post">
+      <div>
+        <label for="login-field"><b>Username or email address</b></label>
+        <input type="text" ngModel name="login" required>
+      </div>
+      <div>
+        <label for="password-field"><b>Password</b></label>
+        <a href="#">Forgot password?</a>
+        <input type="password" ngModel name="password" required>
+      </div>
+      <button type="submit">Sign in</button>
+    </form>
+    <div class="create-account-form-body">
+      <span> Don't have an account? <a href="/register">Create an account</a>.</span>
+    </div>
+  </div>
+</div>
