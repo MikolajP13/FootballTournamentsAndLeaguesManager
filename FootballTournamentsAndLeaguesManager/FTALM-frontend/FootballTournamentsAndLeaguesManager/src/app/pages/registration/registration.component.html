@@ -1,0 +1,85 @@
+<div class="registration-form">
+  <div class="registration-form-header">
+    <h1>Join FTALM</h1>
+  </div>
+  <div class="registration-form-body">
+    <form #registrationForm="ngForm" (ngSubmit)="registerUser(registrationForm)" method="post">
+      <label for="username">Enter your username</label>
+      <div class="username-form">
+        <i class="bi" [ngClass]="{
+          'bi-arrow-right-short': iconTypeForUsername === 0,
+          'bi-x': iconTypeForUsername === 1,
+          'bi-check': iconTypeForUsername === 2}"></i>
+        <input type="text" autofocus="autofocus" [(ngModel)]="username" name="username" (ngModelChange)="onInputChange('username', username)" (focus)="isUsernameFocused = true" (blur)="isUsernameFocused = false" required>
+        <div class="error-form" *ngIf="isUsernameFocused && registrationForm.controls['username'].errors?.['required']">
+          Username is required
+        </div>
+        <div class="error-form" [hidden]="isUsernameCorrect" *ngIf="isUsernameFocused && form.controls['username'].errors?.['invalidUsername']">
+          Username must contain...
+        </div>
+      </div>
+      <div class="firstname-field">
+        <label for="firstname">Enter your firstname</label>
+        <i class="bi" [ngClass]="{
+          'bi-arrow-right-short': iconTypeForFirstname === 0,
+          'bi-x': iconTypeForFirstname === 1,
+          'bi-check': iconTypeForFirstname === 2}"></i>
+        <input id="firstname" type="text" [(ngModel)]="firstname" name="firstname" (ngModelChange)="onInputChange('firstname', firstname)" (focus)="isFirstnameFocused = true" (blur)="isFirstnameFocused = false" required>
+        <div class="error-form" *ngIf="isFirstnameFocused && registrationForm.controls['firstname'].errors?.['required']">
+          First name is required
+        </div>
+        <div class="error-form" [hidden]="isFirstnameCorrect" *ngIf="isFirstnameFocused && form.controls['firstname'].errors?.['invalidFirstOrLastName']">
+          First name must contain...
+        </div>
+      </div>
+      <div class="lastname-field">
+        <label for="lastname">Enter your lastname</label>
+        <i class="bi" [ngClass]="{
+          'bi-arrow-right-short': iconTypeForLastname === 0,
+          'bi-x': iconTypeForLastname === 1,
+          'bi-check': iconTypeForLastname === 2}"></i>
+        <input id="lastname" type="text" [(ngModel)]="lastname" name="lastname" (ngModelChange)="onInputChange('lastname', lastname)" (focus)="isLastnameFocused = true" (blur)="isLastnameFocused = false" required>
+        <div class="error-form" *ngIf="isLastnameFocused && registrationForm.controls['lastname'].errors?.['required']">
+          Last name is required
+        </div>
+        <div class="error-form" [hidden]="isLastnameCorrect" *ngIf="isLastnameFocused && form.controls['lastname'].errors?.['invalidFirstOrLastName']">
+          Last name must contain...
+        </div>
+      </div>
+      <label for="email">Enter your email</label>
+      <div class="email-field">
+        <i class="bi" [ngClass]="{
+          'bi-arrow-right-short': iconTypeForEmail === 0,
+          'bi-x': iconTypeForEmail === 1,
+          'bi-check': iconTypeForEmail === 2}"></i>
+        <input id="email" type="email" [(ngModel)]="email" name="email" (ngModelChange)="onInputChange('email', email)" (focus)="isEmailFocused = true" (blur)="isEmailFocused = false" required>
+        <div class="error-form" *ngIf="isEmailFocused && registrationForm.controls['email'].errors?.['required']">
+          Email is required
+        </div>
+        <div class="error-form" [hidden]="isEmailCorrect" *ngIf="isEmailFocused && form.controls['email'].errors?.['invalidEmail']">
+          Email must contain...
+        </div>
+      </div>
+      <label for="password">Enter your password</label>
+      <div class="password-field">
+        <i class="bi" [ngClass]="{
+          'bi-arrow-right-short': iconTypeForPassword === 0,
+          'bi-x': iconTypeForPassword === 1,
+          'bi-check': iconTypeForPassword === 2}"></i>
+        <input id="pasword" type="{{ isPasswordVisible ? 'text' : 'password'}}" [(ngModel)]="password" name="password" (ngModelChange)="onInputChange('password', password)" (focus)="isPasswordFocused = true" (blur)="isPasswordFocused = false" required>
+        <i class="bi" [ngClass]="isPasswordVisible ? 'bi-eye-slash' : 'bi-eye'" (click)="togglePasswordVisibilty()"></i>
+        <div id="password-strength-section">
+          <app-strength-meter [password]="password"></app-strength-meter>
+        </div>
+        <div class="error-form" *ngIf="isPasswordFocused && registrationForm.controls['password'].errors?.['required']">
+          Password is required
+        </div>
+        <div class="error-form" [hidden]="isPasswordCorrect" *ngIf="isPasswordFocused && form.controls['password'].errors?.['invalidPassword']">
+          Password must contain...
+        </div>
+      </div>
+      <span>Already have an account? <a id="link" href="/">Sign in →</a></span>
+      <button id="create-account-btn" type="submit" [disabled]="!isCreateAccountButtonEnable">Create account</button>
+    </form>
+  </div>    
+</div>

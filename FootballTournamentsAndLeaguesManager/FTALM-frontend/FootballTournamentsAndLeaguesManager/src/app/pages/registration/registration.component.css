@@ -1,0 +1,112 @@
+.registration-form-header {
+  text-align: center;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.registration-form-body {
+  display: block;
+  background-color: #f6f8fa;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.registration-form-body label {
+  display: block;
+  margin-top: 10px;
+}
+
+.bi-eye, .bi-eye-slash {
+  margin-right: 5px;
+  font-size: 18px;
+  color: black;
+  cursor: pointer;
+}
+
+.bi-arrow-right-short {
+  color: blue;
+}
+
+.bi-x {
+  color: red;
+}
+
+.bi-check {
+  color: green;
+}
+
+.registration-form-body input {
+  width: 90%;
+  padding: 6px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.registration-form-body input:focus {
+  outline: none !important;
+  border: 1px solid blue;
+}
+
+span {
+  font-size: 13px;
+}
+
+#create-account-btn:enabled {
+  margin-left: 55px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#create-account-btn:disabled {
+  margin-left: 55px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#create-account-btn:enabled:hover {
+  background-color: #0056b3;
+}
+
+
+#password-strength-section {
+  display: none;
+}
+
+#link {
+  text-decoration: none;
+}
+
+#link:hover {
+  text-decoration: underline;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error-form {
+  margin-left: 15px;
+  font-size: 12px;
+  color: red;
+}
