@@ -1,0 +1,13 @@
+.bar-section {
+  display: flex;
+}
+
+.bar {
+  margin-top: 10px;
+  margin-left: 5px;
+  border-radius: 5px;
+  height: 5px;
+  width: 50px;
+  border: solid 1px black;
+  background-color: rgb(223, 223, 223);
+}
