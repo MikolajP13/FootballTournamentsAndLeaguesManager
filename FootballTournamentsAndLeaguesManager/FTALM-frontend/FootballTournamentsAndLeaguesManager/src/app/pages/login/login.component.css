@@ -1,0 +1,107 @@
+.auth-form {
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-form-header h1 {
+  text-align: center;
+}
+
+#login-error-form{
+  display: none;
+  margin : 0 auto;
+  background-color: #ffcfd4;
+  max-width: 300px;
+  margin: 20px auto 20px;
+  padding: 20px;
+  border: 1px solid #e47676;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form-body {
+  display: block;
+  margin : 0 auto;
+  background-color: #f6f8fa;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.create-account-form-body {
+  display: flex;
+  max-width: 300px;
+  margin: 15px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+span > .link:hover {
+  text-decoration: underline;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 94%;
+  height: 15px;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none !important;
+  border: 1px solid blue;
+}
+
+a {
+  font-size: 12px;
+  color: #007bff;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.password-link {
+  margin-left: 23px;
+}
+
+button[type="submit"] {
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.create-account-form-body a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.password-section {
+  display: flex;
+  align-items: center;
+}
+
+.password-section label {
+  margin-right: 130px;
+}

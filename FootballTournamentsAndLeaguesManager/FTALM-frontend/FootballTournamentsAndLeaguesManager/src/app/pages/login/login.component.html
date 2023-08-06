@@ -1,22 +1,27 @@
 <div class="auth-form">
   <div class="auth-form-header">
-    <h1>Sign in to FTAML</h1>
+    <h1>Sign in to FTALM</h1>
+  </div>
+  <div id="login-error-form">
+    Incorrect login or password.
   </div>
   <div class="auth-form-body">
     <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)" method="post">
       <div>
-        <label for="login-field"><b>Username or email address</b></label>
-        <input type="text" ngModel name="login" required>
+        <label for="login-field">Username or email address</label>
+        <input type="text" autofocus="autofocus" ngModel name="login" required>
       </div>
       <div>
-        <label for="password-field"><b>Password</b></label>
-        <a href="#">Forgot password?</a>
+        <div class="password-section">
+          <label for="password-field">Password</label>
+          <a class="password-link" href="/passwordRecover">Forgot password?</a>
+        </div>
         <input type="password" ngModel name="password" required>
       </div>
       <button type="submit">Sign in</button>
     </form>
-    <div class="create-account-form-body">
-      <span> Don't have an account? <a href="/register">Create an account</a>.</span>
-    </div>
   </div>
+    <div class="create-account-form-body">
+      <span> Don't have an account?<a href="/register" class="link">Create it here</a>.</span>
+    </div>
 </div>

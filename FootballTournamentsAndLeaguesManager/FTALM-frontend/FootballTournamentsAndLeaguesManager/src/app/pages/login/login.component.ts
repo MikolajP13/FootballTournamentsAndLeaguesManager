@@ -33,7 +33,11 @@ export class LoginComponent {
     }
 
     this.userService.userLogin(userToAuthenticate).subscribe({
-      error: () => { console.log("Ivalid username/password or account not enabled."); },
+      error: () => { 
+        var errorForm = document.getElementById("login-error-form");
+        errorForm!.style.display = 'block';
+        console.log("Ivalid username/password or account not enabled."); 
+      },
       complete: () => {
         if(userEmailAddress !== null) {
           this.userService.findUserByEmailAddress(userEmailAddress).subscribe((user: User) => {
