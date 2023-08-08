@@ -9,14 +9,14 @@
     <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)" method="post">
       <div>
         <label for="login-field">Username or email address</label>
-        <input type="text" autofocus="autofocus" ngModel name="login" required>
+        <input type="text" autofocus="autofocus" [(ngModel)]="login" name="login" required>
       </div>
       <div>
         <div class="password-section">
           <label for="password-field">Password</label>
           <a class="password-link" href="/passwordRecover">Forgot password?</a>
         </div>
-        <input type="password" ngModel name="password" required>
+        <input type="password" [(ngModel)]="password" name="password" required>
       </div>
       <button type="submit">Sign in</button>
     </form>

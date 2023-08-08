@@ -11,6 +11,8 @@ import { User } from 'src/app/models/User/user';
 })
 
 export class LoginComponent {
+  login: string = '';
+  password: string = '';
 
   constructor(private userService: UserService, private router: Router) { }
 
