@@ -1,6 +1,9 @@
 import { Component} from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/User/user';
 import { Validator } from 'src/app/security/validators/validator';
+import { UserService } from 'src/app/services/userService/user.service';
 import { StrengthMeterComponent } from 'src/app/strength-meter/strength-meter.component';
 
 @Component({
@@ -10,10 +13,10 @@ import { StrengthMeterComponent } from 'src/app/strength-meter/strength-meter.co
 })
 export class RegistrationComponent {
   form: FormGroup = this.formBuilder.group({
-    username: ['', Validators.compose([this.usernameValidator()])],
-    firstname: ['', Validators.compose([this.firstNameAndLastNameValidator()])],
-    lastname: ['', Validators.compose([this.firstNameAndLastNameValidator()])],
-    email: ['', Validators.compose([this.emailValidator()])],
+    userName: ['', Validators.compose([this.usernameValidator()])],
+    firstName: ['', Validators.compose([this.firstNameAndLastNameValidator()])],
+    lastName: ['', Validators.compose([this.firstNameAndLastNameValidator()])],
+    emailAddress: ['', Validators.compose([this.emailValidator()])],
     password: ['', Validators.compose([this.passwordValidator()])]
   });
   isPasswordVisible: boolean = false;
@@ -39,7 +42,7 @@ export class RegistrationComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   onInit() {
   }
@@ -50,17 +53,22 @@ export class RegistrationComponent {
 
   onInputChange(inputId: string, inputValue: string) {
     switch(inputId) {
-      case 'username':
+      case 'userName':
         {
           if(this.isFieldNotEmpty(inputValue)){
-            Validator.isUsernameValid(inputValue) ? (this.iconTypeForUsername = IconType.CHECK, this.isUsernameCorrect = true) : (this.iconTypeForUsername = IconType.X, this.isUsernameCorrect = false);
+            var userExists = false;
+            this.userService.findUserByUserName(inputValue).subscribe((user: User) => {
+              user !== null ? userExists = true : userExists = false;
+              Validator.isUsernameValid(inputValue) && !userExists
+              ? (this.iconTypeForUsername = IconType.CHECK, this.isUsernameCorrect = true) : (this.iconTypeForUsername = IconType.X, this.isUsernameCorrect = false);
+            });
           }else{
             this.isUsernameCorrect = false;
             this.iconTypeForUsername = IconType.ARROW;
           }
         }
         break;
-      case 'firstname':
+      case 'firstName':
         {
           if(this.isFieldNotEmpty(inputValue)){
             Validator.isFirstOrLastNameValid(inputValue) ? (this.iconTypeForFirstname = IconType.CHECK, this.isFirstnameCorrect = true) : (this.iconTypeForFirstname = IconType.X, this.isFirstnameCorrect = false);
@@ -70,7 +78,7 @@ export class RegistrationComponent {
           }
         }
         break;
-      case 'lastname':
+      case 'lastName':
         {
           if(this.isFieldNotEmpty(inputValue)){
             Validator.isFirstOrLastNameValid(inputValue) ? (this.iconTypeForLastname = IconType.CHECK, this.isLastnameCorrect = true) : (this.iconTypeForLastname = IconType.X, this.isLastnameCorrect = false);
@@ -80,10 +88,15 @@ export class RegistrationComponent {
           }
         }
         break;
-      case 'email':
+      case 'emailAddress':
         {
           if(this.isFieldNotEmpty(inputValue)){
-            Validator.isEmailValid(inputValue) ? (this.iconTypeForEmail = IconType.CHECK, this.isEmailCorrect = true) : (this.iconTypeForEmail = IconType.X, this.isEmailCorrect = false);
+            var emailExists = false;
+            this.userService.findUserByEmailAddress(inputValue).subscribe((user: User) => {
+              user !== null ? emailExists = true : emailExists = false;
+              Validator.isEmailValid(inputValue) && !emailExists
+              ? (this.iconTypeForEmail = IconType.CHECK, this.isEmailCorrect = true) : (this.iconTypeForEmail = IconType.X, this.isEmailCorrect = false);
+            });
           }else{
             this.isEmailCorrect = false;
             this.iconTypeForEmail = IconType.ARROW;
@@ -112,7 +125,9 @@ export class RegistrationComponent {
   }
 
   registerUser(registrationForm: NgForm){
-    //TODO: Implement registration
+    this.userService.addUser(registrationForm.value).subscribe((user: User) => {
+      this.router.navigate(["/"]);
+    });
   }
 
   private isFieldNotEmpty(field: string): boolean {

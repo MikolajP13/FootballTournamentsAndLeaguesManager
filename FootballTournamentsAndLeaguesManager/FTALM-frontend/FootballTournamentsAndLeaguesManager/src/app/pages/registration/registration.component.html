@@ -4,59 +4,59 @@
   </div>
   <div class="registration-form-body">
     <form #registrationForm="ngForm" (ngSubmit)="registerUser(registrationForm)" method="post">
-      <label for="username">Enter your username</label>
+      <label for="userName">Enter your username</label>
       <div class="username-form">
         <i class="bi" [ngClass]="{
           'bi-arrow-right-short': iconTypeForUsername === 0,
           'bi-x': iconTypeForUsername === 1,
           'bi-check': iconTypeForUsername === 2}"></i>
-        <input type="text" autofocus="autofocus" [(ngModel)]="username" name="username" (ngModelChange)="onInputChange('username', username)" (focus)="isUsernameFocused = true" (blur)="isUsernameFocused = false" required>
-        <div class="error-form" *ngIf="isUsernameFocused && registrationForm.controls['username'].errors?.['required']">
+        <input type="text" autofocus="autofocus" [(ngModel)]="username" name="userName" (ngModelChange)="onInputChange('userName', username)" (focus)="isUsernameFocused = true" (blur)="isUsernameFocused = false" required>
+        <div class="error-form" *ngIf="isUsernameFocused && registrationForm.controls['userName'].errors?.['required']">
           Username is required
         </div>
-        <div class="error-form" [hidden]="isUsernameCorrect" *ngIf="isUsernameFocused && form.controls['username'].errors?.['invalidUsername']">
+        <div class="error-form" [hidden]="isUsernameCorrect" *ngIf="isUsernameFocused && form.controls['userName'].errors?.['invalidUsername']">
           Username must contain...
         </div>
       </div>
       <div class="firstname-field">
-        <label for="firstname">Enter your firstname</label>
+        <label for="firstName">Enter your firstname</label>
         <i class="bi" [ngClass]="{
           'bi-arrow-right-short': iconTypeForFirstname === 0,
           'bi-x': iconTypeForFirstname === 1,
           'bi-check': iconTypeForFirstname === 2}"></i>
-        <input id="firstname" type="text" [(ngModel)]="firstname" name="firstname" (ngModelChange)="onInputChange('firstname', firstname)" (focus)="isFirstnameFocused = true" (blur)="isFirstnameFocused = false" required>
-        <div class="error-form" *ngIf="isFirstnameFocused && registrationForm.controls['firstname'].errors?.['required']">
+        <input id="firstname" type="text" [(ngModel)]="firstname" name="firstName" (ngModelChange)="onInputChange('firstName', firstname)" (focus)="isFirstnameFocused = true" (blur)="isFirstnameFocused = false" required>
+        <div class="error-form" *ngIf="isFirstnameFocused && registrationForm.controls['firstName'].errors?.['required']">
           First name is required
         </div>
-        <div class="error-form" [hidden]="isFirstnameCorrect" *ngIf="isFirstnameFocused && form.controls['firstname'].errors?.['invalidFirstOrLastName']">
+        <div class="error-form" [hidden]="isFirstnameCorrect" *ngIf="isFirstnameFocused && form.controls['firstName'].errors?.['invalidFirstOrLastName']">
           First name must contain...
         </div>
       </div>
       <div class="lastname-field">
-        <label for="lastname">Enter your lastname</label>
+        <label for="lastName">Enter your lastname</label>
         <i class="bi" [ngClass]="{
           'bi-arrow-right-short': iconTypeForLastname === 0,
           'bi-x': iconTypeForLastname === 1,
           'bi-check': iconTypeForLastname === 2}"></i>
-        <input id="lastname" type="text" [(ngModel)]="lastname" name="lastname" (ngModelChange)="onInputChange('lastname', lastname)" (focus)="isLastnameFocused = true" (blur)="isLastnameFocused = false" required>
-        <div class="error-form" *ngIf="isLastnameFocused && registrationForm.controls['lastname'].errors?.['required']">
+        <input id="lastname" type="text" [(ngModel)]="lastname" name="lastName" (ngModelChange)="onInputChange('lastName', lastname)" (focus)="isLastnameFocused = true" (blur)="isLastnameFocused = false" required>
+        <div class="error-form" *ngIf="isLastnameFocused && registrationForm.controls['lastName'].errors?.['required']">
           Last name is required
         </div>
-        <div class="error-form" [hidden]="isLastnameCorrect" *ngIf="isLastnameFocused && form.controls['lastname'].errors?.['invalidFirstOrLastName']">
+        <div class="error-form" [hidden]="isLastnameCorrect" *ngIf="isLastnameFocused && form.controls['lastName'].errors?.['invalidFirstOrLastName']">
           Last name must contain...
         </div>
       </div>
-      <label for="email">Enter your email</label>
+      <label for="emailAddress">Enter your email</label>
       <div class="email-field">
         <i class="bi" [ngClass]="{
           'bi-arrow-right-short': iconTypeForEmail === 0,
           'bi-x': iconTypeForEmail === 1,
           'bi-check': iconTypeForEmail === 2}"></i>
-        <input id="email" type="email" [(ngModel)]="email" name="email" (ngModelChange)="onInputChange('email', email)" (focus)="isEmailFocused = true" (blur)="isEmailFocused = false" required>
-        <div class="error-form" *ngIf="isEmailFocused && registrationForm.controls['email'].errors?.['required']">
+        <input id="email" type="email" [(ngModel)]="email" name="emailAddress" (ngModelChange)="onInputChange('emailAddress', email)" (focus)="isEmailFocused = true" (blur)="isEmailFocused = false" required>
+        <div class="error-form" *ngIf="isEmailFocused && registrationForm.controls['emailAddress'].errors?.['required']">
           Email is required
         </div>
-        <div class="error-form" [hidden]="isEmailCorrect" *ngIf="isEmailFocused && form.controls['email'].errors?.['invalidEmail']">
+        <div class="error-form" [hidden]="isEmailCorrect" *ngIf="isEmailFocused && form.controls['emailAddress'].errors?.['invalidEmail']">
           Email must contain...
         </div>
       </div>
