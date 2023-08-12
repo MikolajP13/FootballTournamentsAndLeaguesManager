@@ -1,0 +1,19 @@
+.registration-success-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  height: 40vh;
+}
+
+.registration-success-form {
+  display: block;
+  margin : 0 auto;
+  background-color: #f6f8fa;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

@@ -126,7 +126,7 @@ export class RegistrationComponent {
 
   registerUser(registrationForm: NgForm){
     this.userService.addUser(registrationForm.value).subscribe((user: User) => {
-      this.router.navigate(["/"]);
+      this.router.navigate(["/register-succes"]);
     });
   }
 

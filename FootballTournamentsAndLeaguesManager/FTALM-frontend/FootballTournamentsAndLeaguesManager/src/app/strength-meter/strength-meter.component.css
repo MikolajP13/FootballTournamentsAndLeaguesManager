@@ -3,8 +3,7 @@
 }
 
 .bar {
-  margin-top: 10px;
-  margin-left: 5px;
+  margin: 10px 5px 5px 5px;
   border-radius: 5px;
   height: 5px;
   width: 50px;

@@ -12,10 +12,10 @@
           'bi-check': iconTypeForUsername === 2}"></i>
         <input type="text" autofocus="autofocus" [(ngModel)]="username" name="userName" (ngModelChange)="onInputChange('userName', username)" (focus)="isUsernameFocused = true" (blur)="isUsernameFocused = false" required>
         <div class="error-form" *ngIf="isUsernameFocused && registrationForm.controls['userName'].errors?.['required']">
-          Username is required
+          Username is required.
         </div>
         <div class="error-form" [hidden]="isUsernameCorrect" *ngIf="isUsernameFocused && form.controls['userName'].errors?.['invalidUsername']">
-          Username must contain...
+          Invalid username (must be 8-20 characters long) or username is already taken.
         </div>
       </div>
       <div class="firstname-field">
@@ -26,10 +26,10 @@
           'bi-check': iconTypeForFirstname === 2}"></i>
         <input id="firstname" type="text" [(ngModel)]="firstname" name="firstName" (ngModelChange)="onInputChange('firstName', firstname)" (focus)="isFirstnameFocused = true" (blur)="isFirstnameFocused = false" required>
         <div class="error-form" *ngIf="isFirstnameFocused && registrationForm.controls['firstName'].errors?.['required']">
-          First name is required
+          First name is required.
         </div>
         <div class="error-form" [hidden]="isFirstnameCorrect" *ngIf="isFirstnameFocused && form.controls['firstName'].errors?.['invalidFirstOrLastName']">
-          First name must contain...
+          Invalid first name.
         </div>
       </div>
       <div class="lastname-field">
@@ -40,10 +40,10 @@
           'bi-check': iconTypeForLastname === 2}"></i>
         <input id="lastname" type="text" [(ngModel)]="lastname" name="lastName" (ngModelChange)="onInputChange('lastName', lastname)" (focus)="isLastnameFocused = true" (blur)="isLastnameFocused = false" required>
         <div class="error-form" *ngIf="isLastnameFocused && registrationForm.controls['lastName'].errors?.['required']">
-          Last name is required
+          Last name is required.
         </div>
         <div class="error-form" [hidden]="isLastnameCorrect" *ngIf="isLastnameFocused && form.controls['lastName'].errors?.['invalidFirstOrLastName']">
-          Last name must contain...
+          Invalid last name.
         </div>
       </div>
       <label for="emailAddress">Enter your email</label>
@@ -57,7 +57,7 @@
           Email is required
         </div>
         <div class="error-form" [hidden]="isEmailCorrect" *ngIf="isEmailFocused && form.controls['emailAddress'].errors?.['invalidEmail']">
-          Email must contain...
+          Incorrect email address.
         </div>
       </div>
       <label for="password">Enter your password</label>
@@ -75,7 +75,7 @@
           Password is required
         </div>
         <div class="error-form" [hidden]="isPasswordCorrect" *ngIf="isPasswordFocused && form.controls['password'].errors?.['invalidPassword']">
-          Password must contain...
+          Password must contain at least 8 characters, including at least one digit, one lowercase and uppercase letter, and one special character.
         </div>
       </div>
       <span>Already have an account? <a id="link" href="/">Sign in →</a></span>

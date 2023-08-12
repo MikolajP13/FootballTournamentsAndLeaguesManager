@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { StrengthMeterComponent } from './strength-meter/strength-meter.component';
+import { RegistrationSuccessComponent } from './pages/registration-success/registration-success.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { StrengthMeterComponent } from './strength-meter/strength-meter.componen
     LoginComponent,
     HomeComponent,
     RegistrationComponent,
-    StrengthMeterComponent
+    StrengthMeterComponent,
+    RegistrationSuccessComponent
   ],
   imports: [
     BrowserModule,
