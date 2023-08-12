@@ -25,7 +25,7 @@ public class User {
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.password = password;
-        this.isEnabled = false;
+        this.isEnabled = true; //false; needs update with email verification
     }
 
     public Long getId() {

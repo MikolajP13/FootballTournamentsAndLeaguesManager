@@ -27,6 +27,7 @@ public class UserService {
     public User addUser(User user){
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
+        user.setEnabled(true); //TODO only without email verification
         return userRepository.save(user);
     }
 
