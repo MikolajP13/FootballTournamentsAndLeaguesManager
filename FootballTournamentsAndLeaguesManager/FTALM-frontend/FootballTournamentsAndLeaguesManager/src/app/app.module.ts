@@ -8,8 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
-import { StrengthMeterComponent } from './strength-meter/strength-meter.component';
+import { StrengthMeterComponent } from './shared-components/strength-meter/strength-meter.component';
 import { RegistrationSuccessComponent } from './pages/registration-success/registration-success.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './shared-components/navbar/navbar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -18,14 +23,19 @@ import { RegistrationSuccessComponent } from './pages/registration-success/regis
     HomeComponent,
     RegistrationComponent,
     StrengthMeterComponent,
-    RegistrationSuccessComponent
+    RegistrationSuccessComponent,
+    PageNotFoundComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

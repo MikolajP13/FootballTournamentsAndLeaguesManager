@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Validator } from '../security/validators/validator';
+import { Validator } from '../../security/validators/validator';
 
 @Component({
   selector: 'app-strength-meter',

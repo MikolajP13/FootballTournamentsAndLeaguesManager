@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/User/user';
 import { Validator } from 'src/app/security/validators/validator';
 import { UserService } from 'src/app/services/userService/user.service';
-import { StrengthMeterComponent } from 'src/app/strength-meter/strength-meter.component';
+import { StrengthMeterComponent } from 'src/app/shared-components/strength-meter/strength-meter.component';
 
 @Component({
   selector: 'app-registration',
@@ -126,7 +126,7 @@ export class RegistrationComponent {
 
   registerUser(registrationForm: NgForm){
     this.userService.addUser(registrationForm.value).subscribe((user: User) => {
-      this.router.navigate(["/register-succes"]);
+      this.router.navigate(["/register-success"]);
     });
   }
 
