@@ -1,0 +1,16 @@
+.page-not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.page-not-found-form {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.page-not-found-form > p {
+  font-size: 20px;
+}
