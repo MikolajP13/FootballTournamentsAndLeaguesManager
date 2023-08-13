@@ -1,0 +1,12 @@
+.navbar {
+  background-color: rgb(127, 198, 245);
+}
+
+.example-spacer {
+  margin: 0 5px;
+}
+
+.button-link:hover {
+  background-color: rgb(127, 198, 245);
+  border-radius: 15px;
+}
