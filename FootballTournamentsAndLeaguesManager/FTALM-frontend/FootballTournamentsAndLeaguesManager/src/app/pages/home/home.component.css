@@ -1,0 +1,12 @@
+.competititon-container {
+  margin: 3% 5%;
+}
+
+.competititon-row:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
+.mat-column-details {
+  flex: 0 0 8% !important;
+}

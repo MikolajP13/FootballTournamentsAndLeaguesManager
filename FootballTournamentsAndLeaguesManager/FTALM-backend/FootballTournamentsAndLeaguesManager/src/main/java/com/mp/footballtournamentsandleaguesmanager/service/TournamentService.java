@@ -60,6 +60,9 @@ public class TournamentService {
         TournamentDTO dto = new TournamentDTO();
         dto.setId(tournament.getId());
         dto.setTournamentName(tournament.getName());
+        dto.setNumberOfTeams(tournament.getNumberOfTeams());
+        dto.setStartDate(tournament.getStartDate());
+        dto.setStatus(tournament.getStatus());
         return dto;
     }
 }

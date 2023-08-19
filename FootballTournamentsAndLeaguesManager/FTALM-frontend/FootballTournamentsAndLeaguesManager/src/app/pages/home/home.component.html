@@ -1,3 +1,34 @@
-<p>home works!</p>
-<h3>Greetings: {{authUser.userName}} !</h3>
-<button (click)="logOut()">Log out</button>
+<div class="competititon-container">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="competitionName">
+      <mat-header-cell *matHeaderCellDef> Competititon Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.leagueName}}{{element.tournamentName}}</mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="numberOfTeams">
+      <mat-header-cell *matHeaderCellDef> Number of Teams </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.numberOfTeams}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="startDate">
+      <mat-header-cell *matHeaderCellDef> Start Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.startDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="details" >
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <i class="bi bi-info-circle"></i>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="competititon-row" (click)="showCompetitionDetails(row)"></mat-row>
+  </mat-table>
+</div>

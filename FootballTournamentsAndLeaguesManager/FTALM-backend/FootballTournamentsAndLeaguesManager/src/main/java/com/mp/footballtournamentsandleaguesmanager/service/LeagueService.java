@@ -61,6 +61,9 @@ public class LeagueService {
         LeagueDTO dto = new LeagueDTO();
         dto.setId(league.getId());
         dto.setLeagueName(league.getName());
+        dto.setStartDate(league.getStartDate());
+        dto.setNumberOfTeams(league.getNumberOfTeams());
+        dto.setStatus(league.getStatus());
         return dto;
     }
 }

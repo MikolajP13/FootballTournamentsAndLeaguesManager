@@ -93,7 +93,7 @@ public class TournamentLeagueBase {
         return sb.toString();
     }
 
-    enum Status {
+    public enum Status {
         NOT_STARTED, IN_PROGRESS, FINISHED
     }
 }
