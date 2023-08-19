@@ -1,21 +1,30 @@
 <mat-toolbar class="navbar" color="primary">
+  <button mat-icon-button *ngIf="isNotHomePage()" (click)="toggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="between-button-spacer"></span>
   <i class="bi bi-trophy"></i>
-  <span class="example-spacer"></span>
+  <span class="between-button-spacer"></span>
   <h2>FTALM</h2>
-  <span class="example-spacer"></span>
+  <span class="between-button-spacer"></span>
   <button mat-button class="button-link" routerLink="/home">
     Home
   </button>
-  <span class="example-spacer"></span>
+  <span class="between-button-spacer"></span>
   <button mat-button class="button-link" routerLink="/teams">
     Teams
   </button>
-  <span class="example-spacer"></span>
+  <span class="between-button-spacer"></span>
   <button mat-button class="button-link" routerLink="/tournaments">
     Tournaments
   </button>
-  <span class="example-spacer"></span>
+  <span class="between-button-spacer"></span>
   <button mat-button class="button-link" routerLink="/leagues">
     Leagues
   </button>
+  <span class="spacer"></span>
+  <button mat-button class="button-link button-logout" (click)="logOut()">
+    Logout <i class="bi bi-box-arrow-left"></i>
+  </button>
 </mat-toolbar>
+<app-sidenav></app-sidenav>

@@ -2,8 +2,12 @@
   background-color: rgb(127, 198, 245);
 }
 
-.example-spacer {
+.between-button-spacer {
   margin: 0 5px;
+}
+
+.spacer {
+  flex: 1;
 }
 
 .button-link:hover {
