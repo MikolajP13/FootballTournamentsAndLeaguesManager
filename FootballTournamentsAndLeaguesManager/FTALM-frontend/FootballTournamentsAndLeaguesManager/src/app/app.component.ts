@@ -11,7 +11,8 @@ export class AppComponent {
 
   constructor(private router: Router) {}
 
-  isLoginOrRegistrationPage(): boolean {
-    return this.router.url === '/home';
+  isNotLoginOrRegistrationPage(): boolean {
+    return this.router.url === '/home' || this.router.url === '/teams' || this.router.url === '/leagues' || this.router.url === '/tournaments'
+    || this.router.url.includes('/team/');
   }
 }

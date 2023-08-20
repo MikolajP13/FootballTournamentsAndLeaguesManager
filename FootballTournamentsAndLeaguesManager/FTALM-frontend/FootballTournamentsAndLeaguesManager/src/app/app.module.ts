@@ -15,6 +15,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './shared-components/navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { TeamsComponent } from './pages/teams/teams.component';
+import { TournamentsComponent } from './pages/tournaments/tournaments.component';
+import { LeaguesComponent } from './pages/leagues/leagues.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { SidenavComponent } from './shared-components/sidenav/sidenav.component';
+import { MatListModule } from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import { SidenavService } from './services/sidenavService/sidenav.service';
+import { TeamDetailsComponent } from './pages/team-details/team-details.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +35,12 @@ import { MatButtonModule } from '@angular/material/button';
     StrengthMeterComponent,
     RegistrationSuccessComponent,
     PageNotFoundComponent,
-    NavbarComponent
+    NavbarComponent,
+    TeamsComponent,
+    TournamentsComponent,
+    LeaguesComponent,
+    SidenavComponent,
+    TeamDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +50,13 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule
   ],
-  providers: [],
+  providers: [SidenavService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
