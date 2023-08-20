@@ -12,6 +12,12 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
+  static getUser(): User {
+    const user = sessionStorage.getItem('user');
+    
+    return user ? JSON.parse(user) : undefined;
+  }
+
   userLogin(user: User): Observable<boolean>{
     return this.httpClient.post<boolean>(`${this.apiServerUrl}/user/login`, user);
   }

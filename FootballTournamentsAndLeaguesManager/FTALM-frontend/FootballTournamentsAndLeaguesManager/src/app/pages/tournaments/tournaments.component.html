@@ -1,11 +1,11 @@
-<div class="competititon-container">
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="tournaments-container">
+  <mat-table [dataSource]="tournamentDataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="competitionName">
-      <mat-header-cell *matHeaderCellDef> Competititon Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.leagueName}}{{element.tournamentName}}</mat-cell>
+    <ng-container matColumnDef="tournamentName">
+      <mat-header-cell *matHeaderCellDef> Tournament Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.tournamentName}} </mat-cell>
     </ng-container>
-  
+
     <ng-container matColumnDef="numberOfTeams">
       <mat-header-cell *matHeaderCellDef> Number of Teams </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.numberOfTeams}} </mat-cell>
@@ -29,6 +29,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="competititon-row" (click)="showCompetitionDetails(row)"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
+

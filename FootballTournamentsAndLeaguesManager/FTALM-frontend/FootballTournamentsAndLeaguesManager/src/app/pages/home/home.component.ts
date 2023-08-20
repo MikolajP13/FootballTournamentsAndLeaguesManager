@@ -24,7 +24,7 @@ export class HomeComponent {
     if(this.authUser.id !== undefined){
       this.leagueService.findAllLeaguesByUserId(this.authUser.id).subscribe((leagues: TournamentLeagueBase[]) => {
         leagues.forEach(league => league.competitionType = CompetitionType.LEAGUE);
-        this.dataSource.push(...leagues);
+        this.dataSource = [...this.dataSource, ...leagues];
       });
 
       this.tournamentService.findAllTournamentsByUserId(this.authUser.id).subscribe((tournaments: TournamentLeagueBase[]) => {
@@ -34,8 +34,8 @@ export class HomeComponent {
     }
   }
 
-  showCompetitionDetails(row: TournamentLeagueBase): void {
-    console.log(row.id + ' ' + row.competitionType);
+  showCompetitionDetails(competition: TournamentLeagueBase): void {
+    console.log(competition.id + ' ' + competition.competitionType);
   }
 
   getUser() {

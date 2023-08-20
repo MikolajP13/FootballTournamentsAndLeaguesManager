@@ -1,0 +1,12 @@
+.teams-container {
+  margin: 3% 5%;
+}
+
+.mat-column-details {
+  flex: 0 0 8% !important;
+}
+
+.teams-row:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
