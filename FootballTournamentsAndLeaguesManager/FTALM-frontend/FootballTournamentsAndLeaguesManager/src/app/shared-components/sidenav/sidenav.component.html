@@ -1,0 +1,22 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side">
+    <mat-nav-list *ngIf="isTeamDetailPage()">
+      <a mat-list-item>Team</a>
+      <a mat-list-item>Matches</a>
+      <a mat-list-item>Players</a>
+      <a mat-list-item>Statistics</a>
+      <a mat-list-item>Information</a>
+    </mat-nav-list> 
+    <mat-nav-list *ngIf="isCompetitionDetailPage()">
+      <a mat-list-item>Teams</a>
+      <a mat-list-item *ngIf="isLeagueDetailPage()">League Table</a>
+      <a mat-list-item *ngIf="!isLeagueDetailPage()">Tournament Bracket</a>
+      <a mat-list-item>Matches</a>
+      <a mat-list-item>Statistics</a>
+      <a mat-list-item>Information</a>
+    </mat-nav-list>    
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

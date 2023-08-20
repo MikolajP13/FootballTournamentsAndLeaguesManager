@@ -16,8 +16,8 @@ export class NavbarComponent {
     this.router.navigate(["/"]);
   }
 
-  isNotHomePage(): boolean {
-    return this.router.url !== '/home';
+  isDetailPage(): boolean {
+    return this.router.url.includes('/team/') || this.router.url.includes('/league/') || this.router.url.includes('/tournament/');
   }
 
   toggleSidenav(): void{
