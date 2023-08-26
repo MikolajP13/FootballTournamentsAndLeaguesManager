@@ -1,19 +1,22 @@
-<div class="teams-container">
-  <mat-table [dataSource]="teamDataSource" class="mat-elevation-z8">
-
-    <ng-container matColumnDef="teamName">
-      <mat-header-cell *matHeaderCellDef> Team Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-    </ng-container>
-    
-    <ng-container matColumnDef="details" >
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <i class="bi bi-chevron-right"></i>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="teams-row" (click)="showTeamDetails(row)"></mat-row>
-  </mat-table>
+<div>
+  <button mat-raised-button color="primary" (click)="openCreateTeamPopup()">Create team</button>
+  <div class="teams-container">
+    <mat-table [dataSource]="teamDataSource" class="mat-elevation-z8">
+  
+      <ng-container matColumnDef="teamName">
+        <mat-header-cell *matHeaderCellDef> Team Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="details" >
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <i class="bi bi-chevron-right"></i>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="teams-row" (click)="showTeamDetails(row)"></mat-row>
+    </mat-table>
+  </div>
 </div>

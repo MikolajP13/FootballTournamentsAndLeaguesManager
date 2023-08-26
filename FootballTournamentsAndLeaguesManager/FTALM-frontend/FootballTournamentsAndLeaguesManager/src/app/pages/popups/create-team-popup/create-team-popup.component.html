@@ -1,0 +1,15 @@
+<div class="create-team-form-body">
+  <button mat-icon-button class="close-button" (click)="closePopup()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <form #teamForm="ngForm" (ngSubmit)="createTeam(teamForm)" method="post">
+    <div>
+      <label for="team-name-field">Team name</label>
+      <input type="text" [(ngModel)]="name" name="name" required>
+    </div>
+    <div class="button-container">
+      <button mat-raised-button type="submit">Create team</button>
+    </div>
+  </form>
+  <button mat-raised-button (click)="closePopup()">Cancel</button>
+</div>
