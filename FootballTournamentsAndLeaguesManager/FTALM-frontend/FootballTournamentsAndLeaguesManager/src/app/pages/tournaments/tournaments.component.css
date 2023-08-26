@@ -1,0 +1,8 @@
+.tournaments-container {
+  margin: 3% 5%;
+}
+
+.tournaments-row:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}

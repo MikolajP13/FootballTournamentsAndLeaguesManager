@@ -1,0 +1,8 @@
+.leagues-container {
+  margin: 3% 5%;
+}
+
+.leagues-row:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}

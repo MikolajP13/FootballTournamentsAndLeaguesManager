@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { TournamentLeagueBase } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
 import { User } from 'src/app/models/User/user';
 import { LeagueService } from 'src/app/services/leagueService/league.service';
@@ -15,7 +16,7 @@ export class LeaguesComponent {
   displayedColumns: string[] = ['leagueName', 'numberOfTeams', 'startDate', 'status', 'details'];
   leagueDataSource:TournamentLeagueBase[] = [];
 
-  constructor(private leagueService: LeagueService) { }
+  constructor(private router: Router, private leagueService: LeagueService) { }
 
   ngOnInit() {
     this.authUser = UserService.getUser();
@@ -25,5 +26,7 @@ export class LeaguesComponent {
       });
   }
 
-  
+  showLeagueDeatils(league: TournamentLeagueBase): void {
+    this.router.navigate(['/league/' + league.id]);
+  }
 }
