@@ -4,6 +4,7 @@ import { CompetitionType, TournamentLeagueBase } from 'src/app/models/Tournament
 import { User } from 'src/app/models/User/user';
 import { LeagueService } from 'src/app/services/leagueService/league.service';
 import { TournamentService } from '../../services/tournamentService/tournament.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -22,20 +23,24 @@ export class HomeComponent {
   ngOnInit() {
     this.getUser();
     if(this.authUser.id !== undefined){
-      this.leagueService.findAllLeaguesByUserId(this.authUser.id).subscribe((leagues: TournamentLeagueBase[]) => {
-        leagues.forEach(league => league.competitionType = CompetitionType.LEAGUE);
-        this.dataSource = [...this.dataSource, ...leagues];
-      });
+      const leagueObservable = this.leagueService.findAllLeaguesByUserId(this.authUser.id);
+      const tournamentObservable = this.tournamentService.findAllTournamentsByUserId(this.authUser.id);
 
-      this.tournamentService.findAllTournamentsByUserId(this.authUser.id).subscribe((tournaments: TournamentLeagueBase[]) => {
+      //forkJoin operator from rjxs library wait for async requests to complete and then process data
+      forkJoin([leagueObservable, tournamentObservable]).subscribe(([leagues, tournaments]) => {
+        leagues.forEach(league => league.competitionType = CompetitionType.LEAGUE);
         tournaments.forEach(tournament => tournament.competitionType = CompetitionType.TOURNAMENT);
-        this.dataSource = [...this.dataSource, ...tournaments];
+        this.dataSource = [...this.dataSource, ...leagues, ...tournaments];
       });
     }
   }
 
   showCompetitionDetails(competition: TournamentLeagueBase): void {
-    console.log(competition.id + ' ' + competition.competitionType);
+    if(competition.competitionType === CompetitionType.LEAGUE) {
+      this.router.navigate(['/league/' + competition.id]);
+    }else if(competition.competitionType === CompetitionType.TOURNAMENT) {
+      this.router.navigate(['/tournament/' + competition.id]);
+    }
   }
 
   getUser() {
