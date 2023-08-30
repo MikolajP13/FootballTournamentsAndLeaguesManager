@@ -2,7 +2,7 @@ export class TournamentLeagueBase {
   id?: number;
   name?: string;
   numberOfTeams?: number;
-  startDate?: Date;
+  startDate!: Date;
   status?: Status;
   competitionType?: CompetitionType;
   CompetitionType: any;

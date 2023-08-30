@@ -1,19 +1,19 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side">
     <mat-nav-list *ngIf="isTeamDetailPage()">
-      <a mat-list-item>Team</a>
-      <a mat-list-item>Matches</a>
-      <a mat-list-item>Players</a>
-      <a mat-list-item>Statistics</a>
-      <a mat-list-item>Information</a>
+      <a mat-list-item (click)="showTeamData()">Team</a>
+      <a mat-list-item (click)="showTeamMatches()">Matches</a>
+      <a mat-list-item (click)="showTeamPlayers()">Players</a>
+      <a mat-list-item (click)="showTeamStatistics()">Statistics</a>
+      <a mat-list-item (click)="showTeamAbout()">Information</a>
     </mat-nav-list> 
     <mat-nav-list *ngIf="isCompetitionDetailPage()">
-      <a mat-list-item>Teams</a>
-      <a mat-list-item *ngIf="isLeagueDetailPage()">League Table</a>
-      <a mat-list-item *ngIf="!isLeagueDetailPage()">Tournament Bracket</a>
-      <a mat-list-item>Matches</a>
-      <a mat-list-item>Statistics</a>
-      <a mat-list-item>Information</a>
+      <a mat-list-item (click)="showCompetitionTeams()">Teams</a>
+      <a mat-list-item (click)="showLeagueTable()" *ngIf="isLeagueDetailPage()">League Table</a>
+      <a mat-list-item (click)="showTournamentBracket()" *ngIf="!isLeagueDetailPage()">Tournament Bracket</a>
+      <a mat-list-item (click)="showCompetitionMatches()">Matches</a>
+      <a mat-list-item (click)="showCompetitionStatistics()">Statistics</a>
+      <a mat-list-item (click)="showCompetitionAbout()">Information</a>
     </mat-nav-list>    
   </mat-sidenav>
   <mat-sidenav-content class="sidenav">
