@@ -1,0 +1,39 @@
+<div>
+  <p>team-players for team {{teamId}}</p>
+  <button mat-raised-button color="primary" (click)="openAddPlayerPopup()">Add player</button>
+</div>
+
+<div class="players-container">
+  <mat-table [dataSource]="teamDataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="positionDetail">
+      <mat-header-cell *matHeaderCellDef> Position details </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.positionDetail}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef> First name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef> Last name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="details" >
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <i class="bi bi-chevron-right"></i>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="leagues-row"></mat-row>
+  </mat-table>
+</div>

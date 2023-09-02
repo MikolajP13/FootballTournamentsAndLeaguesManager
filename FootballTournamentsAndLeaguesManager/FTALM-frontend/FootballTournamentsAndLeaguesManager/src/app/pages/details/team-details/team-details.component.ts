@@ -8,6 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TeamDetailsComponent {
   teamId!: number;
+  teamName: any;
+  establishmentDate!: Date;
+  totalPlayers: any;
+  positions: any;
+  playersByPosition: any;
+  currentCompetitions: any;
 
   constructor(private route: ActivatedRoute) {}
 

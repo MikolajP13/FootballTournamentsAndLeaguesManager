@@ -1,0 +1,26 @@
+<div class="team-summary">
+  <h2>Team Summary</h2>
+  <div class="team-info">
+    <p><strong>Team Name:</strong> {{ teamName }}</p>
+    <p><strong>Established:</strong> {{ establishmentDate | date }}</p>
+    <p><strong>Total Players:</strong> {{ totalPlayers }}</p>
+  </div>
+  <div class="player-stats">
+    <h3>Player Statistics</h3>
+    <ul>
+      <li *ngFor="let position of positions">
+        <strong>{{ position }}:</strong> {{ playersByPosition[position] }}
+      </li>
+    </ul>
+  </div>
+  <div class="current-competitions">
+    <h3>Current Competitions</h3>
+    <ul>
+      <li *ngFor="let competition of currentCompetitions">
+        {{ competition.name }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+
