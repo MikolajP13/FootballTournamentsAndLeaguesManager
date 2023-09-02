@@ -3,13 +3,14 @@ export class TournamentLeagueBase {
   name?: string;
   numberOfTeams?: number;
   startDate!: Date;
+  endDate!: Date;
   status?: Status;
   competitionType?: CompetitionType;
   CompetitionType: any;
 }
 
-enum Status {
-  NOT_STARTED, IN_PROGRESS, FINISHED
+export enum Status {
+  NOT_STARTED = "NOT_STARTED", IN_PROGRESS = "IN_PROGRESS", FINISHED = "FINISHED"
 }
 
 export enum CompetitionType {
