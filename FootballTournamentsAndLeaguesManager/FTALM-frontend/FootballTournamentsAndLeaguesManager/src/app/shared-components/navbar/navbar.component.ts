@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/User/user';
 import { SidenavService } from 'src/app/services/sidenavService/sidenav.service';
 
 @Component({
@@ -8,8 +9,18 @@ import { SidenavService } from 'src/app/services/sidenavService/sidenav.service'
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-
+  authUser!: User;
+  
   constructor(private router: Router, private sidenavService: SidenavService){ }
+
+  ngOnInit(){
+    const user = sessionStorage.getItem('user');
+    
+    if(user){
+      this.authUser = JSON.parse(user);
+    }
+    
+  }
 
   logOut(){
     sessionStorage.clear();
