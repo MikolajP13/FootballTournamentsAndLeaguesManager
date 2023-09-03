@@ -1,5 +1,7 @@
 <div>
-  <button mat-raised-button color="primary" (click)="openCreateTeamPopup()">Create team</button>
+  <div class="button-container">
+    <button mat-raised-button (click)="openCreateTeamPopup()"><i class="material-icons">add</i></button>
+  </div>
   <div class="teams-container">
     <mat-table [dataSource]="teamDataSource" class="mat-elevation-z8">
   
@@ -8,6 +10,30 @@
         <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
       </ng-container>
       
+      <ng-container matColumnDef="league" >
+        <mat-header-cell *matHeaderCellDef> League </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span *ngIf="element.isInLeague">
+            <i class="bi bi-check-circle-fill"></i>
+          </span> 
+          <span *ngIf="!element.isInLeague">
+            <i class="bi bi-x-circle-fill"></i>
+          </span> 
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tournament" >
+        <mat-header-cell *matHeaderCellDef> Tournament </mat-header-cell>
+        <mat-cell *matCellDef="let element" >
+          <span *ngIf="element.isInLeague">
+            <i class="bi bi-check-circle-fill"></i>
+          </span> 
+          <span *ngIf="!element.isInLeague">
+            <i class="bi bi-x-circle-fill"></i>
+          </span> 
+        </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="details" >
         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
         <mat-cell *matCellDef="let element">

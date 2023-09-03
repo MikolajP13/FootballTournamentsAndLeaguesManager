@@ -1,5 +1,18 @@
 .teams-container {
-  margin: 3% 5%;
+  margin: 20px;
+}
+
+.button-container {
+  margin: 20px;
+}
+
+.button-container > button {
+  color: white;
+  background-color: #45a049;
+}
+
+.button-container > button:hover {
+  background-color: green;
 }
 
 .mat-column-details {
@@ -9,4 +22,14 @@
 .teams-row:hover {
   background-color: aliceblue;
   cursor: pointer;
+}
+
+.bi-check-circle-fill {
+  font-size: 16px;
+  color: green;
+}
+
+.bi-x-circle-fill {
+  font-size: 16px;
+  color: red;
 }

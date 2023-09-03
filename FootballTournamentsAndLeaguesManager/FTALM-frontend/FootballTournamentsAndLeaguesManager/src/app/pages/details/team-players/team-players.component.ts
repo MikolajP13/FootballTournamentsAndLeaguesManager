@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Player } from 'src/app/models/Player/player';
+import { Player, Position, PositionDetail } from 'src/app/models/Player/player';
 import { PlayerService } from '../../../services/playerService/player.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPlayerPopupComponent } from '../../popups/add-player-popup/add-player-popup.component';
@@ -12,6 +12,8 @@ import { AddPlayerPopupComponent } from '../../popups/add-player-popup/add-playe
 })
 export class TeamPlayersComponent {
   teamId!: number;
+  positionOrder = ['GK', 'LB', 'LCB', 'CB', 'RCB', 'RB', 'LM', 'CDM', 'CM', 'RM', 'LW', 'CAM', 'RW', 'LF', 'CF', 'RF'];
+
   teamDataSource: Player[] = [];
   displayedColumns: string[] = ['position', 'positionDetail', 'firstName', 'lastName', 'details'];
 
@@ -28,7 +30,8 @@ export class TeamPlayersComponent {
   //TODO: sort by position!
   fetchTeamPlayersData(teamId: number) {
     this.playerService.getAllPlayersByTeamId(teamId).subscribe((players: Player[]) => {
-      this.teamDataSource = [...players]; 
+      this.teamDataSource = [...players];
+      this.sortTeamDataSource();
     });
   }
 
@@ -45,7 +48,17 @@ export class TeamPlayersComponent {
   private fetchLastPlayerData(){
     this.playerService.getAllPlayersByTeamId(this.teamId).subscribe((players: Player[]) => {
       const lastPlayer = players[players.length-1];
-      this.teamDataSource = [...this.teamDataSource, lastPlayer]; 
+      this.teamDataSource = [...this.teamDataSource, lastPlayer];
+      this.sortTeamDataSource(); 
+    });
+  }
+
+  private sortTeamDataSource(){
+    this.teamDataSource.sort((p1, p2) => {
+      if(p1.positionDetail && p2.positionDetail){
+        return this.positionOrder.indexOf(p1.positionDetail) - this.positionOrder.indexOf(p2.positionDetail);
+      }else 
+        return 0;
     });
   }
 }

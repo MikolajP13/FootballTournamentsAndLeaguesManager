@@ -15,7 +15,7 @@ import { CreateTeamPopupComponent } from '../popups/create-team-popup/create-tea
 export class TeamsComponent {
   authUser!: User;
 
-  displayedColumns: string[] = ['teamName', 'details'];
+  displayedColumns: string[] = ['teamName', 'league', 'tournament', 'details'];
   teamDataSource:Team[] = [];
 
   constructor(private router: Router, private teamService: TeamService, private dialog: MatDialog){ }
@@ -30,7 +30,7 @@ export class TeamsComponent {
 
   openCreateTeamPopup(){
     const dialogRef = this.dialog.open(CreateTeamPopupComponent, {data: this.authUser.id});
-
+    this.teamDataSource.forEach((team)=>{console.log(team.isInLeague);});
     dialogRef.afterClosed().subscribe(result => {
       if(result === 'success'){
         this.fetchLastTeamData();

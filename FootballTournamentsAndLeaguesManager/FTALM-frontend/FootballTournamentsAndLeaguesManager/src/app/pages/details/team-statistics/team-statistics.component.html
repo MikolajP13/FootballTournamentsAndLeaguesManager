@@ -1,94 +1,97 @@
 <div class="statistics-container">
   <h2>Team statistic</h2>
-  <mat-table [dataSource]="teamLeaguesStatisticsDataSource" class="mat-elevation-z8">
+  <div class="league-statistics-container">
+    <mat-table [dataSource]="teamLeaguesStatisticsDataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="league">
-      <mat-header-cell *matHeaderCellDef> League </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="league">
+        <mat-header-cell *matHeaderCellDef> League </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="win">
+        <mat-header-cell *matHeaderCellDef> W </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.positionDetail}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="draw">
+        <mat-header-cell *matHeaderCellDef> D </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.firstName}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="loss">
+        <mat-header-cell *matHeaderCellDef> L </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="goals" >
+        <mat-header-cell *matHeaderCellDef> Goals </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="goal difference" >
+        <mat-header-cell *matHeaderCellDef> +/- </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="points" >
+        <mat-header-cell *matHeaderCellDef> Points </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="rank" >
+        <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumnsForLeagues"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsForLeagues;"></mat-row>
+    </mat-table>  
+  </div>
+  <div class="tournaments-statistics-container">
+    <mat-table [dataSource]="teamTournamentsStatisticsDataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="win">
-      <mat-header-cell *matHeaderCellDef> W </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.positionDetail}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="draw">
-      <mat-header-cell *matHeaderCellDef> D </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.firstName}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="loss">
-      <mat-header-cell *matHeaderCellDef> L </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="goals" >
-      <mat-header-cell *matHeaderCellDef> Goals </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="goal difference" >
-      <mat-header-cell *matHeaderCellDef> +/- </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="points" >
-      <mat-header-cell *matHeaderCellDef> Points </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="rank" >
-      <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumnsForLeagues"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumnsForLeagues;"></mat-row>
-  </mat-table>
-
-  <mat-table [dataSource]="teamTournamentsStatisticsDataSource" class="mat-elevation-z8">
-
-    <ng-container matColumnDef="tournament">
-      <mat-header-cell *matHeaderCellDef> Tournament </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="win">
-      <mat-header-cell *matHeaderCellDef> W </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.positionDetail}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="draw">
-      <mat-header-cell *matHeaderCellDef> D </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.firstName}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="loss">
-      <mat-header-cell *matHeaderCellDef> L </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="goals" >
-      <mat-header-cell *matHeaderCellDef> Goals </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="goal difference" >
-      <mat-header-cell *matHeaderCellDef> +/- </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="group points" >
-      <mat-header-cell *matHeaderCellDef> Group Points </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="round" >
-      <mat-header-cell *matHeaderCellDef> Round </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumnsForTournaments"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumnsForTournaments;"></mat-row>
-  </mat-table>
+      <ng-container matColumnDef="tournament">
+        <mat-header-cell *matHeaderCellDef> Tournament </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="win">
+        <mat-header-cell *matHeaderCellDef> W </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.positionDetail}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="draw">
+        <mat-header-cell *matHeaderCellDef> D </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.firstName}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="loss">
+        <mat-header-cell *matHeaderCellDef> L </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="goals" >
+        <mat-header-cell *matHeaderCellDef> Goals </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="goal difference" >
+        <mat-header-cell *matHeaderCellDef> +/- </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="group points" >
+        <mat-header-cell *matHeaderCellDef> Group Points </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="round" >
+        <mat-header-cell *matHeaderCellDef> Round </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element }} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumnsForTournaments"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsForTournaments;"></mat-row>
+    </mat-table>
+  </div>
 </div>

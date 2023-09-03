@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CompetitionType, TournamentLeagueBase } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
+import { CompetitionType, Status, TournamentLeagueBase } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
 import { User } from 'src/app/models/User/user';
 import { LeagueService } from 'src/app/services/leagueService/league.service';
 import { TournamentService } from '../../services/tournamentService/tournament.service';
@@ -13,9 +13,11 @@ import { forkJoin } from 'rxjs';
 })
 export class HomeComponent {
   authUser!: User;
+  notStarted: Status = Status.NOT_STARTED;
+  inProgress: Status = Status.IN_PROGRESS;
+  finished: Status = Status.FINISHED;
 
-
-  displayedColumns: string[] = ['competitionName', 'numberOfTeams', 'startDate', 'status', 'details'];
+  displayedColumns: string[] = ['competitionName', 'numberOfTeams', 'startDate', 'endDate', 'status', 'details'];
   dataSource:TournamentLeagueBase[] = [];
 
   constructor(private router: Router, private leagueService: LeagueService, private tournamentService: TournamentService){ }
