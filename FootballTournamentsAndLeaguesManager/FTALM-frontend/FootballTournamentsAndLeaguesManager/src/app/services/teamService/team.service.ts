@@ -16,6 +16,10 @@ export class TeamService {
     return this.httpClient.get<Team[]>(`${this.apiServerUrl}/team/all/${userId}`);
   }
 
+  getTeamById(teamId: number): Observable<Team> {
+    return this.httpClient.get<Team>(`${this.apiServerUrl}/team/find/${teamId}`);
+  }
+
   addTeam(team: Team): Observable<Team> {
     return this.httpClient.post<Team>(`${this.apiServerUrl}/team/add`, team);
   }
