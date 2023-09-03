@@ -18,7 +18,10 @@ export class CreateTeamPopupComponent {
     const team: Team = {
       user: {id: this.userId},
       name: teamForm.value.name,
-      captainId: null
+      captainId: null,
+      isInLeague: false,
+      isInTournament: false,
+      established: new Date()
     }
 
     this.teamService.addTeam(team).subscribe(result => {

@@ -1,7 +1,7 @@
-.create-team-form-body {
+.add-player-form-body {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 450px;
   height: 100%;
   padding: 15px;
 }
@@ -10,13 +10,18 @@
   align-self: flex-end;
 }
 
+.selector-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 label {
   display: block;
   margin-bottom: 5px;
 }
 
 input {
-  width: 384px;
+  width: 434px;
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ccc;

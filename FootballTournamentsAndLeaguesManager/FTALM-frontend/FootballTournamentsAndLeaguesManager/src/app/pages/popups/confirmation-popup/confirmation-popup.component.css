@@ -1,7 +1,7 @@
-.create-team-form-body {
+.confirmation-form-body {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 350px;
   height: 100%;
   padding: 15px;
 }
@@ -10,33 +10,34 @@
   align-self: flex-end;
 }
 
-label {
-  display: block;
-  margin-bottom: 5px;
+.line {
+  border: 1px groove rgb(194, 193, 193);
+  width: 100%;
 }
 
-input {
-  width: 384px;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.confirmation-text {
+  text-align: justify;
+  padding-top: 15px;
 }
 
 .button-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
+  margin-top: 20px;
   width: 100%;
 }
 
-button[type="submit"] {
-  background-color: #007bff;
+p {
+  text-align: justify;
+}
+
+button[type="delete"] {
+  background-color: #ff1100;
   color: #fff;
 }
 
-button[type="submit"]:hover {
-  background-color: #0056b3;
+button[type="delete"]:hover {
+  background-color: #dd2c20;
 }
 
 button[type="button"] {

@@ -1,0 +1,54 @@
+<div class="add-player-form-body">
+  <button mat-icon-button class="close-button" (click)="closePopup()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <form #playerForm="ngForm" (ngSubmit)="addPlayer(playerForm)" method="post">
+    <div>
+      <label for="player-firstName-field">First name</label>
+      <input type="text" [(ngModel)]="firstName" name="firstName" required>
+    </div>
+    <div>
+      <label for="player-firstName-field">Last name</label>
+      <input type="text" [(ngModel)]="lastName" name="lastName" required>
+    </div>
+    <div class="selector-container">
+    <mat-form-field>
+      <mat-label>Position</mat-label>
+      <mat-select [(ngModel)]="selectedPosition" name="position">
+        <mat-option *ngFor="let position of positions" [value]="position">
+          {{position}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="selectedPosition === 'DEFENDER'">
+      <mat-label>Position detail</mat-label>
+      <mat-select [(ngModel)]="selectedPositionDetail" name="positionDetail">
+        <mat-option *ngFor="let detail of positionDefenderDetails; let i = index" [value]="i + startDefenderIndex">
+          {{ detail }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="selectedPosition === 'MIDFIELDER'">
+      <mat-label>Position detail</mat-label>
+      <mat-select [(ngModel)]="selectedPositionDetail" name="positionDetail">
+        <mat-option *ngFor="let detail of positionMidfielderDetails; let i = index" [value]="i + startMidfielderIndex">
+          {{ detail }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="selectedPosition === 'FORWARD'">
+      <mat-label>Position detail</mat-label>
+      <mat-select [(ngModel)]="selectedPositionDetail" name="positionDetail">
+        <mat-option *ngFor="let detail of positionForwardDetails; let i = index" [value]="i + startForwardIndex">
+          {{ detail }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+    <div class="button-container">
+      <button mat-raised-button type="submit">Add player</button>
+      <button mat-raised-button type="button" (click)="closePopup()">Cancel</button>
+    </div>
+  </form>
+
+</div>
