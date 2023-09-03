@@ -24,7 +24,19 @@ import { SidenavComponent } from './shared-components/sidenav/sidenav.component'
 import { MatListModule } from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import { SidenavService } from './services/sidenavService/sidenav.service';
-import { TeamDetailsComponent } from './pages/team-details/team-details.component';
+import { TeamDetailsComponent } from './pages/details/team-details/team-details.component';
+import { TournamentDetailsComponent } from './pages/details/tournament-details/tournament-details.component';
+import { LeagueDetailsComponent } from './pages/details/league-details/league-details.component';
+import { CreateTeamPopupComponent } from './pages/popups/create-team-popup/create-team-popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TeamPlayersComponent } from './pages/details/team-players/team-players.component';
+import { TeamMatchesComponent } from './pages/details/team-matches/team-matches.component';
+import { TeamStatisticsComponent } from './pages/details/team-statistics/team-statistics.component';
+import { TeamAboutComponent } from './pages/details/team-about/team-about.component';
+import { AddPlayerPopupComponent } from './pages/popups/add-player-popup/add-player-popup.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ConfirmationPopupComponent } from './pages/popups/confirmation-popup/confirmation-popup.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -40,7 +52,16 @@ import { TeamDetailsComponent } from './pages/team-details/team-details.componen
     TournamentsComponent,
     LeaguesComponent,
     SidenavComponent,
-    TeamDetailsComponent
+    TeamDetailsComponent,
+    TournamentDetailsComponent,
+    LeagueDetailsComponent,
+    CreateTeamPopupComponent,
+    TeamPlayersComponent,
+    TeamMatchesComponent,
+    TeamStatisticsComponent,
+    TeamAboutComponent,
+    AddPlayerPopupComponent,
+    ConfirmationPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +75,10 @@ import { TeamDetailsComponent } from './pages/team-details/team-details.componen
     MatTableModule,
     MatSidenavModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatTooltipModule
   ],
   providers: [SidenavService],
   bootstrap: [AppComponent]

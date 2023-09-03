@@ -13,6 +13,6 @@ export class AppComponent {
 
   isNotLoginOrRegistrationPage(): boolean {
     return this.router.url === '/home' || this.router.url === '/teams' || this.router.url === '/leagues' || this.router.url === '/tournaments'
-    || this.router.url.includes('/team/');
+    || this.router.url.includes('/team/') || this.router.url.includes('/league/') || this.router.url.includes('/tournament/');
   }
 }
