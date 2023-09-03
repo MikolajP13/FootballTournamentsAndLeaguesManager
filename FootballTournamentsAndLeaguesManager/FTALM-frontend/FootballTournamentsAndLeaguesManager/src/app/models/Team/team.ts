@@ -5,4 +5,7 @@ export class Team {
   };
   name?: string;
   captainId?: number | null;
+  isInLeague?: boolean;
+  isInTournament?: boolean;
+  established?: Date;
 }
