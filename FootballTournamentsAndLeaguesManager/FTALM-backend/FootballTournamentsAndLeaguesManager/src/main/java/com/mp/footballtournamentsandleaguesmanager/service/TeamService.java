@@ -45,6 +45,9 @@ public class TeamService {
         dto.setId(team.getId());
         dto.setName(team.getName());
         dto.setCaptainId(team.getCaptainId());
+        dto.setEstablished(team.getEstablished());
+        dto.setIsInLeague(team.isInLeague());
+        dto.setIsInTournament(team.isInTournament());
         return dto;
     }
 }

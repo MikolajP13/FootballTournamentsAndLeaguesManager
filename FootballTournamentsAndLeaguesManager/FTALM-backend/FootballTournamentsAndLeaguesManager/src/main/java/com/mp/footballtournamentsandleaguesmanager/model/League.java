@@ -22,12 +22,12 @@ public class League extends TournamentLeagueBase{
 
     public League() {
     }
-    public League(Long id, User user, String name, Date startDate, int numberOfTeams, Status status, Set<Team> teams) {
-        super(id, user, name, startDate, numberOfTeams, status);
+    public League(Long id, User user, String name, Date startDate, Date endDate, int numberOfTeams, Status status, Set<Team> teams) {
+        super(id, user, name, startDate, endDate, numberOfTeams, status);
         this.teams = teams;
     }
-    public League(Long id, User user, String name, Date startDate, int numberOfTeams, Status status) {
-        super(id, user, name, startDate, numberOfTeams, status);
+    public League(Long id, User user, String name, Date startDate, Date endDate, int numberOfTeams, Status status) {
+        super(id, user, name, startDate, endDate, numberOfTeams, status);
     }
     public Set<Team> getTeams() {
         return teams;

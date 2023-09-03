@@ -27,6 +27,9 @@ public class TournamentService {
     public TournamentDTO getTournamentById(Long tournamentId){
         return convertToDTO(tournamentRepository.findById(tournamentId).orElseThrow()); //TODO
     }
+    public TournamentDTO findActiveTournamentForTeam(Long teamId){
+        return convertToDTO(tournamentRepository.findActiveTournamentForTeam(teamId).orElseThrow()); //TODO
+    }
     public List<TournamentDTO> getAllByUserId(Long userId){
         Optional<List<Tournament>> tournamentsOptional = tournamentRepository.findAllByUserId(userId);
         List<Tournament> tournaments = tournamentsOptional.orElse(Collections.emptyList());

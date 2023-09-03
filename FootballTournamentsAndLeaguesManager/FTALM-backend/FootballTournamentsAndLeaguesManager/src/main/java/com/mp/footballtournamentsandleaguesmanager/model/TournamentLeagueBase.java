@@ -17,17 +17,19 @@ public class TournamentLeagueBase {
     private User user;
     private String name;
     private Date startDate;
+    private Date endDate;
     private int numberOfTeams;
     private Status status;
 
     public TournamentLeagueBase() {
     }
 
-    public TournamentLeagueBase(Long id, User user, String name, Date startDate, int numberOfTeams, Status status) {
+    public TournamentLeagueBase(Long id, User user, String name, Date startDate, Date endDate, int numberOfTeams, Status status) {
         this.id = id;
         this.user = user;
         this.name = name;
         this.startDate = startDate;
+        this.endDate = endDate;
         this.numberOfTeams = numberOfTeams;
         this.status = status;
     }
@@ -62,6 +64,14 @@ public class TournamentLeagueBase {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public int getNumberOfTeams() {

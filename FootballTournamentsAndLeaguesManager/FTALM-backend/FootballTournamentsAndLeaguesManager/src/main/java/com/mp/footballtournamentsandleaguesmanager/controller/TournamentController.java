@@ -26,6 +26,12 @@ public class TournamentController {
         return new ResponseEntity<>(tournamentService.getTournamentById(tournamentId), HttpStatus.OK);
     }
 
+    @GetMapping("/active/{teamId}")
+    public ResponseEntity<TournamentDTO> findActiveTournamentForTeam(@PathVariable Long teamId){
+        TournamentDTO tournament = tournamentService.findActiveTournamentForTeam(teamId);
+        return new ResponseEntity<>(tournament, HttpStatus.OK);
+    }
+
     @GetMapping("/all/{userId}")
     public ResponseEntity<List<TournamentDTO>> getAllByUserId(@PathVariable Long userId){
        return ResponseEntity.ok(tournamentService.getAllByUserId(userId));

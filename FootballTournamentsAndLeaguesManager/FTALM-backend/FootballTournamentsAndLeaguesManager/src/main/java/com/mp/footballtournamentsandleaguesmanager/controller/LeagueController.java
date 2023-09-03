@@ -27,6 +27,12 @@ public class LeagueController {
         return new ResponseEntity<>(league, HttpStatus.OK); //TODO handle missing ID!
     }
 
+    @GetMapping("active/{teamId}")
+    public ResponseEntity<LeagueDTO> findActiveLagueForTeam(@PathVariable Long teamId){
+        LeagueDTO league = leagueService.findActiveLeagueForTeam(teamId);
+        return new ResponseEntity<>(league, HttpStatus.OK);
+    }
+
 //    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("all/{userId}")
     public ResponseEntity<List<LeagueDTO>> getAllUserLeagues(@PathVariable Long userId) {

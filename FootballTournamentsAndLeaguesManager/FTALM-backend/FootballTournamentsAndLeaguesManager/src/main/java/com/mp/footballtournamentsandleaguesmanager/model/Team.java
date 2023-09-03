@@ -2,6 +2,7 @@ package com.mp.footballtournamentsandleaguesmanager.model;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,15 +21,21 @@ public class Team {
     private Set<Tournament> tournaments = new HashSet<>();
     private String name;
     private Long captainId;
+    private Date established;
+    private boolean isInLeague;
+    private boolean isInTournament;
 
     public Team() {
     }
 
-    public Team(Long id, User user, String name, Long captainId) {
+    public Team(Long id, User user, String name, Long captainId, boolean isInLeague, boolean isInTournament, Date established) {
         this.id = id;
         this.user = user;
         this.name = name;
         this.captainId = captainId;
+        this.established = established;
+        this.isInLeague = isInLeague;
+        this.isInTournament = isInTournament;
     }
 
     public Long getId() {
@@ -77,6 +84,30 @@ public class Team {
 
     public void setCaptainId(Long captainId) {
         this.captainId = captainId;
+    }
+
+    public Date getEstablished() {
+        return established;
+    }
+
+    public void setEstablished(Date established) {
+        this.established = established;
+    }
+
+    public boolean isInLeague() {
+        return isInLeague;
+    }
+
+    public void setInLeague(boolean isInLeague) {
+        this.isInLeague = isInLeague;
+    }
+
+    public boolean isInTournament() {
+        return isInTournament;
+    }
+
+    public void setInTournament(boolean isInTournament) {
+       this.isInTournament = isInTournament;
     }
 
     @Override

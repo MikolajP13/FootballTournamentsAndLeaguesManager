@@ -57,6 +57,10 @@ public class LeagueService {
             return false;
         }
     }
+    public LeagueDTO findActiveLeagueForTeam(Long teamId){
+        return convertToDTO(leagueRepository.findActiveLeagueForTeam(teamId));
+    }
+
     private LeagueDTO convertToDTO(League league) {
         LeagueDTO dto = new LeagueDTO();
         dto.setId(league.getId());
