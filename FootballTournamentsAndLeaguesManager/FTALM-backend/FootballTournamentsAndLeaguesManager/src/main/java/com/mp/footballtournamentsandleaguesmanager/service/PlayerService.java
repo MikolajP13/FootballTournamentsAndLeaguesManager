@@ -48,8 +48,25 @@ public class PlayerService {
         dto.setId(player.getId());
         dto.setFirstName(player.getFirstName());
         dto.setLastName(player.getLastName());
+        dto.setDateOfBirth(player.getDateOfBirth());
+        dto.setAge(player.getAge());
+        dto.setHeightInCm(player.getHeightInCm());
+        dto.setFoot(player.getFoot());
+        dto.setJoinedDate(player.getJoinedDate());
         dto.setPosition(player.getPosition());
         dto.setPositionDetail(player.getPositionDetail());
+        dto.setAppearances(player.getAppearances());
+        dto.setMinutes(player.getMinutes());
+        dto.setYellowCards(player.getYellowCards());
+        dto.setSecondYellowCards(player.getSecondYellowCards());
+        dto.setRedCards(player.getRedCards());
+        dto.setGoalsConceded(player.getGoalsConceded());
+        dto.setCleanSheets(player.getCleanSheets());
+        dto.setGoals(player.getGoals());
+        dto.setAssists(player.getAssists());
+        dto.setInjured(player.isInjured());
+        dto.setTeamCaptain(player.isTeamCaptain());
+        dto.setSuspended(player.isSuspended());
         return dto;
     }
 }
