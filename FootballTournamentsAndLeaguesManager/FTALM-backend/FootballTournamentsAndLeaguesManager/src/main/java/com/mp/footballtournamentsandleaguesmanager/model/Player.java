@@ -16,7 +16,6 @@ public class Player {
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
-    private int age;
     private int heightInCm;
     private Foot foot;
     private Date joinedDate;
@@ -39,7 +38,7 @@ public class Player {
 
     public Player() { }
 
-    public Player(Long id, Team team, String firstName, String lastName, Date dateOfBirth, int age,
+    public Player(Long id, Team team, String firstName, String lastName, Date dateOfBirth,
                   int heightInCm, Foot foot, Date joinedDate, Position position, PositionDetail positionDetail,
                   int appearances, long minutes, int yellowCards, int secondYellowCards, int redCards,
                   int goalsConceded, int cleanSheets, int goals, int assists, boolean isSuspended,
@@ -49,7 +48,6 @@ public class Player {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
-        this.age = age;
         this.heightInCm = heightInCm;
         this.foot = foot;
         this.joinedDate = joinedDate;
@@ -107,14 +105,6 @@ public class Player {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public int getHeightInCm() {

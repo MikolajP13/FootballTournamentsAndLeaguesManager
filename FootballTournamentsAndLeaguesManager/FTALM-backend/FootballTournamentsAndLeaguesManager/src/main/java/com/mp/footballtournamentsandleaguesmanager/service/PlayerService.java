@@ -49,7 +49,6 @@ public class PlayerService {
         dto.setFirstName(player.getFirstName());
         dto.setLastName(player.getLastName());
         dto.setDateOfBirth(player.getDateOfBirth());
-        dto.setAge(player.getAge());
         dto.setHeightInCm(player.getHeightInCm());
         dto.setFoot(player.getFoot());
         dto.setJoinedDate(player.getJoinedDate());
