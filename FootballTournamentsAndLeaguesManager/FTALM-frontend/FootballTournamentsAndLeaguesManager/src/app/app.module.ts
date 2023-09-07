@@ -22,7 +22,7 @@ import { LeaguesComponent } from './pages/leagues/leagues.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavComponent } from './shared-components/sidenav/sidenav.component';
 import { MatListModule } from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { SidenavService } from './services/sidenavService/sidenav.service';
 import { TeamDetailsComponent } from './pages/details/team-details/team-details.component';
 import { TournamentDetailsComponent } from './pages/details/tournament-details/tournament-details.component';
@@ -37,6 +37,9 @@ import { AddPlayerPopupComponent } from './pages/popups/add-player-popup/add-pla
 import { MatSelectModule } from '@angular/material/select';
 import { ConfirmationPopupComponent } from './pages/popups/confirmation-popup/confirmation-popup.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -78,9 +81,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatDialogModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
-  providers: [SidenavService],
-  bootstrap: [AppComponent]
+  providers: [SidenavService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

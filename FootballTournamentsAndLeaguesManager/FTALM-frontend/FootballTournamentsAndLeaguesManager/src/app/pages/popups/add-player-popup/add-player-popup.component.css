@@ -15,6 +15,15 @@
   justify-content: space-between;
 }
 
+.mat-datepicker-input {
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+}
+
+.mat-datepicker-toggle {
+  font-size: 10px;
+}
+
 label {
   display: block;
   margin-bottom: 5px;
@@ -50,4 +59,21 @@ button[type="button"] {
 
 button[type="button"]:hover {
   background-color: #999;
+}
+
+.datepicker {
+  width: 100%;
+}
+
+.selector-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
 }

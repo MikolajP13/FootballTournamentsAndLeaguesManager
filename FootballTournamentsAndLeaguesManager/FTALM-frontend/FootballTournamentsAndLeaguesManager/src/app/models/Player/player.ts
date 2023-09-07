@@ -5,8 +5,29 @@ export class Player {
   };
   firstName?: string;
   lastName?: string;
+  dateOfBirth?: Date;
+  age?: number;
+  heightInCm?: number;
+  foot?: Foot;
+  joinedDate?: Date;
   position?: Position;
   positionDetail?: PositionDetail;
+  appearances?: number;
+  minutes?: number;
+  yellowCards?: number;
+  secondYellowCards?: number;
+  redCards?: number;
+  goalsConceded?: number;
+  cleanSheets?: number;
+  goals?: number;
+  assists?: number;
+  suspended?: boolean;
+  injured?: boolean;
+  teamCaptain?: boolean;
+}
+
+export enum Foot {
+  RIGHT = "right", LEFT = "left", BOTH = "both",
 }
 
 export enum Position {

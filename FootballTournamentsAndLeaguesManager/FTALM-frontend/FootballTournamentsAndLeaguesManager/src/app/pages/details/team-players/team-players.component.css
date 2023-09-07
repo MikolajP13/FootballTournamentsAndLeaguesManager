@@ -14,3 +14,14 @@
 .players-container {
   margin: 20px;
 }
+
+.players-row:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
+.bi-c-circle, .bi-plus-square, .bi-person-slash {
+  font-size: 12px;
+  margin-left: 2px;
+  color: red;
+}

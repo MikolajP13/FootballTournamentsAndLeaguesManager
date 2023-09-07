@@ -14,8 +14,8 @@ export class TeamPlayersComponent {
   teamId!: number;
   positionOrder = ['GK', 'LB', 'LCB', 'CB', 'RCB', 'RB', 'LM', 'CDM', 'CM', 'RM', 'LW', 'CAM', 'RW', 'LF', 'CF', 'RF'];
 
-  teamDataSource: Player[] = [];
-  displayedColumns: string[] = ['position', 'positionDetail', 'firstName', 'lastName', 'details'];
+  teamPlayersDataSource: Player[] = [];
+  displayedColumns: string[] = ['position', 'positionDetail', 'fullName', 'doBAndAge', 'height', 'foot', 'joined', 'details'];
 
   constructor(private playerService: PlayerService, private route: ActivatedRoute, private dialog: MatDialog) { }
 
@@ -27,11 +27,11 @@ export class TeamPlayersComponent {
     this.fetchTeamPlayersData(this.teamId);
   }
 
-  //TODO: sort by position!
   fetchTeamPlayersData(teamId: number) {
     this.playerService.getAllPlayersByTeamId(teamId).subscribe((players: Player[]) => {
-      this.teamDataSource = [...players];
+      this.teamPlayersDataSource = [...players];
       this.sortTeamDataSource();
+      this.processPlayerDetails();
     });
   }
 
@@ -48,17 +48,40 @@ export class TeamPlayersComponent {
   private fetchLastPlayerData(){
     this.playerService.getAllPlayersByTeamId(this.teamId).subscribe((players: Player[]) => {
       const lastPlayer = players[players.length-1];
-      this.teamDataSource = [...this.teamDataSource, lastPlayer];
-      this.sortTeamDataSource(); 
+      this.teamPlayersDataSource = [...this.teamPlayersDataSource, lastPlayer];
+      this.sortTeamDataSource();
+      this.processPlayerDetails();
     });
   }
 
   private sortTeamDataSource(){
-    this.teamDataSource.sort((p1, p2) => {
+    this.teamPlayersDataSource.sort((p1, p2) => {
       if(p1.positionDetail && p2.positionDetail){
         return this.positionOrder.indexOf(p1.positionDetail) - this.positionOrder.indexOf(p2.positionDetail);
       }else 
         return 0;
     });
+  }
+
+  private processPlayerDetails(){
+    this.teamPlayersDataSource.forEach(player => {
+      if(player.dateOfBirth){
+        player.age = this.calculateAge(player.dateOfBirth);
+      }
+    });
+  }
+
+  private calculateAge(dateOfBirth: Date): number {
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
   }
 }

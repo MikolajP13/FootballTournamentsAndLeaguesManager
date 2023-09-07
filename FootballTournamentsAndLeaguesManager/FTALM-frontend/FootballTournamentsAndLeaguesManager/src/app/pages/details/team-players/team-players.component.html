@@ -3,11 +3,11 @@
 </div>
 
 <div class="players-container">
-  <mat-table [dataSource]="teamDataSource" class="mat-elevation-z8">
+  <mat-table [dataSource]="teamPlayersDataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="position">
       <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.position.toLowerCase()}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="positionDetail">
@@ -15,14 +15,33 @@
       <mat-cell *matCellDef="let element"> {{element.positionDetail}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="firstName">
-      <mat-header-cell *matHeaderCellDef> First name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.firstName}}</mat-cell>
+    <ng-container matColumnDef="fullName">
+      <mat-header-cell *matHeaderCellDef> Full name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstName}} {{element.lastName}} 
+        <span *ngIf="element.teamCaptain"><i class="bi bi-c-circle"></i></span>
+        <span *ngIf="element.injured"><i class="bi bi-plus-square"></i></span>
+        <span *ngIf="element.suspended"><i class="bi bi-person-slash"></i></span>
+      </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="doBAndAge">
+      <mat-header-cell *matHeaderCellDef> Date of birth / Age </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MM-yyyy'}} ({{element.age}}) </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="lastName">
-      <mat-header-cell *matHeaderCellDef> Last name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+    <ng-container matColumnDef="height">
+      <mat-header-cell *matHeaderCellDef> Height </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ (element.heightInCm / 100).toString().replace('.', ',') }} m</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="foot">
+      <mat-header-cell *matHeaderCellDef> Foot </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.foot.toLowerCase()}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="joined">
+      <mat-header-cell *matHeaderCellDef> Joined </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.joinedDate | date: 'dd-MM-yyyy' }} </mat-cell>
     </ng-container>
     
     <ng-container matColumnDef="details" >
@@ -33,6 +52,6 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="leagues-row"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="players-row"></mat-row>
   </mat-table>
 </div>
