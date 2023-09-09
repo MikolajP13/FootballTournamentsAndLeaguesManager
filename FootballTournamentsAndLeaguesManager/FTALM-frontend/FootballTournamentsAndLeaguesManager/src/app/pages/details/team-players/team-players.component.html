@@ -52,6 +52,6 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="players-row"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="players-row" (click)="showPlayerDetails(row)"></mat-row>
   </mat-table>
 </div>

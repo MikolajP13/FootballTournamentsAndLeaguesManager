@@ -40,6 +40,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { PlayerDetailsPopupComponent } from './pages/popups/player-details-popup/player-details-popup.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { MatInputModule } from '@angular/material/input';
     TeamStatisticsComponent,
     TeamAboutComponent,
     AddPlayerPopupComponent,
-    ConfirmationPopupComponent
+    ConfirmationPopupComponent,
+    PlayerDetailsPopupComponent
   ],
   imports: [
     BrowserModule,

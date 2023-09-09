@@ -4,6 +4,7 @@ import { Player, Position, PositionDetail } from 'src/app/models/Player/player';
 import { PlayerService } from '../../../services/playerService/player.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPlayerPopupComponent } from '../../popups/add-player-popup/add-player-popup.component';
+import { PlayerDetailsPopupComponent } from '../../popups/player-details-popup/player-details-popup.component';
 
 @Component({
   selector: 'app-team-players',
@@ -45,6 +46,10 @@ export class TeamPlayersComponent {
     });
   }
 
+  showPlayerDetails(player: Player) {
+    this.dialog.open(PlayerDetailsPopupComponent, {data: player});
+  }
+  
   private fetchLastPlayerData(){
     this.playerService.getAllPlayersByTeamId(this.teamId).subscribe((players: Player[]) => {
       const lastPlayer = players[players.length-1];

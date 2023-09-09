@@ -1,0 +1,78 @@
+<div class="player-details-form-body">
+  <button mat-icon-button class="close-button" (click)="closePopup()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="player-details-container">
+    <h1>{{player.firstName}} {{player.lastName}}</h1>
+    <div class="player-statistics">
+      <div class="data">
+        <span>Appearances:</span>
+        <span>{{player.appearances}}</span>
+      </div>
+      <div class="data">
+        <span>Minutes:</span>
+        <span>{{player.minutes}}</span>
+      </div>
+      <div *ngIf="player.position?.toString() != goalkeeper">
+        <div class="data">
+          <span>Goals:</span>
+          <span>{{player.goals}}</span>
+        </div>
+        <div class="data">
+          <span>Assists:</span>
+          <span>{{player.assists}}</span>
+        </div>
+      </div>
+      <div *ngIf="player.position?.toString() == goalkeeper">
+        <div class="data">
+          <span>Goals conceded:</span>
+          <span>{{player.goalsConceded}}</span>
+        </div>
+        <div class="data">
+          <span>Clean sheets:</span>
+          <span>{{player.cleanSheets}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="player-cards">
+      <div class="data">
+        <span>Yellow cards:</span>
+        <span>{{player.yellowCards}}</span>
+      </div>
+      <div class="data">
+        <span>Second yellows:</span>
+        <span>{{player.secondYellowCards}}</span>
+      </div>
+      <div class="data">
+        <span>Red cards:</span>
+        <span>{{player.redCards}}</span>
+      </div>
+    </div>
+    <div class="player-data">
+      <div class="data">
+        <span>Date of birth:</span>
+        <span>{{player.dateOfBirth | date: 'dd-MM-yyyy'}}</span>
+      </div>
+      <div class="data">
+        <span>Age:</span>
+        <span>{{player.age}}</span>
+      </div>
+      <div class="data" *ngIf="player.heightInCm">
+        <span>Height:</span>
+        <span>{{(player.heightInCm/100).toString().replace('.', ',')}} m</span>
+      </div>
+      <div class="data">
+        <span>Position:</span>
+        <span>{{player.position?.toString()?.toLowerCase()}}</span>
+      </div>
+      <div class="data" *ngIf="player.position?.toString() != goalkeeper">
+        <span>Postion detail:</span>
+        <span>{{positionDetail.toLowerCase()}}</span>
+      </div>
+      <div class="data">
+        <span>Foot:</span>
+        <span>{{player.foot?.toString()?.toLowerCase()}}</span>
+      </div>
+    </div>
+  </div>
+</div>

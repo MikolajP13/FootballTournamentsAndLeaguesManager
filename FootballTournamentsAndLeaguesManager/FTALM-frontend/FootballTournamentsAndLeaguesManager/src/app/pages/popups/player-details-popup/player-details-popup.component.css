@@ -1,0 +1,60 @@
+.player-details-form-body {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  height: 100%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.close-button {
+  align-self: flex-end;
+  margin-bottom: 10px;
+}
+
+.player-details-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "header header"
+    "statistics cards"
+    "data data";
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.player-statistics {
+  grid-area: statistics;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.player-cards {
+  grid-area: cards;
+  border-bottom: 1px solid #ddd;
+}
+
+.player-data {
+  grid-area: data;
+}
+
+h1 {
+  grid-area: header;
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+span {
+  font-size: 14px;
+  margin: 3px 15px;
+}
+
+.player-cards > div,
+.data {
+  display: flex;
+  justify-content: space-between;
+}
