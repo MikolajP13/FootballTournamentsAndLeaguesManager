@@ -8,6 +8,7 @@ public class LeagueDTO {
     private Long id;
     private String leagueName;
     private Date startDate;
+    private Date endDate;
     private int numberOfTeams;
     private TournamentLeagueBase.Status status;
 
@@ -33,6 +34,14 @@ public class LeagueDTO {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public int getNumberOfTeams() {
