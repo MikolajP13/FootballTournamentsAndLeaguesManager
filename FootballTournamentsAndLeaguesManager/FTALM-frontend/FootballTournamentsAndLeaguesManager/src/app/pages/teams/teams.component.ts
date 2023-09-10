@@ -30,7 +30,7 @@ export class TeamsComponent {
 
   openCreateTeamPopup(){
     const dialogRef = this.dialog.open(CreateTeamPopupComponent, {data: this.authUser.id});
-    this.teamDataSource.forEach((team)=>{console.log(team.isInLeague);});
+  
     dialogRef.afterClosed().subscribe(result => {
       if(result === 'success'){
         this.fetchLastTeamData();

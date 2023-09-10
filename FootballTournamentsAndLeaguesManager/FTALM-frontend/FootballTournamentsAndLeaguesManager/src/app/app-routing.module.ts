@@ -16,14 +16,18 @@ import { TeamPlayersComponent } from './pages/details/team-players/team-players.
 import { TeamMatchesComponent } from './pages/details/team-matches/team-matches.component';
 import { TeamStatisticsComponent } from './pages/details/team-statistics/team-statistics.component';
 import { TeamAboutComponent } from './pages/details/team-about/team-about.component';
+import { TournamentAboutComponent } from './pages/details/tournament-about/tournament-about.component';
+import { LeagueAboutComponent } from './pages/details/league-about/league-about.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
   {path: "home", component: HomeComponent, canActivate: [authGuard]},
   {path: "tournaments", component: TournamentsComponent, canActivate: [authGuard]},
   {path: "tournament/:id", component: TournamentDetailsComponent, canActivate: [authGuard]},
+  {path: "tournament/:id/about", component: TournamentAboutComponent, canActivate: [authGuard]},
   {path: "leagues", component: LeaguesComponent, canActivate: [authGuard]},
   {path: "league/:id", component: LeagueDetailsComponent, canActivate: [authGuard]},
+  {path: "league/:id/about", component: LeagueAboutComponent, canActivate: [authGuard]},
   {path: "teams", component: TeamsComponent, canActivate: [authGuard]},
   {path: "team/:id", component: TeamDetailsComponent, canActivate: [authGuard]},
   {path: "team/:id/matches", component: TeamMatchesComponent, canActivate: [authGuard]},

@@ -1,0 +1,61 @@
+.create-league-form-body {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  height: 100%;
+  padding: 15px;
+}
+
+.close-button {
+  align-self: flex-end;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 434px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.mat-datepicker-input {
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+}
+
+.mat-datepicker-toggle {
+  font-size: 10px;
+}
+
+.datepicker {
+  width: 100%;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+button[type="button"] {
+  background-color: #ccc;
+}
+
+button[type="button"]:hover {
+  background-color: #999;
+}

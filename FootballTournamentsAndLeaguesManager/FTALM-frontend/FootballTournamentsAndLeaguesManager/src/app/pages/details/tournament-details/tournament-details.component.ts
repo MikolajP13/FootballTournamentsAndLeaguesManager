@@ -7,13 +7,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./tournament-details.component.css']
 })
 export class TournamentDetailsComponent {
-  tournamenId!: number;
+  tournamentId!: number;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.tournamenId = params['id'];
+      this.tournamentId = params['id'];
     });
   }
 }

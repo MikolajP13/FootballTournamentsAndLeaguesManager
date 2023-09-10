@@ -11,9 +11,9 @@
   <div class="current-competitions-container">
     <h3>Current Competitions</h3>
     <div>
-      <p *ngIf="activeLeague">League: {{ activeLeague.leagueName }}</p>
+      <p *ngIf="activeLeague">League: {{ activeLeague.name }}</p>
       <p *ngIf="!activeLeague">Team doesn't take part in any league</p>
-      <p *ngIf="activeTournament">Tournament: {{ activeTournament.tournamentName }}</p>
+      <p *ngIf="activeTournament">Tournament: {{ activeTournament.name }}</p>
       <p *ngIf="!activeTournament">Team doesn't take part in any tournament</p>
     </div>
   </div>

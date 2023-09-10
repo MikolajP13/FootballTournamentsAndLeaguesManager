@@ -1,0 +1,37 @@
+<div class="about-container">
+  <div class="information-container">
+    <h1>This module is designed for creating and managing leagues.</h1>
+    <ul>
+      <li>Users can view the current league matches and fill out match protocols.</li> 
+      <li>
+        Users can add teams to the league, explore team data, review past matches, and access real-time statistics.
+      </li>
+      <li>
+        The league table sub-page provides detailed information about the league table.
+      </li>
+      <li>
+        The matches sub-page presents general match data and offers detailed information when users click on the chevron icon.
+      </li>
+      <li>
+        Moreover, the statistics page showcases ongoing league statistics.
+      </li>
+      <li>You can only delete leagues that are not currently in progress.</li>
+      <li>
+        To activate a league and initiate processes like matching teams and creating a league table,
+        click the 'Start league' button.
+      </li>
+    </ul>
+  </div>
+  <div class="button-container">
+    <div>
+      <button mat-raised-button color="primary" (click)="startLeague()">
+        <i class="bi bi-rocket-takeoff-fill"></i> Start league
+      </button>
+    </div>
+    <div>
+      <button mat-raised-button color="warn" (click)="openConfirmationPopup()">
+        <i class="bi bi-trash3-fill"></i> Delete league
+      </button>
+    </div>
+</div>
+

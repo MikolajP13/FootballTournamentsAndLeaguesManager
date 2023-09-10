@@ -1,0 +1,27 @@
+<div class="create-league-form-body">
+  <button mat-icon-button class="close-button" (click)="closePopup()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <form #leagueForm="ngForm" (ngSubmit)="createLeague(leagueForm)" method="post">
+    <div class="form-field">
+      <label for="league-name-field">League name</label>
+      <input type="text" [(ngModel)]="name" name="name" required>
+    </div>
+    <div class="form-field">
+      <label for="number-of-teams-field">Number of teams</label>
+      <input type="number" [(ngModel)]="numberOfTeams" name="numberOfTeams" required>
+    </div>
+    <div class="form-field">
+      <mat-form-field class="datepicker">
+        <mat-label>Start date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" name="startDate" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="button-container">
+      <button mat-raised-button type="submit">Create tournament</button>
+      <button mat-raised-button type="button" (click)="closePopup()">Cancel</button>
+    </div>
+  </form>
+</div>

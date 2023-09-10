@@ -1,34 +1,51 @@
-<div class="leagues-container">
-  <mat-table [dataSource]="leagueDataSource" class="mat-elevation-z8">
+<div>
+  <div class="button-container">
+    <button mat-raised-button (click)="openCreateLeaguePopup()"><i class="material-icons">add</i></button>
+  </div>
+  <div class="leagues-container">
+    <mat-table [dataSource]="leagueDataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="leagueName">
-      <mat-header-cell *matHeaderCellDef> League Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.leagueName}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="leagueName">
+        <mat-header-cell *matHeaderCellDef> League Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.leagueName}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="numberOfTeams">
-      <mat-header-cell *matHeaderCellDef> Number of Teams </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.numberOfTeams}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="numberOfTeams">
+        <mat-header-cell *matHeaderCellDef> Number of Teams </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.numberOfTeams}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="startDate">
-      <mat-header-cell *matHeaderCellDef> Start Date </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.startDate}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="startDate">
+        <mat-header-cell *matHeaderCellDef> Start Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.startDate}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
-    </ng-container>
-    
-    <ng-container matColumnDef="details" >
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <i class="bi bi-chevron-right"></i>
-      </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="endDate">
+        <mat-header-cell *matHeaderCellDef> End Date </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span *ngIf="element.endDate == null"> - </span>
+          <span *ngIf="element.endDate != null"> {{element.endDate}} </span>
+        </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="leagues-row" (click)="showLeagueDeatils(row)"></mat-row>
-  </mat-table>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+          <i *ngIf="element.status == notStarted" class="bi bi-hourglass-top"></i>
+          <i *ngIf="element.status == inProgress" class="bi bi-hourglass-split"></i>
+          <i *ngIf="element.status == finished" class="bi bi-hourglass-bottom"></i>  
+        </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="details" >
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <i class="bi bi-chevron-right"></i>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="leagues-row" (click)="showLeagueDeatils(row)"></mat-row>
+    </mat-table>
+  </div>
 </div>

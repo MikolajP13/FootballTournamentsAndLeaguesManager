@@ -18,6 +18,14 @@ export class LeagueService {
   }
 
   findActiveLeagueForTeam(teamId: number): Observable<League>{
-    return this.httpClient.get<League>(`${this.apiServerUrl}/league/active/${teamId}`);
+    return this.httpClient.get<League>(`${this.apiServerUrl}/League/active/${teamId}`);
+  }
+
+  addLeague(League: League): Observable<League>{
+    return this.httpClient.post<League>(`${this.apiServerUrl}/league/add`, League);
+  }
+
+  deleteLeague(leagueId: number): Observable<Boolean>{
+    return this.httpClient.delete<Boolean>(`${this.apiServerUrl}/league/delete/${leagueId}`);
   }
 }

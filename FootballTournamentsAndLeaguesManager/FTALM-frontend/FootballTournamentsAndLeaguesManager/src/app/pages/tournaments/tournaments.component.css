@@ -6,3 +6,16 @@
   background-color: aliceblue;
   cursor: pointer;
 }
+
+.button-container {
+  margin: 3% 5%;
+}
+
+.button-container > button {
+  color: white;
+  background-color: #45a049;
+}
+
+.button-container > button:hover {
+  background-color: green;
+}

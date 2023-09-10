@@ -20,4 +20,12 @@ export class TournamentService {
   findActiveTournamentforTeam(teamId: number): Observable<Tournament>{
     return this.httpClient.get<Tournament>(`${this.apiServerUrl}/tournament/active/${teamId}`);
   }
+
+  addTournament(tournament: Tournament): Observable<Tournament>{
+    return this.httpClient.post<Tournament>(`${this.apiServerUrl}/tournament/add`, tournament);
+  }
+
+  deleteTournament(tournamentId: number): Observable<Boolean>{
+    return this.httpClient.delete<Boolean>(`${this.apiServerUrl}/tournament/delete/${tournamentId}`);
+  }
 }

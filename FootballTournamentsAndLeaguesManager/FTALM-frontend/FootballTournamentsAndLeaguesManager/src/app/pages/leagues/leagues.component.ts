@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { TournamentLeagueBase } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
+import { Status, TournamentLeagueBase } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
 import { User } from 'src/app/models/User/user';
 import { LeagueService } from 'src/app/services/leagueService/league.service';
 import { UserService } from 'src/app/services/userService/user.service';
+import { CreateLeaguePopupComponent } from '../popups/create-league-popup/create-league-popup.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-leagues',
@@ -12,11 +14,14 @@ import { UserService } from 'src/app/services/userService/user.service';
 })
 export class LeaguesComponent {
   authUser!: User;
+  notStarted: Status = Status.NOT_STARTED;
+  inProgress: Status = Status.IN_PROGRESS;
+  finished: Status = Status.FINISHED;
 
-  displayedColumns: string[] = ['leagueName', 'numberOfTeams', 'startDate', 'status', 'details'];
+  displayedColumns: string[] = ['leagueName', 'numberOfTeams', 'startDate', 'endDate', 'status', 'details'];
   leagueDataSource:TournamentLeagueBase[] = [];
 
-  constructor(private router: Router, private leagueService: LeagueService) { }
+  constructor(private router: Router, private leagueService: LeagueService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.authUser = UserService.getUser();
@@ -28,5 +33,25 @@ export class LeaguesComponent {
 
   showLeagueDeatils(league: TournamentLeagueBase): void {
     this.router.navigate(['/league/' + league.id]);
+  }
+
+  openCreateLeaguePopup() {
+    const dialogRef = this.dialog.open(CreateLeaguePopupComponent, {data: this.authUser.id});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === 'success'){
+        this.fetchLastTournamentData();
+      }
+    });
+  }
+
+  private fetchLastTournamentData() {
+    this.authUser = UserService.getUser();
+
+    if(this.authUser.id !== undefined)
+      this.leagueService.findAllLeaguesByUserId(this.authUser.id).subscribe((leagues: TournamentLeagueBase[]) => {
+        const lastLeague = leagues[leagues.length-1];
+        this.leagueDataSource = [...this.leagueDataSource, lastLeague];
+      });
   }
 }

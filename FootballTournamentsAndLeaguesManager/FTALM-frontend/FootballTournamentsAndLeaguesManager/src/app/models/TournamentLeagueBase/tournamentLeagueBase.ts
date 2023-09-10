@@ -6,7 +6,6 @@ export class TournamentLeagueBase {
   endDate!: Date;
   status?: Status;
   competitionType?: CompetitionType;
-  CompetitionType: any;
 }
 
 export enum Status {

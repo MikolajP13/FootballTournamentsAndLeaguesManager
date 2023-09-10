@@ -41,6 +41,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { PlayerDetailsPopupComponent } from './pages/popups/player-details-popup/player-details-popup.component';
+import { CreateTournamentPopupComponent } from './pages/popups/create-tournament-popup/create-tournament-popup.component';
+import { TournamentAboutComponent } from './pages/details/tournament-about/tournament-about.component';
+import { LeagueAboutComponent } from './pages/details/league-about/league-about.component';
+import { CreateLeaguePopupComponent } from './pages/popups/create-league-popup/create-league-popup.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +70,11 @@ import { PlayerDetailsPopupComponent } from './pages/popups/player-details-popup
     TeamAboutComponent,
     AddPlayerPopupComponent,
     ConfirmationPopupComponent,
-    PlayerDetailsPopupComponent
+    PlayerDetailsPopupComponent,
+    CreateTournamentPopupComponent,
+    TournamentAboutComponent,
+    LeagueAboutComponent,
+    CreateLeaguePopupComponent
   ],
   imports: [
     BrowserModule,
