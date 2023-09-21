@@ -18,7 +18,7 @@ export class LeagueService {
   }
 
   findActiveLeagueForTeam(teamId: number): Observable<League>{
-    return this.httpClient.get<League>(`${this.apiServerUrl}/League/active/${teamId}`);
+    return this.httpClient.get<League>(`${this.apiServerUrl}/league/active/${teamId}`);
   }
 
   addLeague(League: League): Observable<League>{

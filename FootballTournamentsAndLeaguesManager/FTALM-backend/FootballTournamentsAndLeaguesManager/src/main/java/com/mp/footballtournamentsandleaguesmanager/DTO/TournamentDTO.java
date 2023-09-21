@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class TournamentDTO {
     private  Long id;
-    private String tournamentName;
+    private String name;
     private Date startDate;
     private Date endDate;
     private int numberOfTeams;
@@ -20,12 +20,12 @@ public class TournamentDTO {
         this.id = id;
     }
 
-    public String getTournamentName() {
-        return tournamentName;
+    public String getName() {
+        return name;
     }
 
-    public void setTournamentName(String tournamentName) {
-        this.tournamentName = tournamentName;
+    public void setName(String tournamentName) {
+        this.name = tournamentName;
     }
 
     public Date getStartDate() {

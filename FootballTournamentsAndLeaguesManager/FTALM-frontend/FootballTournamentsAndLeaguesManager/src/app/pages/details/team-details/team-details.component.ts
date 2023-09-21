@@ -57,6 +57,7 @@ export class TeamDetailsComponent {
 
   findActiveLeagueForTeam(teamId: number){
     this.leagueService.findActiveLeagueForTeam(teamId).subscribe(activeLeague => {
+      console.log(activeLeague);
       this.activeLeague = activeLeague;
     });
   }

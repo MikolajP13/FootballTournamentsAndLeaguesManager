@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class LeagueDTO {
     private Long id;
-    private String leagueName;
+    private String name;
     private Date startDate;
     private Date endDate;
     private int numberOfTeams;
@@ -20,12 +20,12 @@ public class LeagueDTO {
         this.id = id;
     }
 
-    public String getLeagueName() {
-        return leagueName;
+    public String getName() {
+        return name;
     }
 
-    public void setLeagueName(String leagueName) {
-        this.leagueName = leagueName;
+    public void setName(String leagueName) {
+        this.name = leagueName;
     }
 
     public Date getStartDate() {

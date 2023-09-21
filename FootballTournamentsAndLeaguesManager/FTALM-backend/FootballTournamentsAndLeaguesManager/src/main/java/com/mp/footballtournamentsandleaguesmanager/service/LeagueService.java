@@ -64,7 +64,7 @@ public class LeagueService {
     private LeagueDTO convertToDTO(League league) {
         LeagueDTO dto = new LeagueDTO();
         dto.setId(league.getId());
-        dto.setLeagueName(league.getName());
+        dto.setName(league.getName());
         dto.setStartDate(league.getStartDate());
         dto.setEndDate(league.getEndDate());
         dto.setNumberOfTeams(league.getNumberOfTeams());
