@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Foot, Player, Position, PositionDetail } from 'src/app/models/Player/player';
 import { PlayerService } from 'src/app/services/playerService/player.service';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { Validator } from 'src/app/security/validators/validator';
 
 @Component({
   selector: 'app-add-player-popup',
@@ -11,6 +11,29 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
   styleUrls: ['./add-player-popup.component.css']
 })
 export class AddPlayerPopupComponent {
+  form: FormGroup = this.formBuilder.group({
+    firstName: ['', Validators.compose([this.firstNameAndLastNameValidator()])],
+    lastName: ['', Validators.compose([this.firstNameAndLastNameValidator()])],
+    heightInCm: ['', Validators.compose([this.heightValidator()])]
+  });
+
+  isFirstnameCorrect: boolean = false;
+  isFirstnameFocused: boolean = false;
+  isLastnameCorrect: boolean = false;
+  isLastnameFocused: boolean = false;
+  isDateOfBirthCorrect: boolean = false;
+  isDateOfBirthFocused: boolean = false;
+  isHeightInCmCorrect: boolean = false;
+  isHeightInCmFocused: boolean = false;
+  isPlayerFootSelected: boolean = false;
+  isPlayerFootOpened: boolean = false;
+  isPlayerPositionOpened: boolean = false;
+  isPlayerPositionSelected: boolean = false;
+  isPlayerPositionDetailOpened: boolean = false;
+  isPlayerPositionDetailSelected: boolean = false;
+
+  isAddPlayerButtonEnable: boolean = false;
+
   firstName!: string;
   lastName!: string;
   dateOfBirth!: Date;
@@ -32,7 +55,7 @@ export class AddPlayerPopupComponent {
   positionMidfielderDetailIndexMap = new Map<string, number>();
   positionForwardDetailIndexMap = new Map<string, number>();
 
-  constructor(public dialogRef: MatDialogRef<AddPlayerPopupComponent>, private playerService: PlayerService, @Inject(MAT_DIALOG_DATA) public teamId: number) {
+  constructor(public dialogRef: MatDialogRef<AddPlayerPopupComponent>, private playerService: PlayerService, @Inject(MAT_DIALOG_DATA) public teamId: number, private formBuilder: FormBuilder) {
     this.positionDefenderDetails.forEach((detail, index) => {
       if(index < 4) 
         this.positionForwardDetailIndexMap.set(detail, index);
@@ -82,4 +105,72 @@ export class AddPlayerPopupComponent {
   getPositionName(position: number): string {
     return Position[position];
   }
+
+  private isFieldNotEmpty(field: string): boolean {
+    return field.trim() !== '';
+  }
+  
+  heightValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      return Validator.isHeightValid(control.value) ? null : { invalidHeightInCm: { value: control.value } };
+    };
+  }
+  
+  firstNameAndLastNameValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      return Validator.isFirstOrLastNameValid(control.value)? null : { invalidFirstOrLastName: { value: control.value } };
+    };
+  }
+
+  dateOfBirthValidator() {
+    this.dateOfBirth === undefined ? this.isDateOfBirthCorrect = false : this.isDateOfBirthCorrect = Validator.isDateOfBirthValid(this.dateOfBirth);
+  }
+
+  onPlayerFootChange() {
+    this.isPlayerFootSelected = this.selectedFoot !== null;
+  }
+
+  onPlayerPositionChange() {
+    this.isPlayerPositionSelected = this.selectedPosition !== null;
+    this.selectedPosition === 'GOALKEEPER' ? this.isPlayerPositionDetailSelected = true : this.isPlayerPositionDetailSelected = false;
+  }
+
+  onPlayerPositionDetailChange() {
+    this.isPlayerPositionDetailSelected = this.selectedPositionDetail !== null;
+  }
+
+  onInputChange(inputId: string, inputValue: string) {
+    switch(inputId) {
+      case 'firstName':
+        {
+          if(this.isFieldNotEmpty(inputValue)){
+            Validator.isFirstOrLastNameValid(inputValue) ? this.isFirstnameCorrect = true : this.isFirstnameCorrect = false;
+          }else{
+            this.isFirstnameCorrect = false;
+          }
+        }
+        break;
+      case 'lastName':
+        {
+          if(this.isFieldNotEmpty(inputValue)){
+            Validator.isFirstOrLastNameValid(inputValue) ? this.isLastnameCorrect = true : this.isLastnameCorrect = false;
+          }else{
+            this.isLastnameCorrect = false;
+          }
+        }
+        break;
+      case 'heightInCm':
+        {
+          if(this.isFieldNotEmpty(inputValue)){
+            Validator.isHeightValid(inputValue) ? this.isHeightInCmCorrect = true : this.isHeightInCmCorrect = false;
+          }else{
+            this.isHeightInCmCorrect = false;
+          }
+        }
+        break;
+    }
+
+    this.isAddPlayerButtonEnable = this.isFirstnameCorrect && this.isLastnameCorrect && this.isHeightInCmCorrect;
+  }
+
 }

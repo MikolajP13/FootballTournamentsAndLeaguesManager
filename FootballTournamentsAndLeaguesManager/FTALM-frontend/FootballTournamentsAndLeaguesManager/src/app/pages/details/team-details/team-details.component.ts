@@ -20,6 +20,8 @@ export class TeamDetailsComponent {
   team!: Team;
   teamDataSource!: Player[];
   numberOfPlayers!: number;
+  sumAge!: number;
+  sumHeight!: number;
   
   displayedColumns: string[] = ['position', 'numberOfPlayers'];
   playersByPosition: PositionNumber[] = [];
@@ -51,13 +53,19 @@ export class TeamDetailsComponent {
     this.playerService.getAllPlayersByTeamId(teamId).subscribe((players: Player[]) => {
       this.teamDataSource = [...players];
       this.numberOfPlayers = this.teamDataSource.length;
+      this.sumAge = this.calculateSumAge(this.teamDataSource);
+      this.sumHeight = this.teamDataSource.reduce((acc, player) => player.heightInCm !== undefined ? acc + player.heightInCm : acc, 0);
       this.getPlayersByPosition();
     });
   }
 
+  calculateSumAge(teamDataSource: Player[]): number {
+    let sum = 0;
+    return teamDataSource.reduce((acc, player) => player.dateOfBirth !== undefined ? acc + this.calculateAge(player.dateOfBirth) : acc, sum);
+  }
+
   findActiveLeagueForTeam(teamId: number){
     this.leagueService.findActiveLeagueForTeam(teamId).subscribe(activeLeague => {
-      console.log(activeLeague);
       this.activeLeague = activeLeague;
     });
   }
@@ -92,6 +100,21 @@ export class TeamDetailsComponent {
     this.playersByPosition.push({position: 'Forward', numberOfPlayers: counterFor});
   }
   
+  //TODO duplicate for now
+  private calculateAge(dateOfBirth: Date): number {
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
+  }
+
 }
 
 interface PositionNumber {

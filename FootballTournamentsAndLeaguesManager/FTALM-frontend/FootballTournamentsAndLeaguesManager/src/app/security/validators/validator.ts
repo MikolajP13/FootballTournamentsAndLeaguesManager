@@ -52,6 +52,16 @@ export class Validator {
     return Validator.passwordRegex.test(password);
   }
 
+  // player must have at least 7 years old
+  static isDateOfBirthValid(date: Date): boolean {
+    const currentDate = new Date();
+    return date <= new Date(currentDate.getFullYear() - 7, currentDate.getMonth(), currentDate.getDate());
+  }
+
+  static isHeightValid(height: string): boolean {
+    return parseInt(height) > 0;
+  }
+
   static isWeakPassword(password: string): boolean {
     return (
       Validator.isWeakPassword1.test(password) ||

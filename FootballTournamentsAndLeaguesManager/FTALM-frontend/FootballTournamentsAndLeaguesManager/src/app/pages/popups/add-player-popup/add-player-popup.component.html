@@ -5,38 +5,62 @@
   <form #playerForm="ngForm" (ngSubmit)="addPlayer(playerForm)" method="post">
     <div class="form-field">
       <label for="player-firstName-field">First name</label>
-      <input type="text" [(ngModel)]="firstName" name="firstName" required>
+      <input id="firstname" type="text" [(ngModel)]="firstName" name="firstName" (ngModelChange)="onInputChange('firstName', firstName)" (focus)="isFirstnameFocused = true" (blur)="isFirstnameFocused = false" required>
+      <div class="error-form" *ngIf="isFirstnameFocused && playerForm.controls['firstName'].errors?.['required']">
+        First name is required.
+      </div>
+      <div class="error-form" [hidden]="isFirstnameCorrect" *ngIf="isFirstnameFocused && form.controls['firstName'].errors?.['invalidFirstOrLastName']">
+        Invalid first name.
+      </div>
     </div>
     <div class="form-field">
       <label for="player-lastName-field">Last name</label>
-      <input type="text" [(ngModel)]="lastName" name="lastName" required>
+      <input type="text" [(ngModel)]="lastName" name="lastName" (ngModelChange)="onInputChange('lastName', lastName)" (focus)="isLastnameFocused = true" (blur)="isLastnameFocused = false" required>
+      <div class="error-form" *ngIf="isLastnameFocused && playerForm.controls['lastName'].errors?.['required']">
+        Last name is required.
+      </div>
+      <div class="error-form" [hidden]="isLastnameCorrect" *ngIf="isLastnameFocused && form.controls['lastName'].errors?.['invalidFirstOrLastName']">
+        Invalid last name.
+      </div>
     </div>
     <div class="form-field">
       <mat-form-field class="datepicker">
         <mat-label>Date of birth</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="dateOfBirth" name="dateOfBirth" required>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="dateOfBirth" name="dateOfBirth" (focus)="isDateOfBirthFocused = true" (blur)="isDateOfBirthFocused = false" (dateChange)="dateOfBirthValidator()">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
+      <div class="error-form" *ngIf="isDateOfBirthFocused && !isDateOfBirthCorrect">
+        Player must have at least 7 years old.
+      </div>
     </div>
     <div class="form-field">
       <label for="player-heightInCm-field">Height (cm)</label>
-      <input type="number" [(ngModel)]="heightInCm" name="heightInCm" required>
+      <input type="number" [(ngModel)]="heightInCm" name="heightInCm" (ngModelChange)="onInputChange('heightInCm', heightInCm.toString())" (focus)="isHeightInCmFocused = true" (blur)="isHeightInCmFocused = false" required>
+      <div class="error-form" *ngIf="isHeightInCmFocused && playerForm.controls['heightInCm'].errors?.['required']">
+        Height in cm is required.
+      </div>
+      <div class="error-form" [hidden]="isHeightInCmCorrect" *ngIf="isHeightInCmFocused && form.controls['heightInCm'].errors?.['invalidHeightInCm']">
+        Invalid height value.
+      </div>
     </div>
     <div class="form-field">
       <mat-form-field>
         <mat-label>Foot</mat-label>
-        <mat-select [(ngModel)]="selectedFoot" name="foot">
+        <mat-select [(ngModel)]="selectedFoot" name="foot" (opened)="isPlayerFootOpened = true" (closed)="isPlayerFootOpened = false" (ngModelChange)="onPlayerFootChange()">
           <mat-option *ngFor="let foot of foots" [value]="foot">
             {{ foot }}
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <div class="error-form" *ngIf="isPlayerFootOpened && !isPlayerFootSelected">
+        Player foot must be selected.
+      </div>
     </div>
     <div class="selector-container">
       <mat-form-field>
         <mat-label>Position</mat-label>
-        <mat-select [(ngModel)]="selectedPosition" name="position">
+        <mat-select [(ngModel)]="selectedPosition" name="position" (opened)="isPlayerPositionOpened = true" (closed)="isPlayerPositionOpened = false" (ngModelChange)="onPlayerPositionChange()">
           <mat-option *ngFor="let position of positions" [value]="position">
             {{ position.toString().toLowerCase() }}
           </mat-option>
@@ -44,7 +68,7 @@
       </mat-form-field>
       <mat-form-field *ngIf="selectedPosition === 'DEFENDER'">
         <mat-label>Position detail</mat-label>
-        <mat-select [(ngModel)]="selectedPositionDetail" name="positionDetail">
+        <mat-select [(ngModel)]="selectedPositionDetail" name="positionDetail" (opened)="isPlayerPositionDetailOpened = true" (closed)="isPlayerPositionDetailOpened = false" (ngModelChange)="onPlayerPositionDetailChange()">
           <mat-option *ngFor="let detail of positionDefenderDetails; let i = index" [value]="i + startDefenderIndex">
             {{ detail }}
           </mat-option>
@@ -52,7 +76,7 @@
       </mat-form-field>
       <mat-form-field *ngIf="selectedPosition === 'MIDFIELDER'">
         <mat-label>Position detail</mat-label>
-        <mat-select [(ngModel)]="selectedPositionDetail" name="positionDetail">
+        <mat-select [(ngModel)]="selectedPositionDetail" name="positionDetail" (opened)="isPlayerPositionDetailOpened = true" (closed)="isPlayerPositionDetailOpened = false" (ngModelChange)="onPlayerPositionDetailChange()">
           <mat-option *ngFor="let detail of positionMidfielderDetails; let i = index" [value]="i + startMidfielderIndex">
             {{ detail }}
           </mat-option>
@@ -60,15 +84,21 @@
       </mat-form-field>
       <mat-form-field *ngIf="selectedPosition === 'FORWARD'">
         <mat-label>Position detail</mat-label>
-        <mat-select [(ngModel)]="selectedPositionDetail" name="positionDetail">
+        <mat-select [(ngModel)]="selectedPositionDetail" name="positionDetail" (opened)="isPlayerPositionDetailOpened = true" (closed)="isPlayerPositionDetailOpened = false" (ngModelChange)="onPlayerPositionDetailChange()">
           <mat-option *ngFor="let detail of positionForwardDetails; let i = index" [value]="i + startForwardIndex">
             {{ detail }}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
+    <div class="error-form" *ngIf="isPlayerPositionOpened && !isPlayerPositionSelected">
+      Player position must be selected.
+    </div>
+    <div class="error-form" *ngIf="selectedPosition !== 'GOALKEEPER' && isPlayerPositionDetailOpened && !isPlayerPositionDetailSelected">
+      Player position detail must be selected.
+    </div>
     <div class="button-container">
-      <button mat-raised-button type="submit">Add player</button>
+      <button mat-raised-button type="submit" [disabled]="!isAddPlayerButtonEnable || !isDateOfBirthCorrect || !isPlayerFootSelected || !isPlayerPositionSelected || !isPlayerPositionDetailSelected">Add player</button>
       <button mat-raised-button type="button" (click)="closePopup()">Cancel</button>
     </div>
   </form>
