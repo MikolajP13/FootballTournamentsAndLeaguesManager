@@ -67,6 +67,7 @@ public class TournamentService {
         dto.setStartDate(tournament.getStartDate());
         dto.setEndDate(tournament.getEndDate());
         dto.setStatus(tournament.getStatus());
+        dto.setType(tournament.getType());
         return dto;
     }
 }

@@ -1,5 +1,6 @@
 package com.mp.footballtournamentsandleaguesmanager.DTO;
 
+import com.mp.footballtournamentsandleaguesmanager.model.Tournament;
 import com.mp.footballtournamentsandleaguesmanager.model.TournamentLeagueBase;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ public class TournamentDTO {
     private Date endDate;
     private int numberOfTeams;
     private TournamentLeagueBase.Status status;
+    private Tournament.TournamentType type;
 
     public Long getId() {
         return id;
@@ -58,5 +60,13 @@ public class TournamentDTO {
 
     public void setStatus(TournamentLeagueBase.Status status) {
         this.status = status;
+    }
+
+    public Tournament.TournamentType getType() {
+        return type;
+    }
+
+    public void setType(Tournament.TournamentType type) {
+        this.type = type;
     }
 }

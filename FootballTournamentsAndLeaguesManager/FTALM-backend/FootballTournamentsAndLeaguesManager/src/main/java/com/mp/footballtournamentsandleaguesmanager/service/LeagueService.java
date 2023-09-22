@@ -69,6 +69,7 @@ public class LeagueService {
         dto.setEndDate(league.getEndDate());
         dto.setNumberOfTeams(league.getNumberOfTeams());
         dto.setStatus(league.getStatus());
+        dto.setType(league.getType());
         return dto;
     }
 }

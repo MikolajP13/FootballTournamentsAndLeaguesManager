@@ -19,6 +19,7 @@ public class Tournament extends TournamentLeagueBase{
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
     private Set<Team> teams = new HashSet<>();
+    private TournamentType type;
 
     public Tournament() {
     }
@@ -27,9 +28,10 @@ public class Tournament extends TournamentLeagueBase{
         super(id, user, name, startDate, endDate, numberOfTeams, status);
     }
 
-    public Tournament(Long id, User user, String name, Date startDate, Date endDate, int numberOfTeams, Status status, Set<Team> teams) {
+    public Tournament(Long id, User user, String name, Date startDate, Date endDate, int numberOfTeams, Status status, Set<Team> teams, TournamentType type) {
         super(id, user, name, startDate, endDate, numberOfTeams, status);
         this.teams = teams;
+        this.type = type;
     }
 
     public void addTeamToTournament(Team team){
@@ -42,8 +44,25 @@ public class Tournament extends TournamentLeagueBase{
         team.getTournaments().remove(this);
     }
 
+    public TournamentType getType() {
+        return type;
+    }
+
+    public void setType(TournamentType type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    public enum TournamentType {
+        DOUBLE_ELIMINATION("Double Elimination"),
+        SINGLE_ELIMINATION("Single Elimination"),
+        GROUP_AND_KNOCKOUT("Group and Knockout");
+
+        TournamentType(String s) {
+        }
     }
 }

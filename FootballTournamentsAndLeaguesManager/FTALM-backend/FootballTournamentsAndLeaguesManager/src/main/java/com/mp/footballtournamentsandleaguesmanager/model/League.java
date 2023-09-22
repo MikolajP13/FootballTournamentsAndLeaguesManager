@@ -19,12 +19,13 @@ public class League extends TournamentLeagueBase{
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
     private Set<Team> teams = new HashSet<>();
-
+    private LeagueType type;
     public League() {
     }
-    public League(Long id, User user, String name, Date startDate, Date endDate, int numberOfTeams, Status status, Set<Team> teams) {
+    public League(Long id, User user, String name, Date startDate, Date endDate, int numberOfTeams, Status status, Set<Team> teams, LeagueType type) {
         super(id, user, name, startDate, endDate, numberOfTeams, status);
         this.teams = teams;
+        this.type = type;
     }
     public League(Long id, User user, String name, Date startDate, Date endDate, int numberOfTeams, Status status) {
         super(id, user, name, startDate, endDate, numberOfTeams, status);
@@ -43,8 +44,25 @@ public class League extends TournamentLeagueBase{
         this.teams.remove(team);
         team.getLeagues().remove(this);
     }
+
+    public LeagueType getType() {
+        return type;
+    }
+
+    public void setType(LeagueType type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    public enum LeagueType {
+        STANDARD_MODE("Standard Mode"),
+        SPLIT_MODE("Split Mode");
+
+        LeagueType(String s) {
+        }
     }
 }
