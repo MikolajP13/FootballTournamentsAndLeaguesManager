@@ -7,7 +7,12 @@
 
       <ng-container matColumnDef="leagueName">
         <mat-header-cell *matHeaderCellDef> League Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.leagueName}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef> League Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.type?.toLowerCase()}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="numberOfTeams">

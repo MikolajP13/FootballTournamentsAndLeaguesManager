@@ -45,6 +45,7 @@ import { CreateTournamentPopupComponent } from './pages/popups/create-tournament
 import { TournamentAboutComponent } from './pages/details/tournament-about/tournament-about.component';
 import { LeagueAboutComponent } from './pages/details/league-about/league-about.component';
 import { CreateLeaguePopupComponent } from './pages/popups/create-league-popup/create-league-popup.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { CreateLeaguePopupComponent } from './pages/popups/create-league-popup/c
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatRadioModule
   ],
   providers: [SidenavService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent],

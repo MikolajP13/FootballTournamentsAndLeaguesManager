@@ -7,7 +7,12 @@
 
       <ng-container matColumnDef="tournamentName">
         <mat-header-cell *matHeaderCellDef> Tournament Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.tournamentName}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef> Tournament Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.type?.toLowerCase()}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="numberOfTeams">

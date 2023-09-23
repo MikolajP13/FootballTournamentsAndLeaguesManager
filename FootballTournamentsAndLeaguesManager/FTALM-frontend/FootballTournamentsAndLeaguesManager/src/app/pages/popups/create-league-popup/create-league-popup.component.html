@@ -5,22 +5,45 @@
   <form #leagueForm="ngForm" (ngSubmit)="createLeague(leagueForm)" method="post">
     <div class="form-field">
       <label for="league-name-field">League name</label>
-      <input type="text" [(ngModel)]="name" name="name" required>
+      <input type="text" [(ngModel)]="name" name="name" (ngModelChange)="onInputChange('name', name)" (focus)="isCompetitionNameFocused = true" (blur)="isCompetitionNameFocused = false" required>
+      <div class="error-form" *ngIf="isCompetitionNameFocused && leagueForm.controls['name'].errors?.['required']">
+        Tournament name is required.
+      </div>
+      <div class="error-form" [hidden]="isCompetitionNameCorrect" *ngIf="isCompetitionNameFocused && form.controls['name'].errors?.['invalidCompetitionName']">
+        Invalid tournament name.
+      </div>
     </div>
     <div class="form-field">
       <label for="number-of-teams-field">Number of teams</label>
-      <input type="number" [(ngModel)]="numberOfTeams" name="numberOfTeams" required>
+      <input type="number" [(ngModel)]="numberOfTeams" name="numberOfTeams" (ngModelChange)="onInputChange('numberOfTeams', numberOfTeams.toString())" (focus)="isNumberOfTeamsFocused = true" (blur)="isNumberOfTeamsFocused = false" required>
+      <div class="error-form" *ngIf="isNumberOfTeamsFocused && leagueForm.controls['numberOfTeams'].errors?.['required']">
+        Number of teams is required.
+      </div>
+      <div class="error-form" [hidden]="isNumberOfTeamsCorrect" *ngIf="isNumberOfTeamsFocused && form.controls['numberOfTeams'].errors?.['invalidNumberOfTeams']">
+        Invalid number of teams (minimum 6, maximum 18).
+      </div>
     </div>
     <div class="form-field">
       <mat-form-field class="datepicker">
         <mat-label>Start date</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" name="startDate" required>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" name="startDate" (focus)="isStartDateFocused = true" (blur)="isStartDateFocused = false" (dateChange)="competitionStartDateValidator()">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
+      <div class="error-form" *ngIf="isStartDateFocused && !isStartDateCorrect">
+        Started date must be today or in future.
+      </div>
+    </div>
+    <div class="form-field">
+      <label id="radio-group-label">Choose league type: </label>
+      <mat-radio-group aria-labelledby="radio-group-label" class="radio-button-group" [(ngModel)]="selectedType" name="selectedType" (ngModelChange)="onTypeChange()">
+        <mat-radio-button *ngFor="let type of types" [value]="type">
+          {{type}}
+        </mat-radio-button>
+      </mat-radio-group>
     </div>
     <div class="button-container">
-      <button mat-raised-button type="submit">Create tournament</button>
+      <button mat-raised-button type="submit" [disabled]="!isAddTournamentButtonEnable || !isStartDateCorrect || !isTypeSelected">Create tournament</button>
       <button mat-raised-button type="button" (click)="closePopup()">Cancel</button>
     </div>
   </form>

@@ -18,7 +18,7 @@ export class LeaguesComponent {
   inProgress: Status = Status.IN_PROGRESS;
   finished: Status = Status.FINISHED;
 
-  displayedColumns: string[] = ['leagueName', 'numberOfTeams', 'startDate', 'endDate', 'status', 'details'];
+  displayedColumns: string[] = ['leagueName', 'type', 'numberOfTeams', 'startDate', 'endDate', 'status', 'details'];
   leagueDataSource:TournamentLeagueBase[] = [];
 
   constructor(private router: Router, private leagueService: LeagueService, private dialog: MatDialog) { }

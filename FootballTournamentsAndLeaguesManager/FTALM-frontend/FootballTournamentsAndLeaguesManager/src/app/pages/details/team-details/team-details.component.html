@@ -5,7 +5,7 @@
       <p>Team name: {{ team.name }}</p>
       <p>Established: {{ team.established | date: 'dd-MM-yyyy' }}</p>
       <p>Squad size: {{ numberOfPlayers }}</p>
-      <p>Average age: <span *ngIf="sumAge != null">{{ sumAge/numberOfPlayers }}</span></p>
+      <p>Average age: <span *ngIf="sumAge != null">{{ sumAge/numberOfPlayers | number: '1.0-1' }}</span></p>
       <p>Average height: <span *ngIf="sumHeight != null">{{ sumHeight/numberOfPlayers | number: '1.1-1' }}</span></p>
     </div>
   </div>

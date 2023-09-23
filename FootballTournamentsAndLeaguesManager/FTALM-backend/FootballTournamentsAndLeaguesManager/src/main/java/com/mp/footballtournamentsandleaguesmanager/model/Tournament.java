@@ -58,9 +58,9 @@ public class Tournament extends TournamentLeagueBase{
     }
 
     public enum TournamentType {
-        DOUBLE_ELIMINATION("Double Elimination"),
         SINGLE_ELIMINATION("Single Elimination"),
-        GROUP_AND_KNOCKOUT("Group and Knockout");
+        GROUP_AND_KNOCKOUT("Group and Knockout"),
+        DOUBLE_ELIMINATION("Double Elimination");
 
         TournamentType(String s) {
         }

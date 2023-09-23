@@ -9,4 +9,11 @@ export class Tournament {
   startDate?: string;
   numberOfTeams?: number;
   status?: Status;
+  type?: Type;
+}
+
+export enum Type {
+  SINGLE_ELIMINATION = "Single Elimination",
+  GROUP_AND_KNOCKOUT = "Group and Knockout",
+  DOUBLE_ELIMINATION = "Double Elimination"
 }

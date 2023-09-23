@@ -9,4 +9,10 @@ export class League {
   startDate?: string;
   numberOfTeams?: number;
   status?: Status;
+  type?: Type;
+}
+
+export enum Type {
+  STANDARD_MODE = "Standard Mode",
+  SPLIT_MODE = "Split Mode"
 }

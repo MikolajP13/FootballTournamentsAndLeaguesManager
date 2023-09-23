@@ -7,6 +7,8 @@ export class Validator {
 
   private static firstAndLastNameRegex: RegExp = /^[a-z ,.'-]+$/i;
 
+  private static competitionNameRegex: RegExp = /^(\w+\s)*\w+$/;
+
   //minimum eight chars, at least: one number, one uppercase, one lowercase letter and one special character
   private static passwordRegex: RegExp =
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^0-9a-zA-Z]).{8,}$/;
@@ -59,7 +61,24 @@ export class Validator {
   }
 
   static isHeightValid(height: string): boolean {
-    return parseInt(height) > 0;
+    return parseInt(height) > 0 && parseInt(height) < 230;
+  }
+
+  static isCompetitionNameValid(competitionName: string): boolean {
+    return Validator.competitionNameRegex.test(competitionName);
+  }
+
+  static isTournamentNumberOfTeamsValid(numberOfTeams: string): boolean {
+    return parseInt(numberOfTeams) >= 4 && parseInt(numberOfTeams) <= 32;
+  }
+
+  static isLeagueNumberOfTeamsValid(numberOfTeams: string): boolean {
+    return parseInt(numberOfTeams) >= 6 && parseInt(numberOfTeams) <= 18;
+  }
+
+  static isCompetitionStartDateValid(date: Date): boolean {
+    const currentDate = new Date();
+    return date >= new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
   }
 
   static isWeakPassword(password: string): boolean {
