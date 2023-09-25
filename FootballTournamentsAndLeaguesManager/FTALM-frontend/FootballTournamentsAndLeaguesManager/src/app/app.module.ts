@@ -46,6 +46,9 @@ import { TournamentAboutComponent } from './pages/details/tournament-about/tourn
 import { LeagueAboutComponent } from './pages/details/league-about/league-about.component';
 import { CreateLeaguePopupComponent } from './pages/popups/create-league-popup/create-league-popup.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { TournamentTeamsComponent } from './pages/details/tournament-teams/tournament-teams.component';
+import { LeagueTeamsComponent } from './pages/details/league-teams/league-teams.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,9 @@ import { MatRadioModule } from '@angular/material/radio';
     CreateTournamentPopupComponent,
     TournamentAboutComponent,
     LeagueAboutComponent,
-    CreateLeaguePopupComponent
+    CreateLeaguePopupComponent,
+    TournamentTeamsComponent,
+    LeagueTeamsComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +101,9 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
-    MatRadioModule
+    MatRadioModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [SidenavService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent],

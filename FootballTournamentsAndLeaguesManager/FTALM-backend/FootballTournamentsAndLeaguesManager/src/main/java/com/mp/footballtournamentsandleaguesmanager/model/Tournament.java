@@ -15,7 +15,7 @@ public class Tournament extends TournamentLeagueBase{
     )
     @JoinTable(
             name = "Tournaments_teams",
-            joinColumns = @JoinColumn(name = "torunament_id"),
+            joinColumns = @JoinColumn(name = "tournament_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
     private Set<Team> teams = new HashSet<>();

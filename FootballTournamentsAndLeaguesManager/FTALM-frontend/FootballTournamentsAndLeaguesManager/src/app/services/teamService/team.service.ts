@@ -16,8 +16,32 @@ export class TeamService {
     return this.httpClient.get<Team[]>(`${this.apiServerUrl}/team/all/${userId}`);
   }
 
+  findAllTeamsNotInTournament(userId: number): Observable<Team[]> {
+    return this.httpClient.get<Team[]>(`${this.apiServerUrl}/team/all/not-in-tournament/${userId}`);
+  }
+
+  findAllTeamsNotInLeague(userId: number): Observable<Team[]> {
+    return this.httpClient.get<Team[]>(`${this.apiServerUrl}/team/all/not-in-league/${userId}`);
+  }
+
+  findAllTeamsInTournamentByTournamentId(tournamentId: number): Observable<Team[]> {
+    return this.httpClient.get<Team[]>(`${this.apiServerUrl}/team/all/tournament/${tournamentId}`);
+  }
+
+  findAllTeamsInLeaguetByLeagueId(leagueId: number): Observable<Team[]> {
+    return this.httpClient.get<Team[]>(`${this.apiServerUrl}/team/all/league/${leagueId}`);
+  }
+
   getTeamById(teamId: number): Observable<Team> {
     return this.httpClient.get<Team>(`${this.apiServerUrl}/team/find/${teamId}`);
+  }
+
+  updateIsInTournament(teamId: number, isInTournament: boolean): Observable<Team> {
+    return this.httpClient.put<Team>(`${this.apiServerUrl}/team/updateIsInTournament/${teamId}`, isInTournament);
+  }
+
+  updateIsInLeague(teamId: number, isInLeague: boolean): Observable<Team> {
+    return this.httpClient.put<Team>(`${this.apiServerUrl}/team/updateIsInLeague/${teamId}`, isInLeague);
   }
 
   addTeam(team: Team): Observable<Team> {

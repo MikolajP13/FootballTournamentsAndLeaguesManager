@@ -40,7 +40,48 @@ public class TeamService {
             return false;
         }
     }
-    private TeamDTO convertToDTO(Team team){
+    public List<TeamDTO> findAllTeamsNotInTournament(Long userId){
+        Optional<List<Team>> teamsOptional = teamRepository.findAllTeamsNotInTournament(userId);
+        List<Team> teams = teamsOptional.orElse(Collections.emptyList());
+        return teams.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+    public List<TeamDTO> findAllTeamsNotInLeague(Long userId){
+        Optional<List<Team>> teamsOptional = teamRepository.findAllTeamsNotInLeague(userId);
+        List<Team> teams = teamsOptional.orElse(Collections.emptyList());
+        return teams.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+    public Team updateIsInTournament(Long teamId, boolean isInTournament){
+        Team updatedTeam = this.teamRepository.findById(teamId).orElseThrow();
+        updatedTeam.setInTournament(isInTournament);
+
+        return teamRepository.save(updatedTeam);
+    }
+    public Team updateIsInLeague(Long teamId, boolean isInLeague) {
+        Team updatedTeam = this.teamRepository.findById(teamId).orElseThrow();
+        updatedTeam.setInLeague(isInLeague);
+
+        return teamRepository.save(updatedTeam);
+    }
+    public List<TeamDTO> findAllTeamsInTournamentByTournamentId(Long tournamentId) {
+        Optional<List<Team>> teamsOptional = teamRepository.findAllTeamsInTournamentByTournamentId(tournamentId);
+        List<Team> teams = teamsOptional.orElse(Collections.emptyList());
+        return teams.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+    public List<TeamDTO> findAllTeamsInLeagueByLeagueId(Long leagueId) {
+        Optional<List<Team>> teamsOptional = teamRepository.findAllTeamsInLeagueByLeagueId(leagueId);
+        List<Team> teams = teamsOptional.orElse(Collections.emptyList());
+        return teams.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public TeamDTO convertToDTO(Team team){
         TeamDTO dto = new TeamDTO();
         dto.setId(team.getId());
         dto.setName(team.getName());

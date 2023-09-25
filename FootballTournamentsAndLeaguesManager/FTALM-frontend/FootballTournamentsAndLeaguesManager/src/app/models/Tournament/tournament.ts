@@ -7,9 +7,14 @@ export class Tournament {
   }
   name?: string;
   startDate?: string;
-  numberOfTeams?: number;
+  numberOfTeams!: number;
   status?: Status;
   type?: Type;
+}
+
+export class TournamentTeam {
+  teamId?: number;
+  tournamentId?: number;
 }
 
 export enum Type {

@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TournamentLeagueBase } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
-import { League } from 'src/app/models/League/league';
+import { League, LeagueTeam } from 'src/app/models/League/league';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +17,20 @@ export class LeagueService {
     return this.httpClient.get<TournamentLeagueBase[]>(`${this.apiServerUrl}/league/all/${userId}`);
   }
 
+  findLeagueById(leagueId: number): Observable<League>{
+    return this.httpClient.get<League>(`${this.apiServerUrl}/league/find/${leagueId}`); 
+  }
+
   findActiveLeagueForTeam(teamId: number): Observable<League>{
     return this.httpClient.get<League>(`${this.apiServerUrl}/league/active/${teamId}`);
   }
 
   addLeague(League: League): Observable<League>{
     return this.httpClient.post<League>(`${this.apiServerUrl}/league/add`, League);
+  }
+
+  addTeamToLeague(leagueTeam: LeagueTeam): Observable<String> {
+    return this.httpClient.post<String>(`${this.apiServerUrl}/league/addTeam`, leagueTeam);
   }
 
   deleteLeague(leagueId: number): Observable<Boolean>{

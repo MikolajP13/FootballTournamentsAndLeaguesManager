@@ -32,6 +32,44 @@ public class TeamController {
         return ResponseEntity.ok(userTeams);
     }
 
+    @GetMapping("/all/not-in-tournament/{userId}")
+    public ResponseEntity<List<TeamDTO>> findAllTeamsNotInTournament(@PathVariable Long userId){
+        List<TeamDTO> availableTeams = teamService.findAllTeamsNotInTournament(userId);
+        return ResponseEntity.ok(availableTeams);
+    }
+
+    @GetMapping("/all/not-in-league/{userId}")
+    public ResponseEntity<List<TeamDTO>> findAllTeamsNotInLeague(@PathVariable Long userId){
+        List<TeamDTO> availableTeams = teamService.findAllTeamsNotInLeague(userId);
+        return ResponseEntity.ok(availableTeams);
+    }
+
+    @PutMapping("/updateIsInTournament/{teamId}")
+    public ResponseEntity<TeamDTO> updateIsInTournament(@PathVariable Long teamId, @RequestBody boolean isInTournament){
+        Team updatedTeam = teamService.updateIsInTournament(teamId, isInTournament);
+        TeamDTO updatedTeamDTO = teamService.convertToDTO(updatedTeam);
+        return ResponseEntity.ok(updatedTeamDTO);
+    }
+
+    @PutMapping("/updateIsInLeague/{teamId}")
+    public ResponseEntity<TeamDTO> updateIsInLeague(@PathVariable Long teamId, @RequestBody boolean isInLeague){
+        Team updatedTeam = teamService.updateIsInLeague(teamId, isInLeague);
+        TeamDTO updatedTeamDTO = teamService.convertToDTO(updatedTeam);
+        return ResponseEntity.ok(updatedTeamDTO);
+    }
+
+    @GetMapping("/all/tournament/{tournamentId}")
+    public ResponseEntity<List<TeamDTO>> findAllTeamsInTournamentByTournamentId(@PathVariable Long tournamentId){
+        List<TeamDTO> tournamentTeams = teamService.findAllTeamsInTournamentByTournamentId(tournamentId);
+        return  ResponseEntity.ok(tournamentTeams);
+    }
+
+    @GetMapping("/all/league/{leagueId}")
+    public ResponseEntity<List<TeamDTO>> findAllTeamsInLeagueByLeagueId(@PathVariable Long leagueId){
+        List<TeamDTO> leagueTeams = teamService.findAllTeamsInLeagueByLeagueId(leagueId);
+        return  ResponseEntity.ok(leagueTeams);
+    }
+
     @PostMapping("add")
     public ResponseEntity<Team> addTeam(@RequestBody Team team){
         Team newTeam = teamService.addTeam(team);
