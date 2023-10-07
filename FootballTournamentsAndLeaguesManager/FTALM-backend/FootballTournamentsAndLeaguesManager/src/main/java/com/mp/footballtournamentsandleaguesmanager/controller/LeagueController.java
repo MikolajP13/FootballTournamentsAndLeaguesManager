@@ -28,7 +28,7 @@ public class LeagueController {
     }
 
     @GetMapping("active/{teamId}")
-    public ResponseEntity<LeagueDTO> findActiveLagueForTeam(@PathVariable Long teamId){
+    public ResponseEntity<LeagueDTO> findActiveLeagueForTeam(@PathVariable Long teamId){
         LeagueDTO league = leagueService.findActiveLeagueForTeam(teamId);
         return new ResponseEntity<>(league, HttpStatus.OK);
     }

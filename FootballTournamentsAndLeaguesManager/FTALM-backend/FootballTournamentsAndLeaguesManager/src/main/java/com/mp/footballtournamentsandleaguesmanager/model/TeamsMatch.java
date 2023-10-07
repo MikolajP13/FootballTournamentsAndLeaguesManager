@@ -12,10 +12,10 @@ public class TeamsMatch {
     @JoinColumn(name = "match_id")
     private Match match;
     @ManyToOne
-    @JoinColumn(name = "home_team_id", updatable = false)
+    @JoinColumn(name = "home_team_id", nullable = false)
     private Team homeTeam;
     @ManyToOne
-    @JoinColumn(name = "away_team_id", updatable = false)
+    @JoinColumn(name = "away_team_id", nullable = false)
     private Team awayTeam;
     @ManyToOne
     @JoinColumn(name = "tournament_id", nullable = true)
