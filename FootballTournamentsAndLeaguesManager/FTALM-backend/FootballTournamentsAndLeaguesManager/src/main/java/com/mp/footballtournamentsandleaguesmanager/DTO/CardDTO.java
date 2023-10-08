@@ -5,6 +5,7 @@ import com.mp.footballtournamentsandleaguesmanager.model.Card;
 public class CardDTO {
     private Long id;
     private Long matchId;
+    private Long teamId;
     private Long playerId;
     private String playerFirstName;
     private String playerLastName;
@@ -25,6 +26,14 @@ public class CardDTO {
 
     public void setMatchId(Long matchId) {
         this.matchId = matchId;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 
     public Long getPlayerId() {

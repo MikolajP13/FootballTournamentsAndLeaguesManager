@@ -7,6 +7,7 @@ import com.mp.footballtournamentsandleaguesmanager.repository.SubstitutionReposi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +35,7 @@ public class SubstitutionService {
             return false;
         }
     }
-    //TODO: edit and update Substitution
+
     public Substitution updateSubstitutionById(Long substitutionId, SubstitutionDTO substitutionDTO){
         Substitution substitutionToUpdate = this.substitutionRepository.findById(substitutionId).orElseThrow();
         substitutionToUpdate.setMinute(substitutionDTO.getMinute());
@@ -51,7 +52,17 @@ public class SubstitutionService {
                 .collect(Collectors.toList());
     }
 
-    //TODO: get all by teamId and matchId
+    public List<SubstitutionDTO> getAllByMatchIdAndTeamId(Long matchId, Long teamId){
+        Optional<List<Substitution>> optionalSubstitutionList = substitutionRepository.getAllByMatchIdAndTeamId(matchId, teamId);
+        List<Substitution> substitutionList = optionalSubstitutionList.orElse(Collections.emptyList());
+        return substitutionList.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public int countSubstitutionsByMatchIdAndTeamId(Long matchId, Long teamId){
+        return substitutionRepository.countSubstitutionsByMatchIdAndTeamId(matchId, teamId).orElse(0);
+    }
 
     public SubstitutionDTO convertToDTO(Substitution substitution){
         SubstitutionDTO dto = new SubstitutionDTO();
@@ -63,6 +74,7 @@ public class SubstitutionService {
         dto.setExitingPlayerFirstName(substitution.getExitingPlayer().getFirstName());
         dto.setExitingPlayerLastName(substitution.getExitingPlayer().getLastName());
         dto.setMatchId(substitution.getMatch().getId());
+        dto.setTeamId(substitution.getTeam().getId());
         dto.setMinute(substitution.getMinute());
 
         return dto;

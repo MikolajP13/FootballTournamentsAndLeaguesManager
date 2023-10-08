@@ -3,6 +3,7 @@ package com.mp.footballtournamentsandleaguesmanager.DTO;
 public class SubstitutionDTO {
     private Long id;
     private Long matchId;
+    private Long teamId;
     private Long enteringPlayerId;
     private String enteringPlayerFirstName;
     private String enteringPlayerLastName;
@@ -25,6 +26,14 @@ public class SubstitutionDTO {
 
     public void setMatchId(Long matchId) {
         this.matchId = matchId;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 
     public Long getEnteringPlayerId() {

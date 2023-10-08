@@ -42,4 +42,14 @@ public class SubstitutionController {
     public ResponseEntity<List<SubstitutionDTO>> getAllByMatchId(@PathVariable Long matchId){
         return new ResponseEntity<>(substitutionService.getAllByMatchId(matchId), HttpStatus.OK);
     }
-}
+
+    @GetMapping("findAll/match/{matchId}/team/{teamId}")
+    public ResponseEntity<List<SubstitutionDTO>> getAllByMatchIdAndTeamId(@PathVariable Long matchId, @PathVariable Long teamId){
+        return new ResponseEntity<>(substitutionService.getAllByMatchIdAndTeamId(matchId, teamId), HttpStatus.OK);
+    }
+
+    @GetMapping("countAll/match/{matchId}/team/{teamId}")
+    public ResponseEntity<Integer> countSubstitutionsByMatchIdAndTeamId(@PathVariable Long matchId, @PathVariable Long teamId){
+        return new ResponseEntity<>(substitutionService.countSubstitutionsByMatchIdAndTeamId(matchId, teamId), HttpStatus.OK);
+    }
+ }

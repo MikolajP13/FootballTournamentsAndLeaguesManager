@@ -34,7 +34,7 @@ public class CardService {
             return false;
         }
     }
-    //TODO: edit and update Card
+
     public Card updateCardById(Long cardId, CardDTO cardDTO){
         Card cardToUpdate = this.cardRepository.findById(cardId).orElseThrow();
         cardToUpdate.setMinute(cardDTO.getMinute());
@@ -61,10 +61,16 @@ public class CardService {
         return optionalPlayerAssists.orElse(0);
     }
 
+    public int countCardsByPlayerIdAndCardType(Long playerId, Card.Type cardType){
+        Optional<Integer> optionalPlayerAssists = cardRepository.countCardsByPlayerIdAndCardType(playerId, cardType);
+        return optionalPlayerAssists.orElse(0);
+    }
+
     public CardDTO convertToDTO(Card card){
         CardDTO dto = new CardDTO();
         dto.setId(card.getId());
         dto.setMatchId(card.getMatch().getId());
+        dto.setTeamId(card.getTeam().getId());
         dto.setMinute(card.getMinute());
         dto.setPlayerId(card.getPlayer().getId());
         dto.setPlayerFirstName(card.getPlayer().getFirstName());

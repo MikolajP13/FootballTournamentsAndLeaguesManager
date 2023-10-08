@@ -12,6 +12,9 @@ public class Substitution {
     @JoinColumn(name = "match_id", nullable = false)
     private Match match;
     @ManyToOne
+    @JoinColumn(name = "team_id", nullable = false)
+    private Team team;
+    @ManyToOne
     @JoinColumn(name = "entering_player_id", nullable = false)
     private Player enteringPlayer;
     @ManyToOne
@@ -22,9 +25,10 @@ public class Substitution {
     public Substitution() {
     }
 
-    public Substitution(Long id, Match match, Player enteringPlayer, Player exitingPlayer, int minute) {
+    public Substitution(Long id, Match match, Team team, Player enteringPlayer, Player exitingPlayer, int minute) {
         this.id = id;
         this.match = match;
+        this.team = team;
         this.enteringPlayer = enteringPlayer;
         this.exitingPlayer = exitingPlayer;
         this.minute = minute;
@@ -44,6 +48,14 @@ public class Substitution {
 
     public void setMatch(Match match) {
         this.match = match;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public Player getEnteringPlayer() {
@@ -75,6 +87,7 @@ public class Substitution {
         final StringBuilder sb = new StringBuilder("Substitution{");
         sb.append("id=").append(id);
         sb.append(", match=").append(match);
+        sb.append(", team=").append(team);
         sb.append(", enteringPlayer=").append(enteringPlayer);
         sb.append(", exitingPlayer=").append(exitingPlayer);
         sb.append(", minute=").append(minute);

@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface SubstitutionRepository extends JpaRepository<Substitution, Long> {
     Optional<List<Substitution>> getAllByMatchId(Long matchId);
+    Optional<List<Substitution>> getAllByMatchIdAndTeamId(Long matchId, Long teamId);
+    Optional<Integer> countSubstitutionsByMatchIdAndTeamId(Long matchId, Long teamId);
 }

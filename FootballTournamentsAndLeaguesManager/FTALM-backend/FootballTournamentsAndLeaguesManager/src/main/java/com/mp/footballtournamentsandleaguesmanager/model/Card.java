@@ -9,10 +9,13 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "match_id")
+    @JoinColumn(name = "match_id", nullable = false)
     private Match match;
     @ManyToOne
-    @JoinColumn(name = "player_id")
+    @JoinColumn(name = "team_id", nullable = false)
+    private Team team;
+    @ManyToOne
+    @JoinColumn(name = "player_id", nullable = false)
     private Player player;
     private int minute;
     private Type cardType;
@@ -20,9 +23,10 @@ public class Card {
     public Card() {
     }
 
-    public Card(Long id, Match match, Player player, int minute) {
+    public Card(Long id, Match match, Team team, Player player, int minute) {
         this.id = id;
         this.match = match;
+        this.team = team;
         this.player = player;
         this.minute = minute;
     }
@@ -41,6 +45,14 @@ public class Card {
 
     public void setMatch(Match match) {
         this.match = match;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public Player getPlayer() {
@@ -72,6 +84,7 @@ public class Card {
         final StringBuilder sb = new StringBuilder("Card{");
         sb.append("id=").append(id);
         sb.append(", match=").append(match);
+        sb.append(", team=").append(team);
         sb.append(", player=").append(player);
         sb.append(", minute=").append(minute);
         sb.append(", cardType=").append(cardType);

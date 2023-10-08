@@ -48,8 +48,14 @@ public class CardController {
         return new ResponseEntity<>(cardService.getAllByMatchId(matchId), HttpStatus.OK);
     }
 
-    @GetMapping("/count/player/{playerId}")
+    @GetMapping("/countAll/player/{playerId}")
     public ResponseEntity<Integer> countCardsByPlayerId(@PathVariable Long playerId){
         return new ResponseEntity<>(cardService.countCardsByPlayerId(playerId), HttpStatus.OK);
+    }
+
+    @GetMapping("/countSpecific/player/{playerId}")
+    public ResponseEntity<Integer> countCardsByPlayerIdAndCardType(@PathVariable Long playerId, @RequestParam String cardTypeString){
+        Card.Type cardType = Card.Type.valueOf(cardTypeString.toUpperCase());
+        return new ResponseEntity<>(cardService.countCardsByPlayerIdAndCardType(playerId, cardType), HttpStatus.OK);
     }
 }
