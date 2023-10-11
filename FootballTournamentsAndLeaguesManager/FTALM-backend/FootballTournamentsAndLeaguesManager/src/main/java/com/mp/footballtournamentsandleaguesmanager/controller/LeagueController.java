@@ -3,6 +3,7 @@ package com.mp.footballtournamentsandleaguesmanager.controller;
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueTeamDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.League;
+import com.mp.footballtournamentsandleaguesmanager.model.TournamentLeagueBase;
 import com.mp.footballtournamentsandleaguesmanager.service.LeagueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,23 @@ public class LeagueController {
     public ResponseEntity<List<LeagueDTO>> getAllUserLeagues(@PathVariable Long userId) {
         List<LeagueDTO> userLeagues = leagueService.getAllByUserId(userId);
         return ResponseEntity.ok(userLeagues);
+    }
+
+    @GetMapping("/getStatus/{leagueId}")
+    public ResponseEntity<TournamentLeagueBase.Status> getLeagueStatusByLeagueId(@PathVariable Long leagueId){
+        return new ResponseEntity<>(leagueService.getLeagueStatusByLeagueId(leagueId), HttpStatus.OK);
+    }
+
+    @GetMapping("/getNumberOfTeams/{leagueId}")
+    public ResponseEntity<Integer> getNumberOfTeamsByLeagueId(@PathVariable Long leagueId){
+        return ResponseEntity.ok(leagueService.getNumberOfTeamsByLeagueId(leagueId));
+    }
+
+    @PutMapping("/updateStatus/{leagueId}")
+    public ResponseEntity<LeagueDTO> updateLeagueStatusByLeagueId(@PathVariable Long leagueId, @RequestBody League league){
+        League updatedLeague = leagueService.updateLeagueStatusByLeagueId(leagueId, league.getStatus());
+        LeagueDTO updatedLeagueDTO = leagueService.convertToDTO(updatedLeague);
+        return ResponseEntity.ok(updatedLeagueDTO);
     }
 
     @PostMapping("/add")

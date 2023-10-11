@@ -61,13 +61,23 @@ public class TeamController {
     @GetMapping("/all/tournament/{tournamentId}")
     public ResponseEntity<List<TeamDTO>> findAllTeamsInTournamentByTournamentId(@PathVariable Long tournamentId){
         List<TeamDTO> tournamentTeams = teamService.findAllTeamsInTournamentByTournamentId(tournamentId);
-        return  ResponseEntity.ok(tournamentTeams);
+        return ResponseEntity.ok(tournamentTeams);
     }
 
     @GetMapping("/all/league/{leagueId}")
     public ResponseEntity<List<TeamDTO>> findAllTeamsInLeagueByLeagueId(@PathVariable Long leagueId){
         List<TeamDTO> leagueTeams = teamService.findAllTeamsInLeagueByLeagueId(leagueId);
-        return  ResponseEntity.ok(leagueTeams);
+        return ResponseEntity.ok(leagueTeams);
+    }
+
+    @GetMapping("/countAll/league/{leagueId}")
+    public ResponseEntity<Integer> countTeamsByLeaguesId(@PathVariable Long leagueId){
+        return ResponseEntity.ok(teamService.countTeamsByLeaguesId(leagueId));
+    }
+
+    @GetMapping("/countAll/tournament/{tournamentId}")
+    public ResponseEntity<Integer> countTeamsByTournamentsId(@PathVariable Long tournamentId){
+        return ResponseEntity.ok(teamService.countTeamsByTournamentsId(tournamentId));
     }
 
     @PostMapping("add")

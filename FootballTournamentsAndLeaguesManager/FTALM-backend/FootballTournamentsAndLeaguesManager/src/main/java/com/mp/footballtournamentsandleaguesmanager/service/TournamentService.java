@@ -3,6 +3,7 @@ package com.mp.footballtournamentsandleaguesmanager.service;
 import com.mp.footballtournamentsandleaguesmanager.DTO.TournamentDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Team;
 import com.mp.footballtournamentsandleaguesmanager.model.Tournament;
+import com.mp.footballtournamentsandleaguesmanager.model.TournamentLeagueBase;
 import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,19 @@ public class TournamentService {
             return false;
         }
     }
-    private TournamentDTO convertToDTO(Tournament tournament){
+    public TournamentLeagueBase.Status getTournamentStatusByTournamentId(Long tournamentId){
+        return tournamentRepository.getTournamentStatusByTournamentId(tournamentId);
+    }
+    public Integer getNumberOfTeamsByTournamentId(Long tournamentId){
+        return tournamentRepository.getNumberOfTeamsByTournamentId(tournamentId).orElse(0);
+    }
+    public Tournament updateTournamentStatusByTournamentId(Long tournamentId, TournamentLeagueBase.Status newStatus){
+        Tournament tournamentToUpdate = this.tournamentRepository.findById(tournamentId).orElseThrow();
+        tournamentToUpdate.setStatus(newStatus);
+        return tournamentRepository.save(tournamentToUpdate);
+    }
+
+    public TournamentDTO convertToDTO(Tournament tournament){
         TournamentDTO dto = new TournamentDTO();
         dto.setId(tournament.getId());
         dto.setName(tournament.getName());

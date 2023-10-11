@@ -21,5 +21,6 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
             "JOIN t.leagues t2 " +
             "WHERE t2.id = :leagueId")
     Optional<List<Team>> findAllTeamsInLeagueByLeagueId(Long leagueId);
-
+    Optional<Integer> countTeamsByLeaguesId(Long leagueId);
+    Optional<Integer> countTeamsByTournamentsId(Long tournamentsId);
 }

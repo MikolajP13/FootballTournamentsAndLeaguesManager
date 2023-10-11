@@ -80,6 +80,12 @@ public class TeamService {
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
+    public Integer countTeamsByLeaguesId(Long leagueId){
+        return teamRepository.countTeamsByLeaguesId(leagueId).orElse(0);
+    }
+    public Integer countTeamsByTournamentsId(Long tournamentId){
+        return teamRepository.countTeamsByTournamentsId(tournamentId).orElse(0);
+    }
 
     public TeamDTO convertToDTO(Team team){
         TeamDTO dto = new TeamDTO();
