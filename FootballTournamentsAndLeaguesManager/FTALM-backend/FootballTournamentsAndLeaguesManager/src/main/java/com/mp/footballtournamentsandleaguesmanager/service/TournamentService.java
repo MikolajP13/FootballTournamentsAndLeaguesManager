@@ -66,6 +66,9 @@ public class TournamentService {
     public Integer getNumberOfTeamsByTournamentId(Long tournamentId){
         return tournamentRepository.getNumberOfTeamsByTournamentId(tournamentId).orElse(0);
     }
+    public Tournament.TournamentType getTournamentTypeByTournamentId(Long tournamentId){
+        return tournamentRepository.getTournamentTypeByTournamentId(tournamentId);
+    }
     public Tournament updateTournamentStatusByTournamentId(Long tournamentId, TournamentLeagueBase.Status newStatus){
         Tournament tournamentToUpdate = this.tournamentRepository.findById(tournamentId).orElseThrow();
         tournamentToUpdate.setStatus(newStatus);

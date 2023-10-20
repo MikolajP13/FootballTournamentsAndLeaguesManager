@@ -67,6 +67,9 @@ public class LeagueService {
     public Integer getNumberOfTeamsByLeagueId(Long leagueId){
         return leagueRepository.getNumberOfTeamsByLeagueId(leagueId).orElse(0);
     }
+    public League.LeagueType getLeagueTypeByLeagueId(Long leagueId){
+        return leagueRepository.getLeagueTypeByLeagueId(leagueId);
+    }
     public League updateLeagueStatusByLeagueId(Long leagueId, TournamentLeagueBase.Status newStatus){
         League leagueToUpdate = this.leagueRepository.findById(leagueId).orElseThrow();
         leagueToUpdate.setStatus(newStatus);

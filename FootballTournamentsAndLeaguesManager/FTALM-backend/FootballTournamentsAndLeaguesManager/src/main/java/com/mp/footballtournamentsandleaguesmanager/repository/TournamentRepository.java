@@ -18,5 +18,6 @@ public interface TournamentRepository extends JpaRepository<Tournament, Long> {
     TournamentLeagueBase.Status getTournamentStatusByTournamentId(Long tournamentId);
     @Query("SELECT t.numberOfTeams FROM Tournament t WHERE t.id = :tournamentId")
     Optional<Integer> getNumberOfTeamsByTournamentId(Long tournamentId);
-
+    @Query("SELECT t.type FROM Tournament t WHERE t.id= :tournamentId")
+    Tournament.TournamentType getTournamentTypeByTournamentId(Long tournamentId);
 }

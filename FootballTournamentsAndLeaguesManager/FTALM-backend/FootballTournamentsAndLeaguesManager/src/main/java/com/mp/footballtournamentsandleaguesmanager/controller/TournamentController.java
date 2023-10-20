@@ -48,6 +48,11 @@ public class TournamentController {
         return ResponseEntity.ok(tournamentService.getNumberOfTeamsByTournamentId(tournamentId));
     }
 
+    @GetMapping("/getType/{tournamentId}")
+    public ResponseEntity<Tournament.TournamentType> getTournamentTypeByTournamentId(@PathVariable Long tournamentId){
+        return new ResponseEntity<>(tournamentService.getTournamentTypeByTournamentId(tournamentId), HttpStatus.OK);
+    }
+
     @PutMapping("/updateStatus/{tournamentId}")
     public ResponseEntity<TournamentDTO> updateLeagueStatusByLeagueId(@PathVariable Long tournamentId, @RequestBody Tournament tournament){
         Tournament updatedLeague = tournamentService.updateTournamentStatusByTournamentId(tournamentId, tournament.getStatus());
