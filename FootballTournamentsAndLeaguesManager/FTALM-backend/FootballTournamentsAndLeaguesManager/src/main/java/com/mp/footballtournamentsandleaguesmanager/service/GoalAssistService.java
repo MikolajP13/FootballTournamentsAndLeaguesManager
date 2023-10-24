@@ -1,6 +1,8 @@
 package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.GoalAssistDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerAssistsDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerGoalsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.GoalAssist;
 import com.mp.footballtournamentsandleaguesmanager.repository.GoalAssistRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.PlayerRepository;
@@ -77,10 +79,22 @@ public class GoalAssistService {
         return optionalPlayerAssists.orElse(0);
     }
 
+    public List<PlayerGoalsDTO> getPlayersGoalsByLeagueId(Long leagueId) {
+        Optional<List<PlayerGoalsDTO>> optionalGoalScorerDTOList = goalAssistRepository.getPlayersGoalsByLeagueId(leagueId);
+        return optionalGoalScorerDTOList.orElse(Collections.emptyList());
+    }
+
+    public List<PlayerAssistsDTO> getPlayersAssistsByLeagueId(Long leagueId){
+        Optional<List<PlayerAssistsDTO>> optionalPlayerAssistsDTOList = goalAssistRepository.getPlayersAssistsByLeagueId(leagueId);
+        return optionalPlayerAssistsDTOList.orElse(Collections.emptyList());
+    }
+
     public GoalAssistDTO convertToDTO(GoalAssist goalAssist){
         GoalAssistDTO dto = new GoalAssistDTO();
         dto.setId(goalAssist.getId());
         dto.setMatchId(goalAssist.getMatch().getId());
+        dto.setTeamId(goalAssist.getTeam().getId());
+        dto.setTeamName(goalAssist.getTeam().getName());
         dto.setMinute(goalAssist.getMinute());
         dto.setScorerPlayerId(goalAssist.getScorerPlayer().getId());
         dto.setScorerPlayerFirstName(goalAssist.getScorerPlayer().getFirstName());

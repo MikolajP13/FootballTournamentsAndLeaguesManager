@@ -1,6 +1,8 @@
 package com.mp.footballtournamentsandleaguesmanager.controller;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.GoalAssistDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerAssistsDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerGoalsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.GoalAssist;
 import com.mp.footballtournamentsandleaguesmanager.service.GoalAssistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +63,15 @@ public class GoalAssistController {
     @GetMapping("/count/player/assists/{playerId}")
     public ResponseEntity<Integer> countAssistsByPlayerId(@PathVariable Long playerId){
         return new ResponseEntity<>(goalAssistService.countAssistsByPlayerId(playerId), HttpStatus.OK);
+    }
+
+    @GetMapping("/getPlayersGoals/league/{leagueId}")
+    public ResponseEntity<List<PlayerGoalsDTO>> getPlayersGoalsByLeagueId(@PathVariable Long leagueId){
+        return new ResponseEntity<>(goalAssistService.getPlayersGoalsByLeagueId(leagueId), HttpStatus.OK);
+    }
+
+    @GetMapping("/getPlayersAssists/league/{leagueId}")
+    public ResponseEntity<List<PlayerAssistsDTO>> getPlayersAssistsByLeagueId(@PathVariable Long leagueId){
+        return new ResponseEntity<>(goalAssistService.getPlayersAssistsByLeagueId(leagueId), HttpStatus.OK);
     }
 }

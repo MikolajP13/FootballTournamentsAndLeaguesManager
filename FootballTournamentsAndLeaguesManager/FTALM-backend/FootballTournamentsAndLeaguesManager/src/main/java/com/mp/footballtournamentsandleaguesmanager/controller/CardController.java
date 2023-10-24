@@ -1,6 +1,7 @@
 package com.mp.footballtournamentsandleaguesmanager.controller;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.CardDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerCardsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Card;
 import com.mp.footballtournamentsandleaguesmanager.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,15 @@ public class CardController {
     public ResponseEntity<Integer> countCardsByPlayerIdAndCardType(@PathVariable Long playerId, @RequestParam String cardTypeString){
         Card.Type cardType = Card.Type.valueOf(cardTypeString.toUpperCase());
         return new ResponseEntity<>(cardService.countCardsByPlayerIdAndCardType(playerId, cardType), HttpStatus.OK);
+    }
+
+    @GetMapping("/getPlayersYellowCards/league/{leagueId}")
+    public ResponseEntity<List<PlayerCardsDTO>> getPlayersYellowCardsByLeagueId(@PathVariable Long leagueId){
+        return new ResponseEntity<>(cardService.getPlayersYellowCardsByLeagueId(leagueId), HttpStatus.OK);
+    }
+
+    @GetMapping("/getPlayersRedCards/league/{leagueId}")
+    public ResponseEntity<List<PlayerCardsDTO>> getPlayersRedCardsByLeagueId(@PathVariable Long leagueId){
+        return new ResponseEntity<>(cardService.getPlayersRedCardsByLeagueId(leagueId), HttpStatus.OK);
     }
 }

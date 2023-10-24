@@ -53,6 +53,8 @@ public class MatchService {
         dto.setAwayTeamId(match.getAwayTeam().getId());
         dto.setHomeTeamScore(match.getHomeTeamScore());
         dto.setAwayTeamScore(match.getAwayTeamScore());
+        dto.setHomeTeamName(match.getHomeTeam().getName());
+        dto.setAwayTeamName(match.getAwayTeam().getName());
         if (match.getTournament() != null) {
             dto.setTournamentId(match.getTournament().getId());
         } else {

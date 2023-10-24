@@ -1,6 +1,7 @@
 package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.CardDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerCardsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Card;
 import com.mp.footballtournamentsandleaguesmanager.repository.CardRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.PlayerRepository;
@@ -64,6 +65,16 @@ public class CardService {
     public int countCardsByPlayerIdAndCardType(Long playerId, Card.Type cardType){
         Optional<Integer> optionalPlayerAssists = cardRepository.countCardsByPlayerIdAndCardType(playerId, cardType);
         return optionalPlayerAssists.orElse(0);
+    }
+
+    public List<PlayerCardsDTO> getPlayersYellowCardsByLeagueId(Long leagueId){
+        Optional<List<PlayerCardsDTO>> optionalPlayerCardsDTOList = cardRepository.getPlayersYellowCardsByLeagueId(leagueId);
+        return optionalPlayerCardsDTOList.orElse(Collections.emptyList());
+    }
+
+    public List<PlayerCardsDTO> getPlayersRedCardsByLeagueId(Long leagueId){
+        Optional<List<PlayerCardsDTO>> optionalPlayerCardsDTOList = cardRepository.getPlayersRedCardsByLeagueId(leagueId);
+        return optionalPlayerCardsDTOList.orElse(Collections.emptyList());
     }
 
     public CardDTO convertToDTO(Card card){

@@ -70,6 +70,9 @@ public class LeagueService {
     public League.LeagueType getLeagueTypeByLeagueId(Long leagueId){
         return leagueRepository.getLeagueTypeByLeagueId(leagueId);
     }
+    public String getLeagueNameByLeagueId(Long leagueId){
+        return leagueRepository.getLeagueNameByLeagueId(leagueId);
+    }
     public League updateLeagueStatusByLeagueId(Long leagueId, TournamentLeagueBase.Status newStatus){
         League leagueToUpdate = this.leagueRepository.findById(leagueId).orElseThrow();
         leagueToUpdate.setStatus(newStatus);

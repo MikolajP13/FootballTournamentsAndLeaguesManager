@@ -18,7 +18,8 @@ public interface LeagueRepository extends JpaRepository<League, Long> {
     TournamentLeagueBase.Status getStatusByLeagueId(Long leagueId);
     @Query("SELECT l.numberOfTeams FROM League l WHERE l.id = :leagueId")
     Optional<Integer> getNumberOfTeamsByLeagueId(Long leagueId);
-    @Query("SELECT l.type FROM League l WHERE l.id= :leagueId")
+    @Query("SELECT l.type FROM League l WHERE l.id = :leagueId")
     League.LeagueType getLeagueTypeByLeagueId(Long leagueId);
-
+    @Query("SELECT l.name FROM League l WHERE l.id = :leagueId")
+    String getLeagueNameByLeagueId(Long leagueId);
 }

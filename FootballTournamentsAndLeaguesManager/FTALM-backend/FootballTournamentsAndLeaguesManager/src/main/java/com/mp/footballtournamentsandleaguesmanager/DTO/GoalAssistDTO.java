@@ -4,6 +4,7 @@ public class GoalAssistDTO {
     private Long id;
     private Long matchId;
     private Long teamId;
+    private String teamName;
     private Long scorerPlayerId;
     private String scorerPlayerFirstName;
     private String scorerPlayerLastName;
@@ -34,6 +35,14 @@ public class GoalAssistDTO {
 
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public Long getScorerPlayerId() {

@@ -56,6 +56,11 @@ public class LeagueController {
         return new ResponseEntity<>(leagueService.getLeagueTypeByLeagueId(leagueId), HttpStatus.OK);
     }
 
+    @GetMapping("/getName/{leagueId}")
+    public ResponseEntity<String> getLeagueNameByLeagueId(@PathVariable Long leagueId){
+        return new ResponseEntity<>(leagueService.getLeagueNameByLeagueId(leagueId), HttpStatus.OK);
+    }
+
     @PutMapping("/updateStatus/{leagueId}")
     public ResponseEntity<LeagueDTO> updateLeagueStatusByLeagueId(@PathVariable Long leagueId, @RequestBody League league){
         League updatedLeague = leagueService.updateLeagueStatusByLeagueId(leagueId, league.getStatus());
