@@ -76,7 +76,8 @@ export class LeagueTeamsComponent {
 
   getCurrentLeague(tournamentId: number){
     this.leagueService.findLeagueById(tournamentId).subscribe(league => {
-      this.maximumNumberOfTeams = league.numberOfTeams;
+      if(league.numberOfTeams)
+        this.maximumNumberOfTeams = league.numberOfTeams;
     });
   }
 

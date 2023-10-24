@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tournament, TournamentTeam } from 'src/app/models/Tournament/tournament';
-import { TournamentLeagueBase } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
+import { Status, TournamentLeagueBase } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -36,4 +36,17 @@ export class TournamentService {
   deleteTournament(tournamentId: number): Observable<Boolean>{
     return this.httpClient.delete<Boolean>(`${this.apiServerUrl}/tournament/delete/${tournamentId}`);
   }
+
+  getTournamentStatus(tournamentId: number): Observable<Status>{
+    return this.httpClient.get<Status>(`${this.apiServerUrl}/tournament/getStatus/${tournamentId}`);
+  }
+
+  getNumberOfTeams(tournamentId: number): Observable<number>{
+    return this.httpClient.get<number>(`${this.apiServerUrl}/tournament/getNumberOfTeams/${tournamentId}`);
+  }
+
+  updateTournamentStatusByTournamentId(tournamentId: number, tournamentStatus: Tournament): Observable<Tournament>{
+    return this.httpClient.put<Tournament>(`${this.apiServerUrl}/tournament/updateStatus/${tournamentId}`, tournamentStatus);
+  }
+
 }

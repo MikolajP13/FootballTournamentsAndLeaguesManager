@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Card } from 'src/app/models/Card/card';
+import { PlayerCards } from 'src/app/models/PlayerCards/playerCards';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -38,6 +39,14 @@ export class CardService {
 
   countSpecificPlayerCards(playerId: number, cardTypeString: string): Observable<number>{
     return this.httpClient.get<number>(`${this.apiServerUrl}/card/countSpecific/player/${playerId}?cardTypeString=${cardTypeString}`);
+  }
+
+  getPlayersYellowCardsByLeagueId(leagueId: number): Observable<PlayerCards[]> {
+    return this.httpClient.get<PlayerCards[]>(`${this.apiServerUrl}/card/getPlayersYellowCards/league/${leagueId}`);
+  }
+
+  getPlayersRedCardsByLeagueId(leagueId: number): Observable<PlayerCards[]>{
+    return this.httpClient.get<PlayerCards[]>(`${this.apiServerUrl}/card/getPlayersRedCards/league/${leagueId}`);
   }
 
 }

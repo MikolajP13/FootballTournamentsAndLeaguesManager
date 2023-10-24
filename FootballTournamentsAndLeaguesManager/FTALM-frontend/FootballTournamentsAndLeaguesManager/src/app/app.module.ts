@@ -49,6 +49,10 @@ import { MatRadioModule } from '@angular/material/radio';
 import { TournamentTeamsComponent } from './pages/details/tournament-teams/tournament-teams.component';
 import { LeagueTeamsComponent } from './pages/details/league-teams/league-teams.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { LeagueTableComponent } from './pages/details/league-table/league-table.component';
+import { LeagueMatchesComponent } from './pages/details/league-matches/league-matches.component';
+import { LeagueStatisticsComponent } from './pages/details/league-statistics/league-statistics.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -80,7 +84,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     LeagueAboutComponent,
     CreateLeaguePopupComponent,
     TournamentTeamsComponent,
-    LeagueTeamsComponent
+    LeagueTeamsComponent,
+    LeagueTableComponent,
+    LeagueMatchesComponent,
+    LeagueStatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +110,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatInputModule,
     MatRadioModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTabsModule
   ],
   providers: [SidenavService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent],

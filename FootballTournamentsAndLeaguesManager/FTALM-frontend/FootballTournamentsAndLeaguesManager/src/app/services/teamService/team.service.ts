@@ -36,6 +36,14 @@ export class TeamService {
     return this.httpClient.get<Team>(`${this.apiServerUrl}/team/find/${teamId}`);
   }
 
+  countTeamsByTournamentId(tournamentId: number): Observable<number> {
+    return this.httpClient.get<number>(`${this.apiServerUrl}/team/countAll/tournament/${tournamentId}`);
+  }
+
+  countTeamsByLeagueId(leagueId: number): Observable<number> {
+    return this.httpClient.get<number>(`${this.apiServerUrl}/team/countAll/league/${leagueId}`);
+  }
+
   updateIsInTournament(teamId: number, isInTournament: boolean): Observable<Team> {
     return this.httpClient.put<Team>(`${this.apiServerUrl}/team/updateIsInTournament/${teamId}`, isInTournament);
   }

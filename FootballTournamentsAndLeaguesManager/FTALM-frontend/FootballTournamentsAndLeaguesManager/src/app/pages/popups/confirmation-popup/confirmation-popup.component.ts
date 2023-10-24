@@ -13,6 +13,7 @@ import { TournamentService } from 'src/app/services/tournamentService/tournament
 export class ConfirmationPopupComponent {
   id: number;
   object: string;
+  warning: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<ConfirmationPopupComponent>, private teamService: TeamService, 
     private tournamentService: TournamentService, private leagueService: LeagueService,
@@ -20,6 +21,7 @@ export class ConfirmationPopupComponent {
   {
     this.object = data.objectName;
     this.id = data.id;
+    this.warning = data.warning;
   }
 
   delete() {

@@ -7,7 +7,7 @@ export class Tournament {
   }
   name?: string;
   startDate?: string;
-  numberOfTeams!: number;
+  numberOfTeams?: number;
   status?: Status;
   type?: Type;
 }

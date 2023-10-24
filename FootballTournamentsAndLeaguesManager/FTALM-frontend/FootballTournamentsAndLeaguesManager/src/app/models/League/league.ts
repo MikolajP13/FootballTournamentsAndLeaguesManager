@@ -7,7 +7,7 @@ export class League {
   }
   name?: string;
   startDate?: string;
-  numberOfTeams!: number;
+  numberOfTeams?: number;
   status?: Status;
   type?: Type;
 }

@@ -1,0 +1,18 @@
+<div class="league-matches-container">
+  <h3>
+    <i class="bi bi-chevron-left" *ngIf="matchweekNumber > 1" (click)="previousMatchWeek()"></i> 
+      Matchweek {{ matchweekNumber }}
+    <i class="bi bi-chevron-right" *ngIf="lastMatchWeekNumber && matchweekNumber < lastMatchWeekNumber" (click)="nextMatchWeek()"></i>
+  </h3>
+  <mat-list>
+    <ng-container *ngFor="let match of leagueMatchesData">
+    <mat-list-item *ngIf="match.matchweek == matchweekNumber">
+        <span matListItemTitle>{{ match.homeTeamName }} {{ match.homeTeamScore }} - {{ match.awayTeamScore }} {{ match.awayTeamName }}
+          <i class="bi bi-pencil-square" *ngIf="!match.matchProtocolCreated" (click)="fillMatchProtocol()"></i>
+          <i class="bi bi-info-square" *ngIf="match.matchProtocolCreated" (click)="showMatchDetails()"></i>
+        </span>
+        <span matListItemLine>Date: {{ match.date }}</span>
+      </mat-list-item>
+    </ng-container>
+  </mat-list>
+</div>

@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GoalAssist } from 'src/app/models/GoalAssist/goalAssist';
+import { PlayerAssists } from 'src/app/models/PlayerAssists/playerAssists';
+import { PlayerGoals } from 'src/app/models/PlayerGoals/playerGoals';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -44,4 +46,13 @@ export class GoalAssistService {
     return this.httpClient.get<number>(`${this.apiServerUrl}/goalAssist/count/player/assists/${playerId}`);
   }
 
+  getPlayersGoalsByLeagueId(leagueId: number): Observable<PlayerGoals[]> {
+    return this.httpClient.get<PlayerGoals[]>(`${this.apiServerUrl}/goalAssist/getPlayersGoals/league/${leagueId}`);
+  }
+
+  getPlayersAssistsByLeagueId(leagueId: number): Observable<PlayerAssists[]> {
+    return this.httpClient.get<PlayerAssists[]>(`${this.apiServerUrl}/goalAssist/getPlayersAssists/league/${leagueId}`);
+  }
+
+  
 }

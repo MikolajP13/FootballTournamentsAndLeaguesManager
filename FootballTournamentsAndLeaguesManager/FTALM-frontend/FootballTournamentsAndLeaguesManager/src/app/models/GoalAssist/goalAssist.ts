@@ -7,6 +7,7 @@ export class GoalAssist {
   team?: {
     id?: number;
   }
+  teamName?: string;
   scorerPlayer?:{
     id?: number;
   }
