@@ -22,7 +22,6 @@ export class LeagueMatchesComponent {
       this.leagueId = params['id'];
     });
     
-    //fetch test
     this.matchService.getLeagueMatchesByLeagueId(this.leagueId).subscribe((match: Match[]) => {
       this.leagueMatchesData = [...match];
       this.lastMatchWeekNumber = this.getLastMatchWeekNumber(this.leagueMatchesData);

@@ -9,4 +9,7 @@ import java.util.Optional;
 public interface MatchRepository extends JpaRepository<Match, Long> {
     Optional<List<Match>> getAllByLeagueId(Long leagueId);
     Optional<List<Match>> getAllByTournamentId(Long tournamentId);
+    Optional<Match> getMatchByHomeTeamIdAndAwayTeamIdAndIsMatchProtocolCreatedAndLeagueId(Long homeTeamId, Long awayTeamId, boolean matchProtocolCreated, Long leagueId);
+    Optional<Integer> countMatchesByLeagueId(Long leagueId);
+    Optional<Integer> countAllByLeagueIdAndIsMatchProtocolCreated(Long leagueId, boolean matchProtocolCreated);
 }

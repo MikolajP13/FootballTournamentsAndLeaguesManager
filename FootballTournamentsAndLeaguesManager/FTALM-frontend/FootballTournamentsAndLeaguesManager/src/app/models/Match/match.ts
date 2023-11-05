@@ -1,19 +1,15 @@
 export class Match {
   id?: number
   date?: Date
-  homeTeam?: {
-    id: number
-  }
+  homeTeamId?: number
   homeTeamName?: string
-  awayTeam?: {
-    id: number
-  }
+  awayTeamId?: number
   awayTeamName?: string
-  homeTeamScore?: number
-  awayTeamScore?: number
+  homeTeamScore?: number | null
+  awayTeamScore?: number | null
   tournamentId?: number
-  leagueId?: number
+  league?: { id: number }
   matchweek?: number
-  round?: number
-  matchProtocolCreated?: boolean
+  round?: number | null
+  isMatchProtocolCreated?: boolean
 }

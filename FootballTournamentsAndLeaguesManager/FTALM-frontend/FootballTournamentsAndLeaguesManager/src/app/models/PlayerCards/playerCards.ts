@@ -4,6 +4,6 @@ export class PlayerCards {
   lastName?: string
   teamId?: number
   teamName?: string
-  yellowCards?: number
-  redCards?: number
+  yellowCards!: number
+  redCards!: number
 }

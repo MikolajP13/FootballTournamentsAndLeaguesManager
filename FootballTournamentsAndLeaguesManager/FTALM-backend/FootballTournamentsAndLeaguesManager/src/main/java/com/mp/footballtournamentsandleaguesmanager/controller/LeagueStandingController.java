@@ -21,8 +21,8 @@ public class LeagueStandingController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<LeagueStanding> addLeagueStanding(@RequestBody LeagueStanding leagueStanding){
-        LeagueStanding newLeagueStanding = this.leagueStandingService.addLeagueStanding(leagueStanding);
+    public ResponseEntity<List<LeagueStanding>> addLeagueStanding(@RequestBody List<LeagueStanding> leagueStanding){
+        List<LeagueStanding> newLeagueStanding = this.leagueStandingService.addLeagueStanding(leagueStanding);
         return new ResponseEntity<>(newLeagueStanding, HttpStatus.OK);
     }
 

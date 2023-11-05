@@ -1,5 +1,5 @@
 export class Team {
-  id?: number;
+  id?: number | null;
   user?: {
     id: number;
   };

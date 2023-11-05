@@ -6,12 +6,18 @@
   </h3>
   <mat-list>
     <ng-container *ngFor="let match of leagueMatchesData">
-    <mat-list-item *ngIf="match.matchweek == matchweekNumber">
+      <mat-list-item *ngIf="match.matchweek === matchweekNumber && match.homeTeamId && match.awayTeamId">
         <span matListItemTitle>{{ match.homeTeamName }} {{ match.homeTeamScore }} - {{ match.awayTeamScore }} {{ match.awayTeamName }}
-          <i class="bi bi-pencil-square" *ngIf="!match.matchProtocolCreated" (click)="fillMatchProtocol()"></i>
-          <i class="bi bi-info-square" *ngIf="match.matchProtocolCreated" (click)="showMatchDetails()"></i>
+          <i class="bi bi-pencil-square" *ngIf="!match.isMatchProtocolCreated" (click)="fillMatchProtocol()"></i>
+          <i class="bi bi-info-square" *ngIf="match.isMatchProtocolCreated" (click)="showMatchDetails()"></i>
         </span>
         <span matListItemLine>Date: {{ match.date }}</span>
+      </mat-list-item>
+    </ng-container>
+    <ng-container *ngFor="let match of leagueMatchesData">
+      <mat-list-item *ngIf="match.matchweek === matchweekNumber && (!match.homeTeamId || !match.awayTeamId)">
+        <span matListItemTitle *ngIf="match.homeTeamId && match.matchweek == matchweekNumber">Pause: {{ match.homeTeamName }}</span>
+        <span matListItemTitle *ngIf="match.awayTeamId && match.matchweek == matchweekNumber">Pause: {{ match.awayTeamName }}</span>
       </mat-list-item>
     </ng-container>
   </mat-list>

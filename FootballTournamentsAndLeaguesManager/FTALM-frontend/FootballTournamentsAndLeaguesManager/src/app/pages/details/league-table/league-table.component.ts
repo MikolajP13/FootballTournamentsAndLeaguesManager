@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LeagueStanding } from 'src/app/models/LeagueStanding/leagueStanding';
-import { Team } from 'src/app/models/Team/team';
 import { LeagueService } from 'src/app/services/leagueService/league.service';
 import { LeagueStandingService } from 'src/app/services/leagueStandingService/league-standing.service';
 import { TeamService } from 'src/app/services/teamService/team.service';
+import { MatchService } from '../../../services/matchService/match.service';
+import { CardService } from 'src/app/services/cardService/card.service';
 
 @Component({
   selector: 'app-league-table',
@@ -18,7 +19,11 @@ export class LeagueTableComponent {
   displayedColumns: string[] = ['position', 'teamName', 'matches', 'won', 'drawn', 'lost', 'goalsForAgainst', 'goalDifference', 'points'];
   leagueTableDataSource: LeagueStanding[] = [];
 
-  constructor(private route: ActivatedRoute, private teamService: TeamService, private leagueService: LeagueService, private leagueStandingService: LeagueStandingService) { 
+  private firstTeamCardPoints: number = 0;
+  private comparedTeamCardPoints: number = 0;
+
+  constructor(private route: ActivatedRoute, private teamService: TeamService, private matchService: MatchService, private cardService: CardService,
+    private leagueService: LeagueService, private leagueStandingService: LeagueStandingService) { 
     this.leagueName = '';
   }
   
@@ -28,13 +33,11 @@ export class LeagueTableComponent {
     });
     
     this.setLeagueName(this.leagueId);
-
-    //Fetch test
-    this.leagueStandingService.getLeagueStanding(4).subscribe((leagueStanding: LeagueStanding[]) => {
+    
+    this.leagueStandingService.getLeagueStanding(this.leagueId).subscribe((leagueStanding: LeagueStanding[]) => {
       this.leagueTableDataSource = [...leagueStanding];
     });
     
-
   }
 
   private setLeagueName(leagueId: number): void {
@@ -43,4 +46,5 @@ export class LeagueTableComponent {
     }
     );
   }
+
 }

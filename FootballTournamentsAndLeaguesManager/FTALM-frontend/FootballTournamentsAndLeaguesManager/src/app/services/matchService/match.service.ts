@@ -24,4 +24,20 @@ export class MatchService {
     return this.httpClient.post<Match>(`${this.apiServerBaseUrl}/match/create`, match);
   }
 
+  public createMatches(matches: Match[]): Observable<Match[]> {
+    return this.httpClient.post<Match[]>(`${this.apiServerBaseUrl}/match/createAll`, matches);
+  }
+
+  public getMatchByHomeTeamIdAndAwayTeamIdAndLeagueId(homeTeamId: number, awayTeamId: number, leagueId: number): Observable<Match> {
+    return this.httpClient.get<Match>(`${this.apiServerBaseUrl}/match/find/homeTeam/${homeTeamId}/awayTeam/${awayTeamId}/league/${leagueId}`);
+  }
+
+  public countAllByLeagueIdAndIsMatchProtocolCreated(leagueId: number): Observable<number> {
+    return this.httpClient.get<number>(`${this.apiServerBaseUrl}/match/countCreatedProtocols/league/${leagueId}`);
+  }
+
+  public countAllByLeagueIdAndIsMatchProtocolNotCreated(leagueId: number): Observable<number> {
+    return this.httpClient.get<number>(`${this.apiServerBaseUrl}/match/countNotCreatedProtocols/league/${leagueId}`);
+  }
+
 }

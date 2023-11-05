@@ -9,8 +9,8 @@ public class MatchDTO {
     private String homeTeamName;
     private Long awayTeamId;
     private String awayTeamName;
-    private int homeTeamScore;
-    private int awayTeamScore;
+    private Integer homeTeamScore;
+    private Integer awayTeamScore;
     private Long tournamentId;
     private Long leagueId;
     private int matchweek;
@@ -65,19 +65,19 @@ public class MatchDTO {
         this.awayTeamName = awayTeamName;
     }
 
-    public int getHomeTeamScore() {
+    public Integer getHomeTeamScore() {
         return homeTeamScore;
     }
 
-    public void setHomeTeamScore(int homeTeamScore) {
+    public void setHomeTeamScore(Integer homeTeamScore) {
         this.homeTeamScore = homeTeamScore;
     }
 
-    public int getAwayTeamScore() {
+    public Integer getAwayTeamScore() {
         return awayTeamScore;
     }
 
-    public void setAwayTeamScore(int awayTeamScore) {
+    public void setAwayTeamScore(Integer awayTeamScore) {
         this.awayTeamScore = awayTeamScore;
     }
 
@@ -119,5 +119,25 @@ public class MatchDTO {
 
     public void setMatchProtocolCreated(boolean matchProtocolCreated) {
         isMatchProtocolCreated = matchProtocolCreated;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("MatchDTO{");
+        sb.append("id=").append(id);
+        sb.append(", date=").append(date);
+        sb.append(", homeTeamId=").append(homeTeamId);
+        sb.append(", homeTeamName='").append(homeTeamName).append('\'');
+        sb.append(", awayTeamId=").append(awayTeamId);
+        sb.append(", awayTeamName='").append(awayTeamName).append('\'');
+        sb.append(", homeTeamScore=").append(homeTeamScore);
+        sb.append(", awayTeamScore=").append(awayTeamScore);
+        sb.append(", tournamentId=").append(tournamentId);
+        sb.append(", leagueId=").append(leagueId);
+        sb.append(", matchweek=").append(matchweek);
+        sb.append(", round=").append(round);
+        sb.append(", isMatchProtocolCreated=").append(isMatchProtocolCreated);
+        sb.append('}');
+        return sb.toString();
     }
 }

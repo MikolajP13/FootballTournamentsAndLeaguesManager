@@ -28,7 +28,7 @@ export class TeamService {
     return this.httpClient.get<Team[]>(`${this.apiServerUrl}/team/all/tournament/${tournamentId}`);
   }
 
-  findAllTeamsInLeaguetByLeagueId(leagueId: number): Observable<Team[]> {
+  findAllTeamsInLeagueByLeagueId(leagueId: number): Observable<Team[]> {
     return this.httpClient.get<Team[]>(`${this.apiServerUrl}/team/all/league/${leagueId}`);
   }
 

@@ -11,14 +11,10 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Date date;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "home_team_id", nullable = false)
-    private Team homeTeam;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "away_team_id", nullable = false)
-    private Team awayTeam;
-    private int homeTeamScore;
-    private int awayTeamScore;
+    private Long homeTeamId;
+    private Long awayTeamId;
+    private Integer homeTeamScore;
+    private Integer awayTeamScore;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tournament_id", nullable = true)
     private Tournament tournament;
@@ -32,12 +28,12 @@ public class Match {
     public Match() {
     }
 
-    public Match(Long id, Date date, Team homeTeam, Team awayTeam, int homeTeamScore, int awayTeamScore,
+    public Match(Long id, Date date, Long homeTeamId, Long awayTeamId, Integer homeTeamScore, Integer awayTeamScore,
                  Tournament tournament, League league, int matchweek, int round, boolean isMatchProtocolCreated) {
         this.id = id;
         this.date = date;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
+        this.homeTeamId = homeTeamId;
+        this.awayTeamId = awayTeamId;
         this.homeTeamScore = homeTeamScore;
         this.awayTeamScore = awayTeamScore;
         this.tournament = tournament;
@@ -63,35 +59,35 @@ public class Match {
         this.date = date;
     }
 
-    public Team getHomeTeam() {
-        return homeTeam;
+    public Long getHomeTeamId() {
+        return homeTeamId;
     }
 
-    public void setHomeTeam(Team homeTeam) {
-        this.homeTeam = homeTeam;
+    public void setHomeTeamId(Long homeTeamId) {
+        this.homeTeamId = homeTeamId;
     }
 
-    public Team getAwayTeam() {
-        return awayTeam;
+    public Long getAwayTeamId() {
+        return awayTeamId;
     }
 
-    public void setAwayTeam(Team awayTeam) {
-        this.awayTeam = awayTeam;
+    public void setAwayTeamId(Long awayTeamId) {
+        this.awayTeamId = awayTeamId;
     }
 
-    public int getHomeTeamScore() {
+    public Integer getHomeTeamScore() {
         return homeTeamScore;
     }
 
-    public void setHomeTeamScore(int homeTeamScore) {
+    public void setHomeTeamScore(Integer homeTeamScore) {
         this.homeTeamScore = homeTeamScore;
     }
 
-    public int getAwayTeamScore() {
+    public Integer getAwayTeamScore() {
         return awayTeamScore;
     }
 
-    public void setAwayTeamScore(int awayTeamScore) {
+    public void setAwayTeamScore(Integer awayTeamScore) {
         this.awayTeamScore = awayTeamScore;
     }
 
@@ -140,8 +136,8 @@ public class Match {
         final StringBuilder sb = new StringBuilder("Match{");
         sb.append("id=").append(id);
         sb.append(", date=").append(date);
-        sb.append(", homeTeam=").append(homeTeam);
-        sb.append(", awayTeam=").append(awayTeam);
+        sb.append(", homeTeam=").append(homeTeamId);
+        sb.append(", awayTeam=").append(awayTeamId);
         sb.append(", homeTeamScore=").append(homeTeamScore);
         sb.append(", awayTeamScore=").append(awayTeamScore);
         sb.append(", tournament=").append(tournament);

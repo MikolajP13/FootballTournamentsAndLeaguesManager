@@ -65,13 +65,13 @@ export class LeagueStatisticsComponent {
 
   fetchPlayersYellowCardsData(leagueId: number): void {
     this.cardService.getPlayersYellowCardsByLeagueId(leagueId).subscribe((playersYellowCards: PlayerCards[]) => {
-      this.playersYellowCardsDataSource = [...playersYellowCards];
+      this.playersYellowCardsDataSource = [...playersYellowCards].filter(player => player.yellowCards > 0);
     });
   }
 
   fetchPlayersRedCardsData(leagueId: number): void {
     this.cardService.getPlayersRedCardsByLeagueId(leagueId).subscribe((playerRedCards: PlayerCards[]) => {
-      this.playersRedCardsDataSource = [...playerRedCards];
+      this.playersRedCardsDataSource = [...playerRedCards].filter(player => player.redCards > 0);
     });
   }
 

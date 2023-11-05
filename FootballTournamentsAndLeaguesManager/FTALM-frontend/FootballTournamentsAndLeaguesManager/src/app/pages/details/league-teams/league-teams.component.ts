@@ -86,7 +86,7 @@ export class LeagueTeamsComponent {
   }
 
   private fetchLeagueTeamsData(teamId: number) {
-    this.teamService.findAllTeamsInLeaguetByLeagueId(teamId).subscribe((teams: Team[]) => {
+    this.teamService.findAllTeamsInLeagueByLeagueId(teamId).subscribe((teams: Team[]) => {
         this.leagueTeamDataSource = [...this.leagueTeamDataSource, ...teams];
         this.numberOfTeams = this.leagueTeamDataSource.length;
     });

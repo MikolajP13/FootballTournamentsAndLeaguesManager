@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Card } from 'src/app/models/Card/card';
 import { PlayerCards } from 'src/app/models/PlayerCards/playerCards';
+import { TeamCards } from 'src/app/models/TeamCards/teamCards';
+
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -47,6 +49,10 @@ export class CardService {
 
   getPlayersRedCardsByLeagueId(leagueId: number): Observable<PlayerCards[]>{
     return this.httpClient.get<PlayerCards[]>(`${this.apiServerUrl}/card/getPlayersRedCards/league/${leagueId}`);
+  }
+
+  getCardsOverallByLeagueIdAndTeamId(leagueId: number, teamId: number): Observable<TeamCards> {
+    return this.httpClient.get<TeamCards>(`${this.apiServerUrl}/card/getTeamCards/league/${leagueId}/team/${teamId}`);
   }
 
 }

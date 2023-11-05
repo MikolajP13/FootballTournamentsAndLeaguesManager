@@ -12,8 +12,8 @@ export class LeagueStandingService {
   
   constructor(private httpClient: HttpClient) { }
 
-  public addLeagueStanding(leagueStanding: LeagueStanding): Observable<LeagueStanding> {
-    return this.httpClient.post<LeagueStanding>(`${this.apiServerBaseUrl}/leagueStanding/add`, leagueStanding);
+  public addLeagueStanding(leagueStanding: LeagueStanding[]): Observable<LeagueStanding[]> {
+    return this.httpClient.post<LeagueStanding[]>(`${this.apiServerBaseUrl}/leagueStanding/add`, leagueStanding);
   }
 
   public getLeagueStanding(leagueId: number): Observable<LeagueStanding[]> {
