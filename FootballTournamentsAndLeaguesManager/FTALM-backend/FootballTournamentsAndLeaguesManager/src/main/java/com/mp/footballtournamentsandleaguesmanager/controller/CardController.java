@@ -28,6 +28,12 @@ public class CardController {
         return new ResponseEntity<>(newCard, HttpStatus.CREATED);
     }
 
+    @PostMapping("/addAll")
+    public ResponseEntity<List<Card>> addCards(@RequestBody List<Card> cardList) {
+        List<Card> cards = cardService.addCards(cardList);
+        return new ResponseEntity<>(cards, HttpStatus.CREATED);
+    }
+
     @DeleteMapping("/delete/{cardId}")
     public ResponseEntity<Boolean> deleteCardById(@PathVariable Long cardId){
         return cardService.deleteCardById(cardId) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
@@ -74,5 +80,10 @@ public class CardController {
     @GetMapping("/getTeamCards/league/{leagueId}/team/{teamId}")
     public ResponseEntity<TeamCardsDTO> getCardsOverallByLeagueIdAndTeamId(@PathVariable Long leagueId, @PathVariable Long teamId){
         return new ResponseEntity<>(cardService.getCardsOverallByLeagueIdAndTeamId(leagueId, teamId), HttpStatus.OK);
+    }
+
+    @GetMapping("/getPlayerCard/{playerId}/match/{matchId}")
+    public ResponseEntity<CardDTO> getCardByPlayerIdAndMatchId(@PathVariable Long playerId, @PathVariable Long matchId){
+        return new ResponseEntity<>(cardService.getCardByPlayerIdAndMatchId(playerId, matchId), HttpStatus.OK);
     }
 }

@@ -1,0 +1,3 @@
+::ng-deep .main-menu .mat-mdc-menu-content { 
+  height: 150px !important; 
+}

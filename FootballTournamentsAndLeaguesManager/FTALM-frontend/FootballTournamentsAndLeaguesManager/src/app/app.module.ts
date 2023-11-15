@@ -53,6 +53,13 @@ import { LeagueTableComponent } from './pages/details/league-table/league-table.
 import { LeagueMatchesComponent } from './pages/details/league-matches/league-matches.component';
 import { LeagueStatisticsComponent } from './pages/details/league-statistics/league-statistics.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { LeagueMatchComponent } from './pages/details/league-match/league-match.component';
+import { MatSnackBarModule, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+import { SnackBarComponent } from './shared-components/snack-bar/snack-bar.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { LeagueMatchDetailsComponent } from './pages/details/league-match-details/league-match-details.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +94,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     LeagueTeamsComponent,
     LeagueTableComponent,
     LeagueMatchesComponent,
-    LeagueStatisticsComponent
+    LeagueStatisticsComponent,
+    LeagueMatchComponent,
+    SnackBarComponent,
+    LeagueMatchDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -111,9 +121,13 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatRadioModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatCardModule,
+    MatSlideToggleModule
   ],
-  providers: [SidenavService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
+  providers: [SidenavService, SnackBarComponent, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, {provide: MAT_SNACK_BAR_DATA, useValue: { duration: 1500 }}],
   bootstrap: [AppComponent],
   
 })

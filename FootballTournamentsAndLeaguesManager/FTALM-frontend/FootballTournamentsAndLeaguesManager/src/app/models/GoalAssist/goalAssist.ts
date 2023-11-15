@@ -1,4 +1,3 @@
-
 export class GoalAssist {
   id?: number;
   match?: {
@@ -13,11 +12,10 @@ export class GoalAssist {
   }
   scorerPlayerFirstName?: string;
   scorerPlayerLastName?: string;
-  assistPlayer?: {
-    id?: number;
-  }
+  assistPlayerId?: number | null;
   assistPlayerFirstName?: string;
   assistPlayerLastName?: string;
   minute?: number;
   matchId?: number;
+  type?: string; // fix iterating over event array (type any)
 }

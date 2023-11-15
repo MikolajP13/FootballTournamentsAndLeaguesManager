@@ -11,5 +11,5 @@ export class Match {
   league?: { id: number }
   matchweek?: number
   round?: number | null
-  isMatchProtocolCreated?: boolean
+  matchProtocolCreated?: boolean
 }

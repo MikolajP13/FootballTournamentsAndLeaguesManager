@@ -33,6 +33,11 @@ public class CardService {
     public Card addCard(Card card){
         return cardRepository.save(card);
     }
+
+    public List<Card> addCards(List<Card> cardList) {
+        return cardRepository.saveAll(cardList);
+    }
+
     public Boolean deleteCardById(Long cardId){
         if(cardRepository.existsById(cardId)){
             cardRepository.deleteById(cardId);
@@ -89,11 +94,18 @@ public class CardService {
         return optionalTeamCardsDTO.orElse(new TeamCardsDTO(team.getId(), team.getName(), 0l, 0l));
     }
 
+    public CardDTO getCardByPlayerIdAndMatchId(Long playerId, Long matchId){
+        Optional<Card> optionalCard = cardRepository.getCardByPlayerIdAndMatchId(playerId, matchId);
+        Card card = optionalCard.orElse(null);
+        return card != null ? convertToDTO(card) : null;
+    }
+
     public CardDTO convertToDTO(Card card){
         CardDTO dto = new CardDTO();
         dto.setId(card.getId());
         dto.setMatchId(card.getMatch().getId());
         dto.setTeamId(card.getTeam().getId());
+        dto.setTeamName(card.getTeam().getName());
         dto.setMinute(card.getMinute());
         dto.setPlayerId(card.getPlayer().getId());
         dto.setPlayerFirstName(card.getPlayer().getFirstName());

@@ -17,20 +17,19 @@ public class GoalAssist {
     @ManyToOne
     @JoinColumn(name = "scorerPlayer_id", nullable = false)
     private Player scorerPlayer;
-    @ManyToOne
-    @JoinColumn(name = "assistPlayer_id", nullable = false)
-    private Player assistPlayer;
+
+    private Long assistPlayerId;
     private int minute;
 
     public GoalAssist() {
     }
 
-    public GoalAssist(Long id, Match match, Team team, Player scorerPlayer, Player assistPlayer, int minute) {
+    public GoalAssist(Long id, Match match, Team team, Player scorerPlayer, Long assistPlayerId, int minute) {
         this.id = id;
         this.match = match;
         this.team = team;
         this.scorerPlayer = scorerPlayer;
-        this.assistPlayer = assistPlayer;
+        this.assistPlayerId = assistPlayerId;
         this.minute = minute;
     }
 
@@ -66,12 +65,12 @@ public class GoalAssist {
         this.scorerPlayer = scorerPlayer;
     }
 
-    public Player getAssistPlayer() {
-        return assistPlayer;
+    public Long getAssistPlayerId() {
+        return assistPlayerId;
     }
 
-    public void setAssistPlayer(Player assistPlayer) {
-        this.assistPlayer = assistPlayer;
+    public void setAssistPlayerId(Long assistPlayerId) {
+        this.assistPlayerId = assistPlayerId;
     }
 
     public int getMinute() {
@@ -82,16 +81,4 @@ public class GoalAssist {
         this.minute = minute;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("GoalAssist{");
-        sb.append("id=").append(id);
-        sb.append(", match=").append(match);
-        sb.append(", team=").append(team);
-        sb.append(", scorerPlayer=").append(scorerPlayer);
-        sb.append(", assistPlayer=").append(assistPlayer);
-        sb.append(", minute=").append(minute);
-        sb.append('}');
-        return sb.toString();
-    }
 }

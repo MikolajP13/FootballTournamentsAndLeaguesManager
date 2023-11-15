@@ -18,6 +18,10 @@ export class GoalAssistService {
     return this.httpClient.post<GoalAssist>(`${this.apiServerUrl}/goalAssist/add`, goalAssist);
   }
 
+  addGoalAssists(goalAssists: GoalAssist[]): Observable<GoalAssist[]> {
+    return this.httpClient.post<GoalAssist[]>(`${this.apiServerUrl}/goalAssist/addAll`, goalAssists);
+  }
+
   deleteGoalAssist(goalAssistId: number): Observable<Boolean> {
     return this.httpClient.delete<Boolean>(`${this.apiServerUrl}/goalAssist/delete/${goalAssistId}`);
   }

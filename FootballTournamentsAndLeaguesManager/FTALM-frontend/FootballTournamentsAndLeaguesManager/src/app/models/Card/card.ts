@@ -1,4 +1,3 @@
-
 export class Card {
   id?: number;
   match?: {
@@ -16,7 +15,9 @@ export class Card {
   cardType?: CardType;
   matchId?: number;
   teamId?: number;
+  teamName?: string;
   playerId?: number;
+  type?: string; // fix iterating over event array (type any)
 }
 
 export enum CardType {

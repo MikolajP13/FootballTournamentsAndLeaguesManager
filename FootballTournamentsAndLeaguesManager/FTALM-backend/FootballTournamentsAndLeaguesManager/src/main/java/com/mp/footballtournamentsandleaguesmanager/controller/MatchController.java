@@ -67,4 +67,9 @@ public class MatchController {
         return new ResponseEntity<>(matches, HttpStatus.CREATED);
     }
 
+    @PutMapping("/update/{matchId}")
+    public ResponseEntity<MatchDTO> updateMatch(@PathVariable Long matchId, @RequestBody MatchDTO matchDTO){
+        Match updatedMatch = matchService.updateMatch(matchId, matchDTO);
+        return ResponseEntity.ok(matchService.convertToDTO(updatedMatch));
+    }
 }

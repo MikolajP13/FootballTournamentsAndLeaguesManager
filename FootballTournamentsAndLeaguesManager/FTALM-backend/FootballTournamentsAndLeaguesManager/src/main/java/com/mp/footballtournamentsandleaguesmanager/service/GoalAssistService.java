@@ -4,6 +4,7 @@ import com.mp.footballtournamentsandleaguesmanager.DTO.GoalAssistDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerAssistsDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerGoalsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.GoalAssist;
+import com.mp.footballtournamentsandleaguesmanager.model.Player;
 import com.mp.footballtournamentsandleaguesmanager.repository.GoalAssistRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.PlayerRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
@@ -32,6 +33,11 @@ public class GoalAssistService {
     public GoalAssist addGoalAssist(GoalAssist goalAssist){
         return goalAssistRepository.save(goalAssist);
     }
+
+    public List<GoalAssist> addGoalAssists(List<GoalAssist> goalAssistList) {
+        return goalAssistRepository.saveAll(goalAssistList);
+    }
+
     public Boolean deleteGoalAssistById(Long goalAssistId){
         if(goalAssistRepository.existsById(goalAssistId)){
             goalAssistRepository.deleteById(goalAssistId);
@@ -45,7 +51,7 @@ public class GoalAssistService {
         GoalAssist goalAssistToUpdate = this.goalAssistRepository.findById(goalId).orElseThrow();
         goalAssistToUpdate.setMinute(goalAssistDTO.getMinute());
         goalAssistToUpdate.setScorerPlayer(playerRepository.findById(goalAssistDTO.getScorerPlayerId()).orElseThrow());
-        goalAssistToUpdate.setAssistPlayer(playerRepository.findById(goalAssistDTO.getAssistPlayerId()).orElseThrow());
+//        goalAssistToUpdate.setAssistPlayer(playerRepository.findById(goalAssistDTO.getAssistPlayerId()).orElseThrow());
 
         return goalAssistRepository.save(goalAssistToUpdate);
     }
@@ -90,7 +96,12 @@ public class GoalAssistService {
     }
 
     public GoalAssistDTO convertToDTO(GoalAssist goalAssist){
+        Optional<Player> assistPlayerOptional = Optional.empty();
         GoalAssistDTO dto = new GoalAssistDTO();
+        Long assistPlayerId = goalAssist.getAssistPlayerId();
+        if (assistPlayerId != null)
+            assistPlayerOptional = playerRepository.findById(assistPlayerId);
+
         dto.setId(goalAssist.getId());
         dto.setMatchId(goalAssist.getMatch().getId());
         dto.setTeamId(goalAssist.getTeam().getId());
@@ -99,9 +110,12 @@ public class GoalAssistService {
         dto.setScorerPlayerId(goalAssist.getScorerPlayer().getId());
         dto.setScorerPlayerFirstName(goalAssist.getScorerPlayer().getFirstName());
         dto.setScorerPlayerLastName(goalAssist.getScorerPlayer().getLastName());
-        dto.setAssistPlayerId(goalAssist.getAssistPlayer().getId());
-        dto.setAssistPlayerFirstName(goalAssist.getAssistPlayer().getFirstName());
-        dto.setAssistPlayerLastName(goalAssist.getAssistPlayer().getLastName());
+        dto.setAssistPlayerId(goalAssist.getAssistPlayerId());
+
+        if (assistPlayerOptional.isPresent()) {
+            dto.setAssistPlayerFirstName(assistPlayerOptional.get().getFirstName());
+            dto.setAssistPlayerLastName(assistPlayerOptional.get().getLastName());
+        }
 
         return  dto;
     }

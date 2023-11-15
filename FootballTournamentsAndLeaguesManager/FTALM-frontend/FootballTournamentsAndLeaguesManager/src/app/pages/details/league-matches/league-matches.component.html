@@ -3,13 +3,21 @@
     <i class="bi bi-chevron-left" *ngIf="matchweekNumber > 1" (click)="previousMatchWeek()"></i> 
       Matchweek {{ matchweekNumber }}
     <i class="bi bi-chevron-right" *ngIf="lastMatchWeekNumber && matchweekNumber < lastMatchWeekNumber" (click)="nextMatchWeek()"></i>
+
+    <button mat-button [matMenuTriggerFor]="menu">Jump</button>
+    <mat-menu class="main-menu" #menu="matMenu">
+      <div *ngFor="let matchweekNumber of matchweeks">
+        <button mat-menu-item (click)="jumpToMatchweek(matchweekNumber)">{{ matchweekNumber }}</button>
+    </div>
+    </mat-menu>
+
   </h3>
   <mat-list>
     <ng-container *ngFor="let match of leagueMatchesData">
       <mat-list-item *ngIf="match.matchweek === matchweekNumber && match.homeTeamId && match.awayTeamId">
         <span matListItemTitle>{{ match.homeTeamName }} {{ match.homeTeamScore }} - {{ match.awayTeamScore }} {{ match.awayTeamName }}
-          <i class="bi bi-pencil-square" *ngIf="!match.isMatchProtocolCreated" (click)="fillMatchProtocol()"></i>
-          <i class="bi bi-info-square" *ngIf="match.isMatchProtocolCreated" (click)="showMatchDetails()"></i>
+          <i class="bi bi-pencil-square" *ngIf="!match.matchProtocolCreated" (click)="fillMatchProtocol(match)"></i>
+          <i class="bi bi-info-square" *ngIf="match.matchProtocolCreated" (click)="showMatchDetails(match)"></i>
         </span>
         <span matListItemLine>Date: {{ match.date }}</span>
       </mat-list-item>

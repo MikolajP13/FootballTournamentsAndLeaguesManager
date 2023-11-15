@@ -4,6 +4,7 @@ public class SubstitutionDTO {
     private Long id;
     private Long matchId;
     private Long teamId;
+    private String teamName;
     private Long enteringPlayerId;
     private String enteringPlayerFirstName;
     private String enteringPlayerLastName;
@@ -34,6 +35,14 @@ public class SubstitutionDTO {
 
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public Long getEnteringPlayerId() {

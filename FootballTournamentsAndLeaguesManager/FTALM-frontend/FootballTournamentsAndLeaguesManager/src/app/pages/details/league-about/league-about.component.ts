@@ -190,7 +190,7 @@ export class LeagueAboutComponent {
           awayTeamScore: null,
           matchweek: roundNo,
           round: null,
-          isMatchProtocolCreated: false
+          matchProtocolCreated: false
         }
       }
       else {
@@ -202,7 +202,7 @@ export class LeagueAboutComponent {
           awayTeamScore: null,
           matchweek: roundNo,
           round: null,
-          isMatchProtocolCreated: false
+          matchProtocolCreated: false
         }
       }
 

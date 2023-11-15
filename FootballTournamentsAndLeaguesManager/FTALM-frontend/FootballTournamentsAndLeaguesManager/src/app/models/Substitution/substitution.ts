@@ -1,4 +1,3 @@
-
 export class Substitution {
   id?: number;
   match?: {
@@ -18,4 +17,6 @@ export class Substitution {
   exitingPlayerFirstName?: string;
   exitingPlayerLastName?: string;
   minute?: number;
+  teamName?: string;
+  type?: string; // fix iterating over event array (type any)
 }

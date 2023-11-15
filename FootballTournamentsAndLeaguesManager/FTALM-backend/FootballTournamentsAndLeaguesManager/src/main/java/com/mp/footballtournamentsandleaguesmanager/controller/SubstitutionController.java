@@ -26,6 +26,12 @@ public class SubstitutionController {
         return new ResponseEntity<>(newSubstitution, HttpStatus.CREATED);
     }
 
+    @PostMapping("/addAll")
+    public ResponseEntity<List<Substitution>> addSubstitutions(@RequestBody List<Substitution> substitutionList){
+        List<Substitution> substitutions = substitutionService.addSubstitutions(substitutionList);
+        return new ResponseEntity<>(substitutions, HttpStatus.CREATED);
+    }
+
     @DeleteMapping("/delete/{substitutionId}")
     public ResponseEntity<Boolean> deleteSubstitutionById(@PathVariable Long substitutionId){
         return substitutionService.deleteSubstitutionById(substitutionId) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();

@@ -6,6 +6,7 @@ public class CardDTO {
     private Long id;
     private Long matchId;
     private Long teamId;
+    private String teamName;
     private Long playerId;
     private String playerFirstName;
     private String playerLastName;
@@ -34,6 +35,14 @@ public class CardDTO {
 
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public Long getPlayerId() {

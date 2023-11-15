@@ -19,6 +19,10 @@ export class CardService {
     return this.httpClient.post<Card>(`${this.apiServerUrl}/card/add`, card);
   }
 
+  addCards(cards: Card[]): Observable<Card[]> {
+    return this.httpClient.post<Card[]>(`${this.apiServerUrl}/card/addAll`, cards);
+  }
+
   deleteCard(cardId: number): Observable<Boolean> {
     return this.httpClient.delete<Boolean>(`${this.apiServerUrl}/card/delete/${cardId}`);
   }
@@ -55,4 +59,7 @@ export class CardService {
     return this.httpClient.get<TeamCards>(`${this.apiServerUrl}/card/getTeamCards/league/${leagueId}/team/${teamId}`);
   }
 
+  getCardByPlayerIdAndMatchId(playerId: number, matchId: number): Observable<Card> {
+    return this.httpClient.get<Card>(`${this.apiServerUrl}/card/getPlayerCard/${playerId}/match/${matchId}`);
+  }
 }

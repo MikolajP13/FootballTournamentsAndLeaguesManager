@@ -23,6 +23,8 @@ import { LeagueTeamsComponent } from './pages/details/league-teams/league-teams.
 import { LeagueTableComponent } from './pages/details/league-table/league-table.component';
 import { LeagueMatchesComponent } from './pages/details/league-matches/league-matches.component';
 import { LeagueStatisticsComponent } from './pages/details/league-statistics/league-statistics.component';
+import { LeagueMatchComponent } from './pages/details/league-match/league-match.component';
+import { LeagueMatchDetailsComponent } from './pages/details/league-match-details/league-match-details.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -37,6 +39,8 @@ const routes: Routes = [
   {path: "league/:id/teams", component: LeagueTeamsComponent, canActivate: [authGuard]},
   {path: "league/:id/table", component: LeagueTableComponent, canActivate: [authGuard]},
   {path: "league/:id/matches", component: LeagueMatchesComponent, canActivate: [authGuard]},
+  {path: "league/:leagueId/match/:id", component: LeagueMatchComponent, canActivate: [authGuard]},
+  {path: "league/:leagueId/match-details/:id", component: LeagueMatchDetailsComponent, canActivate: [authGuard]},
   {path: "league/:id/statistics", component: LeagueStatisticsComponent, canActivate: [authGuard]},
   {path: "teams", component: TeamsComponent, canActivate: [authGuard]},
   {path: "team/:id", component: TeamDetailsComponent, canActivate: [authGuard]},

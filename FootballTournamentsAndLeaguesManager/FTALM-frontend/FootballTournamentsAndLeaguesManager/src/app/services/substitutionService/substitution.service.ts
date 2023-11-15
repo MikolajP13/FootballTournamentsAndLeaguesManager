@@ -16,6 +16,10 @@ export class SubstitutionService {
     return this.httpClient.post<Substitution>(`${this.apiServerUrl}/substitution/add`, substitution);
   }
 
+  addSubstitutions(substitutions: Substitution[]): Observable<Substitution[]> {
+    return this.httpClient.post<Substitution[]>(`${this.apiServerUrl}/substitution/addAll`, substitutions);
+  }
+
   deleteSubstitution(substitutionId: number): Observable<Boolean> {
     return this.httpClient.delete<Boolean>(`${this.apiServerUrl}/substitution/delete/${substitutionId}`);
   }

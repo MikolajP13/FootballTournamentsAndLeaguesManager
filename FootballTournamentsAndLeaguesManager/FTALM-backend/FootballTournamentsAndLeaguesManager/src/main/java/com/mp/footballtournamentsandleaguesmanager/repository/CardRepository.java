@@ -1,5 +1,6 @@
 package com.mp.footballtournamentsandleaguesmanager.repository;
 
+import com.mp.footballtournamentsandleaguesmanager.DTO.CardDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerCardsDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.TeamCardsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Card;
@@ -42,4 +43,5 @@ public interface CardRepository extends JpaRepository<Card, Long> {
             "WHERE m.league.id = :leagueId AND t.id = :teamId " +
             "GROUP BY t.id")
     Optional<TeamCardsDTO> getCardsOverallByLeagueIdAndTeamId(Long leagueId, Long teamId);
+    Optional<Card> getCardByPlayerIdAndMatchId(Long playerId, Long matchId);
 }

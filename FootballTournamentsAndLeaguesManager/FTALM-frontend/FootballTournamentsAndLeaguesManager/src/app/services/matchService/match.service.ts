@@ -40,4 +40,8 @@ export class MatchService {
     return this.httpClient.get<number>(`${this.apiServerBaseUrl}/match/countNotCreatedProtocols/league/${leagueId}`);
   }
 
+  public updateMatch(matchId: number, match: Match): Observable<Match> {
+    return this.httpClient.put<Match>(`${this.apiServerBaseUrl}/match/update/${matchId}`, match);
+  }
+
 }

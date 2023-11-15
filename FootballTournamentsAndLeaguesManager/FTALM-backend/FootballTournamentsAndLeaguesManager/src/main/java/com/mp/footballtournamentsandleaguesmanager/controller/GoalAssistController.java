@@ -28,6 +28,12 @@ public class GoalAssistController {
         return new ResponseEntity<>(newGoalAssist, HttpStatus.CREATED);
     }
 
+    @PostMapping("/addAll")
+    public ResponseEntity<List<GoalAssist>> addGoalAssists(@RequestBody List<GoalAssist> goalAssistList){
+        List<GoalAssist> goalAssists = goalAssistService.addGoalAssists(goalAssistList);
+        return new ResponseEntity<>(goalAssists, HttpStatus.CREATED);
+    }
+
     @DeleteMapping("/delete/{goalAssistId}")
     public ResponseEntity<Boolean> deleteGoalById(@PathVariable Long goalAssistId){
         return goalAssistService.deleteGoalAssistById(goalAssistId) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();

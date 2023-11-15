@@ -38,6 +38,15 @@ public class MatchService {
         return matchRepository.saveAll(matchList);
     }
 
+    public Match updateMatch(Long matchId, MatchDTO matchDTO) {
+        Match matchToUpdate = this.matchRepository.findById(matchId).orElseThrow();
+        matchToUpdate.setDate(matchDTO.getDate());
+        matchToUpdate.setAwayTeamScore(matchDTO.getAwayTeamScore());
+        matchToUpdate.setHomeTeamScore(matchDTO.getHomeTeamScore());
+        matchToUpdate.setMatchProtocolCreated(matchDTO.isMatchProtocolCreated());
+        return matchRepository.save(matchToUpdate);
+    }
+
     public List<MatchDTO> getAllByLeagueId(Long leagueId){
         Optional<List<Match>> optionalList = matchRepository.getAllByLeagueId(leagueId);
         List<Match> matchList = optionalList.orElse(Collections.emptyList());
@@ -72,7 +81,7 @@ public class MatchService {
         return optionalNumberOfCreatedMatchProtocols.orElse(0);
     }
 
-    private MatchDTO convertToDTO(Match match) {
+    public MatchDTO convertToDTO(Match match) {
         MatchDTO dto = new MatchDTO();
 
         dto.setId(match.getId());

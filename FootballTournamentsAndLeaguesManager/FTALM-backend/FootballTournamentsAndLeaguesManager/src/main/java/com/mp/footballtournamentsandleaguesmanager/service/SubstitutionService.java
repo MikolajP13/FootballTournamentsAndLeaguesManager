@@ -27,6 +27,11 @@ public class SubstitutionService {
     public Substitution addSubstitution(Substitution substitution){
         return substitutionRepository.save(substitution);
     }
+
+    public List<Substitution> addSubstitutions(List<Substitution> substitutionList) {
+        return substitutionRepository.saveAll(substitutionList);
+    }
+
     public Boolean deleteSubstitutionById(Long substitutionId){
         if(substitutionRepository.existsById(substitutionId)){
             substitutionRepository.deleteById(substitutionId);
@@ -75,6 +80,7 @@ public class SubstitutionService {
         dto.setExitingPlayerLastName(substitution.getExitingPlayer().getLastName());
         dto.setMatchId(substitution.getMatch().getId());
         dto.setTeamId(substitution.getTeam().getId());
+        dto.setTeamName(substitution.getTeam().getName());
         dto.setMinute(substitution.getMinute());
 
         return dto;
