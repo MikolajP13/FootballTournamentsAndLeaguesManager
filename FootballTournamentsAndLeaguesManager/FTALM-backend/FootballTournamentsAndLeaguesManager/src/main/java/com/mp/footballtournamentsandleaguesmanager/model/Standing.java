@@ -1,19 +1,13 @@
 package com.mp.footballtournamentsandleaguesmanager.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-@Entity
-@Table(name = "LeagueStandings")
-public class LeagueStanding extends Standing{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+//TODO: code refactoring for League and TournamentStanding!
+public class Standing {
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
-    @ManyToOne
-    @JoinColumn(name = "league_id", nullable = false)
-    private League league;
     private int matches;
     private int points;
     private int goalsFor;
@@ -22,44 +16,12 @@ public class LeagueStanding extends Standing{
     private int draws;
     private int losses;
 
-    public LeagueStanding() { }
-
-    public LeagueStanding(Long id, Team team, League league, int matches, int points, int goalsFor, int goalsAgainst,
-                          int wins, int draws, int losses) {
-        this.id = id;
-        this.team = team;
-        this.league = league;
-        this.matches = matches;
-        this.points = points;
-        this.goalsFor = goalsFor;
-        this.goalsAgainst = goalsAgainst;
-        this.wins = wins;
-        this.draws = draws;
-        this.losses = losses;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Team getTeam() {
         return team;
     }
 
     public void setTeam(Team team) {
         this.team = team;
-    }
-
-    public League getLeague() {
-        return league;
-    }
-
-    public void setLeague(League league) {
-        this.league = league;
     }
 
     public int getMatches() {
@@ -117,5 +79,4 @@ public class LeagueStanding extends Standing{
     public void setLosses(int losses) {
         this.losses = losses;
     }
-
 }

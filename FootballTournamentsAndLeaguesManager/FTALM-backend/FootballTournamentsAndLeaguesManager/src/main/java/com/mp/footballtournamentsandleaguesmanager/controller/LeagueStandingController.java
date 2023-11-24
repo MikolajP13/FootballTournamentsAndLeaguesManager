@@ -2,6 +2,7 @@ package com.mp.footballtournamentsandleaguesmanager.controller;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueStandingDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.LeagueStanding;
+import com.mp.footballtournamentsandleaguesmanager.repository.LeagueStandingRepository;
 import com.mp.footballtournamentsandleaguesmanager.service.LeagueStandingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,10 +15,13 @@ import java.util.List;
 @RequestMapping("/leagueStanding")
 public class LeagueStandingController {
     private final LeagueStandingService leagueStandingService;
+    private final LeagueStandingRepository leagueStandingRepository;
 
     @Autowired
-    public LeagueStandingController(LeagueStandingService leagueStandingService) {
+    public LeagueStandingController(LeagueStandingService leagueStandingService,
+                                    LeagueStandingRepository leagueStandingRepository) {
         this.leagueStandingService = leagueStandingService;
+        this.leagueStandingRepository = leagueStandingRepository;
     }
 
     @PostMapping("/add")
@@ -31,6 +35,17 @@ public class LeagueStandingController {
         List<LeagueStandingDTO> leagueStandingDTOList = this.leagueStandingService.getLeagueStandingByLeagueId(leagueId);
         return ResponseEntity.ok(leagueStandingDTOList);
     }
+
+
+    @PutMapping("/update/league/{leagueId}/team/{teamId}")
+    public ResponseEntity<LeagueStandingDTO> updateLeagueStanding(@PathVariable Long leagueId,
+                                                                  @PathVariable Long teamId,
+                                                                  @RequestBody LeagueStandingDTO leagueStandingDTO){
+        LeagueStanding updatedLeagueStanding = leagueStandingService.updateLeagueStanding(leagueId, teamId, leagueStandingDTO);
+        LeagueStandingDTO updatedLeagueStandingDTO = leagueStandingService.convertToDTO(updatedLeagueStanding);
+        return ResponseEntity.ok(updatedLeagueStandingDTO);
+    }
+
 
     @GetMapping("/getTeamsGoalsFor/{leagueId}")
     public ResponseEntity<List<LeagueStandingDTO>> getLeagueStandingsByLeagueIdOrderByGoalsFor(@PathVariable Long leagueId){

@@ -11,4 +11,5 @@ public interface LeagueStandingRepository extends JpaRepository<LeagueStanding, 
     Optional<List<LeagueStanding>> getLeagueStandingsByLeagueIdOrderByGoalsFor(Long leagueId);
     Optional<List<LeagueStanding>> getLeagueStandingsByLeagueIdOrderByWins(Long leagueId);
     Optional<List<LeagueStanding>> getLeagueStandingsByLeagueIdOrderByLosses(Long leagueId);
+    Optional<LeagueStanding> findByLeagueIdAndTeamId(Long leagueId, Long teamId);
 }

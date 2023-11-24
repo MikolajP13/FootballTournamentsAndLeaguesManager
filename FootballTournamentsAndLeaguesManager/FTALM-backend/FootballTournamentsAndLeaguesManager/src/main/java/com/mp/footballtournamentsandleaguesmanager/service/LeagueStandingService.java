@@ -1,7 +1,6 @@
 package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueStandingDTO;
-import com.mp.footballtournamentsandleaguesmanager.DTO.TeamCardsDTO;
 import com.mp.footballtournamentsandleaguesmanager.businessLogic.TeamComparator;
 import com.mp.footballtournamentsandleaguesmanager.model.LeagueStanding;
 import com.mp.footballtournamentsandleaguesmanager.repository.LeagueRepository;
@@ -19,6 +18,8 @@ public class LeagueStandingService {
     private final MatchService matchService;
     private final LeagueRepository leagueRepository;
     private final CardService cardService;
+    private static final int POINTS_FOR_WIN = 3;
+    private static final int POINTS_FOR_DRAW = 1;
 
     @Autowired
     public LeagueStandingService(LeagueStandingRepository leagueStandingRepository, MatchService matchService,
@@ -30,8 +31,27 @@ public class LeagueStandingService {
         this.cardService = cardService;
     }
 
-    public List<LeagueStanding> addLeagueStanding(List<LeagueStanding> leagueStanding) {
-        return leagueStandingRepository.saveAll(leagueStanding);
+    public List<LeagueStanding> addLeagueStanding(List<LeagueStanding> leagueStandings) {
+        return leagueStandingRepository.saveAll(leagueStandings);
+    }
+
+    public LeagueStanding updateLeagueStanding(Long leagueId, Long teamId, LeagueStandingDTO leagueStandingDTO) {
+        LeagueStanding leagueStandingToUpdate = this.leagueStandingRepository.findByLeagueIdAndTeamId(leagueId, teamId).orElseThrow();
+        leagueStandingToUpdate.setMatches(leagueStandingToUpdate.getMatches() + 1);
+        leagueStandingToUpdate.setGoalsFor(leagueStandingToUpdate.getGoalsFor() + leagueStandingDTO.getGoalsFor());
+        leagueStandingToUpdate.setGoalsAgainst(leagueStandingToUpdate.getGoalsAgainst() + leagueStandingDTO.getGoalsAgainst());
+
+        if (leagueStandingDTO.getWins() == 1) {
+            leagueStandingToUpdate.setWins(leagueStandingToUpdate.getWins() + 1);
+            leagueStandingToUpdate.setPoints(leagueStandingToUpdate.getPoints() + POINTS_FOR_WIN);
+        } else if (leagueStandingDTO.getDraws() == 1){
+            leagueStandingToUpdate.setDraws(leagueStandingToUpdate.getDraws() + 1);
+            leagueStandingToUpdate.setPoints(leagueStandingToUpdate.getPoints() + POINTS_FOR_DRAW);
+        } else {
+            leagueStandingToUpdate.setLosses(leagueStandingToUpdate.getLosses() + 1);
+        }
+
+        return leagueStandingRepository.save(leagueStandingToUpdate);
     }
 
     public List<LeagueStandingDTO> getLeagueStandingByLeagueId(Long leagueId){
@@ -42,7 +62,7 @@ public class LeagueStandingService {
             if(matchService.countAllByLeagueIdAndIsMatchProtocolCreated(leagueId, true) == 0)
                 leagueStandingList.sort(Comparator.comparing(t -> t.getTeam().getName()));
             else
-                leagueStandingList.sort(new TeamComparator(leagueId, matchService, cardService));
+                leagueStandingList.sort(new TeamComparator<>(leagueId, matchService, cardService));
         }
 
         return leagueStandingList.stream()

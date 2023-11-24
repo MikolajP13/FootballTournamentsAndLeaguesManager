@@ -3,8 +3,8 @@ package com.mp.footballtournamentsandleaguesmanager.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "LeagueStandings")
-public class LeagueStanding extends Standing{
+@Table(name = "TournamentStandings")
+public class TournamentStanding extends Standing{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -12,8 +12,9 @@ public class LeagueStanding extends Standing{
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
     @ManyToOne
-    @JoinColumn(name = "league_id", nullable = false)
-    private League league;
+    @JoinColumn(name = "tournament_id", nullable = false)
+    private Tournament tournament;
+    private int groupId; // 1 - A, 2 - B, 3 - C, ...
     private int matches;
     private int points;
     private int goalsFor;
@@ -22,13 +23,15 @@ public class LeagueStanding extends Standing{
     private int draws;
     private int losses;
 
-    public LeagueStanding() { }
+    public TournamentStanding() {
+    }
 
-    public LeagueStanding(Long id, Team team, League league, int matches, int points, int goalsFor, int goalsAgainst,
-                          int wins, int draws, int losses) {
+    public TournamentStanding(Long id, Team team, Tournament tournament, int groupId, int matches, int points,
+                              int goalsFor, int goalsAgainst, int wins, int draws, int losses) {
         this.id = id;
         this.team = team;
-        this.league = league;
+        this.tournament = tournament;
+        this.groupId = groupId;
         this.matches = matches;
         this.points = points;
         this.goalsFor = goalsFor;
@@ -54,12 +57,20 @@ public class LeagueStanding extends Standing{
         this.team = team;
     }
 
-    public League getLeague() {
-        return league;
+    public Tournament getTournament() {
+        return tournament;
     }
 
-    public void setLeague(League league) {
-        this.league = league;
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public int getMatches() {
@@ -117,5 +128,4 @@ public class LeagueStanding extends Standing{
     public void setLosses(int losses) {
         this.losses = losses;
     }
-
 }

@@ -3,13 +3,14 @@ package com.mp.footballtournamentsandleaguesmanager.businessLogic;
 import com.mp.footballtournamentsandleaguesmanager.DTO.MatchDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.TeamCardsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.LeagueStanding;
+import com.mp.footballtournamentsandleaguesmanager.model.Standing;
 import com.mp.footballtournamentsandleaguesmanager.service.CardService;
 import com.mp.footballtournamentsandleaguesmanager.service.MatchService;
 
 import java.util.Comparator;
 import java.util.Random;
 
-public class TeamComparator implements Comparator<LeagueStanding> {
+public class TeamComparator<T extends Standing> implements Comparator<T> {
     private final Long competitionId;
     private final static Random random = new Random();
     private final MatchService matchService;
@@ -22,7 +23,7 @@ public class TeamComparator implements Comparator<LeagueStanding> {
     }
 
     @Override
-    public int compare(LeagueStanding firstTeam, LeagueStanding secondTeam) {
+    public int compare(T firstTeam, T secondTeam) {
         int firstTeamPoints = 0;
         int firstTeamGoalsFirstMatch = 0;
         int firstTeamGoalsSecondMatch = 0;
