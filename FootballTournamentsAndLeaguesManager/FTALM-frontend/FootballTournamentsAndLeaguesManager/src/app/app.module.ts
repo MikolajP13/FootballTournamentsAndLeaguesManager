@@ -60,6 +60,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LeagueMatchDetailsComponent } from './pages/details/league-match-details/league-match-details.component';
+import { TournamentStatisticsComponent } from './pages/details/tournament-statistics/tournament-statistics.component';
+import { TournamentMatchesComponent } from './pages/details/tournament-matches/tournament-matches.component';
+import { TournamentMatchDetailsComponent } from './pages/details/tournament-match-details/tournament-match-details.component';
+import { TournamentBracketComponent } from './pages/details/tournament-bracket/tournament-bracket.component';
+import { TournamentMatchComponent } from './pages/details/tournament-match/tournament-match.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +102,12 @@ import { LeagueMatchDetailsComponent } from './pages/details/league-match-detail
     LeagueStatisticsComponent,
     LeagueMatchComponent,
     SnackBarComponent,
-    LeagueMatchDetailsComponent
+    LeagueMatchDetailsComponent,
+    TournamentStatisticsComponent,
+    TournamentMatchesComponent,
+    TournamentMatchDetailsComponent,
+    TournamentBracketComponent,
+    TournamentMatchComponent
   ],
   imports: [
     BrowserModule,

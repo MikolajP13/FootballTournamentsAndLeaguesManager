@@ -1,8 +1,8 @@
-
-export class LeagueStanding {
+export class TournamentStanding {
   id?: number;
-  league?: { id?: number };
-  leagueName?: string
+  tournament?: { id?: number };
+  tournamentName?: string
+  groupId?: number
   team?: { id?: number };
   teamName?: string
   matches?: number

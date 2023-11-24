@@ -1,0 +1,189 @@
+<div class="tournament-statistic-container">
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="1500ms">
+    <mat-tab label="Goals">
+      <div class="stats-goals-container">
+        <mat-table [dataSource]="playersGoalsDataSource|slice:0:10" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="rank">
+            <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
+            <mat-cell *matCellDef="let player; let i = index">
+              <ng-container *ngIf="i === 0 || player.goals != playersGoalsDataSource[i-1].goals; else sameRank">
+                {{ i + 1 }}
+              </ng-container>
+              <ng-template #sameRank>
+                {{ i }}
+              </ng-template>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="player">
+            <mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.firstName + " " + player.lastName }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="team">
+            <mat-header-cell *matHeaderCellDef> Team </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.teamName }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="goals">
+            <mat-header-cell *matHeaderCellDef> Goals </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.goals }} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="playersGoalsDisplayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: playersGoalsDisplayedColumns;"></mat-row>
+        </mat-table>
+        <button mat-raised-button color="primary" [disabled]="playersGoalsDataSource.length <= 10">View full list <i
+            class="bi bi-arrow-right"></i></button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Assists">
+      <div class="stats-assists-container">
+        <mat-table [dataSource]="playersAssistsDataSource|slice:0:10" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="rank">
+            <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
+            <mat-cell *matCellDef="let player; let i = index">
+              <ng-container *ngIf="i === 0 || player.assists != playersAssistsDataSource[i-1].assists; else sameRank">
+                {{ i + 1 }}
+              </ng-container>
+              <ng-template #sameRank>
+                {{ i }}
+              </ng-template>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="player">
+            <mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.firstName + " " + player.lastName }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="team">
+            <mat-header-cell *matHeaderCellDef> Team </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.teamName }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="assists">
+            <mat-header-cell *matHeaderCellDef> Assists </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.assists }} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="playersAssistsDisplayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: playersAssistsDisplayedColumns;"></mat-row>
+        </mat-table>
+        <button mat-raised-button color="primary" [disabled]="playersAssistsDataSource.length <= 10">View full list <i
+            class="bi bi-arrow-right"></i></button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Clean Sheets">
+      <div class="stats-clean-sheets-container">
+        <mat-table [dataSource]="playersCleanSheetsDataSource|slice:0:10" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="rank">
+            <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
+            <mat-cell *matCellDef="let element"> </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="player">
+            <mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
+            <mat-cell *matCellDef="let element"> </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="team">
+            <mat-header-cell *matHeaderCellDef> Team </mat-header-cell>
+            <mat-cell *matCellDef="let element"> </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="cleanSheets">
+            <mat-header-cell *matHeaderCellDef> Clean Sheets </mat-header-cell>
+            <mat-cell *matCellDef="let element"> </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="playersCleanSheetsDisplayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: playersCleanSheetsDisplayedColumns;"></mat-row>
+        </mat-table>
+        <button mat-raised-button color="primary" [disabled]="playersCleanSheetsDataSource.length <= 10">View full list
+          <i class="bi bi-arrow-right"></i></button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Yellow Cards">
+      <div class="stats-yellow-cards-container">
+        <mat-table [dataSource]="playersYellowCardsDataSource|slice:0:10" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="rank">
+            <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
+            <mat-cell *matCellDef="let player; let i = index">
+              <ng-container
+                *ngIf="i === 0 || player.yellowCards != playersYellowCardsDataSource[i-1].yellowCards; else sameRank">
+                {{ i + 1 }}
+              </ng-container>
+              <ng-template #sameRank>
+                {{ i }}
+              </ng-template>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="player">
+            <mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.firstName + " " + player.lastName }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="team">
+            <mat-header-cell *matHeaderCellDef> Team </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.teamName }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="yellowCards">
+            <mat-header-cell *matHeaderCellDef> Yellow Cards </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.yellowCards }} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="playersYellowCardsDisplayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: playersYellowCardsDisplayedColumns;"></mat-row>
+        </mat-table>
+        <button mat-raised-button color="primary" [disabled]="playersYellowCardsDataSource.length <= 10">View full list
+          <i class="bi bi-arrow-right"></i></button>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Red Cards">
+      <div class="stats-yellow-cards-container">
+        <mat-table [dataSource]="playersRedCardsDataSource|slice:0:10" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="rank">
+            <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
+            <mat-cell *matCellDef="let player; let i = index">
+              <ng-container
+                *ngIf="i === 0 || player.redCards != playersRedCardsDataSource[i-1].redCards; else sameRank">
+                {{ i + 1 }}
+              </ng-container>
+              <ng-template #sameRank>
+                {{ i }}
+              </ng-template>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="player">
+            <mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.firstName + " " + player.lastName }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="team">
+            <mat-header-cell *matHeaderCellDef> Team </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.teamName }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="redCards">
+            <mat-header-cell *matHeaderCellDef> Red Cards </mat-header-cell>
+            <mat-cell *matCellDef="let player"> {{ player.redCards }} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="playersRedCardsDisplayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: playersRedCardsDisplayedColumns;"></mat-row>
+        </mat-table>
+        <button mat-raised-button color="primary" [disabled]="playersRedCardsDataSource.length <= 10">View full list <i class="bi bi-arrow-right"></i></button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

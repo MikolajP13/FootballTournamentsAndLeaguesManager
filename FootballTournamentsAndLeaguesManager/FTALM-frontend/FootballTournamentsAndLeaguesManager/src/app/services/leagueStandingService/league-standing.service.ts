@@ -16,6 +16,10 @@ export class LeagueStandingService {
     return this.httpClient.post<LeagueStanding[]>(`${this.apiServerBaseUrl}/leagueStanding/add`, leagueStanding);
   }
 
+  public updateLeagueStanding(leagueId: number, teamId: number, leagueStanding: LeagueStanding): Observable<LeagueStanding> {
+    return this.httpClient.put<LeagueStanding>(`${this.apiServerBaseUrl}/leagueStanding/update/league/${leagueId}/team/${teamId}`, leagueStanding);
+  }
+
   public getLeagueStanding(leagueId: number): Observable<LeagueStanding[]> {
     return this.httpClient.get<LeagueStanding[]>(`${this.apiServerBaseUrl}/leagueStanding/all/${leagueId}`);
   }

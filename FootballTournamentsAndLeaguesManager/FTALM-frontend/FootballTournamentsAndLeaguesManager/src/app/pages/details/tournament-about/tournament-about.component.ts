@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ConfirmationPopupComponent } from '../../popups/confirmation-popup/confirmation-popup.component';
 import { TournamentService } from 'src/app/services/tournamentService/tournament.service';
 import { TeamService } from 'src/app/services/teamService/team.service';
-import { Tournament } from 'src/app/models/Tournament/tournament';
+import { Tournament, Type } from 'src/app/models/Tournament/tournament';
 import { Status } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
 
 @Component({
@@ -15,6 +15,7 @@ import { Status } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase
 export class TournamentAboutComponent {
   tournamentId!: number;
   objectName: string = 'tournament';
+  tournament!: Tournament;
   tournamentCanBeStarted: boolean = false;
   tournamentCanBeDeletedWithWarning: boolean = false;
 
@@ -23,6 +24,10 @@ export class TournamentAboutComponent {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.tournamentId = params['id'];
+    });
+
+    this.tournamentService.findTournamentById(this.tournamentId).subscribe(tournament => {
+      this.tournament = tournament;
     });
 
     this.tournamentService.getTournamentStatus(this.tournamentId).subscribe(status => {
@@ -58,10 +63,15 @@ export class TournamentAboutComponent {
       status: Status.IN_PROGRESS
     }
 
-    this.tournamentService.updateTournamentStatusByTournamentId(this.tournamentId, updatedStatus).subscribe();
+    //this.tournamentService.updateTournamentStatusByTournamentId(this.tournamentId, updatedStatus).subscribe();
 
     //TODO: tournament can only be started once!!
     this.tournamentCanBeStarted = false;
+
+    if(this.tournament.type === Type.GROUP_AND_KNOCKOUT) {
+      console.log(JSON.stringify(this.tournament));
+      //TODO: get all teams, split to groups, create tournament standings (groupId!!), create matches (round 0/matchweek as groupId!!) 
+    }
 
     //TODO: logic for creating matches etc.
 

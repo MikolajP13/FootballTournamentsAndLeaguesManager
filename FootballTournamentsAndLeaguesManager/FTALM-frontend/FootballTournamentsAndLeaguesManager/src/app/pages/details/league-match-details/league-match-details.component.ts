@@ -59,7 +59,6 @@ export class LeagueMatchDetailsComponent {
       this.matchEvents = this.matchEvents.concat(result.substitution.map(details => ({details, type: this.SUBSTITUTION_EVENT_ID})));
     
       this.matchEvents.sort((event1, event2) => event2.details.minute - event1.details.minute);
-      console.log(this.matchEvents);
     });
   }
 }

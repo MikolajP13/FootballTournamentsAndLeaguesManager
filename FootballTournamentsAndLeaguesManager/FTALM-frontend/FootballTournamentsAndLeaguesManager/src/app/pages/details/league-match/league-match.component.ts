@@ -13,6 +13,8 @@ import { GoalAssistService } from 'src/app/services/goalAssistService/goal-assis
 import { CardService } from 'src/app/services/cardService/card.service';
 import { SubstitutionService } from '../../../services/substitutionService/substitution.service';
 import { MatchWeekNumberService } from '../../../services/matchweekService/match-week-number.service';
+import { LeagueStandingService } from 'src/app/services/leagueStandingService/league-standing.service';
+import { LeagueStanding } from 'src/app/models/LeagueStanding/leagueStanding';
 
 @Component({
   selector: 'app-league-match',
@@ -48,8 +50,8 @@ export class LeagueMatchComponent {
   awayTeamScore: number = 0;
 
   constructor(private route: ActivatedRoute, private matchService: MatchService, private playerService: PlayerService, 
-    private goalAssistService: GoalAssistService, private cardService: CardService, 
-    private substitutionService: SubstitutionService, private snackBar: SnackBarComponent,
+    private goalAssistService: GoalAssistService, private cardService: CardService, private substitutionService: SubstitutionService, 
+    private leagueStandingService: LeagueStandingService, private snackBar: SnackBarComponent,
     private matchWeekNumberService: MatchWeekNumberService, private router: Router) {}
 
   ngOnInit(): void { 
@@ -179,7 +181,7 @@ export class LeagueMatchComponent {
     var updatedMatchData: Match = {
       homeTeamScore: this.homeTeamScore,
       awayTeamScore: this.awayTeamScore,
-      matchProtocolCreated: true,
+      matchProtocolCreated: false, // TEMP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       date: new Date(Date.now())
     }
     var goalAssistEvents = this.events.filter(e => e.type === this.GOAL_ASSIST_EVENT_ID);
@@ -198,10 +200,49 @@ export class LeagueMatchComponent {
       this.substitutionService.addSubstitutions(substitutionEvents).subscribe();
     }
 
-    if(this.match?.id)
-     this.matchService.updateMatch(this.match.id, updatedMatchData).subscribe();
-    
-    if(this.match?.matchweek){
+    if(this.match?.id) {
+      this.matchService.updateMatch(this.match.id, updatedMatchData).subscribe();
+
+      if(this.leagueId && this.match?.homeTeamId && this.match?.awayTeamId) {
+        var homeTeamWin: number = 0; 
+        var awayTeamWin: number = 0; 
+        var draw: number = 0; 
+        var homeTeamLose: number = 0; 
+        var awayTeamLose: number = 0;
+        let goalBalanceForHomeTeam: number = this.homeTeamScore - this.awayTeamScore;
+
+        if(goalBalanceForHomeTeam > 0){
+          homeTeamWin = 1;
+          awayTeamLose = 1;
+        } else if(goalBalanceForHomeTeam == 0){
+          draw = 1;
+        } else {
+          awayTeamWin = 1;
+          homeTeamLose = 1;
+        }
+        
+        var leagueStandingForHomeTeam: LeagueStanding = {
+          goalsFor: this.homeTeamScore,
+          goalsAgainst: this.awayTeamScore,
+          wins: homeTeamWin,
+          draws: draw,
+          losses: homeTeamLose
+        }
+
+        var leagueStandingForAwayTeam: LeagueStanding = {
+          goalsFor: this.awayTeamScore,
+          goalsAgainst: this.homeTeamScore,
+          wins: awayTeamWin,
+          draws: draw,
+          losses: awayTeamLose
+        }
+
+        this.leagueStandingService.updateLeagueStanding(this.leagueId, this.match.homeTeamId, leagueStandingForHomeTeam).subscribe();
+        this.leagueStandingService.updateLeagueStanding(this.leagueId, this.match.awayTeamId, leagueStandingForAwayTeam).subscribe();
+      }
+    }
+
+    if(this.match?.matchweek) {
       this.router.navigate([`/league/${this.leagueId}/matches/`])
       this.matchWeekNumberService.matchWeekNumber = this.match?.matchweek;
     }
@@ -228,8 +269,8 @@ export class LeagueMatchComponent {
         firstPlayer !== undefined && !this.checkIfPlayerOffThePitch(firstPlayer) && isMinuteValid;
     else
       return this.arePlayersSelected(homeTeamEvent) 
-      && !this.checkIfPlayerOffThePitch(firstPlayer) && !this.checkIfPlayerOffThePitch(secondPlayer)
-      && !this.checkFirstAndSecondPlayer(homeTeamEvent) && isMinuteValid 
+        && !this.checkIfPlayerOffThePitch(firstPlayer) && !this.checkIfPlayerOffThePitch(secondPlayer)
+        && !this.checkFirstAndSecondPlayer(homeTeamEvent) && isMinuteValid 
   }
 
   arePlayersSelected(homeTeamEvent: boolean): boolean {
