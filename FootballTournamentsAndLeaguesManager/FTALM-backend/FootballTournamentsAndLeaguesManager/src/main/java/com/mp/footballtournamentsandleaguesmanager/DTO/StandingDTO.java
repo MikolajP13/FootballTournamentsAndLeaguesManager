@@ -1,15 +1,9 @@
-package com.mp.footballtournamentsandleaguesmanager.model;
+package com.mp.footballtournamentsandleaguesmanager.DTO;
 
-import jakarta.persistence.*;
-
-@MappedSuperclass
-public class Standing {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class StandingDTO {
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "team_id", nullable = false)
-    private Team team;
+    private Long teamId;
+    private String teamName;
     private int matches;
     private int points;
     private int goalsFor;
@@ -17,20 +11,6 @@ public class Standing {
     private int wins;
     private int draws;
     private int losses;
-
-    public Standing() {
-    }
-
-    public Standing(Team team, int matches, int points, int goalsFor, int goalsAgainst, int wins, int draws, int losses) {
-        this.team = team;
-        this.matches = matches;
-        this.points = points;
-        this.goalsFor = goalsFor;
-        this.goalsAgainst = goalsAgainst;
-        this.wins = wins;
-        this.draws = draws;
-        this.losses = losses;
-    }
 
     public Long getId() {
         return id;
@@ -40,12 +20,20 @@ public class Standing {
         this.id = id;
     }
 
-    public Team getTeam() {
-        return team;
+    public Long getTeamId() {
+        return teamId;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public int getMatches() {

@@ -1,7 +1,7 @@
 package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.TournamentStandingDTO;
-import com.mp.footballtournamentsandleaguesmanager.businessLogic.TeamComparator;
+import com.mp.footballtournamentsandleaguesmanager.business.TeamComparator;
 import com.mp.footballtournamentsandleaguesmanager.model.TournamentStanding;
 import com.mp.footballtournamentsandleaguesmanager.repository.TournamentStandingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,40 +50,11 @@ public class TournamentStandingService {
 
     public TournamentStanding updateTournamentStanding(Long tournamentId, int groupId, Long teamId, TournamentStandingDTO tournamentStandingDTO){
         TournamentStanding tournamentStandingToUpdate = this.tournamentStandingRepository.findByTournamentIdAndGroupIdAndTeamId(tournamentId, groupId, teamId).orElseThrow();
-        tournamentStandingToUpdate.setMatches(tournamentStandingToUpdate.getMatches() + 1);
-        tournamentStandingToUpdate.setGoalsFor(tournamentStandingToUpdate.getGoalsFor() + tournamentStandingDTO.getGoalsFor());
-        tournamentStandingToUpdate.setGoalsAgainst(tournamentStandingToUpdate.getGoalsAgainst() + tournamentStandingDTO.getGoalsAgainst());
 
-        if (tournamentStandingDTO.getWins() == 1) {
-            tournamentStandingToUpdate.setWins(tournamentStandingToUpdate.getWins() + 1);
-            tournamentStandingToUpdate.setPoints(tournamentStandingToUpdate.getPoints() + POINTS_FOR_WIN);
-        } else if (tournamentStandingDTO.getDraws() == 1){
-            tournamentStandingToUpdate.setDraws(tournamentStandingToUpdate.getDraws() + 1);
-            tournamentStandingToUpdate.setPoints(tournamentStandingToUpdate.getPoints() + POINTS_FOR_DRAW);
-        } else {
-            tournamentStandingToUpdate.setLosses(tournamentStandingToUpdate.getLosses() + 1);
-        }
-        //TODO: code refactoring code due to duplication [LeagueStanding] !
-        return  tournamentStandingRepository.save(tournamentStandingToUpdate);
+        return  tournamentStandingRepository.save(StandingMapper.updateStandingAndReturn(tournamentStandingToUpdate, tournamentStandingDTO));
     }
 
-    //TODO: code refactoring code due to duplication [LeagueStanding] !
     public TournamentStandingDTO convertToDTO(TournamentStanding tournamentStanding){
-        TournamentStandingDTO dto = new TournamentStandingDTO();
-        dto.setId(tournamentStanding.getId());
-        dto.setTournamentId(tournamentStanding.getTournament().getId());
-        dto.setTournamentName(tournamentStanding.getTournament().getName());
-        dto.setGroupId(tournamentStanding.getGroupId());
-        dto.setTeamId(tournamentStanding.getTeam().getId());
-        dto.setTeamName(tournamentStanding.getTeam().getName());
-        dto.setMatches(tournamentStanding.getMatches());
-        dto.setPoints(tournamentStanding.getPoints());
-        dto.setGoalsFor(tournamentStanding.getGoalsFor());
-        dto.setGoalsAgainst(tournamentStanding.getGoalsAgainst());
-        dto.setWins(tournamentStanding.getWins());
-        dto.setDraws(tournamentStanding.getDraws());
-        dto.setLosses(tournamentStanding.getLosses());
-
-        return dto;
+        return StandingMapper.convertToDTO(tournamentStanding, new TournamentStandingDTO());
     }
 }

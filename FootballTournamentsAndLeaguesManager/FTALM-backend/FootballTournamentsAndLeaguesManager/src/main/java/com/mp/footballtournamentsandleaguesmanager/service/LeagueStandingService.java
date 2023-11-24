@@ -1,7 +1,7 @@
 package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueStandingDTO;
-import com.mp.footballtournamentsandleaguesmanager.businessLogic.TeamComparator;
+import com.mp.footballtournamentsandleaguesmanager.business.TeamComparator;
 import com.mp.footballtournamentsandleaguesmanager.model.LeagueStanding;
 import com.mp.footballtournamentsandleaguesmanager.repository.LeagueRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.LeagueStandingRepository;
@@ -37,21 +37,8 @@ public class LeagueStandingService {
 
     public LeagueStanding updateLeagueStanding(Long leagueId, Long teamId, LeagueStandingDTO leagueStandingDTO) {
         LeagueStanding leagueStandingToUpdate = this.leagueStandingRepository.findByLeagueIdAndTeamId(leagueId, teamId).orElseThrow();
-        leagueStandingToUpdate.setMatches(leagueStandingToUpdate.getMatches() + 1);
-        leagueStandingToUpdate.setGoalsFor(leagueStandingToUpdate.getGoalsFor() + leagueStandingDTO.getGoalsFor());
-        leagueStandingToUpdate.setGoalsAgainst(leagueStandingToUpdate.getGoalsAgainst() + leagueStandingDTO.getGoalsAgainst());
 
-        if (leagueStandingDTO.getWins() == 1) {
-            leagueStandingToUpdate.setWins(leagueStandingToUpdate.getWins() + 1);
-            leagueStandingToUpdate.setPoints(leagueStandingToUpdate.getPoints() + POINTS_FOR_WIN);
-        } else if (leagueStandingDTO.getDraws() == 1){
-            leagueStandingToUpdate.setDraws(leagueStandingToUpdate.getDraws() + 1);
-            leagueStandingToUpdate.setPoints(leagueStandingToUpdate.getPoints() + POINTS_FOR_DRAW);
-        } else {
-            leagueStandingToUpdate.setLosses(leagueStandingToUpdate.getLosses() + 1);
-        }
-
-        return leagueStandingRepository.save(leagueStandingToUpdate);
+        return leagueStandingRepository.save(StandingMapper.updateStandingAndReturn(leagueStandingToUpdate, leagueStandingDTO));
     }
 
     public List<LeagueStandingDTO> getLeagueStandingByLeagueId(Long leagueId){
@@ -95,20 +82,6 @@ public class LeagueStandingService {
     }
 
     public LeagueStandingDTO convertToDTO(LeagueStanding leagueStanding){
-        LeagueStandingDTO dto = new LeagueStandingDTO();
-        dto.setId(leagueStanding.getId());
-        dto.setLeagueId(leagueStanding.getLeague().getId());
-        dto.setLeagueName(leagueStanding.getLeague().getName());
-        dto.setTeamId(leagueStanding.getTeam().getId());
-        dto.setTeamName(leagueStanding.getTeam().getName());
-        dto.setMatches(leagueStanding.getMatches());
-        dto.setPoints(leagueStanding.getPoints());
-        dto.setGoalsFor(leagueStanding.getGoalsFor());
-        dto.setGoalsAgainst(leagueStanding.getGoalsAgainst());
-        dto.setWins(leagueStanding.getWins());
-        dto.setDraws(leagueStanding.getDraws());
-        dto.setLosses(leagueStanding.getLosses());
-
-        return dto;
+        return StandingMapper.convertToDTO(leagueStanding, new LeagueStandingDTO());
     }
 }

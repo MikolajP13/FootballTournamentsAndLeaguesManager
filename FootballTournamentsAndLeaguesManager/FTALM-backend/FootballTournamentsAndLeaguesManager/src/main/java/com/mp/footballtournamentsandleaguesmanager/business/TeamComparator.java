@@ -1,8 +1,7 @@
-package com.mp.footballtournamentsandleaguesmanager.businessLogic;
+package com.mp.footballtournamentsandleaguesmanager.business;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.MatchDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.TeamCardsDTO;
-import com.mp.footballtournamentsandleaguesmanager.model.LeagueStanding;
 import com.mp.footballtournamentsandleaguesmanager.model.Standing;
 import com.mp.footballtournamentsandleaguesmanager.service.CardService;
 import com.mp.footballtournamentsandleaguesmanager.service.MatchService;
