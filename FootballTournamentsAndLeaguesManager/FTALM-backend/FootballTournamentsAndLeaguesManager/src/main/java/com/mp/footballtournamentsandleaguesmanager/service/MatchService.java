@@ -2,7 +2,6 @@ package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.MatchDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Match;
-import com.mp.footballtournamentsandleaguesmanager.model.Team;
 import com.mp.footballtournamentsandleaguesmanager.repository.MatchRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +57,23 @@ public class MatchService {
     public List<MatchDTO> getAllByTournamentId(Long tournamentId){
         Optional<List<Match>> optionalList = matchRepository.getAllByTournamentId(tournamentId);
         List<Match> matchList = optionalList.orElse(Collections.emptyList());
+        return matchList.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<MatchDTO> getAllByTournamentIdAndRoundAndMatchweek(Long tournamentId, int round, int matchweek){
+        Optional<List<Match>> optionalList = matchRepository.getAllByTournamentIdAndRoundAndMatchweek(tournamentId, round, matchweek);
+        List<Match> matchList = optionalList.orElse(Collections.emptyList());
+        return matchList.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<MatchDTO> getAllByTournamentIdAndRoundIsGreaterThanEqual(Long tournamentId, int firstRound) {
+        Optional<List<Match>> optionalList = matchRepository.getAllByTournamentIdAndRoundIsGreaterThanEqual(tournamentId, firstRound);
+        List<Match> matchList = optionalList.orElse(Collections.emptyList());
+
         return matchList.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());

@@ -242,10 +242,7 @@ export class LeagueMatchComponent {
       }
     }
 
-    if(this.match?.matchweek) {
-      this.router.navigate([`/league/${this.leagueId}/matches/`])
-      this.matchWeekNumberService.matchWeekNumber = this.match?.matchweek;
-    }
+    this.navigateToMatches();
     
   }
 
@@ -311,7 +308,10 @@ export class LeagueMatchComponent {
   }
 
   navigateToMatches(): void {
-
+    if(this.match?.matchweek) {
+      this.router.navigate([`/league/${this.leagueId}/matches/`])
+      this.matchWeekNumberService.matchWeekNumber = this.match?.matchweek;
+    }
   }
 
 }

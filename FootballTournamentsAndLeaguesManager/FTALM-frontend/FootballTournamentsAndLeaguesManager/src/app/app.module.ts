@@ -65,6 +65,7 @@ import { TournamentMatchesComponent } from './pages/details/tournament-matches/t
 import { TournamentMatchDetailsComponent } from './pages/details/tournament-match-details/tournament-match-details.component';
 import { TournamentBracketComponent } from './pages/details/tournament-bracket/tournament-bracket.component';
 import { TournamentMatchComponent } from './pages/details/tournament-match/tournament-match.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -135,7 +136,8 @@ import { TournamentMatchComponent } from './pages/details/tournament-match/tourn
     MatSnackBarModule,
     MatMenuModule,
     MatCardModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatStepperModule
   ],
   providers: [SidenavService, SnackBarComponent, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, {provide: MAT_SNACK_BAR_DATA, useValue: { duration: 1500 }}],
   bootstrap: [AppComponent],

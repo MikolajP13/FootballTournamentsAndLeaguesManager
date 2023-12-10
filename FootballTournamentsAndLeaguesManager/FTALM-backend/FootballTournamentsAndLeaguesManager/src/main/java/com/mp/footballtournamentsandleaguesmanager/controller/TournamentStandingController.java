@@ -27,7 +27,8 @@ public class TournamentStandingController {
     }
 
     @GetMapping("/all/tournament/{tournamentId}/group/{groupId}")
-    public ResponseEntity<List<TournamentStandingDTO>> getTournamentStandingByTournamentIdAndGroupId(Long tournamentId, int groupId){
+    public ResponseEntity<List<TournamentStandingDTO>> getTournamentStandingByTournamentIdAndGroupId(@PathVariable Long tournamentId,
+                                                                                                     @PathVariable int groupId){
         List<TournamentStandingDTO> tournamentStandingDTOList = this.tournamentStandingService.getTournamentStandingByTournamentIdAndGroupId(tournamentId, groupId);
         return ResponseEntity.ok(tournamentStandingDTOList);
     }

@@ -19,9 +19,6 @@ export class LeagueTableComponent {
   displayedColumns: string[] = ['position', 'teamName', 'matches', 'won', 'drawn', 'lost', 'goalsForAgainst', 'goalDifference', 'points'];
   leagueTableDataSource: LeagueStanding[] = [];
 
-  private firstTeamCardPoints: number = 0;
-  private comparedTeamCardPoints: number = 0;
-
   constructor(private route: ActivatedRoute, private teamService: TeamService, private matchService: MatchService, private cardService: CardService,
     private leagueService: LeagueService, private leagueStandingService: LeagueStandingService) { 
     this.leagueName = '';

@@ -21,7 +21,7 @@ export class TournamentStandingService {
   }
 
   public updateTournamentStanding(tournamentId: number, groupId: number, teamId: number, tournamentStanding: TournamentStanding): Observable<TournamentStanding> {
-    return this.httpClient.put<TournamentStanding>(`${this.apiServerBaseUrl}/tournamentStandings/update/tournament/${tournamentId}/group/${groupId}/team/${teamId}`, tournamentStanding);
+    return this.httpClient.put<TournamentStanding>(`${this.apiServerBaseUrl}/tournamentStanding/update/tournament/${tournamentId}/group/${groupId}/team/${teamId}`, tournamentStanding);
   }
 
 }

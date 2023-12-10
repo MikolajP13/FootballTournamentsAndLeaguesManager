@@ -35,6 +35,19 @@ public class MatchController {
         return new ResponseEntity<>(matchService.getAllByTournamentId(tournamentId), HttpStatus.OK);
     }
 
+    // in case of tournament with group stage matchweek will be a group identifier
+    @GetMapping("findAll/tournament/{tournamentId}/round/{round}/group/{group}")
+    public ResponseEntity<List<MatchDTO>> getAllByTournamentIdAndRoundAndMatchweek(@PathVariable Long tournamentId,
+                                                                                   @PathVariable int round,
+                                                                                   @PathVariable int group){
+        return new ResponseEntity<>(matchService.getAllByTournamentIdAndRoundAndMatchweek(tournamentId, round, group), HttpStatus.OK);
+    }
+
+    @GetMapping("findAll/bracketStage/tournament/{tournamentId}")
+    public ResponseEntity<List<MatchDTO>> getAllByTournamentIdAndRoundIsGreaterThanEqual(@PathVariable Long tournamentId) {
+        return new ResponseEntity<>(matchService.getAllByTournamentIdAndRoundIsGreaterThanEqual(tournamentId, 1), HttpStatus.OK);
+    }
+
     @GetMapping("/find/homeTeam/{homeTeamId}/awayTeam/{awayTeamId}/league/{leagueId}")
     public ResponseEntity<MatchDTO> getMatchByHomeTeamIdAndAwayTeamIdAndMatchProtocolCreatedAndLeagueId(@PathVariable Long homeTeamId,
                                                                                  @PathVariable Long awayTeamId,

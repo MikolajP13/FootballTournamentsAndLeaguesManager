@@ -38,9 +38,9 @@ public class TournamentStandingService {
 
         if(!tournamentStandingList.isEmpty()){
             if(tournamentStandingList.stream().anyMatch(t -> t.getMatches() > 0))
-                tournamentStandingList.sort(Comparator.comparing(t -> t.getTeam().getName()));
-            else
                 tournamentStandingList.sort(new TeamComparator<>(tournamentId, matchService, cardService));
+            else
+                tournamentStandingList.sort(Comparator.comparing(t -> t.getTeam().getName()));
         }
 
         return tournamentStandingList.stream()

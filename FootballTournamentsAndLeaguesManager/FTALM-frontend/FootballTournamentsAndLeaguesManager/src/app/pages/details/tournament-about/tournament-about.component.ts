@@ -6,6 +6,12 @@ import { TournamentService } from 'src/app/services/tournamentService/tournament
 import { TeamService } from 'src/app/services/teamService/team.service';
 import { Tournament, Type } from 'src/app/models/Tournament/tournament';
 import { Status } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
+import { Team } from 'src/app/models/Team/team';
+import { StandingsUtils } from 'src/app/utils/StandingUtils';
+import { TournamentStandingService } from 'src/app/services/tournamentStandingService/tournament-standing.service';
+import { TournamentStanding } from 'src/app/models/TournamentStanding/tournamentStanding';
+import { Match } from '../../../models/Match/match';
+import { MatchService } from 'src/app/services/matchService/match.service';
 
 @Component({
   selector: 'app-tournament-about',
@@ -16,10 +22,12 @@ export class TournamentAboutComponent {
   tournamentId!: number;
   objectName: string = 'tournament';
   tournament!: Tournament;
+  teams!: Team[];
   tournamentCanBeStarted: boolean = false;
   tournamentCanBeDeletedWithWarning: boolean = false;
 
-  constructor(private route: ActivatedRoute, private dialog: MatDialog, private tournamentService: TournamentService, private teamService: TeamService) { }
+  constructor(private route: ActivatedRoute, private dialog: MatDialog, private teamService: TeamService, private matchService: MatchService,
+    private tournamentService: TournamentService, private tournamentStandingService: TournamentStandingService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -57,23 +65,61 @@ export class TournamentAboutComponent {
   }
 
   startTournament() {
-    console.log("Start tournament " + this.tournamentId);
-    //TODO: DB update tournament status to IN_PROGRESS
+
+    // update tournament status to IN_PROGRESS
     const updatedStatus: Tournament = {
       status: Status.IN_PROGRESS
     }
 
-    //this.tournamentService.updateTournamentStatusByTournamentId(this.tournamentId, updatedStatus).subscribe();
-
     //TODO: tournament can only be started once!!
-    this.tournamentCanBeStarted = false;
+    // this.tournamentCanBeStarted = false;
 
-    if(this.tournament.type === Type.GROUP_AND_KNOCKOUT) {
-      console.log(JSON.stringify(this.tournament));
-      //TODO: get all teams, split to groups, create tournament standings (groupId!!), create matches (round 0/matchweek as groupId!!) 
-    }
+    this.tournamentService.updateTournamentStatusByTournamentId(this.tournamentId, updatedStatus).subscribe();
 
-    //TODO: logic for creating matches etc.
+    this.teamService.findAllTeamsInTournamentByTournamentId(this.tournamentId).subscribe((teams: Team[]) =>{
+      var tournamentMatches: Match[] = [];
 
+      // shuffle teams
+      this.teams = StandingsUtils.shuffle(teams);
+
+      // if tournament type is group and knockout then create league standings and group matches
+      if(this.tournament.type?.replaceAll('_', ' ') == Type.GROUP_AND_KNOCKOUT.valueOf().toUpperCase()) {
+        let tournamentStanding: TournamentStanding[] = [];
+        let tournamentStageGroupMatches: Match[] = [];
+        const numberOfGroups = Math.floor(this.teams.length/4);
+
+        for (let i = 0; i < numberOfGroups; i++) {
+          for (let j = 0; j < 4; j++) {
+            tournamentStanding.push({
+              tournament: {id: this.tournamentId},
+              groupId: i + 1,
+              team: {id: this.teams[j] ? (this.teams[j].id || 0) : 0},
+              matches: 0,
+              points: 0,
+              goalsFor: 0,
+              goalsAgainst: 0,
+              wins: 0,
+              draws: 0,
+              losses: 0
+            });
+          }
+
+          // create tournament group fixtures => function(teams, competitionId, isTournament, isRematch)
+          var groupMatches: Match[] = StandingsUtils.generateRoundRobinSchedule(this.teams.splice(0, 4), this.tournamentId, true, i+1, false);
+          tournamentStageGroupMatches = tournamentStageGroupMatches.concat(groupMatches);
+        }
+        
+        tournamentMatches = tournamentStageGroupMatches;
+        this.tournamentStandingService.addTournamentStanding(tournamentStanding).subscribe();
+
+      } else { 
+        // standard tournament mode start with matches in round number 1
+        tournamentMatches = StandingsUtils.generateTournamentPairs(this.teams, this.tournamentId);
+      }
+
+      this.matchService.createMatches(tournamentMatches).subscribe();
+
+    });
   }
+
 }

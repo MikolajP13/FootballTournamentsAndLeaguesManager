@@ -1,1 +1,82 @@
-<p>tournament-matches works!</p>
+<div class="league-matches-container">
+  <div *ngIf="tournamentType === groupAndKnockout">
+    <mat-form-field>    
+      <mat-label>Selected view type</mat-label>
+      <mat-select [(value)]="selectedView">
+        <mat-option value="groupStage">Group Stage</mat-option>
+        <mat-option value="bracketStage">Bracket Stage</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+ 
+  <div *ngIf="selectedView === 'groupStage' && tournamentType === groupAndKnockout">
+    <h3>
+      <i class="bi bi-chevron-left" *ngIf="groupNumber > 1" (click)="previousRoundOrGroup(false)"></i> 
+        Group 
+        <span *ngIf="groupNumber === 1"> A </span>
+        <span *ngIf="groupNumber === 2"> B </span>
+        <span *ngIf="groupNumber === 3"> C </span>
+        <span *ngIf="groupNumber === 4"> D </span>
+        <span *ngIf="groupNumber === 5"> E </span>
+        <span *ngIf="groupNumber === 6"> F </span>
+        <span *ngIf="groupNumber === 7"> G </span>
+        <span *ngIf="groupNumber === 8"> H </span>
+      <i class="bi bi-chevron-right" *ngIf="lastGroupNumber && groupNumber < lastGroupNumber" (click)="nextRoundOrGroup(false)"></i>
+
+      <button mat-button [matMenuTriggerFor]="menu">Jump</button>
+      <mat-menu class="main-menu" #menu="matMenu">
+        <div *ngFor="let groupNumber of groups">
+          <button mat-menu-item (click)="jumpToRoundOrGroup(groupNumber, false)">
+            Group 
+            <span *ngIf="groupNumber === 1"> A </span>
+            <span *ngIf="groupNumber === 2"> B </span>
+            <span *ngIf="groupNumber === 3"> C </span>
+            <span *ngIf="groupNumber === 4"> D </span>
+            <span *ngIf="groupNumber === 5"> E </span>
+            <span *ngIf="groupNumber === 6"> F </span>
+            <span *ngIf="groupNumber === 7"> G </span>
+            <span *ngIf="groupNumber === 8"> H </span>  
+          </button>
+        </div>
+      </mat-menu>
+    </h3>
+    <mat-list>
+      <ng-container *ngFor="let match of tournamentGroupStageMatchesData">
+        <mat-list-item *ngIf="match.matchweek === groupNumber && match.homeTeamId && match.awayTeamId">
+          <span matListItemTitle>{{ match.homeTeamName }} {{ match.homeTeamScore }} - {{ match.awayTeamScore }} {{ match.awayTeamName }}
+            <i class="bi bi-pencil-square" *ngIf="!match.matchProtocolCreated" (click)="fillMatchProtocol(match)"></i>
+            <i class="bi bi-info-square" *ngIf="match.matchProtocolCreated" (click)="showMatchDetails(match)"></i>
+          </span>
+          <span matListItemLine>Date: {{ match.date }}</span>
+        </mat-list-item>
+      </ng-container>
+    </mat-list>
+  </div>
+
+  <div *ngIf="selectedView === 'bracketStage' || tournamentType === singleElimination">
+    <h3>
+      <i class="bi bi-chevron-left" *ngIf="roundNumber > 1" (click)="previousRoundOrGroup(true)"></i> 
+        Round {{ roundNumber }}
+      <i class="bi bi-chevron-right" *ngIf="lastRoundNumber && roundNumber < lastRoundNumber" (click)="nextRoundOrGroup(true)"></i>
+
+      <button mat-button [matMenuTriggerFor]="menu">Jump</button>
+      <mat-menu class="main-menu" #menu="matMenu">
+        <div *ngFor="let roundNumber of rounds">
+          <button mat-menu-item (click)="jumpToRoundOrGroup(roundNumber, true)">{{ roundNumber }}</button>
+        </div>
+      </mat-menu>
+    </h3>
+    <mat-list>
+      <ng-container *ngFor="let match of tournamentBracketStageMatchesData">
+        <mat-list-item *ngIf="match.round === roundNumber && match.homeTeamId && match.awayTeamId">
+          <span matListItemTitle>{{ match.homeTeamName }} {{ match.homeTeamScore }} - {{ match.awayTeamScore }} {{ match.awayTeamName }}
+            <i class="bi bi-pencil-square" *ngIf="!match.matchProtocolCreated" (click)="fillMatchProtocol(match)"></i>
+            <i class="bi bi-info-square" *ngIf="match.matchProtocolCreated" (click)="showMatchDetails(match)"></i>
+          </span>
+          <span matListItemLine>Date: {{ match.date }}</span>
+        </mat-list-item>
+      </ng-container>
+    </mat-list>
+  </div>
+
+</div>

@@ -20,6 +20,18 @@ export class MatchService {
     return this.httpClient.get<Match[]>(`${this.apiServerBaseUrl}/match/findAll/league/${leagueId}`);
   }
 
+  public getTournamentMatchesByTournamentId(tournamentId: number): Observable<Match[]> {
+    return this.httpClient.get<Match[]>(`${this.apiServerBaseUrl}/match/findAll/tournament/${tournamentId}`);
+  }
+
+  public getTournamentMatchesForBracketStage(tournamentId: number): Observable<Match[]> {
+    return this.httpClient.get<Match[]>(`${this.apiServerBaseUrl}/match/findAll/bracketStage/tournament/${tournamentId}`);
+  }
+
+  public getTournamentMatchesByRoundAndGroup(tournamentId: number, round: number, group: number): Observable<Match[]> {
+    return this.httpClient.get<Match[]>(`${this.apiServerBaseUrl}/match/findAll/tournament/${tournamentId}/round/${round}/group/${group}`);
+  }
+
   public createMatch(match: Match): Observable<Match> {
     return this.httpClient.post<Match>(`${this.apiServerBaseUrl}/match/create`, match);
   }

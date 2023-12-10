@@ -77,7 +77,7 @@ export class LeagueAboutComponent {
       var matches: Match[] = this.generateRoundRobinSchedule();
       this.matchService.createMatches(matches).subscribe();
 
-      // create league standing
+      // create league standings
       var leagueStanding = this.createLeagueStanding(this.leagueId, this.teams);
       this.leagueStandingService.addLeagueStanding(leagueStanding).subscribe();
 

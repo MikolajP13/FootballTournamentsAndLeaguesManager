@@ -1,0 +1,257 @@
+/* .tournament-group {
+  
+} */
+
+.group-table {
+  display: flex;
+  width: 50%;
+  padding: 8px;
+}
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+/* Bracket stage */
+
+.round-headers-container {
+  margin-top: 25px;
+  margin-left: 75px;
+  width: 1085px;
+  display: flex;
+}
+
+.round-header {
+  flex: 1;
+}
+
+.round {
+  float: left;
+}
+
+.round.r-of-16 {
+  margin-left: 25px;
+  margin-top: 25px;
+}
+
+.round.r-of-8 {
+  margin-left: 65px;
+  margin-top: 25px;
+}
+
+.round.r-of-4 {
+  margin-left: 65px;
+  margin-top: 25px;
+}
+
+.round.r-of-2 {
+  margin-left: 65px;
+  margin-top: 25px;
+}
+
+.round.r-of-0 {
+  margin-left: 65px;
+  margin-top: 25px;
+}
+
+.bracket-game-r-of-16 {
+  width: 150px;
+  margin-bottom: 9px;
+}
+
+.bracket-game-r-of-8 {
+  width: 150px;
+  padding: 31px 0;
+}
+
+.bracket-game-r-of-4 {
+  width: 150px;
+  padding: 85px 0;
+}
+
+.bracket-game-r-of-2 {
+  width: 150px;
+  padding: 191px 0;
+}
+
+.bracket-game-r-of-0 {
+  width: 150px;
+  padding: 400px 0;
+}
+
+.team {
+  min-width: 100px;
+  border: 1px solid #AAA;
+  padding-left: 10px;
+}
+
+.team.top {
+  border-radius: 3px 3px 0 0;
+}
+
+.team.bot {
+  border-radius: 0 0 3px 3px;
+}
+
+.team .score {
+  display: inline;
+  float: right;
+  border-left: 1px solid #AAA;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #EEE;
+}
+
+.team.win {
+  background-color: #B8F2B8;
+}
+
+.team.loss {
+  background-color: #F2B8B8;
+}
+
+.connectors {
+  float: left;
+  min-width: 35px;
+}
+
+/* Connector lines leading to final */
+.connectors.r-of-0 .top-line {
+  position: relative;
+  margin-top: -262px;
+  margin-left: -65px;
+  top: 30px;
+  width: 48px;
+  border: 1px solid #AAA;
+}
+.connectors.r-of-0 .bottom-line {
+  position: relative;
+  top: 454px;
+  margin-left: -65px;
+  width: 48px;
+  border: 1px solid #AAA;
+}
+
+.connectors.r-of-0 .vert-line {
+  position: relative;
+  top: 26px;
+  left: -50px;
+  height: 427px;
+  border-right: 2px solid #AAA;
+}
+
+.connectors.r-of-0 .next-line {
+  position: relative;
+  top: -192px;
+  left: -16px;
+  width: 17px;
+  border: 1px solid #AAA;
+}
+
+
+/* Connector lines leading to 1/2 */
+.connectors.r-of-2 .top-line {
+  position: relative;
+  margin-top: -158px;
+  margin-left: -65px;
+  top: 30px;
+  width: 48px;
+  border: 1px solid #AAA;
+}
+.connectors.r-of-2 .bottom-line {
+  position: relative;
+  top: 242px;
+  margin-left: -65px;
+  width: 48px;
+  border: 1px solid #AAA;
+}
+
+.connectors.r-of-2 .vert-line {
+  position: relative;
+  top: 26px;
+  left: -50px;
+  height: 216px;
+  border-right: 2px solid #AAA;
+}
+
+.connectors.r-of-2 .next-line {
+  position: relative;
+  top: -85px;
+  left: -16px;
+  width: 17px;
+  border: 1px solid #AAA;
+}
+
+/* Connector lines leading to 1/4 */
+.connectors.r-of-4 .top-line {
+  position: relative;
+  margin-top: -111px;
+  margin-left: -65px;
+  top: 30px;
+  width: 48px;
+  border: 1px solid #AAA;
+}
+.connectors.r-of-4 .bottom-line {
+  position: relative;
+  top: 133px;
+  margin-left: -65px;
+  width: 48px;
+  border: 1px solid #AAA;
+}
+
+.connectors.r-of-4 .vert-line {
+  position: relative;
+  top: 26px;
+  left: -50px;
+  height: 107px;
+  border-right: 2px solid #AAA;
+}
+
+.connectors.r-of-4 .next-line {
+  position: relative;
+  top: -23px;
+  left: -15px;
+  width: 14px;
+  border: 1px solid #AAA;
+}
+
+/* Connector lines leading to 1/8 */
+.connectors.r-of-8 .top-line {
+  position: relative;
+  margin-top: -84px;
+  margin-left: -65px;
+  top: 30px;
+  width: 48px;
+  border: 1px solid #AAA;
+}
+.connectors.r-of-8 .bottom-line {
+  position: relative;
+  top: 81px;
+  margin-left: -65px;
+  width: 48px;
+  border: 1px solid #AAA;
+}
+
+.connectors.r-of-8 .vert-line {
+  position: relative;
+  top: 26px;
+  left: -50px;
+  height: 55px;
+  border-right: 2px solid #AAA;
+}
+
+.connectors.r-of-8 .next-line {
+  position: relative;
+  top: 1px;
+  left: -15px;
+  width: 14px;
+  border: 1px solid #AAA;
+}
+
+.clear {
+  clear: both;
+}
