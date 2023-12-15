@@ -16,8 +16,12 @@ export class HomeComponent {
   notStarted: Status = Status.NOT_STARTED;
   inProgress: Status = Status.IN_PROGRESS;
   finished: Status = Status.FINISHED;
+  standard: string = 'STANDARD_MODE';
+  split: string = 'SPLIT_MODE';
+  groupAndKnockout: string = 'GROUP_AND_KNOCKOUT';
+  singleElimination: string = 'SINGLE_ELIMINATION';
 
-  displayedColumns: string[] = ['competitionName', 'numberOfTeams', 'startDate', 'endDate', 'status', 'details'];
+  displayedColumns: string[] = ['competitionName', 'competitionType', 'numberOfTeams', 'startDate', 'endDate', 'status', 'details'];
   dataSource:TournamentLeagueBase[] = [];
 
   constructor(private router: Router, private leagueService: LeagueService, private tournamentService: TournamentService){ }

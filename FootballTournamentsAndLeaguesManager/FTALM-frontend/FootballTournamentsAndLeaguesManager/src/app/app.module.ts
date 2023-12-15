@@ -66,6 +66,8 @@ import { TournamentMatchDetailsComponent } from './pages/details/tournament-matc
 import { TournamentBracketComponent } from './pages/details/tournament-bracket/tournament-bracket.component';
 import { TournamentMatchComponent } from './pages/details/tournament-match/tournament-match.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -137,7 +139,10 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatMenuModule,
     MatCardModule,
     MatSlideToggleModule,
-    MatStepperModule
+    MatStepperModule,
+    MatPaginatorModule,
+    FontAwesomeModule,
+    
   ],
   providers: [SidenavService, SnackBarComponent, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, {provide: MAT_SNACK_BAR_DATA, useValue: { duration: 1500 }}],
   bootstrap: [AppComponent],

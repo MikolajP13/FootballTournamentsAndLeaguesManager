@@ -1,5 +1,5 @@
 .leagues-container {
-  margin: 3% 5%;
+  margin: 0% 3%;
 }
 
 .leagues-row:hover {
@@ -8,14 +8,38 @@
 }
 
 .button-container {
-  margin: 3% 5%;
+  display: flex;
+  justify-content: right;
+  margin: 1% 3%;
 }
 
 .button-container > button {
+  margin: 20px 0px;
   color: white;
   background-color: #45a049;
 }
 
 .button-container > button:hover {
   background-color: green;
+}
+
+mat-header-cell {
+  justify-content: center;
+}
+
+mat-cell {
+  font-family: var(--font);
+  justify-content: center;
+}
+
+.league-name-cell {
+  justify-content: left !important;
+}
+
+.mat-column-status {
+  flex: 0 0 10% !important;
+}
+
+.mat-column-details {
+  flex: 0 0 10% !important;
 }

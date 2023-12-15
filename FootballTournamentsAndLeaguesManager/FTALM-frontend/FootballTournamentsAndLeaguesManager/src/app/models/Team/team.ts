@@ -3,7 +3,7 @@ export class Team {
   user?: {
     id: number;
   };
-  name?: string;
+  name!: string;
   captainId?: number | null;
   isInLeague?: boolean;
   isInTournament?: boolean;

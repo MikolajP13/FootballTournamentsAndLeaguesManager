@@ -15,7 +15,7 @@
     <mat-card *ngFor="let event of matchEvents" class="card-event">
       <div class="event-header">
         <div *ngIf="event.type === GOAL_ASSIST_EVENT_ID">
-          <i class="fa-regular fa-futbol"></i>
+          <fa-icon [icon]="footballIcon"></fa-icon>
         </div>
         <div *ngIf="event.type === CARD_EVENT_ID">
           <div class="icon-container">
@@ -64,7 +64,7 @@
       <div class="home-team-event" *ngIf="event.details.teamId  === homeTeamId">
         <div class="container" *ngIf="event.type === GOAL_ASSIST_EVENT_ID">
           <span> {{ event.details.scorerPlayerFirstName.substring(0, 1) }}. {{ event.details.scorerPlayerLastName }} </span>
-          <i class="fa-regular fa-futbol"></i>
+          <fa-icon [icon]="footballIcon"></fa-icon>
           <span class="event-minute"> {{event.details.minute}}' </span>
         </div>
         <div class="container" *ngIf="event.type === CARD_EVENT_ID">
@@ -91,7 +91,7 @@
       <div class="away-team-event" *ngIf="event.details.teamId  === awayTeamId">
         <div class="container" *ngIf="event.type === GOAL_ASSIST_EVENT_ID">
           <span class="event-minute"> {{event.details.minute}}' </span>
-          <i class="fa-regular fa-futbol"></i>
+          <fa-icon [icon]="footballIcon"></fa-icon>
           <span> {{ event.details.scorerPlayerFirstName.substring(0, 1) }}. {{ event.details.scorerPlayerLastName }} </span>
         </div>
         <div class="container" *ngIf="event.type === CARD_EVENT_ID">

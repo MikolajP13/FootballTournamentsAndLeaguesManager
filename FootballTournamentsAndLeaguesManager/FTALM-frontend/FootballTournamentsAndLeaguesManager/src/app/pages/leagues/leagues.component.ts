@@ -17,6 +17,8 @@ export class LeaguesComponent {
   notStarted: Status = Status.NOT_STARTED;
   inProgress: Status = Status.IN_PROGRESS;
   finished: Status = Status.FINISHED;
+  standard: string = 'STANDARD_MODE';
+  split: string = 'SPLIT_MODE';
 
   displayedColumns: string[] = ['leagueName', 'type', 'numberOfTeams', 'startDate', 'endDate', 'status', 'details'];
   leagueDataSource:TournamentLeagueBase[] = [];

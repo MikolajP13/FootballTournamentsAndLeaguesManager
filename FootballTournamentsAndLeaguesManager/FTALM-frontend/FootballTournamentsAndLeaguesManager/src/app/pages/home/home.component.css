@@ -1,6 +1,20 @@
 #ftalm-header {
+  font-family: var(--font);
   text-align: center;
   margin-top: 15px;
+}
+
+mat-header-cell {
+  justify-content: center;
+}
+
+mat-cell {
+  font-family: var(--font);
+  justify-content: center;
+}
+
+.competition-cell {
+  justify-content: left !important;
 }
 
 .competititon-container {
@@ -12,6 +26,10 @@
   cursor: pointer;
 }
 
+.mat-column-status {
+  flex: 0 0 10% !important;
+}
+
 .mat-column-details {
-  flex: 0 0 8% !important;
+  flex: 0 0 5% !important;
 }

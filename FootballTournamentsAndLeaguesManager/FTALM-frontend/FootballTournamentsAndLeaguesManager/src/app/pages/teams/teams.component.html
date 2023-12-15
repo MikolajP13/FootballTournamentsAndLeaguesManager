@@ -1,15 +1,30 @@
 <div>
   <div class="button-container">
+    <mat-form-field>
+      <mat-label>Filter by Team Name</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Search Team Name"
+        #input
+      />
+    </mat-form-field>
     <button mat-raised-button (click)="openCreateTeamPopup()"><i class="material-icons">add</i></button>
   </div>
+
   <div class="teams-container">
     <mat-table [dataSource]="teamDataSource" class="mat-elevation-z8">
   
       <ng-container matColumnDef="teamName">
-        <mat-header-cell *matHeaderCellDef> Team Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        <mat-header-cell class="team-name-cell" *matHeaderCellDef> Team Name </mat-header-cell>
+        <mat-cell class="team-name-cell" *matCellDef="let element"> {{element.name}} </mat-cell>
       </ng-container>
       
+      <ng-container matColumnDef="established">
+        <mat-header-cell *matHeaderCellDef> Established </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.established | date: 'dd-MM-yyyy'}} </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="league" >
         <mat-header-cell *matHeaderCellDef> League </mat-header-cell>
         <mat-cell *matCellDef="let element">
@@ -25,10 +40,10 @@
       <ng-container matColumnDef="tournament" >
         <mat-header-cell *matHeaderCellDef> Tournament </mat-header-cell>
         <mat-cell *matCellDef="let element" >
-          <span *ngIf="element.isInLeague">
+          <span *ngIf="element.isInTournament">
             <i class="bi bi-check-circle-fill"></i>
           </span> 
-          <span *ngIf="!element.isInLeague">
+          <span *ngIf="!element.isInTournament">
             <i class="bi bi-x-circle-fill"></i>
           </span> 
         </mat-cell>
@@ -44,5 +59,6 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;" class="teams-row" (click)="showTeamDetails(row)"></mat-row>
     </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
   </div>
 </div>

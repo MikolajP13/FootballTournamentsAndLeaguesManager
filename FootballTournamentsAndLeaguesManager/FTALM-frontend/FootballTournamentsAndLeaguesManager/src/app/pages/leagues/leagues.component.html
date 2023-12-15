@@ -6,13 +6,16 @@
     <mat-table [dataSource]="leagueDataSource" class="mat-elevation-z8">
 
       <ng-container matColumnDef="leagueName">
-        <mat-header-cell *matHeaderCellDef> League Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        <mat-header-cell class="league-name-cell" *matHeaderCellDef> League Name </mat-header-cell>
+        <mat-cell class="league-name-cell" *matCellDef="let element"> {{element.name}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="type">
         <mat-header-cell *matHeaderCellDef> League Type </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.type?.toLowerCase()}} </mat-cell>
+        <mat-cell *matCellDef="let element">
+          <span *ngIf="element.type === standard" matTooltip="Standard Mode"> SM </span>
+          <span *ngIf="element.type === split" matTooltip="Split Mode"> SpM </span>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="numberOfTeams">
@@ -36,9 +39,9 @@
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
         <mat-cell *matCellDef="let element"> 
-          <i *ngIf="element.status == notStarted" class="bi bi-hourglass-top"></i>
-          <i *ngIf="element.status == inProgress" class="bi bi-hourglass-split"></i>
-          <i *ngIf="element.status == finished" class="bi bi-hourglass-bottom"></i>  
+          <i *ngIf="element.status == notStarted" class="bi bi-hourglass-top" matTooltip="Not Started"></i>
+          <i *ngIf="element.status == inProgress" class="bi bi-hourglass-split" matTooltip="In Progress"></i>
+          <i *ngIf="element.status == finished" class="bi bi-hourglass-bottom" matTooltip="Finished"></i> 
         </mat-cell>
       </ng-container>
       

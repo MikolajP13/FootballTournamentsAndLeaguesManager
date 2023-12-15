@@ -6,9 +6,19 @@
 
       <ng-container matColumnDef="competitionName">
         <mat-header-cell *matHeaderCellDef> Competititon Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        <mat-cell class="competition-cell" *matCellDef="let element"> {{element.name}} </mat-cell>
       </ng-container>
     
+      <ng-container matColumnDef="competitionType">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span *ngIf="element.type === standard" matTooltip="Standard Mode"> SM </span>
+          <span *ngIf="element.type === split" matTooltip="Split Mode"> SpM </span>
+          <span *ngIf="element.type === groupAndKnockout" matTooltip="Group and Knockout"> G&K </span>
+          <span *ngIf="element.type === singleElimination" matTooltip="Single Elimination"> SE </span>
+        </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="numberOfTeams">
         <mat-header-cell *matHeaderCellDef> Number of Teams </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.numberOfTeams}} </mat-cell>
@@ -30,9 +40,9 @@
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
         <mat-cell *matCellDef="let element"> 
-          <i *ngIf="element.status == notStarted" class="bi bi-hourglass-top"></i>
-          <i *ngIf="element.status == inProgress" class="bi bi-hourglass-split"></i>
-          <i *ngIf="element.status == finished" class="bi bi-hourglass-bottom"></i>
+          <i *ngIf="element.status == notStarted" class="bi bi-hourglass-top" matTooltip="Not Started"></i>
+          <i *ngIf="element.status == inProgress" class="bi bi-hourglass-split" matTooltip="In Progress"></i>
+          <i *ngIf="element.status == finished" class="bi bi-hourglass-bottom" matTooltip="Finished"></i>
         </mat-cell>
       </ng-container>
       

@@ -1,6 +1,6 @@
 <div class="registration-form">
   <div class="registration-form-header">
-    <h1>Join FTALM</h1>
+    <h1>Join Football Tournaments And Leagues Manager</h1>
   </div>
   <div class="registration-form-body">
     <form #registrationForm="ngForm" (ngSubmit)="registerUser(registrationForm)" method="post">
@@ -10,7 +10,7 @@
           'bi-arrow-right-short': iconTypeForUsername === 0,
           'bi-x': iconTypeForUsername === 1,
           'bi-check': iconTypeForUsername === 2}"></i>
-        <input type="text" autofocus="autofocus" [(ngModel)]="username" name="userName" (ngModelChange)="onInputChange('userName', username)" (focus)="isUsernameFocused = true" (blur)="isUsernameFocused = false" required>
+        <input type="text" [(ngModel)]="username" name="userName" (ngModelChange)="onInputChange('userName', username)" (focus)="isUsernameFocused = true" (blur)="isUsernameFocused = false" required>
         <div class="error-form" *ngIf="isUsernameFocused && registrationForm.controls['userName'].errors?.['required']">
           Username is required.
         </div>

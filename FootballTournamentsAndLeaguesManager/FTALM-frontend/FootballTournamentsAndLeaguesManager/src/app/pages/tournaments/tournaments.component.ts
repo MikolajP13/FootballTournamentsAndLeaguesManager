@@ -6,7 +6,6 @@ import { User } from 'src/app/models/User/user';
 import { TournamentService } from 'src/app/services/tournamentService/tournament.service';
 import { UserService } from 'src/app/services/userService/user.service';
 import { CreateTournamentPopupComponent } from '../popups/create-tournament-popup/create-tournament-popup.component';
-import { Tournament } from 'src/app/models/Tournament/tournament';
 
 @Component({
   selector: 'app-tournaments',
@@ -18,9 +17,11 @@ export class TournamentsComponent {
   notStarted: Status = Status.NOT_STARTED;
   inProgress: Status = Status.IN_PROGRESS;
   finished: Status = Status.FINISHED;
+  groupAndKnockout: string = 'GROUP_AND_KNOCKOUT';
+  singleElimination: string = 'SINGLE_ELIMINATION';
 
   displayedColumns: string[] = ['tournamentName', 'type', 'numberOfTeams', 'startDate', 'endDate', 'status', 'details'];
-  tournamentDataSource:TournamentLeagueBase[] = [];
+  tournamentDataSource: TournamentLeagueBase[] = [];
 
   constructor(private router: Router, private tournamentService: TournamentService, private dialog: MatDialog) { }
 
@@ -55,4 +56,5 @@ export class TournamentsComponent {
         this.tournamentDataSource = [...this.tournamentDataSource, lastTournament];
       });
   }
+
 }

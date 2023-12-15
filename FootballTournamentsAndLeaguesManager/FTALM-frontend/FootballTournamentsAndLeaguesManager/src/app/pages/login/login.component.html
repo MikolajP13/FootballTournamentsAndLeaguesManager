@@ -1,9 +1,9 @@
 <div class="auth-form">
   <div class="auth-form-header">
-    <h1>Sign in to FTALM</h1>
+    <h1>Sign in to Football Tournaments And Leagues Manager</h1>
   </div>
   <div id="login-error-form">
-    Incorrect login or password.
+    Incorrect login/email or password.
   </div>
   <div class="auth-form-body">
     <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)" method="post">
@@ -14,7 +14,7 @@
       <div>
         <div class="password-section">
           <label for="password-field">Password</label>
-          <a class="password-link" href="/passwordRecover">Forgot password?</a>
+          <!-- <a class="password-link" href="/passwordRecover">Forgot password?</a> -->
         </div>
         <input type="password" [(ngModel)]="password" name="password" required>
       </div>

@@ -1,10 +1,20 @@
 .auth-form {
   justify-content: center;
   align-items: center;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+}
+
+.auth-form-header {
+  width: 360px;
 }
 
 .auth-form-header h1 {
+  font-family: var(--font);
   text-align: center;
+  word-wrap: break-word;
 }
 
 #login-error-form{
@@ -52,6 +62,7 @@ label {
 
 input[type="text"],
 input[type="password"] {
+  font-family: var(--font);
   width: 94%;
   height: 15px;
   padding: 8px;
@@ -62,6 +73,7 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="password"]:focus {
+  font-family: var(--font);
   outline: none !important;
   border: 1px solid blue;
 }
@@ -78,6 +90,7 @@ a {
 }
 
 button[type="submit"] {
+  font-family: var(--font);
   text-align: center;
   width: 100%;
   padding: 10px;

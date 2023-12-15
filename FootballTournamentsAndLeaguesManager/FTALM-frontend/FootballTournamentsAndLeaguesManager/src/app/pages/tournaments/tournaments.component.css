@@ -1,5 +1,21 @@
 .tournaments-container {
-  margin: 3% 5%;
+  margin: 0 3%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: right;
+  margin: 1% 3%;
+}
+
+.button-container > button {
+  margin: 20px 0px;
+  color: white;
+  background-color: #45a049;
+}
+
+.button-container > button:hover {
+  background-color: green;
 }
 
 .tournaments-row:hover {
@@ -7,15 +23,23 @@
   cursor: pointer;
 }
 
-.button-container {
-  margin: 3% 5%;
+mat-header-cell {
+  justify-content: center;
 }
 
-.button-container > button {
-  color: white;
-  background-color: #45a049;
+mat-cell {
+  font-family: var(--font);
+  justify-content: center;
 }
 
-.button-container > button:hover {
-  background-color: green;
+.tournament-name-cell {
+  justify-content: left !important;
+}
+
+.mat-column-status {
+  flex: 0 0 10% !important;
+}
+
+.mat-column-details {
+  flex: 0 0 10% !important;
 }
