@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LeagueTeam } from 'src/app/models/League/league';
+import { League, LeagueTeam } from 'src/app/models/League/league';
 import { Team } from 'src/app/models/Team/team';
 import { User } from 'src/app/models/User/user';
 import { LeagueService } from 'src/app/services/leagueService/league.service';
@@ -16,7 +16,7 @@ import { UserService } from 'src/app/services/userService/user.service';
 export class LeagueTeamsComponent {
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
   leagueId!: string;
-
+  league!: League;
   authUser!: User;
   teamControl = new FormControl();
   teamsDataSource!: Team[];
@@ -26,7 +26,7 @@ export class LeagueTeamsComponent {
   numberOfTeams!: number;
   maximumNumberOfTeams!: number;
 
-  displayedColumns: string[] = ['teamName', 'details'];
+  displayedColumns: string[] = ['teamName', 'details', 'remove'];
   leagueTeamDataSource: Team[] = [];
 
   constructor(private teamService: TeamService, private leagueService: LeagueService, private route: ActivatedRoute, private router: Router) { }
@@ -74,10 +74,16 @@ export class LeagueTeamsComponent {
     window.location.reload();
   }
 
+  removeTeam(team: Team) {
+    console.log(team);
+  }
+
   getCurrentLeague(tournamentId: number){
     this.leagueService.findLeagueById(tournamentId).subscribe(league => {
       if(league.numberOfTeams)
         this.maximumNumberOfTeams = league.numberOfTeams;
+
+      this.league = league;
     });
   }
 

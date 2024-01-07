@@ -2,10 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 20px;
   padding: 10px;
   height: 350px;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  margin: 3% 3%;
 }
 
 .team-info-container {
@@ -32,7 +32,13 @@
   flex: 1;
 }
 
+.squad-overview-container .cdk-column-position,
+.squad-overview-container .cdk-column-numberOfPlayers {
+  text-align: center;
+}
+
 p {
+  font-size: 15px;
   text-align: justify;
 }
 

@@ -25,8 +25,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { SidenavService } from './services/sidenavService/sidenav.service';
 import { TeamDetailsComponent } from './pages/details/team-details/team-details.component';
-import { TournamentDetailsComponent } from './pages/details/tournament-details/tournament-details.component';
-import { LeagueDetailsComponent } from './pages/details/league-details/league-details.component';
 import { CreateTeamPopupComponent } from './pages/popups/create-team-popup/create-team-popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TeamPlayersComponent } from './pages/details/team-players/team-players.component';
@@ -84,8 +82,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LeaguesComponent,
     SidenavComponent,
     TeamDetailsComponent,
-    TournamentDetailsComponent,
-    LeagueDetailsComponent,
     CreateTeamPopupComponent,
     TeamPlayersComponent,
     TeamMatchesComponent,

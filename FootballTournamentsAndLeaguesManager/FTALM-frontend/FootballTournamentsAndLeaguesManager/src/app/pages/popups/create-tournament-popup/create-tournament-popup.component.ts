@@ -41,11 +41,14 @@ export class CreateTournamentPopupComponent {
 
     if(this.selectedType === 'Single Elimination'){
       typeId = Object.values(Type).indexOf(Type.SINGLE_ELIMINATION);
-    }else if(this.selectedType === 'Group and Knockout'){
-      typeId = Object.values(Type).indexOf(Type.GROUP_AND_KNOCKOUT);
-    }else{
-      typeId = Object.values(Type).indexOf(Type.DOUBLE_ELIMINATION);
+    } else{
+        typeId = Object.values(Type).indexOf(Type.GROUP_AND_KNOCKOUT);
     }
+    // else if(this.selectedType === 'Group and Knockout'){
+    //   typeId = Object.values(Type).indexOf(Type.GROUP_AND_KNOCKOUT);
+    // } else{
+    //   typeId = Object.values(Type).indexOf(Type.DOUBLE_ELIMINATION);
+    // }
 
     const tournament: Tournament = {
       user: {id: this.userId},

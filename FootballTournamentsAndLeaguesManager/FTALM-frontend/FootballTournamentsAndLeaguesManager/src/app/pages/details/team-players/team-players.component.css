@@ -1,5 +1,7 @@
 .button-container {
-  margin: 20px;
+  display: flex;
+  justify-content: right;
+  margin: 3% 3%;
 }
 
 .button-container > button {
@@ -12,16 +14,59 @@
 }
 
 .players-container {
-  margin: 20px;
+  margin: 3% 3%;
+}
+
+mat-header-cell {
+  justify-content: center;
+}
+
+mat-cell {
+  font-family: var(--font);
+  justify-content: center;
+}
+
+.mat-column-position {
+  flex: 0 0 10% !important;
+  justify-content: left;
+}
+
+.mat-column-joined,
+.mat-column-positionDetail,
+.mat-column-height,
+.mat-column-foot {
+  flex: 0 0 8% !important;
+}
+
+.mat-column-details,
+.mat-column-edit,
+.mat-column-delete {
+  flex: 0 0 5% !important;
 }
 
 .players-row:hover {
   background-color: aliceblue;
+}
+
+.bi-chevron-right, .bi-trash3, .bi-pencil {
   cursor: pointer;
+}
+
+.bi-chevron-right:hover {
+  color:  blue;
+}
+
+.bi-pencil:hover {
+  color: orange;
+}
+
+.bi-trash3:hover {
+  color: red;
 }
 
 .bi-c-circle, .bi-plus-square, .bi-person-slash {
   font-size: 12px;
   margin-left: 2px;
+  padding-bottom: 15px;
   color: red;
 }

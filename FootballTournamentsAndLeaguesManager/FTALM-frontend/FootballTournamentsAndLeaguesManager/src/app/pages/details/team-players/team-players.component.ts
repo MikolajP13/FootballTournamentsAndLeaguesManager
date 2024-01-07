@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Player, Position, PositionDetail } from 'src/app/models/Player/player';
+import { Player } from 'src/app/models/Player/player';
 import { PlayerService } from '../../../services/playerService/player.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPlayerPopupComponent } from '../../popups/add-player-popup/add-player-popup.component';
@@ -16,7 +16,7 @@ export class TeamPlayersComponent {
   positionOrder = ['GK', 'LB', 'LCB', 'CB', 'RCB', 'RB', 'LM', 'CDM', 'CM', 'RM', 'LW', 'CAM', 'RW', 'LF', 'CF', 'RF'];
 
   teamPlayersDataSource: Player[] = [];
-  displayedColumns: string[] = ['position', 'positionDetail', 'fullName', 'doBAndAge', 'height', 'foot', 'joined', 'details'];
+  displayedColumns: string[] = ['position', 'positionDetail', 'fullName', 'doBAndAge', 'height', 'foot', 'joined', 'details' , 'edit', 'delete'];
 
   constructor(private playerService: PlayerService, private route: ActivatedRoute, private dialog: MatDialog) { }
 
@@ -47,9 +47,18 @@ export class TeamPlayersComponent {
   }
 
   showPlayerDetails(player: Player) {
+    // console.log(player.id); TODO
     this.dialog.open(PlayerDetailsPopupComponent, {data: player});
   }
   
+  showPlayerEdit(player: Player) {
+    console.log(player);
+  }
+
+  deletePlayer(player: Player) {
+    console.log(player);
+  }
+
   private fetchLastPlayerData(){
     this.playerService.getAllPlayersByTeamId(this.teamId).subscribe((players: Player[]) => {
       const lastPlayer = players[players.length-1];

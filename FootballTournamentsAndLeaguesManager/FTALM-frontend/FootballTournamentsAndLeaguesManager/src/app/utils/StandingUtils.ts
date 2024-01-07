@@ -1,6 +1,5 @@
 import { Match } from "../models/Match/match";
 import { Team } from "../models/Team/team";
-import { LeagueAboutComponent } from "../pages/details/league-about/league-about.component";
 
 export class StandingsUtils {
   private static BLANK_TEAM_NAME: string = 'Blank Team';

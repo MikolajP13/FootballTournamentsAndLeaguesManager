@@ -11,7 +11,9 @@ import { TeamService } from 'src/app/services/teamService/team.service';
 })
 export class CreateTeamPopupComponent {
   name!: string;
-  
+  isTeamNameCorrect: boolean = false;
+  isTeamNameFocused: boolean = false;
+
   constructor(public dialogRef: MatDialogRef<CreateTeamPopupComponent>, private teamService: TeamService, @Inject(MAT_DIALOG_DATA) public userId: number) {}
 
   createTeam(teamForm: NgForm): void {
@@ -24,10 +26,16 @@ export class CreateTeamPopupComponent {
       established: new Date()
     }
 
-    this.teamService.addTeam(team).subscribe(result => {
-    });
+    this.teamService.addTeam(team).subscribe(result => { });
 
     this.dialogRef.close('success');
+  }
+
+  onInputChange(inputValue: string) {
+    if (inputValue.trim() !== '')
+      this.isTeamNameCorrect = true;
+    else
+      this.isTeamNameCorrect = false;
   }
 
   closePopup(){

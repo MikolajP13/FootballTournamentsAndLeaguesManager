@@ -34,7 +34,7 @@ export class TournamentsComponent {
   }
 
   showTournamentDetails(tournament: TournamentLeagueBase): void {
-    this.router.navigate(['/tournament/' + tournament.id]);
+    this.router.navigate(['/tournament/' + tournament.id  + '/teams']);
   }
 
   openCreateTournamentPopup() {

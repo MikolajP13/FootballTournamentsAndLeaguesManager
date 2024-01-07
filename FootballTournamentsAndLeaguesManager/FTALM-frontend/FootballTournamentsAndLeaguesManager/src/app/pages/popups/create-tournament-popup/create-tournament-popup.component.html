@@ -20,7 +20,7 @@
         Number of teams is required.
       </div>
       <div class="error-form" [hidden]="isNumberOfTeamsCorrect" *ngIf="isNumberOfTeamsFocused && form.controls['numberOfTeams'].errors?.['invalidNumberOfTeams']">
-        Invalid number of teams (minimum 4, maximum 32).
+        Invalid number of teams (must be: 4/8/16/32).
       </div>
     </div>
     <div class="form-field">

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Player, Position } from 'src/app/models/Player/player';
+import { Player } from 'src/app/models/Player/player';
 import { Team } from 'src/app/models/Team/team';
 import { PlayerService } from 'src/app/services/playerService/player.service';
 import { TeamService } from 'src/app/services/teamService/team.service';
 import { LeagueService } from '../../../services/leagueService/league.service';
 import { TournamentService } from 'src/app/services/tournamentService/tournament.service';
-import { TournamentLeagueBase } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
 import { League } from 'src/app/models/League/league';
 import { Tournament } from 'src/app/models/Tournament/tournament';
 
@@ -27,7 +26,9 @@ export class TeamDetailsComponent {
   playersByPosition: PositionNumber[] = [];
 
   activeLeague!: League;
+  isInLeague!: boolean;
   activeTournament!: Tournament;
+  isInTournament!: boolean;
 
   constructor(private teamService: TeamService, private playerService: PlayerService, private leagueService: LeagueService, 
     private tournamentService: TournamentService, private route: ActivatedRoute) { }
@@ -66,13 +67,23 @@ export class TeamDetailsComponent {
 
   findActiveLeagueForTeam(teamId: number){
     this.leagueService.findActiveLeagueForTeam(teamId).subscribe(activeLeague => {
-      this.activeLeague = activeLeague;
+      if (activeLeague.id === null) {
+        this.isInLeague = false;
+      } else {
+        this.isInLeague = true;
+        this.activeLeague = activeLeague;
+      }
     });
   }
 
   findActiveTournament(teamId: number) {
     this.tournamentService.findActiveTournamentforTeam(teamId).subscribe(activeTournament => {
-      this.activeTournament = activeTournament
+      if (activeTournament.id === null) {
+        this.isInTournament = false;
+      } else {
+        this.isInTournament = true;
+        this.activeTournament = activeTournament
+      }
     });
   }
 

@@ -30,6 +30,11 @@ input {
   width: 100%;
 }
 
+.error-form {
+  font-size: 12px;
+  color: red;
+}
+
 button[type="submit"] {
   background-color: #007bff;
   color: #fff;
@@ -37,6 +42,10 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+button[type="submit"]:disabled {
+  background-color: #01448b;
 }
 
 button[type="button"] {

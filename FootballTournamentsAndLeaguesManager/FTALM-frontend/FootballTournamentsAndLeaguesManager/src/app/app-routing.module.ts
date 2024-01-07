@@ -10,8 +10,6 @@ import { TournamentsComponent } from './pages/tournaments/tournaments.component'
 import { LeaguesComponent } from './pages/leagues/leagues.component';
 import { TeamsComponent } from './pages/teams/teams.component';
 import { TeamDetailsComponent } from './pages/details/team-details/team-details.component';
-import { LeagueDetailsComponent } from './pages/details/league-details/league-details.component';
-import { TournamentDetailsComponent } from './pages/details/tournament-details/tournament-details.component';
 import { TeamPlayersComponent } from './pages/details/team-players/team-players.component';
 import { TeamMatchesComponent } from './pages/details/team-matches/team-matches.component';
 import { TeamStatisticsComponent } from './pages/details/team-statistics/team-statistics.component';
@@ -35,7 +33,6 @@ const routes: Routes = [
   {path: "", component: LoginComponent},
   {path: "home", component: HomeComponent, canActivate: [authGuard]},
   {path: "tournaments", component: TournamentsComponent, canActivate: [authGuard]},
-  {path: "tournament/:id", component: TournamentDetailsComponent, canActivate: [authGuard]},
   {path: "tournament/:id/about", component: TournamentAboutComponent, canActivate: [authGuard]},
   {path: "tournament/:id/teams", component: TournamentTeamsComponent, canActivate: [authGuard]},
   {path: "tournament/:id/bracket", component: TournamentBracketComponent, canActivate: [authGuard]},
@@ -44,7 +41,6 @@ const routes: Routes = [
   {path: "tournament/:tournamentId/match-details/:id", component: TournamentMatchDetailsComponent, canActivate: [authGuard]},
   {path: "tournament/:id/statistics", component: TournamentStatisticsComponent, canActivate: [authGuard]},
   {path: "leagues", component: LeaguesComponent, canActivate: [authGuard]},
-  {path: "league/:id", component: LeagueDetailsComponent, canActivate: [authGuard]},
   {path: "league/:id/about", component: LeagueAboutComponent, canActivate: [authGuard]},
   {path: "league/:id/teams", component: LeagueTeamsComponent, canActivate: [authGuard]},
   {path: "league/:id/table", component: LeagueTableComponent, canActivate: [authGuard]},

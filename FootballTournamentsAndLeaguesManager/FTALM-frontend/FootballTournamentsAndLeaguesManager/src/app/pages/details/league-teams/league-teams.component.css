@@ -1,3 +1,49 @@
+.league-teams-container {
+  margin: 0 3%;
+}
+
+.league-data-container {
+  margin-top: 1%;
+  text-align: center;
+}
+
+.league-teams-row:hover {
+  background-color: aliceblue;
+}
+
+.league-info-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.league-form-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 3% 1% 3%;
+}
+
+.league-form-counter {
+  margin-top: 100px;
+}
+
+.mat-column-details,
+.mat-column-remove {
+  flex: 0 0 5% !important;
+}
+
+.bi-chevron-right, .bi-trash3 {
+  cursor: pointer;
+}
+
+.bi-chevron-right:hover {
+  color:  blue;
+}
+
+.bi-trash3:hover {
+  color: red;
+}
+
 
 .teams-row:hover {
   background-color: aliceblue;

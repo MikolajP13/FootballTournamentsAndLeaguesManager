@@ -46,12 +46,26 @@
     
     <ng-container matColumnDef="details" >
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-cell *matCellDef="let element" (click)="showPlayerDetails(element)">
         <i class="bi bi-chevron-right"></i>
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="edit" >
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let element" (click)="showPlayerEdit(element)">
+        <i class="bi bi-pencil"></i>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete" >
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <i class="bi bi-trash3" (click)="deletePlayer(element)"></i>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="players-row" (click)="showPlayerDetails(row)"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="players-row"></mat-row>
   </mat-table>
 </div>

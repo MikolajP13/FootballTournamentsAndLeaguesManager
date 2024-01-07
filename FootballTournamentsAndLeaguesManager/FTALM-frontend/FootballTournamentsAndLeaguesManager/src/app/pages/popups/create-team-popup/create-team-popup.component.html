@@ -5,10 +5,13 @@
   <form #teamForm="ngForm" (ngSubmit)="createTeam(teamForm)" method="post">
     <div>
       <label for="team-name-field">Team name</label>
-      <input type="text" [(ngModel)]="name" name="name" required>
+      <input type="text" [(ngModel)]="name" name="name" (ngModelChange)="onInputChange(name)" (focus)="isTeamNameFocused = true" (blur)="isTeamNameFocused = false" required>
+    </div>
+    <div class="error-form" *ngIf="!isTeamNameCorrect && isTeamNameFocused">
+      Team name is required.
     </div>
     <div class="button-container">
-      <button mat-raised-button type="submit">Create team</button>
+      <button mat-raised-button type="submit" [disabled]="!isTeamNameCorrect">Create team</button>
       <button mat-raised-button type="button" (click)="closePopup()">Cancel</button>
     </div>
   </form>

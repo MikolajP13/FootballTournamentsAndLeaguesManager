@@ -1,46 +1,66 @@
-<div class="tournament-teams-container">
-  <form class="teams-form">
-    <mat-form-field class="teams-field">
-      <mat-label>Team</mat-label>
-      <input #input
-             type="text"
-             placeholder="Choose team"
-             matInput
-             [formControl]="teamControl"
-             [matAutocomplete]="auto"
-             (input)="filter()"
-             (focus)="filter()">
-      <mat-autocomplete requireSelection #auto="matAutocomplete" [displayWith]="displayTeamName">
-        <mat-option *ngFor="let team of filteredTeams" [value]="team" (click)="selectTeam()" (onSelectionChange)="isTeamSelected = false">
-          {{ team.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
-  <div class="button-container">
-    <button mat-raised-button (click)="addTeamToLeague()" [disabled]="!isTeamSelected && numberOfTeams < maximumNumberOfTeams">Add team</button>
-  </div>
-  <div class="tournament-teams-counter">
-    <span> {{ numberOfTeams }} / {{ maximumNumberOfTeams }}</span>
-  </div>
-  <div class="tournament-teams-container">
-    <mat-table [dataSource]="leagueTeamDataSource" class="mat-elevation-z8">
-  
-      <ng-container matColumnDef="teamName">
-        <mat-header-cell *matHeaderCellDef> Team Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-      </ng-container>
+<div>
 
-      <ng-container matColumnDef="details" >
-        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <i class="bi bi-chevron-right"></i>
-        </mat-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" class="teams-row" (click)="showTeamDetails(row)"></mat-row>
-    </mat-table>
+  <div class="league-info-container">
+    <div class="league-data-container" *ngIf="league">
+      <h2> {{ league.name }} </h2>
+      <h5> Start date: {{ league.startDate }} </h5>
+      <h5 *ngIf="league.endDate"> End date: {{ league.endDate }} </h5>
+    </div>
   </div>
+
+  <div class="league-form-container">
+    <form class="teams-form" *ngIf="numberOfTeams < maximumNumberOfTeams">
+      <mat-form-field class="teams-field">
+        <mat-label>Team</mat-label>
+        <input #input
+               type="text"
+               placeholder="Choose team"
+               matInput
+               [formControl]="teamControl"
+               [matAutocomplete]="auto"
+               (input)="filter()"
+               (focus)="filter()">
+        <mat-autocomplete requireSelection #auto="matAutocomplete" [displayWith]="displayTeamName">
+          <mat-option *ngFor="let team of filteredTeams" [value]="team" (click)="selectTeam()" (onSelectionChange)="isTeamSelected = false">
+            {{ team.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="button-container">
+        <button mat-raised-button (click)="addTeamToLeague()" [disabled]="!isTeamSelected && numberOfTeams < maximumNumberOfTeams">Add team</button>
+      </div>
+    </form>
+
+    <div *ngIf="numberOfTeams == maximumNumberOfTeams"></div>
+    
+    <div class="league-form-counter">
+      <span> Number of Teams: {{ numberOfTeams }} / {{ maximumNumberOfTeams }}</span>
+    </div>
+  </div>
+    <div class="league-teams-container">
+      <mat-table [dataSource]="leagueTeamDataSource" class="mat-elevation-z8">
+    
+        <ng-container matColumnDef="teamName">
+          <mat-header-cell *matHeaderCellDef> Team Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="details" >
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <i class="bi bi-chevron-right" (click)="showTeamDetails(element)"></i>
+          </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="remove" >
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <i class="bi bi-trash3" (click)="removeTeam(element)"></i>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="league-teams-row"></mat-row>
+      </mat-table>
+    </div>
 </div>
-

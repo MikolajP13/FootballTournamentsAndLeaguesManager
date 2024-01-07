@@ -16,7 +16,7 @@ import { Tournament, TournamentTeam } from 'src/app/models/Tournament/tournament
 export class TournamentTeamsComponent {
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
   tournamentId!: string;
-
+  tournament!: Tournament;
   authUser!: User;
   teamControl = new FormControl();
   teamsDataSource!: Team[];
@@ -26,7 +26,7 @@ export class TournamentTeamsComponent {
   numberOfTeams!: number;
   maximumNumberOfTeams!: number;
 
-  displayedColumns: string[] = ['teamName', 'details'];
+  displayedColumns: string[] = ['teamName', 'details', 'remove'];
   tournamentTeamDataSource: Team[] = [];
 
   constructor(private teamService: TeamService, private tournamentService: TournamentService, private route: ActivatedRoute, private router: Router) { }
@@ -74,10 +74,18 @@ export class TournamentTeamsComponent {
     window.location.reload();
   }
 
+  removeTeam(team: Team) { 
+    console.log(team);
+  }
+
   getCurrentTournament(tournamentId: number){
     this.tournamentService.findTournamentById(tournamentId).subscribe(tournament => {
       if(tournament.numberOfTeams)
         this.maximumNumberOfTeams = tournament.numberOfTeams;
+
+
+        console.log(tournament);
+      this.tournament = tournament;
     });
   }
 

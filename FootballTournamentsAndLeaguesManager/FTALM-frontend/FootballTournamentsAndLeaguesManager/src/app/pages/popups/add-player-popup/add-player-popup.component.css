@@ -10,6 +10,10 @@
   align-self: flex-end;
 }
 
+.form-field {
+  margin-bottom: 10px;
+}
+
 .selector-container {
   display: flex;
   justify-content: space-between;
@@ -51,6 +55,10 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+button[type="submit"]:disabled {
+  background-color: #01448b;
 }
 
 button[type="button"] {
