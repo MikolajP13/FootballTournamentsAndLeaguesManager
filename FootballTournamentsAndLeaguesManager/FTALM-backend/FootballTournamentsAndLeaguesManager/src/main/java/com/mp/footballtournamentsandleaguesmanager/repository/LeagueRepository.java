@@ -13,7 +13,7 @@ public interface LeagueRepository extends JpaRepository<League, Long> {
     @Query("SELECT l FROM League l " +
             "JOIN l.teams t " +
             "WHERE t.id = :teamId AND l.endDate IS NULL")
-    League findActiveLeagueForTeam(Long teamId);
+    Optional<League> findActiveLeagueForTeam(Long teamId);
     @Query("SELECT l.status FROM League l WHERE l.id = :leagueId")
     TournamentLeagueBase.Status getStatusByLeagueId(Long leagueId);
     @Query("SELECT l.numberOfTeams FROM League l WHERE l.id = :leagueId")

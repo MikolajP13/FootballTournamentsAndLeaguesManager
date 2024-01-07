@@ -59,7 +59,9 @@ public class LeagueService {
         }
     }
     public LeagueDTO findActiveLeagueForTeam(Long teamId){
-        return convertToDTO(leagueRepository.findActiveLeagueForTeam(teamId));
+        return leagueRepository.findActiveLeagueForTeam(teamId)
+                .map(this::convertToDTO)
+                .orElseGet(LeagueDTO::new);
     }
     public TournamentLeagueBase.Status getLeagueStatusByLeagueId(Long leagueId){
         return leagueRepository.getStatusByLeagueId(leagueId);
