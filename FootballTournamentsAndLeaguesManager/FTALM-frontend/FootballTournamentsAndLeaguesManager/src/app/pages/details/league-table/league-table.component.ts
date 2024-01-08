@@ -26,7 +26,7 @@ export class LeagueTableComponent {
   
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.leagueId = params['id'];
+      this.leagueId = params['leagueId'];
     });
     
     this.setLeagueName(this.leagueId);

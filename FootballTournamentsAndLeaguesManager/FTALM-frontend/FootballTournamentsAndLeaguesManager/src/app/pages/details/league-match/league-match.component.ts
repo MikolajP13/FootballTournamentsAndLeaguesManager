@@ -56,7 +56,7 @@ export class LeagueMatchComponent {
 
   ngOnInit(): void { 
     this.route.params.subscribe(params => {
-      this.matchId = params['id'];
+      this.matchId = params['matchId'];
       this.leagueId = params['leagueId'];
     });
 

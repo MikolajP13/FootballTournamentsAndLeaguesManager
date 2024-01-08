@@ -38,7 +38,7 @@ export class LeagueTeamsComponent {
     }
     
     this.route.params.subscribe(params => {
-        this.leagueId = params['id'];
+        this.leagueId = params['leagueId'];
     });
 
     this.getCurrentLeague(parseInt(this.leagueId));

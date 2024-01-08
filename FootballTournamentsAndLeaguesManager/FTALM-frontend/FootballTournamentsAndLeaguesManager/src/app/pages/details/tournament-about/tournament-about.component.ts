@@ -31,7 +31,7 @@ export class TournamentAboutComponent {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.tournamentId = params['id'];
+      this.tournamentId = params['tournamentId'];
     });
 
     this.tournamentService.findTournamentById(this.tournamentId).subscribe(tournament => {

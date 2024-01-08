@@ -21,7 +21,12 @@ export class SidenavComponent {
       filter(e => (e instanceof ActivationEnd) && (Object.keys(e.snapshot.params).length > 0)),
       map(e => e instanceof ActivationEnd ? e.snapshot.params : {})
     ).subscribe(params => {
-      this.id = params['id'];
+      if (params['leagueId'] !== undefined)
+        this.id = params['leagueId'];
+      else if (params['tournamentId'] !== undefined)
+        this.id = params['tournamentId'];
+      else if (params['teamId'] !== undefined)
+        this.id = params['teamId'];
     });
   }
 

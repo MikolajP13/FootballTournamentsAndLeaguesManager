@@ -32,7 +32,7 @@ export class TournamentMatchesComponent {
 
   ngOnInit(): void { 
     this.route.params.subscribe(params => {
-      this.tournamentId = params['id'];
+      this.tournamentId = params['tournamentId'];
     });
     
     this.roundNumber = this.matchweekNumberService.roundNumber;

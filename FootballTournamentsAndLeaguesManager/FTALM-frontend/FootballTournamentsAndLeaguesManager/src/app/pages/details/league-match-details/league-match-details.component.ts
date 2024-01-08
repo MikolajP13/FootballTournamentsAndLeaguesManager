@@ -20,6 +20,7 @@ export class LeagueMatchDetailsComponent {
   SUBSTITUTION_EVENT_ID: string = 'S';
   displayedColumns: string[] = ['1', '2', '3'];
   matchId!: number;
+  leagueId!: number;
   homeTeamId?: number;
   awayTeamId?: number;
   match?: Match;
@@ -32,7 +33,8 @@ export class LeagueMatchDetailsComponent {
 
   ngOnInit(): void { 
     this.route.params.subscribe(params => {
-      this.matchId = params['id'];
+      this.leagueId = params['leagueId'];
+      this.matchId = params['matchId'];
     });
 
     this.matchService.getMatchByMatchId(this.matchId).subscribe(match =>{

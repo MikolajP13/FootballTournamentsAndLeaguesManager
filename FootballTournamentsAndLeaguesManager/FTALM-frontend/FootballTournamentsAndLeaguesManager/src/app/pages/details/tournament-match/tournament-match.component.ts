@@ -59,7 +59,7 @@ export class TournamentMatchComponent {
 
   ngOnInit(): void { 
     this.route.params.subscribe(params => {
-      this.matchId = params['id'];
+      this.matchId = params['matchId'];
       this.tournamentId = params['tournamentId'];
     });
 

@@ -31,7 +31,7 @@ export class TournamentStatisticsComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.tournamentId = params['id'];
+      this.tournamentId = params['tournamentId'];
     });
 
     this.fetchPlayersGoalsData(this.tournamentId);

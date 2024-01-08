@@ -41,7 +41,7 @@ export class LeagueStatisticsComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.leagueId = params['id'];
+      this.leagueId = params['leagueId'];
     });
 
     this.fetchPlayersGoalsData(this.leagueId);

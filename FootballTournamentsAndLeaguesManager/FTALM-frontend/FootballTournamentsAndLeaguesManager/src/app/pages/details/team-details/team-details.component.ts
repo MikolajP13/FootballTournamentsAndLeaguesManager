@@ -35,7 +35,7 @@ export class TeamDetailsComponent {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.teamId = params['id'];
+      this.teamId = params['teamId'];
     });
 
     this.getTeamById(this.teamId);

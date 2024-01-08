@@ -38,7 +38,7 @@ export class TournamentTeamsComponent {
     }
     
     this.route.params.subscribe(params => {
-        this.tournamentId = params['id'];
+        this.tournamentId = params['tournamentId'];
     });
 
     this.getCurrentTournament(parseInt(this.tournamentId));

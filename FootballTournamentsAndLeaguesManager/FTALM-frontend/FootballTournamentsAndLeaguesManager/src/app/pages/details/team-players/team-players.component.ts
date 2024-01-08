@@ -22,7 +22,7 @@ export class TeamPlayersComponent {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.teamId = params['id'];
+      this.teamId = params['teamId'];
     });
 
     this.fetchTeamPlayersData(this.teamId);

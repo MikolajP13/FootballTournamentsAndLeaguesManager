@@ -43,9 +43,9 @@ export class HomeComponent {
 
   showCompetitionDetails(competition: TournamentLeagueBase): void {
     if(competition.competitionType === CompetitionType.LEAGUE) {
-      this.router.navigate(['/league/' + competition.id]);
+      this.router.navigate(['/league/' + competition.id + '/teams']);
     }else if(competition.competitionType === CompetitionType.TOURNAMENT) {
-      this.router.navigate(['/tournament/' + competition.id]);
+      this.router.navigate(['/tournament/' + competition.id + '/teams']);
     }
   }
 
