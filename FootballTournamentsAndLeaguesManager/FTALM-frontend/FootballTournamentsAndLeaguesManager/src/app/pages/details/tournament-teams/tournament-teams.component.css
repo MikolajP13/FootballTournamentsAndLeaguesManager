@@ -27,6 +27,15 @@
   margin-top: 100px;
 }
 
+mat-header-cell {
+  justify-content: center;
+}
+
+mat-cell {
+  font-family: var(--font);
+  justify-content: center;
+}
+
 .mat-column-details,
 .mat-column-remove {
   flex: 0 0 5% !important;

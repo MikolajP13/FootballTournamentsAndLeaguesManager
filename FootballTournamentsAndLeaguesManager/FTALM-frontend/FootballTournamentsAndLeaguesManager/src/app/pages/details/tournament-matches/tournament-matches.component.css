@@ -1,0 +1,162 @@
+.tournament-matchweek-info {
+  display: flex;
+  margin: 2% 0;
+  justify-content: space-between;
+}
+
+.bi-chevron-left,
+.bi-chevron-right {
+  margin: 0 20px;
+  font-size: 20px;
+}
+
+.bi-chevron-left:hover,
+.bi-chevron-right:hover {
+  color: black;
+  background-color: gainsboro;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.matchweek-first-or-last {
+  cursor: auto !important;
+  background-color: transparent !important;
+}
+
+.view-selector-container {
+  margin: 8px 0 0 10px;
+}
+
+.tournament-match-list {
+  display: flex;
+  justify-content: center;
+  margin-right: 65px;
+}
+
+.tournament-matchweek-info h3 {
+  flex-grow: 1;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.jump-to-btn-container {
+  margin-right: 10px;
+}
+
+.tournament-matches-container {
+  display: grid;
+
+}
+
+.bi-info-square,
+.bi-pencil-square {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.bi-info-square {
+  color: rgb(54, 170, 241);
+}
+
+.bi-pencil-square {
+  color: rgb(85, 189, 85);
+}
+
+.bi-info-square:hover,
+.bi-pencil-square:hover {
+  cursor: pointer;
+}
+
+.bi-info-square:hover {
+  color: blue !important;
+}
+
+.bi-pencil-square:hover {
+  color: green !important;
+}
+
+.group,
+.round {
+  font-size: 20px;
+}
+
+.team, .score, .separator {
+  font-size: 20px;
+}
+
+.team-pause {
+  font-size: 16px;
+}
+
+.score {
+  margin: 0 25px;
+}
+
+.team, .team-pause, .score, 
+.match-date, .separator,
+.tournament-matchweek-info h3 {
+  font-family: var(--font);
+}
+
+::ng-deep .jump-to-round-group-menu .mat-mdc-menu-content { 
+  max-height: 150px !important;
+}
+
+.list-item {
+  border-bottom: solid 1px black;
+  padding: 35px 0;
+}
+
+.list-item:first-child {
+  border-top: solid 1px black;
+}
+
+.match-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50px;
+}
+
+.match-details-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.match-buttons {
+  display: flex;
+  margin-bottom: 22px;
+}
+
+.match-date {
+  text-align: center;
+}
+
+/* .team-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.team {
+  flex-grow: 1;
+} */
+
+/* 
+            <span matListItemTitle class="team-name">
+              <span class="team">{{ match.homeTeamName }}</span>
+              <span class="score">{{ match.homeTeamScore }} - {{ match.awayTeamScore }}</span>
+              <span class="team">{{ match.awayTeamName }}</span>
+              <i class="bi bi-pencil-square" *ngIf="!match.matchProtocolCreated" (click)="fillMatchProtocol(match)"></i>
+              <i class="bi bi-info-square" *ngIf="match.matchProtocolCreated" (click)="showMatchDetails(match)"></i>
+            </span>
+*/

@@ -8,4 +8,5 @@ export class Team {
   isInLeague?: boolean;
   isInTournament?: boolean;
   established?: Date;
+  numberOfPlayers?: number
 }

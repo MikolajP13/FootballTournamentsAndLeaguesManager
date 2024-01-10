@@ -1,7 +1,7 @@
-.confirmation-form-body {
+.confirmation-form-body { 
   display: flex;
   flex-direction: column;
-  width: 350px;
+  width: 400px;
   height: 100%;
   padding: 15px;
 }
@@ -23,7 +23,8 @@
 }
 
 p {
-  text-align: justify;
+  text-align: center;
+  font-size: 16px;
 }
 
 button[type="delete"] {

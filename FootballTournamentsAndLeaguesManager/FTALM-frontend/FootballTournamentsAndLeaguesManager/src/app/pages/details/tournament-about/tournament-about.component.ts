@@ -59,7 +59,8 @@ export class TournamentAboutComponent {
     this.dialog.open(ConfirmationPopupComponent, {data: {
       id: this.tournamentId,
       objectName: this.objectName,
-      warning: this.tournamentCanBeDeletedWithWarning
+      warning: this.tournamentCanBeDeletedWithWarning,
+      position: {top: '-200px'}
     }
     });
   }

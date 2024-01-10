@@ -7,6 +7,8 @@ import { Team } from 'src/app/models/Team/team';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TournamentService } from '../../../services/tournamentService/tournament.service';
 import { Tournament, TournamentTeam } from 'src/app/models/Tournament/tournament';
+import { PlayerService } from 'src/app/services/playerService/player.service';
+import { Player } from 'src/app/models/Player/player';
 
 @Component({
   selector: 'app-tournament-teams',
@@ -26,10 +28,11 @@ export class TournamentTeamsComponent {
   numberOfTeams!: number;
   maximumNumberOfTeams!: number;
 
-  displayedColumns: string[] = ['teamName', 'details', 'remove'];
+  displayedColumns: string[] = ['teamName', 'established', 'numberOfPlayers', 'details', 'remove'];
   tournamentTeamDataSource: Team[] = [];
 
-  constructor(private teamService: TeamService, private tournamentService: TournamentService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private teamService: TeamService, private tournamentService: TournamentService, 
+    private playerService: PlayerService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() { 
     this.authUser = UserService.getUser();
@@ -83,8 +86,7 @@ export class TournamentTeamsComponent {
       if(tournament.numberOfTeams)
         this.maximumNumberOfTeams = tournament.numberOfTeams;
 
-
-        console.log(tournament);
+      console.log(tournament);
       this.tournament = tournament;
     });
   }
@@ -96,6 +98,12 @@ export class TournamentTeamsComponent {
   private fetchTournamentTeamsData(teamId: number) {
     this.teamService.findAllTeamsInTournamentByTournamentId(teamId).subscribe((teams: Team[]) => {
         this.tournamentTeamDataSource = [...this.tournamentTeamDataSource, ...teams];
+        this.tournamentTeamDataSource.forEach(team => {
+          if (team.id)
+            this.playerService.getAllPlayersByTeamId(team.id).subscribe((players: Player[]) => {
+              team.numberOfPlayers = players.length;
+            });     
+        });
         this.numberOfTeams = this.tournamentTeamDataSource.length;
     });
   }

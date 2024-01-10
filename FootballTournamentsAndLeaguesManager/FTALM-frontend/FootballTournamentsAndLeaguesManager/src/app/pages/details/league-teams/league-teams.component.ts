@@ -2,9 +2,11 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { League, LeagueTeam } from 'src/app/models/League/league';
+import { Player } from 'src/app/models/Player/player';
 import { Team } from 'src/app/models/Team/team';
 import { User } from 'src/app/models/User/user';
 import { LeagueService } from 'src/app/services/leagueService/league.service';
+import { PlayerService } from 'src/app/services/playerService/player.service';
 import { TeamService } from 'src/app/services/teamService/team.service';
 import { UserService } from 'src/app/services/userService/user.service';
 
@@ -26,10 +28,11 @@ export class LeagueTeamsComponent {
   numberOfTeams!: number;
   maximumNumberOfTeams!: number;
 
-  displayedColumns: string[] = ['teamName', 'details', 'remove'];
+  displayedColumns: string[] = ['teamName', 'established', 'numberOfPlayers', 'details', 'remove'];
   leagueTeamDataSource: Team[] = [];
 
-  constructor(private teamService: TeamService, private leagueService: LeagueService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private teamService: TeamService, private leagueService: LeagueService, 
+    private playerService: PlayerService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() { 
     this.authUser = UserService.getUser();
@@ -94,6 +97,12 @@ export class LeagueTeamsComponent {
   private fetchLeagueTeamsData(teamId: number) {
     this.teamService.findAllTeamsInLeagueByLeagueId(teamId).subscribe((teams: Team[]) => {
         this.leagueTeamDataSource = [...this.leagueTeamDataSource, ...teams];
+        this.leagueTeamDataSource.forEach(team => {
+          if (team.id)
+            this.playerService.getAllPlayersByTeamId(team.id).subscribe((players: Player[]) => {
+              team.numberOfPlayers = players.length;
+            });     
+        });
         this.numberOfTeams = this.leagueTeamDataSource.length;
     });
   }

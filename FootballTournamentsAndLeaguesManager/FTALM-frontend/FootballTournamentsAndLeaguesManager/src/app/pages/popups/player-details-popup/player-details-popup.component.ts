@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Player, Position } from 'src/app/models/Player/player';
 import { PositionDetail } from '../../../models/Player/player';
 
@@ -14,6 +14,12 @@ export class PlayerDetailsPopupComponent {
 
   constructor(public dialogRef: MatDialogRef<PlayerDetailsPopupComponent>, @Inject(MAT_DIALOG_DATA) public player: Player) { 
     this.positionDetail = PositionDetail[player.positionDetail?.toString() as keyof typeof PositionDetail];
+  }
+
+  ngOnInit() {
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.position = {top: '170px'};
+    this.dialogRef.updatePosition(matDialogConfig.position);
   }
 
   closePopup(){

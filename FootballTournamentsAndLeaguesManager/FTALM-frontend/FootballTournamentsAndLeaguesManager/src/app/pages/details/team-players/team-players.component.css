@@ -30,8 +30,10 @@ mat-cell {
   flex: 0 0 10% !important;
   justify-content: left;
 }
+.mat-column-joined {
+  flex: 0 0 10% !important;
+}
 
-.mat-column-joined,
 .mat-column-positionDetail,
 .mat-column-height,
 .mat-column-foot {

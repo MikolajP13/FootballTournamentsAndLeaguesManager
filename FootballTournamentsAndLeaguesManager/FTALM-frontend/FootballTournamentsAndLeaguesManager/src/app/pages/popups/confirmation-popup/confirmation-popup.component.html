@@ -3,12 +3,19 @@
     <mat-icon>close</mat-icon>
   </button>
   <div class="confirmation-text">
-    <p> This action cannot be undone. </p>
-    <p *ngIf="warning"> {{object.substring(0,1).toUpperCase() + object.substring(1)}} is still in progress.
-      Deleting an active {{object}} will result in the loss of all related match data and statistics.
-      You will not be able to resume it again.
-    </p>
-    <p> Are you sure you want to delete this {{object}}? </p>
+    <p> This action cannot be undone!</p>
+    <ul *ngIf="warning">
+      <li>
+        {{object.substring(0,1).toUpperCase() + object.substring(1)}} is still in progress.
+      </li>
+      <li>
+        Deleting an active {{object}} will result in the loss of all related match data and statistics.
+      </li>
+      <li>
+        You will not be able to resume it again.
+      </li>
+    </ul>
+    <p><b>Are you sure you want to delete this {{object}}?</b></p>
   </div>
   <div class="button-container">
     <button mat-raised-button type="delete" (click)="delete()">Delete</button>

@@ -6,6 +6,7 @@ import { CardService } from 'src/app/services/cardService/card.service';
 import { GoalAssistService } from 'src/app/services/goalAssistService/goal-assist.service';
 import { MatchService } from 'src/app/services/matchService/match.service';
 import { SubstitutionService } from 'src/app/services/substitutionService/substitution.service';
+import { faFutbol } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-tournament-match-details',
@@ -13,6 +14,7 @@ import { SubstitutionService } from 'src/app/services/substitutionService/substi
   styleUrls: ['./tournament-match-details.component.css']
 })
 export class TournamentMatchDetailsComponent {
+  footballIcon = faFutbol;
   GOAL_ASSIST_EVENT_ID: string = 'G';
   CARD_EVENT_ID: string = 'C';
   SUBSTITUTION_EVENT_ID: string = 'S';

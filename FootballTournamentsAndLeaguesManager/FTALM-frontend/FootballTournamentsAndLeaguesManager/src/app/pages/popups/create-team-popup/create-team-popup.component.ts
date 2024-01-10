@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogConfig, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Team } from 'src/app/models/Team/team';
 import { TeamService } from 'src/app/services/teamService/team.service';
 
@@ -15,6 +15,12 @@ export class CreateTeamPopupComponent {
   isTeamNameFocused: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<CreateTeamPopupComponent>, private teamService: TeamService, @Inject(MAT_DIALOG_DATA) public userId: number) {}
+
+  ngOnInit() {
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.position = {top: `170px`};
+    this.dialogRef.updatePosition(matDialogConfig.position);
+  }
 
   createTeam(teamForm: NgForm): void {
     const team: Team = {

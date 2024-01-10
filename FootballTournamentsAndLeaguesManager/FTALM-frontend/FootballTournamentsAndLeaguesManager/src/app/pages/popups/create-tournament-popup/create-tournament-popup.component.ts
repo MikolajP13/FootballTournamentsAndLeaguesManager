@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Tournament, Type } from 'src/app/models/Tournament/tournament';
 import { Status } from 'src/app/models/TournamentLeagueBase/tournamentLeagueBase';
 import { Validator } from 'src/app/security/validators/validator';
@@ -35,6 +35,12 @@ export class CreateTournamentPopupComponent {
   isAddTournamentButtonEnable: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<CreateTournamentPopupComponent>, private tournamentService: TournamentService, @Inject(MAT_DIALOG_DATA) public userId: number, private formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.position = {top: '170px'};
+    this.dialogRef.updatePosition(matDialogConfig.position);
+  }
 
   createTournament(tournamentForm: NgForm) {
     let typeId: number;

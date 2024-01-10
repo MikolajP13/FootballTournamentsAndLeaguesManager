@@ -1,72 +1,89 @@
-<div class="league-table-container">
-  <h2> {{leagueName}} </h2>
+<div class="league-container">
+  <div class="league-name-container">
+    <h2> {{leagueName}} </h2>
+  </div>
 
-  <mat-table [dataSource]="leagueTableDataSource" class="mat-elevation-z8">
+  <div class="league-table-container">
+    <mat-table [dataSource]="leagueTableDataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-      <mat-cell *matCellDef="let team; let i = index">
-          {{ i + 1 }}
-      </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+        <mat-cell *matCellDef="let team; let i = index">
+            {{ i + 1 }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="teamName">
+        <mat-header-cell *matHeaderCellDef> Team </mat-header-cell>
+        <mat-cell *matCellDef="let team">
+          {{ team.teamName }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="matches">
+        <mat-header-cell *matHeaderCellDef> Matches </mat-header-cell>
+        <mat-cell *matCellDef="let team">
+          {{ team.matches }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="won">
+        <mat-header-cell *matHeaderCellDef> W </mat-header-cell>
+        <mat-cell *matCellDef="let team">
+          {{ team.wins }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="drawn">
+        <mat-header-cell *matHeaderCellDef> D </mat-header-cell>
+        <mat-cell *matCellDef="let team">
+          {{ team.draws }}
+        </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="lost">
+        <mat-header-cell *matHeaderCellDef> L </mat-header-cell>
+        <mat-cell *matCellDef="let team">
+          {{ team.losses }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="goalsForAgainst">
+        <mat-header-cell *matHeaderCellDef> Goals </mat-header-cell>
+        <mat-cell *matCellDef="let team">
+          {{ team.goalsFor }} : {{ team.goalsAgainst }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="goalDifference">
+        <mat-header-cell *matHeaderCellDef> +/- </mat-header-cell>
+        <mat-cell *matCellDef="let team">
+          {{ team.goalsFor - team.goalsAgainst }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="points">
+        <mat-header-cell *matHeaderCellDef> Pts </mat-header-cell>
+        <mat-cell *matCellDef="let team">
+          {{ team.points }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="form">
+        <mat-header-cell *matHeaderCellDef> Form </mat-header-cell>
+        <mat-cell *matCellDef="let team">
+          <ng-container *ngFor="let f of formArray"> 
+            <!-- team.formArray -->
+            <span class="team-form-icon" *ngIf="f === 'w'"> <i class="bi bi-check-circle-fill"></i> </span>
+            <span class="team-form-icon" *ngIf="f === 'd'"> <i class="bi bi-dash-circle-fill"></i> </span>
+            <span class="team-form-icon" *ngIf="f === 'l'"> <i class="bi bi-x-circle-fill"></i> </span>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="teamName">
-      <mat-header-cell *matHeaderCellDef> Team </mat-header-cell>
-      <mat-cell *matCellDef="let team">
-        {{ team.teamName }}
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="matches">
-      <mat-header-cell *matHeaderCellDef> Matches </mat-header-cell>
-      <mat-cell *matCellDef="let team">
-        {{ team.matches }}
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="won">
-      <mat-header-cell *matHeaderCellDef> W </mat-header-cell>
-      <mat-cell *matCellDef="let team">
-        {{ team.wins }}
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="drawn">
-      <mat-header-cell *matHeaderCellDef> D </mat-header-cell>
-      <mat-cell *matCellDef="let team">
-        {{ team.draws }}
-      </mat-cell>
-    </ng-container>
-    
-    <ng-container matColumnDef="lost">
-      <mat-header-cell *matHeaderCellDef> L </mat-header-cell>
-      <mat-cell *matCellDef="let team">
-        {{ team.losses }}
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="goalsForAgainst">
-      <mat-header-cell *matHeaderCellDef> Goals </mat-header-cell>
-      <mat-cell *matCellDef="let team">
-        {{ team.goalsFor }} : {{ team.goalsAgainst }}
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="goalDifference">
-      <mat-header-cell *matHeaderCellDef> +/- </mat-header-cell>
-      <mat-cell *matCellDef="let team">
-        {{ team.goalsFor - team.goalsAgainst }}
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="points">
-      <mat-header-cell *matHeaderCellDef> Pts </mat-header-cell>
-      <mat-cell *matCellDef="let team">
-        {{ team.points }}
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="league-table-row"></mat-row>
+    </mat-table>
+  
+  </div>
 </div>

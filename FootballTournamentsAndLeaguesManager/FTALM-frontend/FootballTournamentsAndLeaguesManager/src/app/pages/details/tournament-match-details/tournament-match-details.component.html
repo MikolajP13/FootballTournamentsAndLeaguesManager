@@ -1,11 +1,8 @@
 <div class="match-details-container">
   <div class="match-details-header" *ngIf="match">
-    <h3>
-      {{ match.homeTeamName }} 
-      <span>{{ match.homeTeamScore}} : </span>
-      <span>{{ match.awayTeamScore}}</span>
-      {{ match.awayTeamName }}
-    </h3> 
+      <span class="team">{{ match.homeTeamName }}</span>
+      <span class="score">{{ match.homeTeamScore }} - {{ match.awayTeamScore }}</span>
+      <span class="team">{{ match.awayTeamName }}</span>
   </div>
 
   <mat-label>Time line view </mat-label>
@@ -15,7 +12,7 @@
     <mat-card *ngFor="let event of matchEvents" class="card-event">
       <div class="event-header">
         <div *ngIf="event.type === GOAL_ASSIST_EVENT_ID">
-          <i class="fa-regular fa-futbol"></i>
+          <fa-icon class="card-icon" [icon]="footballIcon"></fa-icon>
         </div>
         <div *ngIf="event.type === CARD_EVENT_ID">
           <div class="icon-container">
@@ -27,29 +24,33 @@
         </div>
         <div *ngIf="event.type === SUBSTITUTION_EVENT_ID">
           <div class="icon-container">
-            <i class="bi bi-arrow-up"></i>
-            <i class="bi bi-arrow-down"></i>
+            <i class="bi bi-arrow-up card-icon"></i>
+            <i class="bi bi-arrow-down card-icon"></i>
           </div>
         </div>
         <span *ngIf="event.type === GOAL_ASSIST_EVENT_ID" class="event-type">GOAL!!!</span>
         <span *ngIf="event.details.cardType == 'YELLOW'" class="event-type">YELLOW CARD</span>
         <span *ngIf="event.details.cardType == 'SECOND_YELLOW' || event.details.cardType == 'RED'" class="event-type">RED CARD</span>
         <span *ngIf="event.type === SUBSTITUTION_EVENT_ID" class="event-type">SUBSTITUTION</span>
-        {{ event.details.minute }}'
+        <span class="event-type"> {{ event.details.minute }}' </span>
       </div>
 
       <div class="card-event-details">
-        <div>
+        <div class="card-event-data">
           <span *ngIf="event.type === GOAL_ASSIST_EVENT_ID">
             {{ event.details.scorerPlayerFirstName }} {{ event.details.scorerPlayerLastName }}
-            {{ event.details.assistPlayerFirstName }} {{ event.details.assistPlayerLastName }} (Assist)
+            <br>
+            <span *ngIf="event.details.assistPlayerFirstName && event.details.assistPlayerLastName">
+              {{ event.details.assistPlayerFirstName }} {{ event.details.assistPlayerLastName }} (Assist)
+            </span>
           </span>
           <span *ngIf="event.type === CARD_EVENT_ID">
             {{ event.details.playerFirstName }} {{ event.details.playerLastName }}
           </span>
           <span *ngIf="event.type === SUBSTITUTION_EVENT_ID">
-            in: {{ event.details.enteringPlayerFirstName }} {{ event.details.enteringPlayerLastName }}
-            out: {{ event.details.exitingPlayerFirstName }} {{ event.details.exitingPlayerLastName }}
+            In: {{ event.details.enteringPlayerFirstName }} {{ event.details.enteringPlayerLastName }}
+            <br>
+            Out: {{ event.details.exitingPlayerFirstName }} {{ event.details.exitingPlayerLastName }}
           </span>
         </div>
         <div class="right-container">
@@ -64,7 +65,7 @@
       <div class="home-team-event" *ngIf="event.details.teamId  === homeTeamId">
         <div class="container" *ngIf="event.type === GOAL_ASSIST_EVENT_ID">
           <span> {{ event.details.scorerPlayerFirstName.substring(0, 1) }}. {{ event.details.scorerPlayerLastName }} </span>
-          <i class="fa-regular fa-futbol"></i>
+          <fa-icon [icon]="footballIcon"></fa-icon>
           <span class="event-minute"> {{event.details.minute}}' </span>
         </div>
         <div class="container" *ngIf="event.type === CARD_EVENT_ID">
@@ -91,7 +92,7 @@
       <div class="away-team-event" *ngIf="event.details.teamId  === awayTeamId">
         <div class="container" *ngIf="event.type === GOAL_ASSIST_EVENT_ID">
           <span class="event-minute"> {{event.details.minute}}' </span>
-          <i class="fa-regular fa-futbol"></i>
+          <fa-icon [icon]="footballIcon"></fa-icon>
           <span> {{ event.details.scorerPlayerFirstName.substring(0, 1) }}. {{ event.details.scorerPlayerLastName }} </span>
         </div>
         <div class="container" *ngIf="event.type === CARD_EVENT_ID">

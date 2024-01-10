@@ -1,6 +1,8 @@
 .timeline {
-  margin: 1em auto;
+  margin: 3em auto;
+  justify-self: center;
   max-width: 18em;
+  margin-left: 49.5%;
 }
 
 .checkpoint {
@@ -65,9 +67,32 @@
   background-color: green;
 }
 
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1% 0;
+}
+
 .card-event {
+  align-self: center;
   margin: 0.8rem 0.8rem;
+  width: 45%;
   border: 1px solid rgb(196, 196, 196);
+}
+
+.card-icon {
+  font-size: 22px !important;
+}
+
+.card-event-details {
+  height: 40px;
+}
+
+.right-container {
+  font-size: 18px;
+  margin-top: 8px;
+  margin-right: 10px;
 }
 
 .event-header {
@@ -142,6 +167,12 @@
 .card-event-details {
   display: flex;
   justify-content: space-between;
+  height: 60px;
+}
+
+.card-event-data {
+  margin: 4px 0 4px 16px;
+  font-size: 16px;
 }
 
 .container {
@@ -152,4 +183,22 @@
 
 .event-minute {
   font-weight: bold !important;
+}
+
+.match-details-header {
+  margin: 2% 0 1% 0;
+  display: flex;
+  justify-content: center;
+}
+
+.team, .score {
+  font-size: 24px;
+}
+
+.score {
+  margin: 0 25px;
+}
+
+.match-details-container mat-label {
+  margin-left: 1%;
 }

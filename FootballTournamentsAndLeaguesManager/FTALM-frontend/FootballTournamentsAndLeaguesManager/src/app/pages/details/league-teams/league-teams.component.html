@@ -33,7 +33,7 @@
 
     <div *ngIf="numberOfTeams == maximumNumberOfTeams"></div>
     
-    <div class="league-form-counter">
+    <div [ngClass]="{'league-form-counter': numberOfTeams < maximumNumberOfTeams}">
       <span> Number of Teams: {{ numberOfTeams }} / {{ maximumNumberOfTeams }}</span>
     </div>
   </div>
@@ -45,6 +45,16 @@
           <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
   
+        <ng-container matColumnDef="established">
+          <mat-header-cell *matHeaderCellDef> Established </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.established | date: 'dd-MM-yyyy' }} </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="numberOfPlayers">
+          <mat-header-cell *matHeaderCellDef> Number of Players </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.numberOfPlayers }} </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="details" >
           <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let element">

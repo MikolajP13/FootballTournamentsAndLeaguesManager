@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LeagueService } from 'src/app/services/leagueService/league.service';
 import { TeamService } from 'src/app/services/teamService/team.service';
@@ -22,6 +22,12 @@ export class ConfirmationPopupComponent {
     this.object = data.objectName;
     this.id = data.id;
     this.warning = data.warning;
+  }
+
+  ngOnInit() {
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.position = {top: `170px`};
+    this.dialogRef.updatePosition(matDialogConfig.position);
   }
 
   delete() {

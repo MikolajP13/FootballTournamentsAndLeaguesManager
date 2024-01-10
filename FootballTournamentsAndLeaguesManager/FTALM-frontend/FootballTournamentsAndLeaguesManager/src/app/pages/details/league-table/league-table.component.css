@@ -1,0 +1,48 @@
+.league-container {
+  margin: 1% 3% 1% 3%;
+}
+
+.league-name-container {
+  display: flex;
+  justify-content: center;
+}
+
+.league-table-row:hover {
+  background-color: aliceblue;
+}
+
+.mat-column-won,
+.mat-column-drawn,
+.mat-column-lost {
+  flex: 0 0 5% !important;
+}
+
+.mat-column-goalDifference,
+.mat-column-points {
+  flex: 0 0 8% !important;
+}
+
+.team-form-icon {
+  margin: 0 1px;
+}
+
+.bi-check-circle-fill {
+  color: green;
+}
+
+.bi-dash-circle-fill {
+  color: gray;
+}
+
+.bi-x-circle-fill {
+  color: red;
+}
+
+mat-header-cell {
+  justify-content: center;
+}
+
+mat-cell {
+  font-family: var(--font);
+  justify-content: center;
+}

@@ -1,3 +1,135 @@
-::ng-deep .main-menu .mat-mdc-menu-content { 
-  height: 150px !important; 
+.league-matchweek-info {
+  display: flex;
+  margin: 2% 0;
+  justify-content: space-between;
+}
+
+.bi-chevron-left,
+.bi-chevron-right {
+  margin: 0 20px;
+  font-size: 20px;
+}
+
+.bi-chevron-left:hover,
+.bi-chevron-right:hover {
+  color: black;
+  background-color: gainsboro;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.matchweek-first-or-last {
+  cursor: auto !important;
+  background-color: transparent !important;
+}
+
+.league-match-list {
+  display: flex;
+  justify-content: center;
+}
+
+.league-matchweek-info h3 {
+  flex-grow: 1;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.jump-to-btn-container {
+  margin-right: 10px;
+}
+
+.league-matches-container {
+  display: flex;
+  justify-content: center;
+  margin-right: 65px;
+}
+
+.bi-info-square,
+.bi-pencil-square {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.bi-info-square {
+  color: rgb(54, 170, 241);
+}
+
+.bi-pencil-square {
+  color: rgb(85, 189, 85);
+}
+
+.bi-info-square:hover,
+.bi-pencil-square:hover {
+  cursor: pointer;
+}
+
+.bi-info-square:hover {
+  color: blue !important;
+}
+
+.bi-pencil-square:hover {
+  color: green !important;
+}
+
+.matchweek {
+  font-size: 20px;
+}
+
+.team, .score {
+  font-size: 20px;
+}
+
+.team-pause {
+  font-size: 16px;
+}
+
+.score {
+  margin: 0 25px;
+}
+
+.team, .team-pause, .score, .match-date,
+.league-matchweek-info h3 {
+  font-family: var(--font);
+}
+
+.list-item {
+  border-bottom: solid 1px black;
+  padding: 35px 0;
+}
+
+.list-item:first-child {
+  border-top: solid 1px black;
+}
+
+.match-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50px;
+}
+
+.match-details-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.match-buttons {
+  display: flex;
+  margin-bottom: 22px;
+}
+
+.match-date {
+  text-align: center;
+}
+
+::ng-deep .jump-to-matchweek-menu .mat-mdc-menu-content { 
+  height: 150px !important;
 }

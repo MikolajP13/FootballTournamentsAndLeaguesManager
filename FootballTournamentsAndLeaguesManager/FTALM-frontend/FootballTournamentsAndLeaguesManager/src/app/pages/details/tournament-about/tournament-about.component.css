@@ -1,5 +1,5 @@
-.bout-container {
-  display: flex;
+.about-container {
+  margin: 2% 3%;
 }
 
 .information-container {
@@ -24,6 +24,7 @@
 
 .information-container ul li {
   margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .button-container {
