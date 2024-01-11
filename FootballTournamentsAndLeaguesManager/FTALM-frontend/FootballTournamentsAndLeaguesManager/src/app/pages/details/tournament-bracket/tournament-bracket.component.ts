@@ -27,7 +27,9 @@ export class TournamentBracketComponent {
   tournamentGroupMatchesDataSource: Match[][] = [];
   tournamentBracketMatchesDataSource: Map<number, Match[]> = new Map<number, Match[]>;
 
-  displayedColumns: string[] = ['position', 'teamName', 'matches', 'won', 'drawn', 'lost', 'goalsForAgainst', 'goalDifference', 'points'];
+  displayedColumns: string[] = ['position', 'teamName', 'matches', 'won', 'drawn', 'lost', 'goalsForAgainst', 'goalDifference', 'points', 'form'];
+
+  formArray: string[] = ['w', 'w', 'l', 'd', 'l'];
 
   constructor(private route: ActivatedRoute, private tournamentService: TournamentService,
     private teamService: TeamService, private tournamentStandingService: TournamentStandingService,

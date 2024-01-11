@@ -46,7 +46,6 @@
 
 .tournament-matches-container {
   display: grid;
-
 }
 
 .bi-info-square,
@@ -139,24 +138,3 @@
 .match-date {
   text-align: center;
 }
-
-/* .team-name {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.team {
-  flex-grow: 1;
-} */
-
-/* 
-            <span matListItemTitle class="team-name">
-              <span class="team">{{ match.homeTeamName }}</span>
-              <span class="score">{{ match.homeTeamScore }} - {{ match.awayTeamScore }}</span>
-              <span class="team">{{ match.awayTeamName }}</span>
-              <i class="bi bi-pencil-square" *ngIf="!match.matchProtocolCreated" (click)="fillMatchProtocol(match)"></i>
-              <i class="bi bi-info-square" *ngIf="match.matchProtocolCreated" (click)="showMatchDetails(match)"></i>
-            </span>
-*/

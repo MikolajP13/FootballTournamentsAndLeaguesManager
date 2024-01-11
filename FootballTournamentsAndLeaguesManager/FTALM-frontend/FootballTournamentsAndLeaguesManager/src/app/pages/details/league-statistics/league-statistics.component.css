@@ -1,3 +1,21 @@
-div {
-  height: 450px;
+.stats-goals-container,
+.stats-assists-container,
+.stats-yellow-cards-container,
+.stats-red-cards-container,
+.stats-wins-container,
+.stats-losses-container {
+  margin: 1% 3% 1% 3%;
+}
+
+.mat-column-rank {
+  flex: 0 0 5% !important;
+}
+
+mat-header-cell {
+  justify-content: center;
+}
+
+mat-cell {
+  font-family: var(--font);
+  justify-content: center;
 }

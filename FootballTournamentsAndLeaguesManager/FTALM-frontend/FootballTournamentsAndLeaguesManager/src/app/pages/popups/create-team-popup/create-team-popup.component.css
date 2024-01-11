@@ -6,13 +6,24 @@
   padding: 15px;
 }
 
+.team-create-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px rgb(199, 199, 199);
+}
+
+.team-create-header span {
+  align-self: center;
+}
+
 .close-button {
   align-self: flex-end;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;  
 }
 
 input {

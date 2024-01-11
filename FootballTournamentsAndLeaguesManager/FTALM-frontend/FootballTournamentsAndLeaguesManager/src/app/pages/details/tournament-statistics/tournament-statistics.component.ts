@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Player } from 'src/app/models/Player/player';
 import { PlayerAssists } from 'src/app/models/PlayerAssists/playerAssists';
@@ -14,17 +16,23 @@ import { GoalAssistService } from 'src/app/services/goalAssistService/goal-assis
 })
 export class TournamentStatisticsComponent {
   tournamentId!: number;
-  playersGoalsDataSource: Player[] = [];
-  playersAssistsDataSource: Player[] = [];
-  playersCleanSheetsDataSource: Player[] = [];
-  playersYellowCardsDataSource: Player[] = [];
-  playersRedCardsDataSource: Player[] = [];
+  playersGoalsDataSource: MatTableDataSource<Player> = new MatTableDataSource();
+  playersAssistsDataSource: MatTableDataSource<Player> = new MatTableDataSource();
+  playersCleanSheetsDataSource: MatTableDataSource<Player> = new MatTableDataSource();
+  playersYellowCardsDataSource: MatTableDataSource<Player> = new MatTableDataSource();
+  playersRedCardsDataSource: MatTableDataSource<Player> = new MatTableDataSource();
 
   playersGoalsDisplayedColumns = ['rank', 'player', 'team', 'goals'];
   playersAssistsDisplayedColumns = ['rank', 'player', 'team', 'assists'];
   playersCleanSheetsDisplayedColumns = ['rank', 'player', 'team', 'cleanSheets'];
   playersYellowCardsDisplayedColumns = ['rank', 'player', 'team', 'yellowCards'];
   playersRedCardsDisplayedColumns = ['rank', 'player', 'team', 'redCards'];
+
+  @ViewChild('paginatorPlayersGoals', { static: true }) paginatorPlayersGoals: MatPaginator | null = null;
+  @ViewChild('paginatorPlayersAssists', { static: true }) paginatorPlayersAssists: MatPaginator | null = null;
+  @ViewChild('paginatorPlayersYellowCards', { static: true }) paginatorPlayersYellowCards: MatPaginator | null = null;
+  @ViewChild('paginatorPlayersRedCards', { static: true }) paginatorPlayersRedCards: MatPaginator | null = null;
+
 
   constructor(private route: ActivatedRoute, private goalAssistService: GoalAssistService, 
     private cardService: CardService) { }
@@ -41,27 +49,34 @@ export class TournamentStatisticsComponent {
 
   }
 
+  ngAfterViewInit() {
+    this.playersGoalsDataSource.paginator = this.paginatorPlayersGoals;
+    this.playersAssistsDataSource.paginator = this.paginatorPlayersAssists;
+    this.playersYellowCardsDataSource.paginator = this.paginatorPlayersYellowCards;
+    this.playersRedCardsDataSource.paginator = this.paginatorPlayersRedCards;
+  }
+
   fetchPlayersGoalsData(leagueId: number): void {
     this.goalAssistService.getPlayersGoalsByLeagueId(leagueId).subscribe((playerGoals: PlayerGoals[]) => {
-      this.playersGoalsDataSource = [...playerGoals];
+      this.playersGoalsDataSource.data = [...playerGoals];
     });
   }
 
   fetchPlayersAssistsData(leagueId: number): void {
     this.goalAssistService.getPlayersAssistsByLeagueId(leagueId).subscribe((playerAssists: PlayerAssists[]) => {
-      this.playersAssistsDataSource = [...playerAssists];
+      this.playersAssistsDataSource.data = [...playerAssists];
     });
   }
 
   fetchPlayersYellowCardsData(leagueId: number): void {
     this.cardService.getPlayersYellowCardsByLeagueId(leagueId).subscribe((playersYellowCards: PlayerCards[]) => {
-      this.playersYellowCardsDataSource = [...playersYellowCards].filter(player => player.yellowCards > 0);
+      this.playersYellowCardsDataSource.data = [...playersYellowCards].filter(player => player.yellowCards > 0);
     });
   }
 
   fetchPlayersRedCardsData(leagueId: number): void {
     this.cardService.getPlayersRedCardsByLeagueId(leagueId).subscribe((playerRedCards: PlayerCards[]) => {
-      this.playersRedCardsDataSource = [...playerRedCards].filter(player => player.redCards > 0);
+      this.playersRedCardsDataSource.data = [...playerRedCards].filter(player => player.redCards > 0);
     });
   }
 }

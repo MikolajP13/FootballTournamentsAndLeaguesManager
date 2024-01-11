@@ -1,11 +1,15 @@
-/* .tournament-group {
-  
-} */
+.tournament-group-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
 
-.group-table {
-  display: flex;
-  width: 50%;
-  padding: 8px;
+#group-id-header {
+  margin: 1% 15%;
+}
+
+.tournament-group-table {
+  margin-left: 15%;
+  width: 70%;
 }
 
 .mat-stepper-horizontal {
@@ -14,6 +18,117 @@
 
 .mat-mdc-form-field {
   margin-top: 16px;
+}
+
+.bi-info-square,
+.bi-pencil-square {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.bi-info-square {
+  color: rgb(54, 170, 241);
+}
+
+.bi-pencil-square {
+  color: rgb(85, 189, 85);
+}
+
+.bi-info-square:hover,
+.bi-pencil-square:hover {
+  cursor: pointer;
+}
+
+.bi-info-square:hover {
+  color: blue !important;
+}
+
+.bi-pencil-square:hover {
+  color: green !important;
+}
+
+.tournament-group-matches {
+  display: flex;
+  justify-content: center;
+}
+
+.list-item {
+  border-bottom: solid 1px black;
+  padding: 35px 0;
+}
+
+.list-item:first-child {
+  border-top: solid 1px black;
+}
+
+.group-match-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+.group-match-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50px;
+}
+
+.group-match-details-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.match-buttons {
+  display: flex;
+  margin-bottom: 22px;
+}
+
+.group-match-date {
+  text-align: center;
+}
+
+.mat-column-position,
+.mat-column-won,
+.mat-column-drawn,
+.mat-column-lost {
+  flex: 0 0 5% !important;
+}
+
+.mat-column-matches,
+.mat-column-goalDifference,
+.mat-column-points {
+  flex: 0 0 8% !important;
+}
+
+.tournament-table-row:hover {
+  background-color: aliceblue;
+}
+
+.team-form-icon {
+  margin: 0 1px;
+}
+
+.bi-check-circle-fill {
+  color: green;
+}
+
+.bi-dash-circle-fill {
+  color: gray;
+}
+
+.bi-x-circle-fill {
+  color: red;
+}
+
+mat-header-cell {
+  justify-content: center;
+}
+
+mat-cell {
+  font-family: var(--font);
+  justify-content: center;
 }
 
 /* Bracket stage */

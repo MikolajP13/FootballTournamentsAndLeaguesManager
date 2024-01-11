@@ -6,6 +6,16 @@
   padding: 15px;
 }
 
+.player-add-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px rgb(199, 199, 199);
+}
+
+.player-add-header span {
+  align-self: center;
+}
+
 .close-button {
   align-self: flex-end;
 }
@@ -30,6 +40,7 @@
 
 label {
   display: block;
+  margin-top: 10px;
   margin-bottom: 5px;
 }
 

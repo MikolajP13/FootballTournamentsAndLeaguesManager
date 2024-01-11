@@ -1,7 +1,11 @@
 <div class="create-team-form-body">
-  <button mat-icon-button class="close-button" (click)="closePopup()">
-    <mat-icon>close</mat-icon>
-  </button>
+  <div class="team-create-header">
+    <span> Create Team </span>
+    <button mat-icon-button class="close-button" (click)="closePopup()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
   <form #teamForm="ngForm" (ngSubmit)="createTeam(teamForm)" method="post">
     <div>
       <label for="team-name-field">Team name</label>

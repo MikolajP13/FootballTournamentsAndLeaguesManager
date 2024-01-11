@@ -3,86 +3,124 @@
     
     <mat-tab-group>
       <mat-tab label="Tournament Group Stage">
-        <div class="tournament-group">
-          <div class="group-table" *ngFor="let group of tournamentStandingDataSource; let i = index">
-            <h4>Group {{ convertGroupIdToLetter(group[0].groupId) }}</h4>
-            <mat-table [dataSource]="group" class="mat-elevation-z8">
-              <ng-container matColumnDef="position">
-                <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-                <mat-cell *matCellDef="let team; let i = index">
-                    {{ i + 1 }}
-                </mat-cell>
-              </ng-container>
-          
-              <ng-container matColumnDef="teamName">
-                <mat-header-cell *matHeaderCellDef> Team </mat-header-cell>
-                <mat-cell *matCellDef="let team">
-                  {{ team.teamName }}
-                </mat-cell>
-              </ng-container>
-          
-              <ng-container matColumnDef="matches">
-                <mat-header-cell *matHeaderCellDef> Matches </mat-header-cell>
-                <mat-cell *matCellDef="let team">
-                  {{ team.matches }}
-                </mat-cell>
-              </ng-container>
-          
-              <ng-container matColumnDef="won">
-                <mat-header-cell *matHeaderCellDef> W </mat-header-cell>
-                <mat-cell *matCellDef="let team">
-                  {{ team.wins }}
-                </mat-cell>
-              </ng-container>
-          
-              <ng-container matColumnDef="drawn">
-                <mat-header-cell *matHeaderCellDef> D </mat-header-cell>
-                <mat-cell *matCellDef="let team">
-                  {{ team.draws }}
-                </mat-cell>
-              </ng-container>
-              
-              <ng-container matColumnDef="lost">
-                <mat-header-cell *matHeaderCellDef> L </mat-header-cell>
-                <mat-cell *matCellDef="let team">
-                  {{ team.losses }}
-                </mat-cell>
-              </ng-container>
-          
-              <ng-container matColumnDef="goalsForAgainst">
-                <mat-header-cell *matHeaderCellDef> Goals </mat-header-cell>
-                <mat-cell *matCellDef="let team">
-                  {{ team.goalsFor }} : {{ team.goalsAgainst }}
-                </mat-cell>
-              </ng-container>
-          
-              <ng-container matColumnDef="goalDifference">
-                <mat-header-cell *matHeaderCellDef> +/- </mat-header-cell>
-                <mat-cell *matCellDef="let team">
-                  {{ team.goalsFor - team.goalsAgainst }}
-                </mat-cell>
-              </ng-container>
-          
-              <ng-container matColumnDef="points">
-                <mat-header-cell *matHeaderCellDef> Pts </mat-header-cell>
-                <mat-cell *matCellDef="let team">
-                  {{ team.points }}
-                </mat-cell>
-              </ng-container>
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
-            <div class="group-matches">
+        <div class="tournament-group-container">
+          <div *ngFor="let group of tournamentStandingDataSource; let i = index">
+            <h4 id="group-id-header">Group {{ convertGroupIdToLetter(group[0].groupId) }}</h4>
+            <div class="tournament-group-table">
+              <mat-table [dataSource]="group" class="mat-elevation-z8">
+                <ng-container matColumnDef="position">
+                  <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+                  <mat-cell *matCellDef="let team; let i = index">
+                      {{ i + 1 }}
+                  </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="teamName">
+                  <mat-header-cell *matHeaderCellDef> Team </mat-header-cell>
+                  <mat-cell *matCellDef="let team">
+                    {{ team.teamName }}
+                  </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="matches">
+                  <mat-header-cell *matHeaderCellDef> Matches </mat-header-cell>
+                  <mat-cell *matCellDef="let team">
+                    {{ team.matches }}
+                  </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="won">
+                  <mat-header-cell *matHeaderCellDef> W </mat-header-cell>
+                  <mat-cell *matCellDef="let team">
+                    {{ team.wins }}
+                  </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="drawn">
+                  <mat-header-cell *matHeaderCellDef> D </mat-header-cell>
+                  <mat-cell *matCellDef="let team">
+                    {{ team.draws }}
+                  </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="lost">
+                  <mat-header-cell *matHeaderCellDef> L </mat-header-cell>
+                  <mat-cell *matCellDef="let team">
+                    {{ team.losses }}
+                  </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="goalsForAgainst">
+                  <mat-header-cell *matHeaderCellDef> Goals </mat-header-cell>
+                  <mat-cell *matCellDef="let team">
+                    {{ team.goalsFor }} : {{ team.goalsAgainst }}
+                  </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="goalDifference">
+                  <mat-header-cell *matHeaderCellDef> +/- </mat-header-cell>
+                  <mat-cell *matCellDef="let team">
+                    {{ team.goalsFor - team.goalsAgainst }}
+                  </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="points">
+                  <mat-header-cell *matHeaderCellDef> Pts </mat-header-cell>
+                  <mat-cell *matCellDef="let team">
+                    {{ team.points }}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="form">
+                  <mat-header-cell *matHeaderCellDef> Form </mat-header-cell>
+                  <mat-cell *matCellDef="let team">
+                    <ng-container *ngFor="let f of formArray"> 
+                      <!-- team.formArray -->
+                      <span class="team-form-icon" *ngIf="f === 'w'"> <i class="bi bi-check-circle-fill"></i> </span>
+                      <span class="team-form-icon" *ngIf="f === 'd'"> <i class="bi bi-dash-circle-fill"></i> </span>
+                      <span class="team-form-icon" *ngIf="f === 'l'"> <i class="bi bi-x-circle-fill"></i> </span>
+                    </ng-container>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="tournament-table-row"></mat-row>
+              </mat-table>
+            </div>
+
+            <div class="tournament-group-matches">
               <mat-list>
                 <ng-container *ngFor="let match of tournamentGroupMatchesDataSource[i]">
-                  <mat-list-item *ngIf="match.homeTeamId && match.awayTeamId">
-                    <span matListItemTitle>{{ match.homeTeamName }} {{ match.homeTeamScore }} - {{ match.awayTeamScore }} {{ match.awayTeamName }}
-                      <i class="bi bi-pencil-square" *ngIf="!match.matchProtocolCreated" (click)="fillMatchProtocol(match)"></i>
-                      <i class="bi bi-info-square" *ngIf="match.matchProtocolCreated" (click)="showMatchDetails(match)"></i>
-                    </span>
-                    <span matListItemLine>Date: {{ match.date }}</span>
+                  <mat-list-item class="list-item" *ngIf="match.homeTeamId && match.awayTeamId">
+                    <div matListItemTitle class="group-match-container">
+                      <div class="group-match-info">
+                        <div class="group-match-stage">
+                          <span class="team-name">{{ match.homeTeamName }}</span>
+                        </div>
+                        <div class="group-match-stage">
+                          <span class="team-name">{{ match.awayTeamName }}</span>
+                        </div>
+                      </div>
+                      <div class="group-match-info">
+                        <div class="group-match-score">
+                          <span class="team-score">{{ match.homeTeamScore }}</span>
+                        </div>
+                        <div class="group-match-score">
+                          <span class="team-score">{{ match.awayTeamScore }}</span>
+                        </div>
+                      </div>
+                      <div class="group-match-details-container">
+                        <div class="group-match-date">
+                          <span>Date: {{ match.date | date: 'dd-MM-yyyy HH:mm' }}</span>
+                        </div>
+                        <div class="match-buttons">
+                          <i class="bi bi-pencil-square" *ngIf="!match.matchProtocolCreated" (click)="fillMatchProtocol(match)"></i>
+                          <i class="bi bi-info-square" *ngIf="match.matchProtocolCreated" (click)="showMatchDetails(match)"></i>
+                        </div>
+                      </div>
+                    </div>
                   </mat-list-item>
-                  </ng-container>
+                </ng-container>
               </mat-list>
             </div>
           </div>

@@ -2,12 +2,12 @@
   <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="1500ms">
     <mat-tab label="Goals">
       <div class="stats-goals-container">
-        <mat-table [dataSource]="playersGoalsDataSource|slice:0:10" class="mat-elevation-z8">
+        <mat-table [dataSource]="playersGoalsDataSource" class="mat-elevation-z8">
 
           <ng-container matColumnDef="rank">
             <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
             <mat-cell *matCellDef="let player; let i = index">
-              <ng-container *ngIf="i === 0 || player.goals != playersGoalsDataSource[i-1].goals; else sameRank">
+              <ng-container *ngIf="i === 0 || player.goals != playersGoalsDataSource.data[i-1].goals; else sameRank">
                 {{ i + 1 }}
               </ng-container>
               <ng-template #sameRank>
@@ -34,18 +34,17 @@
           <mat-header-row *matHeaderRowDef="playersGoalsDisplayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: playersGoalsDisplayedColumns;"></mat-row>
         </mat-table>
-        <button mat-raised-button color="primary" [disabled]="playersGoalsDataSource.length <= 10">View full list <i
-            class="bi bi-arrow-right"></i></button>
+        <mat-paginator #paginatorPlayersGoals [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
       </div>
     </mat-tab>
     <mat-tab label="Assists">
       <div class="stats-assists-container">
-        <mat-table [dataSource]="playersAssistsDataSource|slice:0:10" class="mat-elevation-z8">
+        <mat-table [dataSource]="playersAssistsDataSource" class="mat-elevation-z8">
 
           <ng-container matColumnDef="rank">
             <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
             <mat-cell *matCellDef="let player; let i = index">
-              <ng-container *ngIf="i === 0 || player.assists != playersAssistsDataSource[i-1].assists; else sameRank">
+              <ng-container *ngIf="i === 0 || player.assists != playersAssistsDataSource.data[i-1].assists; else sameRank">
                 {{ i + 1 }}
               </ng-container>
               <ng-template #sameRank>
@@ -72,50 +71,19 @@
           <mat-header-row *matHeaderRowDef="playersAssistsDisplayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: playersAssistsDisplayedColumns;"></mat-row>
         </mat-table>
-        <button mat-raised-button color="primary" [disabled]="playersAssistsDataSource.length <= 10">View full list <i
-            class="bi bi-arrow-right"></i></button>
+        <mat-paginator #paginatorPlayersAssists [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
       </div>
     </mat-tab>
-    <mat-tab label="Clean Sheets">
-      <div class="stats-clean-sheets-container">
-        <mat-table [dataSource]="playersCleanSheetsDataSource|slice:0:10" class="mat-elevation-z8">
 
-          <ng-container matColumnDef="rank">
-            <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-            <mat-cell *matCellDef="let element"> </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="player">
-            <mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
-            <mat-cell *matCellDef="let element"> </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="team">
-            <mat-header-cell *matHeaderCellDef> Team </mat-header-cell>
-            <mat-cell *matCellDef="let element"> </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="cleanSheets">
-            <mat-header-cell *matHeaderCellDef> Clean Sheets </mat-header-cell>
-            <mat-cell *matCellDef="let element"> </mat-cell>
-          </ng-container>
-
-          <mat-header-row *matHeaderRowDef="playersCleanSheetsDisplayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: playersCleanSheetsDisplayedColumns;"></mat-row>
-        </mat-table>
-        <button mat-raised-button color="primary" [disabled]="playersCleanSheetsDataSource.length <= 10">View full list
-          <i class="bi bi-arrow-right"></i></button>
-      </div>
-    </mat-tab>
     <mat-tab label="Yellow Cards">
       <div class="stats-yellow-cards-container">
-        <mat-table [dataSource]="playersYellowCardsDataSource|slice:0:10" class="mat-elevation-z8">
+        <mat-table [dataSource]="playersYellowCardsDataSource" class="mat-elevation-z8">
 
           <ng-container matColumnDef="rank">
             <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
             <mat-cell *matCellDef="let player; let i = index">
               <ng-container
-                *ngIf="i === 0 || player.yellowCards != playersYellowCardsDataSource[i-1].yellowCards; else sameRank">
+                *ngIf="i === 0 || player.yellowCards != playersYellowCardsDataSource.data[i-1].yellowCards; else sameRank">
                 {{ i + 1 }}
               </ng-container>
               <ng-template #sameRank>
@@ -142,20 +110,19 @@
           <mat-header-row *matHeaderRowDef="playersYellowCardsDisplayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: playersYellowCardsDisplayedColumns;"></mat-row>
         </mat-table>
-        <button mat-raised-button color="primary" [disabled]="playersYellowCardsDataSource.length <= 10">View full list
-          <i class="bi bi-arrow-right"></i></button>
+        <mat-paginator #paginatorPlayersYellowCards [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
       </div>
     </mat-tab>
 
     <mat-tab label="Red Cards">
       <div class="stats-yellow-cards-container">
-        <mat-table [dataSource]="playersRedCardsDataSource|slice:0:10" class="mat-elevation-z8">
+        <mat-table [dataSource]="playersRedCardsDataSource" class="mat-elevation-z8">
 
           <ng-container matColumnDef="rank">
             <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
             <mat-cell *matCellDef="let player; let i = index">
               <ng-container
-                *ngIf="i === 0 || player.redCards != playersRedCardsDataSource[i-1].redCards; else sameRank">
+                *ngIf="i === 0 || player.redCards != playersRedCardsDataSource.data[i-1].redCards; else sameRank">
                 {{ i + 1 }}
               </ng-container>
               <ng-template #sameRank>
@@ -182,7 +149,7 @@
           <mat-header-row *matHeaderRowDef="playersRedCardsDisplayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: playersRedCardsDisplayedColumns;"></mat-row>
         </mat-table>
-        <button mat-raised-button color="primary" [disabled]="playersRedCardsDataSource.length <= 10">View full list <i class="bi bi-arrow-right"></i></button>
+        <mat-paginator #paginatorPlayersRedCards [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
       </div>
     </mat-tab>
   </mat-tab-group>

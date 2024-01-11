@@ -1,7 +1,11 @@
 <div class="add-player-form-body">
-  <button mat-icon-button class="close-button" (click)="closePopup()">
-    <mat-icon>close</mat-icon>
-  </button>
+  <div class="player-add-header">
+    <span> Add Player </span>
+    <button mat-icon-button class="close-button" (click)="closePopup()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
   <form #playerForm="ngForm" (ngSubmit)="addPlayer(playerForm)" method="post">
     <div class="form-field">
       <label for="player-firstName-field">First name</label>

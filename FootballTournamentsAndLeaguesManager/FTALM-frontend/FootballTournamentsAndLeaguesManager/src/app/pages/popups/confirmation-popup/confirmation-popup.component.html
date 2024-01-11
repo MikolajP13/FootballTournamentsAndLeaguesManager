@@ -1,7 +1,10 @@
 <div class="confirmation-form-body">
-  <button mat-icon-button class="close-button" (click)="closePopup()">
-    <mat-icon>close</mat-icon>
-  </button>
+  <div class="confirmation-header">
+    <span>Confirmation</span>
+    <button mat-icon-button class="close-button" (click)="closePopup()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
   <div class="confirmation-text">
     <p> This action cannot be undone!</p>
     <ul *ngIf="warning">

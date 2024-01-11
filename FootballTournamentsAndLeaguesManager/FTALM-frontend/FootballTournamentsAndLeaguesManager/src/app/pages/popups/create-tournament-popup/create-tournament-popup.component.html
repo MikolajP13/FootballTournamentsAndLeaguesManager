@@ -1,7 +1,11 @@
 <div class="create-tournament-form-body">
-  <button mat-icon-button class="close-button" (click)="closePopup()">
-    <mat-icon>close</mat-icon>
-  </button>
+  <div class="tournament-create-header">
+    <span> Create Tournament </span>
+    <button mat-icon-button class="close-button" (click)="closePopup()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
   <form #tournamentForm="ngForm" (ngSubmit)="createTournament(tournamentForm)" method="post">
     <div class="form-field">
       <label for="tournament-name-field">Tournament name</label>
