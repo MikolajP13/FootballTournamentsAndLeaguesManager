@@ -1,0 +1,9 @@
+.snackbar-container {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+.bi-check-circle-fill {
+  color: green;
+}

@@ -15,6 +15,7 @@ export class SnackBarService {
        duration: 1500,
        horizontalPosition: 'end',
        verticalPosition: 'bottom',
+       panelClass: 'match-event-snackbar',
        data: { message }
     });
   }

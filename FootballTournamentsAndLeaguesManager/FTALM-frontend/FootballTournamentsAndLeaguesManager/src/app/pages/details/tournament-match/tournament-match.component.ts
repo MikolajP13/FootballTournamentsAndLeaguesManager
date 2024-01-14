@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { Card, CardType } from 'src/app/models/Card/card';
 import { GoalAssist } from 'src/app/models/GoalAssist/goalAssist';
-import { LeagueStanding } from 'src/app/models/LeagueStanding/leagueStanding';
 import { Match } from 'src/app/models/Match/match';
 import { Player } from 'src/app/models/Player/player';
 import { Substitution } from 'src/app/models/Substitution/substitution';
@@ -16,6 +15,7 @@ import { SubstitutionService } from 'src/app/services/substitutionService/substi
 import { SnackBarComponent } from 'src/app/shared-components/snack-bar/snack-bar.component';
 import { TournamentStandingService } from '../../../services/tournamentStandingService/tournament-standing.service';
 import { TournamentStanding } from 'src/app/models/TournamentStanding/tournamentStanding';
+import { faFutbol } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-tournament-match',
@@ -23,6 +23,8 @@ import { TournamentStanding } from 'src/app/models/TournamentStanding/tournament
   styleUrls: ['./tournament-match.component.css']
 })
 export class TournamentMatchComponent {
+  footballIcon = faFutbol;
+
   GOAL_ASSIST_EVENT_ID: string = 'G';
   CARD_EVENT_ID: string = 'C';
   SUBSTITUTION_EVENT_ID: string = 'S';
@@ -110,14 +112,16 @@ export class TournamentMatchComponent {
       teamName === this.match?.homeTeamName ? this.homeTeamScore += 1 : this.awayTeamScore += 1;
 
     }else if(selectedEventType === 'Card') {
+
       var possiblyRedCard = this.events.filter(e => e.type === this.CARD_EVENT_ID 
         && e.player.id === firstPlayer?.id 
         && e.cardType === 0);
 
       var card: Card = {
         player: firstPlayer,
-        // 0 is yellow card, 1 is red card
-        cardType: possiblyRedCard.length === 1 ? 1 as unknown as CardType : playerCard as CardType,
+        // 0 is yellow card, 2 is second yellow, 3 is red card
+        cardType: playerCard === 0 as unknown as CardType ? 
+          (possiblyRedCard.length === 1 ? 1 as unknown as CardType : playerCard as CardType) : 2 as unknown as CardType,
         match: {
           id: this.matchId 
         },

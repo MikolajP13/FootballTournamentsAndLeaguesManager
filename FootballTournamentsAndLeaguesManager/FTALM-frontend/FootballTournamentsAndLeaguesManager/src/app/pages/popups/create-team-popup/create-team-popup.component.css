@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 100%;
+  height: auto;
   padding: 15px;
 }
 
@@ -32,6 +32,10 @@ input {
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.create-team-form-container {
+  flex: 1;
 }
 
 .button-container {

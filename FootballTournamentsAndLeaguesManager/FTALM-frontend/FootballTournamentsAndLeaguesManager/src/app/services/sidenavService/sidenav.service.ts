@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class SidenavService {
   private sidenav?: MatSidenav;
   private isOpenSubject = new BehaviorSubject<boolean>(false);
+  private showMatchesSublistSource = new BehaviorSubject<boolean>(false);
 
   constructor(private router: Router){
     //hide sidenav after page change 
@@ -28,6 +29,11 @@ export class SidenavService {
       this.sidenav.toggle();
       this.isOpenSubject.next(this.sidenav.opened);
     }
+  }
+
+  toggleMatchesSublist(): boolean {
+    this.showMatchesSublistSource.next(!this.showMatchesSublistSource.value);
+    return this.showMatchesSublistSource.value;
   }
 
   getIsOpen(): Observable<boolean> {

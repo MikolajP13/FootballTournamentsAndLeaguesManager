@@ -1,3 +1,23 @@
 .sidenav {
   height: calc(100vh - 64px);
 }
+
+.mat-sidenav {
+  width: 170px;
+}
+
+.list-item:hover,
+.sublist-item:hover {
+  background-color: rgb(127, 198, 245);;
+}
+
+.sublist-item span {
+  padding-left: 15px;
+}
+
+.expanded-list-item-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+

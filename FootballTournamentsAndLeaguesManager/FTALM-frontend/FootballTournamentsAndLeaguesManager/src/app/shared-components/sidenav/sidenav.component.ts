@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { ActivatedRoute, ActivationEnd, Params, Router } from '@angular/router';
-import { tap, switchMap, filter, map } from 'rxjs';
+import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
+import { filter, map } from 'rxjs';
 import { SidenavService } from 'src/app/services/sidenavService/sidenav.service';
 
 @Component({
@@ -12,6 +12,7 @@ import { SidenavService } from 'src/app/services/sidenavService/sidenav.service'
 export class SidenavComponent {
   @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
   id!: number;
+  showMatchesSublist: boolean = false;
 
   constructor(private sidenavService: SidenavService, private router: Router, private route: ActivatedRoute) {}
 
@@ -47,12 +48,20 @@ export class SidenavComponent {
     return this.router.url.includes('/league/');
   }
 
+  toggleTeamMatchesSublist() {
+    this.showMatchesSublist = this.sidenavService.toggleMatchesSublist();
+  }
+
   //navigation to the sub team pages
   showTeamData(){
     this.router.navigate([`/team/${this.id}`]);
   }
 
-  showTeamMatches(){
+  showTeamPlayedMatches(){
+    this.router.navigate([`/team/${this.id}/matches`]);
+  }
+
+  showTeamUpcomingMatches(){
     this.router.navigate([`/team/${this.id}/matches`]);
   }
 

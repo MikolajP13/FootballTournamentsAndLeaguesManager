@@ -1,178 +1,211 @@
-<div class="match-container" *ngIf="match">
-  <div class="match-protocol-container" *ngIf="!match.matchProtocolCreated">
-    <mat-list>
-      <ng-container *ngFor="let event of events; let i = index">
-        <mat-list-item>
-          <span *ngIf="event.type === GOAL_ASSIST_EVENT_ID">
-            <i class="fa-regular fa-futbol"></i> {{ event.minute }}
-            {{ event.teamName }} {{ event.scorerPlayer.firstName + ' ' + event.scorerPlayer.lastName}} 
-            <span *ngIf="event.assistPlayer !== undefined">{{ event.assistPlayer.firstName + ' ' + event.assistPlayer.lastName}}</span>
-          </span>
-          <span *ngIf="event.type === CARD_EVENT_ID">
-            <i class="bi bi-square-fill"></i> {{ event.minute}}
-            {{ event.teamName }} {{ event.player.firstName }} {{ event.player.lastName }} {{ event.cardType }} 
-          </span>
-          <span *ngIf="event.type === SUBSTITUTION_EVENT_ID">
-            <i class="bi bi-arrow-down-up"></i> {{ event.minute }}
-            {{ event.teamName }} in: {{ event.enteringPlayer.firstName + ' ' + event.enteringPlayer.lastName}} 
-            out: {{ event.exitingPlayer.firstName + ' ' + event.exitingPlayer.lastName}} 
-          </span>
-          <mat-icon (click)="removeEventFromList(i)">close</mat-icon>
-        </mat-list-item>
-      </ng-container>
-    </mat-list>
-    <div class="match-protocol-table">
-      <div class="item">
-        <h3 class="match-protocol-header">
-          {{ match.homeTeamName }}
-        </h3>
-      </div>
-      <div class="item">
-        <h3 class="match-protocol-header">
-          <span>{{ homeTeamScore }}</span>
-          :
-          <span>{{ awayTeamScore }}</span>
-        </h3>
-      </div>
-      <div class="item">
-        <h3 class="match-protocol-header">
-          {{ match.awayTeamName }}
-        </h3>
-      </div>
-      <div class="item">
-        <div class="event-type-selector-container">
-          <mat-form-field>
-            <mat-label>Event Type</mat-label>
-            <mat-select [(ngModel)]="selectedEventType" name="eventType">
-              <mat-option *ngFor="let event of eventTypes" [value]="event">
-                {{ event }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+<div class="match-protocol-container" *ngIf="match">
+  <div class="match-protocol-header-container">
+    <div class="match-protocol-header">
+      <h3 class="match-protocol-team">
+        {{ match.homeTeamName }}
+      </h3>
+      <h3 class="match-protocol-team">
+        <span>{{ homeTeamScore }}</span>
+        <span id="separator">:</span>
+        <span>{{ awayTeamScore }}</span>
+      </h3>
+      <h3 class="match-protocol-team">
+        {{ match.awayTeamName }}
+      </h3>
+    </div>
+    <div class="protocol-btn-container">
+      <button mat-raised-button id="btn-save" (click)="saveProtocol()">Save protocol</button>
+      <button mat-raised-button id="btn-cancel" (click)="navigateToMatches()">Cancel</button>
+    </div>
+  </div>
 
-          <div *ngIf="selectedEventType === 'Goal'">
-            <mat-label>Select Goal Type: </mat-label>
-            <mat-radio-group [(ngModel)]="selectedGoalType" (change)="onGoalTypeChange(true)" aria-label="Select an option">
-              <mat-radio-button *ngFor="let goalType of goalTypes" [value]="goalType">{{ goalType }}</mat-radio-button>
-            </mat-radio-group>
-          </div>
+  <div class="match-protocol-table">
+    <div class="event-home-team">
+      <div class="event-type-selector-container">
+        <mat-form-field>
+          <mat-label>Event Type</mat-label>
+          <mat-select [(ngModel)]="selectedEventType" name="eventType">
+            <mat-option *ngFor="let event of eventTypes" [value]="event">
+              {{ event }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-          <mat-form-field *ngIf="selectedEventType !== undefined">
-            <mat-label *ngIf="selectedEventType === 'Goal'">Scorer player</mat-label>
-            <mat-label *ngIf="selectedEventType === 'Card'">Player</mat-label>
-            <mat-label *ngIf="selectedEventType === 'Substitution'">Incoming player</mat-label>
-            <mat-select [(ngModel)]="firstPlayer" name="firstPlayer" required>
-              <mat-option *ngFor="let player of homeTeamPlayers" [value]="player">
-                {{ player.firstName + ' ' + player.lastName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-error *ngIf="firstPlayer !== undefined && checkIfPlayerOffThePitch(firstPlayer)">Player cannot be choosen because is off the pitch.</mat-error>
-
-          <mat-form-field *ngIf="selectedEventType !== undefined && selectedEventType !== 'Card' && selectedGoalType === 'Normal'">
-            <mat-label *ngIf="selectedEventType === 'Goal'">Assist player</mat-label>
-            <mat-label *ngIf="selectedEventType === 'Substitution'">Outgoing player</mat-label>
-            <mat-select [(ngModel)]="secondPlayer" name="secondPlayer" required>
-              <mat-option *ngFor="let player of homeTeamPlayers" [value]="player">
-                {{ player.firstName + ' ' + player.lastName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-error *ngIf="selectedEventType === 'Goal' && arePlayersSelected(true) && checkFirstAndSecondPlayer(true)">The same player cannot score a goal and assist.</mat-error>
-          <mat-error *ngIf="selectedEventType === 'Substitution' && arePlayersSelected(true) && checkFirstAndSecondPlayer(true)">The same player cannot be substituted.</mat-error>
-          <mat-error *ngIf="secondPlayer !== undefined && checkIfPlayerOffThePitch(secondPlayer)">Player cannot be choosen because is off the pitch.</mat-error>
-
-          <mat-form-field *ngIf="selectedEventType === 'Card'">
-            <mat-label>Card</mat-label>
-            <mat-select [(ngModel)]="card" name="card" required>
-              <mat-option *ngFor="let cardType of cardTypes; let i = index" [value]="i">
-                {{ cardType.toString().toLowerCase() }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-            
-          <mat-form-field *ngIf="selectedEventType !== undefined">
-            <mat-label>Minute</mat-label>
-            <input type="number" matInput [(ngModel)]="minute" name="minute" min="1" max="120" required>
-            <mat-error *ngIf="minute !== undefined && (minute < 1 || minute > 120)">Minute must be between 1 and 120.</mat-error>
-          </mat-form-field>
+        <div *ngIf="selectedEventType === 'Goal'">
+          <mat-label>Goal Type: </mat-label>
+          <mat-radio-group [(ngModel)]="selectedGoalType" (change)="onGoalTypeChange(true)"
+            aria-label="Select an option">
+            <mat-radio-button *ngFor="let goalType of goalTypes" [value]="goalType">{{ goalType }}</mat-radio-button>
+          </mat-radio-group>
         </div>
 
-        <div class="button-container">
-          <button mat-raised-button color="primary" [disabled]="!isEventValid(true)" (click)="addToMatchEventList(true, match.homeTeamId, match.homeTeamName)">Add</button>
-          <button mat-raised-button color="basic" (click)="clearSelectedValues(true)">Clear</button>
-        </div>
+        <mat-form-field *ngIf="selectedEventType !== undefined">
+          <mat-label *ngIf="selectedEventType === 'Goal'">Scorer player</mat-label>
+          <mat-label *ngIf="selectedEventType === 'Card'">Player</mat-label>
+          <mat-label *ngIf="selectedEventType === 'Substitution'">Incoming player</mat-label>
+          <mat-select [(ngModel)]="firstPlayer" name="firstPlayer" required>
+            <mat-option *ngFor="let player of homeTeamPlayers" [value]="player">
+              {{ player.firstName + ' ' + player.lastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error *ngIf="firstPlayer !== undefined && checkIfPlayerOffThePitch(firstPlayer)">Player cannot be choosen
+          because is off the pitch.</mat-error>
+
+        <mat-form-field
+          *ngIf="selectedEventType !== undefined && selectedEventType !== 'Card' && selectedGoalType === 'Normal'">
+          <mat-label *ngIf="selectedEventType === 'Goal'">Assist player</mat-label>
+          <mat-label *ngIf="selectedEventType === 'Substitution'">Outgoing player</mat-label>
+          <mat-select [(ngModel)]="secondPlayer" name="secondPlayer" required>
+            <mat-option *ngFor="let player of homeTeamPlayers" [value]="player">
+              {{ player.firstName + ' ' + player.lastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error
+          *ngIf="selectedEventType === 'Goal' && arePlayersSelected(true) && checkFirstAndSecondPlayer(true)">The same
+          player cannot score a goal and assist.</mat-error>
+        <mat-error
+          *ngIf="selectedEventType === 'Substitution' && arePlayersSelected(true) && checkFirstAndSecondPlayer(true)">The
+          same player cannot be substituted.</mat-error>
+        <mat-error *ngIf="secondPlayer !== undefined && checkIfPlayerOffThePitch(secondPlayer)">Player cannot be
+          choosen because is off the pitch.</mat-error>
+
+        <mat-form-field *ngIf="selectedEventType === 'Card'">
+          <mat-label>Card</mat-label>
+          <mat-select [(ngModel)]="card" name="card" required>
+            <mat-option *ngFor="let cardType of cardTypes; let i = index" [value]="i">
+              {{ cardType.toString().toLowerCase() }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="selectedEventType !== undefined">
+          <mat-label>Minute</mat-label>
+          <input type="number" matInput [(ngModel)]="minute" name="minute" min="1" max="120" required>
+          <mat-error *ngIf="minute !== undefined && (minute < 1 || minute > 120)">Minute must be between 1 and
+            120</mat-error>
+        </mat-form-field>
       </div>
-      
-      <div class="item"></div>
 
-      <div class="item">
-        <div class="event-type-selector-container">
-          <mat-form-field>
-            <mat-label>Event Type</mat-label>
-            <mat-select [(ngModel)]="selectedEventType2" name="eventType">
-              <mat-option *ngFor="let event of eventTypes" [value]="event">
-                {{ event }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+      <div class="event-btn-container">
+        <button mat-raised-button id="btn-add-event" [disabled]="!isEventValid(true)"
+          (click)="addToMatchEventList(true, match.homeTeamId, match.homeTeamName)">Add</button>
+        <button mat-raised-button id="btn-clear-event" (click)="clearSelectedValues(true)">Clear</button>
+      </div>
+    </div>
 
-          <div *ngIf="selectedEventType2 === 'Goal'">
-            <mat-label>Select Goal Type: </mat-label>
-            <mat-radio-group [(ngModel)]="selectedGoalType2" (change)="onGoalTypeChange(false)" aria-label="Select an option">
-              <mat-radio-button *ngFor="let goalType of goalTypes" [value]="goalType">{{ goalType }}</mat-radio-button>
-            </mat-radio-group>
-          </div>
+    <div class="event-gap">
+      <div class="match-protocol-form-container" *ngIf="!match.matchProtocolCreated">
+        <mat-list>
+          <ng-container *ngFor="let event of events; let i = index">
+            <mat-list-item>
+              <div class="event-list-item">
+                <div class="container" *ngIf="event.type === GOAL_ASSIST_EVENT_ID">
+                  <fa-icon id="event-icon-goal" [icon]="footballIcon"></fa-icon>
+                  <span> {{ event.scorerPlayer.firstName.substring(0, 1) }}. {{ event.scorerPlayer.lastName }} </span>
+                  <span class="event-minute"> {{event.minute}}' </span>
+                </div>
+                <div class="container" *ngIf="event.type === CARD_EVENT_ID">
+                  <div *ngIf="event.cardType == 0 || event.cardType == 1" class="square-small yellow">
+                    <div *ngIf="event.cardType == 1" class="square-small-second-yellow"></div>
+                  </div>
+                  <div *ngIf="event.cardType == 2" class="square-small red"></div>
+                  <span> {{ event.player.firstName.substring(0, 1) }}. {{ event.player.lastName }} </span>
+                  <span class="event-minute"> {{event.minute}}' </span>
+                </div>
+                <div class="container" *ngIf="event.type === SUBSTITUTION_EVENT_ID">
+                  <span>
+                    <i class="bi bi-arrow-up"></i> {{ event.enteringPlayer.firstName.substring(0, 1) + '. ' +
+                    event.enteringPlayer.lastName}}
+                  </span>
+                  <span>
+                    <i class="bi bi-arrow-down"></i>{{ event.exitingPlayer.firstName.substring(0, 1) + '. ' +
+                    event.exitingPlayer.lastName}}
+                  </span>
+                  <span class="event-minute"> {{event.minute}}' </span>
+                </div>
+                <mat-icon id="remove-event-icon" (click)="removeEventFromList(i)">close</mat-icon>
+              </div>
+            </mat-list-item>
+          </ng-container>
+        </mat-list>
+      </div>
+    </div>
 
-          <mat-form-field *ngIf="selectedEventType2 !== undefined">
-            <mat-label *ngIf="selectedEventType2 === 'Goal'">Scorer player</mat-label>
-            <mat-label *ngIf="selectedEventType2 === 'Card'">Player</mat-label>
-            <mat-label *ngIf="selectedEventType2 === 'Substitution'">Incoming player</mat-label>
-            <mat-select [(ngModel)]="firstPlayer2" name="firstPlayer" required>
-              <mat-option *ngFor="let player2 of awayTeamPlayers" [value]="player2">
-                {{ player2.firstName + ' ' + player2.lastName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-error *ngIf="firstPlayer2 !== undefined && checkIfPlayerOffThePitch(firstPlayer2)">Player cannot be choosen because is off the pitch.</mat-error>
+    <div class="event-away-team">
+      <div class="event-type-selector-container">
+        <mat-form-field>
+          <mat-label>Event Type</mat-label>
+          <mat-select [(ngModel)]="selectedEventType2" name="eventType">
+            <mat-option *ngFor="let event of eventTypes" [value]="event">
+              {{ event }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-          <mat-form-field *ngIf="selectedEventType2 !== undefined && selectedEventType2 !== 'Card' && selectedGoalType2 === 'Normal'">
-            <mat-label *ngIf="selectedEventType2 === 'Goal'">Assist player</mat-label>
-            <mat-label *ngIf="selectedEventType2 === 'Substitution'">Outgoing player</mat-label>
-            <mat-select [(ngModel)]="secondPlayer2" name="secondPlayer" required>
-              <mat-option *ngFor="let player2 of awayTeamPlayers" [value]="player2">
-                {{ player2.firstName + ' ' + player2.lastName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-error *ngIf="selectedEventType2 === 'Goal' && arePlayersSelected(false) && checkFirstAndSecondPlayer(false)">The same player cannot score a goal and assist.</mat-error>
-          <mat-error *ngIf="selectedEventType2 === 'Substitution' && arePlayersSelected(false) && checkFirstAndSecondPlayer(false)">The same player cannot be substituted.</mat-error>
-          <mat-error *ngIf="secondPlayer2 !== undefined && checkIfPlayerOffThePitch(secondPlayer2)">Player cannot be choosen because is off the pitch.</mat-error>
+        <div *ngIf="selectedEventType2 === 'Goal'">
+          <mat-label>Select Goal Type: </mat-label>
+          <mat-radio-group [(ngModel)]="selectedGoalType2" (change)="onGoalTypeChange(false)"
+            aria-label="Select an option">
+            <mat-radio-button *ngFor="let goalType of goalTypes" [value]="goalType">{{ goalType }}</mat-radio-button>
+          </mat-radio-group>
+        </div>
 
-          <mat-form-field *ngIf="selectedEventType2 === 'Card'">
-            <mat-label>Card</mat-label>
-            <mat-select [(ngModel)]="card2" name="card" required>
-              <mat-option *ngFor="let cardType2 of cardTypes; let i = index" [value]="i">
-                {{ cardType2.toString().toLowerCase() }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-            
-          <mat-form-field *ngIf="selectedEventType2 !== undefined">
-            <mat-label>Minute</mat-label>
-            <input type="number" matInput [(ngModel)]="minute2" name="minute2" min="1" max="120" required>
-            <mat-error *ngIf="minute2 !== undefined && (minute2 < 1 || minute2 > 120)">Minute must be between 1 and 120.</mat-error>
-          </mat-form-field>
-        <div class="btn-container">
-          <button mat-raised-button color="primary" [disabled]="!isEventValid(false)" (click)="addToMatchEventList(false, match.awayTeamId, match.awayTeamName)">Add</button>
-          <button mat-raised-button color="basic" (click)="clearSelectedValues(false)">Clear</button>
+        <mat-form-field *ngIf="selectedEventType2 !== undefined">
+          <mat-label *ngIf="selectedEventType2 === 'Goal'">Scorer player</mat-label>
+          <mat-label *ngIf="selectedEventType2 === 'Card'">Player</mat-label>
+          <mat-label *ngIf="selectedEventType2 === 'Substitution'">Incoming player</mat-label>
+          <mat-select [(ngModel)]="firstPlayer2" name="firstPlayer" required>
+            <mat-option *ngFor="let player2 of awayTeamPlayers" [value]="player2">
+              {{ player2.firstName + ' ' + player2.lastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error *ngIf="firstPlayer2 !== undefined && checkIfPlayerOffThePitch(firstPlayer2)">Player cannot be
+          choosen because is off the pitch.</mat-error>
+
+        <mat-form-field
+          *ngIf="selectedEventType2 !== undefined && selectedEventType2 !== 'Card' && selectedGoalType2 === 'Normal'">
+          <mat-label *ngIf="selectedEventType2 === 'Goal'">Assist player</mat-label>
+          <mat-label *ngIf="selectedEventType2 === 'Substitution'">Outgoing player</mat-label>
+          <mat-select [(ngModel)]="secondPlayer2" name="secondPlayer" required>
+            <mat-option *ngFor="let player2 of awayTeamPlayers" [value]="player2">
+              {{ player2.firstName + ' ' + player2.lastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error
+          *ngIf="selectedEventType2 === 'Goal' && arePlayersSelected(false) && checkFirstAndSecondPlayer(false)">The
+          same player cannot score a goal and assist.</mat-error>
+        <mat-error
+          *ngIf="selectedEventType2 === 'Substitution' && arePlayersSelected(false) && checkFirstAndSecondPlayer(false)">The
+          same player cannot be substituted.</mat-error>
+        <mat-error *ngIf="secondPlayer2 !== undefined && checkIfPlayerOffThePitch(secondPlayer2)">Player cannot be
+          choosen because is off the pitch.</mat-error>
+
+        <mat-form-field *ngIf="selectedEventType2 === 'Card'">
+          <mat-label>Card</mat-label>
+          <mat-select [(ngModel)]="card2" name="card" required>
+            <mat-option *ngFor="let cardType2 of cardTypes; let i = index" [value]="i">
+              {{ cardType2.toString().toLowerCase() }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="selectedEventType2 !== undefined">
+          <mat-label>Minute</mat-label>
+          <input type="number" matInput [(ngModel)]="minute2" name="minute2" min="1" max="120" required>
+          <mat-error *ngIf="minute2 !== undefined && (minute2 < 1 || minute2 > 120)">Minute must be between 1 and
+            120.</mat-error>
+        </mat-form-field>
+        <div class="event-btn-container">
+          <button mat-raised-button id="btn-add-event" [disabled]="!isEventValid(false)"
+            (click)="addToMatchEventList(false, match.awayTeamId, match.awayTeamName)">Add</button>
+          <button mat-raised-button id="btn-clear-event" (click)="clearSelectedValues(false)">Clear</button>
         </div>
       </div>
     </div>
   </div>
-  <div class="btn-container">
-    <button mat-raised-button color="primary" (click)="saveProtocol()">Save protocol</button>
-    <button mat-raised-button color="basic" (click)="navigateToMatches()">Cancel</button>
-  </div>
-</div>
 
+</div>

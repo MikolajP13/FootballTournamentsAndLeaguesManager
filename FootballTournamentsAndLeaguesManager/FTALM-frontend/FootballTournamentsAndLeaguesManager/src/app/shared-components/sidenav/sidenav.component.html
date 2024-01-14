@@ -1,19 +1,29 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="over">
     <mat-nav-list *ngIf="isTeamDetailPage()">
-      <a mat-list-item (click)="showTeamData()">Team</a>
-      <a mat-list-item (click)="showTeamMatches()">Matches</a>
-      <a mat-list-item (click)="showTeamPlayers()">Players</a>
-      <a mat-list-item (click)="showTeamStatistics()">Statistics</a>
-      <a mat-list-item (click)="showTeamAbout()">Information</a>
+      <a mat-list-item class="list-item" (click)="showTeamData()"><span><i class="bi bi-shield-shaded"></i> Team</span></a>
+      <a mat-list-item class="list-item" (click)="toggleTeamMatchesSublist()">
+        <div class="expanded-list-item-container">
+          <span><i class="bi bi-calendar-week"></i> Matches</span>
+          <div class="expandend-list-icon-container">
+            <mat-icon *ngIf="showMatchesSublist">expand_less</mat-icon>
+            <mat-icon *ngIf="!showMatchesSublist">expand_more</mat-icon>
+          </div>
+        </div>
+      </a>
+      <a mat-list-item class="sublist-item" *ngIf="showMatchesSublist" (click)="showTeamPlayedMatches()"> <span><i class="bi bi-dot"></i>Played</span></a>
+      <a mat-list-item class="sublist-item" *ngIf="showMatchesSublist" (click)="showTeamUpcomingMatches()"><span><i class="bi bi-dot"></i>Upcoming</span></a>
+      <a mat-list-item class="list-item" (click)="showTeamPlayers()"><span><i class="bi bi-person-vcard"></i> Players</span></a>
+      <a mat-list-item class="list-item" (click)="showTeamStatistics()"><span><i class="bi bi-graph-up-arrow"></i> Statistics</span></a>
+      <a mat-list-item class="list-item" (click)="showTeamAbout()"><span><i class="bi bi-info-square"></i> Information</span></a>
     </mat-nav-list> 
     <mat-nav-list *ngIf="isCompetitionDetailPage()">
-      <a mat-list-item (click)="showCompetitionTeams()">Teams</a>
-      <a mat-list-item (click)="showLeagueTable()" *ngIf="isLeagueDetailPage()">League Table</a>
-      <a mat-list-item (click)="showTournamentBracket()" *ngIf="!isLeagueDetailPage()">Tournament Bracket</a>
-      <a mat-list-item (click)="showCompetitionMatches()">Matches</a>
-      <a mat-list-item (click)="showCompetitionStatistics()">Statistics</a>
-      <a mat-list-item (click)="showCompetitionAbout()">Information</a>
+      <a mat-list-item class="list-item" (click)="showCompetitionTeams()"><span><i class="bi bi-people"></i> Teams</span></a>
+      <a mat-list-item class="list-item" (click)="showLeagueTable()" *ngIf="isLeagueDetailPage()"><span><i class="bi bi-table"></i> Table</span></a>
+      <a mat-list-item class="list-item" (click)="showTournamentBracket()" *ngIf="!isLeagueDetailPage()"><span><i class="bi bi-diagram-2"></i> Group/Bracket</span></a>
+      <a mat-list-item class="list-item" (click)="showCompetitionMatches()"><span><i class="bi bi-calendar-week"></i> Matches</span></a>
+      <a mat-list-item class="list-item" (click)="showCompetitionStatistics()"><span><i class="bi bi-graph-up-arrow"></i> Statistics</span></a>
+      <a mat-list-item class="list-item" (click)="showCompetitionAbout()"><span><i class="bi bi-info-square"></i> Information</span></a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="sidenav">
