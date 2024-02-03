@@ -5,6 +5,8 @@ import { PlayerService } from '../../../services/playerService/player.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPlayerPopupComponent } from '../../popups/add-player-popup/add-player-popup.component';
 import { PlayerDetailsPopupComponent } from '../../popups/player-details-popup/player-details-popup.component';
+import { DeletePlayerPopupComponent } from '../../popups/delete-player-popup/delete-player-popup.component';
+import { EditPlayerPopupComponent } from '../../popups/edit-player-popup/edit-player-popup.component';
 
 @Component({
   selector: 'app-team-players',
@@ -52,11 +54,22 @@ export class TeamPlayersComponent {
   }
   
   showPlayerEdit(player: Player) {
-    console.log(player);
+    const dialogRef = this.dialog.open(EditPlayerPopupComponent, {data: player});
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === 'success'){
+        window.location.reload();
+      }
+    });
   }
 
   deletePlayer(player: Player) {
-    console.log(player);
+    this.dialog.open(DeletePlayerPopupComponent, {data: {
+      objectId: player.id,
+      teamId: this.teamId,
+      position: {top: '-200px'}
+    }
+    });
   }
 
   private fetchLastPlayerData(){

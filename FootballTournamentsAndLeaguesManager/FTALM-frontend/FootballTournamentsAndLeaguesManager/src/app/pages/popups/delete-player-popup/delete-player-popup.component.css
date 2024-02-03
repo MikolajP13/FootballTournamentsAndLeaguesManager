@@ -1,0 +1,59 @@
+.confirmation-form-body { 
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 100%;
+  padding: 15px;
+}
+
+.confirmation-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px rgb(199, 199, 199);
+}
+
+.confirmation-header span {
+  align-self: center;
+}
+
+.close-button {
+  align-self: flex-end;
+}
+
+.confirmation-text {
+  text-align: justify;
+  padding-top: 15px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.error {
+  color: red !important;
+}
+
+p {
+  text-align: center;
+  font-size: 16px;
+}
+
+button[type="delete"] {
+  background-color: #ff1100;
+  color: #fff;
+}
+
+button[type="delete"]:hover {
+  background-color: #dd2c20;
+}
+
+button[type="button"] {
+  background-color: #ccc;
+}
+
+button[type="button"]:hover {
+  background-color: #999;
+}

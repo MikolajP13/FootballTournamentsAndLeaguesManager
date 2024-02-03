@@ -20,4 +20,11 @@ export class PlayerService {
     return this.httpClient.post<Player>(`${this.apiServerUrl}/player/add`, player);
   }
 
+  updatePlayer(playerId: number, player: Player): Observable<Player>{
+    return this.httpClient.patch<Player>(`${this.apiServerUrl}/player/${playerId}/update`, player);
+  }
+
+  deletePlayer(playerId: number): Observable<boolean> {
+    return this.httpClient.delete<boolean>(`${this.apiServerUrl}/player/delete/${playerId}`);
+  }
 }
