@@ -2,29 +2,19 @@ package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.model.*;
 import com.mp.footballtournamentsandleaguesmanager.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class TeamsMatchService {
     private final TeamsMatchRepository teamsMatchRepository;
     private final MatchRepository matchRepository;
     private final TournamentRepository tournamentRepository;
     private final LeagueRepository leagueRepository;
     private final TeamRepository teamRepository;
-
-    @Autowired
-    public TeamsMatchService(TeamsMatchRepository teamsMatchRepository, MatchRepository matchRepository,
-                             TournamentRepository tournamentRepository, LeagueRepository leagueRepository,
-                             TeamRepository teamRepository) {
-        this.teamsMatchRepository = teamsMatchRepository;
-        this.matchRepository = matchRepository;
-        this.tournamentRepository = tournamentRepository;
-        this.leagueRepository = leagueRepository;
-        this.teamRepository = teamRepository;
-    }
 
     public Boolean addTeamsToMatchInCompetition(Long matchId, Long homeTeamId, Long awayTeamId, Long tournamentId, Long leagueId, boolean isLeagueMatch) {
         TeamsMatch newTeamsMatch = new TeamsMatch();

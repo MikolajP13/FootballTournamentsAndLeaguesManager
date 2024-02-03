@@ -6,26 +6,14 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class PlayerDTO {
-    private Long id;
+public class IncompletePlayerDataDTO {
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
-    private int age;
     private int heightInCm;
     private Player.Foot foot;
-    private Date joinedDate;
     private Player.Position position;
     private Player.PositionDetail positionDetail;
-    private int appearances;
-    private long minutes;
-    private int yellowCards;
-    private int secondYellowCards;
-    private int redCards;
-    private int goalsConceded;
-    private int cleanSheets;
-    private int goals;
-    private int assists;
     private boolean isSuspended;
     private boolean isInjured;
     private boolean isTeamCaptain;

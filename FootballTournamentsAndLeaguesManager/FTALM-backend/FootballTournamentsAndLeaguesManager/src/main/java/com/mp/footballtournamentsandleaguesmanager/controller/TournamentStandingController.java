@@ -3,7 +3,7 @@ package com.mp.footballtournamentsandleaguesmanager.controller;
 import com.mp.footballtournamentsandleaguesmanager.DTO.TournamentStandingDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.TournamentStanding;
 import com.mp.footballtournamentsandleaguesmanager.service.TournamentStandingService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/tournamentStanding")
 public class TournamentStandingController {
     private final TournamentStandingService tournamentStandingService;
-
-    @Autowired
-    public TournamentStandingController(TournamentStandingService tournamentStandingService) {
-        this.tournamentStandingService = tournamentStandingService;
-    }
 
     @PostMapping("/add")
     public ResponseEntity<List<TournamentStanding>> addTournamentStanding(@RequestBody List<TournamentStanding> tournamentStanding) {

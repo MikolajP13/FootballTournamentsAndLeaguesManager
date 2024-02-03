@@ -1,9 +1,17 @@
 package com.mp.footballtournamentsandleaguesmanager.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Cards")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,65 +27,6 @@ public class Card {
     private Player player;
     private int minute;
     private Type cardType;
-
-    public Card() {
-    }
-
-    public Card(Long id, Match match, Team team, Player player, int minute) {
-        this.id = id;
-        this.match = match;
-        this.team = team;
-        this.player = player;
-        this.minute = minute;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Match getMatch() {
-        return match;
-    }
-
-    public void setMatch(Match match) {
-        this.match = match;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public int getMinute() {
-        return minute;
-    }
-
-    public void setMinute(int minute) {
-        this.minute = minute;
-    }
-
-    public Type getCardType() {
-        return cardType;
-    }
-
-    public void setCardType(Type cardType) {
-        this.cardType = cardType;
-    }
 
     @Override
     public String toString() {

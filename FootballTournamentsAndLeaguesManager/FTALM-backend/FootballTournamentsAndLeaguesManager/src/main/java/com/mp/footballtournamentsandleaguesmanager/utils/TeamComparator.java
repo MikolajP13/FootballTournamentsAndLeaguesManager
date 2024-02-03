@@ -1,25 +1,21 @@
-package com.mp.footballtournamentsandleaguesmanager.business;
+package com.mp.footballtournamentsandleaguesmanager.utils;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.MatchDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.TeamCardsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Standing;
 import com.mp.footballtournamentsandleaguesmanager.service.CardService;
 import com.mp.footballtournamentsandleaguesmanager.service.MatchService;
+import lombok.AllArgsConstructor;
 
 import java.util.Comparator;
 import java.util.Random;
 
+@AllArgsConstructor
 public class TeamComparator<T extends Standing> implements Comparator<T> {
     private final Long competitionId;
     private final static Random random = new Random();
     private final MatchService matchService;
     private final CardService cardService;
-
-    public TeamComparator(Long competitionId, MatchService matchService, CardService cardService) {
-        this.competitionId = competitionId;
-        this.matchService = matchService;
-        this.cardService = cardService;
-    }
 
     @Override
     public int compare(T firstTeam, T secondTeam) {

@@ -3,7 +3,7 @@ package com.mp.footballtournamentsandleaguesmanager.service;
 import com.mp.footballtournamentsandleaguesmanager.DTO.TeamDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Team;
 import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -12,13 +12,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class TeamService {
     private final TeamRepository teamRepository;
 
-    @Autowired
-    public TeamService(TeamRepository teamRepository) {
-        this.teamRepository = teamRepository;
-    }
     public TeamDTO getTeamById(Long teamId){
         return convertToDTO(teamRepository.findById(teamId).orElseThrow());
     }
@@ -93,8 +90,8 @@ public class TeamService {
         dto.setName(team.getName());
         dto.setCaptainId(team.getCaptainId());
         dto.setEstablished(team.getEstablished());
-        dto.setIsInLeague(team.isInLeague());
-        dto.setIsInTournament(team.isInTournament());
+        dto.setInLeague(team.isInLeague());
+        dto.setInTournament(team.isInTournament());
         return dto;
     }
 }

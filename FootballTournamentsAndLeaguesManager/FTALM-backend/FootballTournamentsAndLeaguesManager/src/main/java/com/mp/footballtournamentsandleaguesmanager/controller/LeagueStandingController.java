@@ -4,6 +4,7 @@ import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueStandingDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.LeagueStanding;
 import com.mp.footballtournamentsandleaguesmanager.repository.LeagueStandingRepository;
 import com.mp.footballtournamentsandleaguesmanager.service.LeagueStandingService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,17 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/leagueStanding")
 public class LeagueStandingController {
     private final LeagueStandingService leagueStandingService;
-    private final LeagueStandingRepository leagueStandingRepository;
-
-    @Autowired
-    public LeagueStandingController(LeagueStandingService leagueStandingService,
-                                    LeagueStandingRepository leagueStandingRepository) {
-        this.leagueStandingService = leagueStandingService;
-        this.leagueStandingRepository = leagueStandingRepository;
-    }
 
     @PostMapping("/add")
     public ResponseEntity<List<LeagueStanding>> addLeagueStanding(@RequestBody List<LeagueStanding> leagueStanding){

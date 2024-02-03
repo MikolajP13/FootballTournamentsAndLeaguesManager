@@ -6,7 +6,7 @@ import com.mp.footballtournamentsandleaguesmanager.model.Team;
 import com.mp.footballtournamentsandleaguesmanager.model.TournamentLeagueBase;
 import com.mp.footballtournamentsandleaguesmanager.repository.LeagueRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -15,16 +15,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class LeagueService {
     private final LeagueRepository leagueRepository;
     private final TeamRepository teamRepository;
-
-    @Autowired
-    public LeagueService(LeagueRepository leagueRepository,
-                         TeamRepository teamRepository) {
-        this.leagueRepository = leagueRepository;
-        this.teamRepository = teamRepository;
-    }
 
     public LeagueDTO getLeagueById(Long leagueId){
         return convertToDTO(leagueRepository.findById(leagueId).orElseThrow()); //TODO

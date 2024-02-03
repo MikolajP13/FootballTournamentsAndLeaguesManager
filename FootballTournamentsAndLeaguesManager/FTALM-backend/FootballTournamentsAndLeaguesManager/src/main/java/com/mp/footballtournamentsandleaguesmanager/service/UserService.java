@@ -1,8 +1,8 @@
 package com.mp.footballtournamentsandleaguesmanager.service;
 
-import com.mp.footballtournamentsandleaguesmanager.exception.UserNotFoundException;
 import com.mp.footballtournamentsandleaguesmanager.model.User;
 import com.mp.footballtournamentsandleaguesmanager.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,15 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public List<User> findAllUsers(){
         return userRepository.findAll();

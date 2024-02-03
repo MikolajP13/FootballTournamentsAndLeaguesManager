@@ -4,7 +4,7 @@ import com.mp.footballtournamentsandleaguesmanager.DTO.MatchDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Match;
 import com.mp.footballtournamentsandleaguesmanager.repository.MatchRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -13,16 +13,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class MatchService {
     private final MatchRepository matchRepository;
     private final TeamRepository teamRepository;
-
-    @Autowired
-    public MatchService(MatchRepository matchRepository,
-                        TeamRepository teamRepository) {
-        this.matchRepository = matchRepository;
-        this.teamRepository = teamRepository;
-    }
 
     public MatchDTO getMatchById(Long matchId){
         return convertToDTO(matchRepository.findById(matchId).orElseThrow());

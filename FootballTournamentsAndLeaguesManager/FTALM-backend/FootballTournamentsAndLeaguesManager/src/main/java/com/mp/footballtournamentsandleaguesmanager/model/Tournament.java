@@ -1,6 +1,10 @@
 package com.mp.footballtournamentsandleaguesmanager.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Date;
 import java.util.HashSet;
@@ -8,6 +12,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Tournaments")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Tournament extends TournamentLeagueBase{
 
     @ManyToMany(
@@ -21,19 +29,6 @@ public class Tournament extends TournamentLeagueBase{
     private Set<Team> teams = new HashSet<>();
     private TournamentType type;
 
-    public Tournament() {
-    }
-
-    public Tournament(Long id, User user, String name, Date startDate, Date endDate, int numberOfTeams, Status status) {
-        super(id, user, name, startDate, endDate, numberOfTeams, status);
-    }
-
-    public Tournament(Long id, User user, String name, Date startDate, Date endDate, int numberOfTeams, Status status, Set<Team> teams, TournamentType type) {
-        super(id, user, name, startDate, endDate, numberOfTeams, status);
-        this.teams = teams;
-        this.type = type;
-    }
-
     public void addTeamToTournament(Team team){
         this.teams.add(team);
         team.getTournaments().add(this);
@@ -42,14 +37,6 @@ public class Tournament extends TournamentLeagueBase{
     public void removeTeamFromTournament(Team team){
         this.teams.remove(team);
         team.getTournaments().remove(this);
-    }
-
-    public TournamentType getType() {
-        return type;
-    }
-
-    public void setType(TournamentType type) {
-        this.type = type;
     }
 
     @Override

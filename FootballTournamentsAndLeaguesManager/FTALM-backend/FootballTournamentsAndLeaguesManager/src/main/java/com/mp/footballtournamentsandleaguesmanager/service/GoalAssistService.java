@@ -8,6 +8,7 @@ import com.mp.footballtournamentsandleaguesmanager.model.Player;
 import com.mp.footballtournamentsandleaguesmanager.repository.GoalAssistRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.PlayerRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +18,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class GoalAssistService {
     private final GoalAssistRepository goalAssistRepository;
     private final PlayerRepository playerRepository;
-    private final TeamRepository teamRepository;
-
-    @Autowired
-    public GoalAssistService(GoalAssistRepository goalAssistRepository, PlayerRepository playerRepository,
-                       TeamRepository teamRepository) {
-        this.goalAssistRepository = goalAssistRepository;
-        this.playerRepository = playerRepository;
-        this.teamRepository = teamRepository;
-    }
 
     public GoalAssist addGoalAssist(GoalAssist goalAssist){
         return goalAssistRepository.save(goalAssist);

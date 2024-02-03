@@ -5,7 +5,7 @@ import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerAssistsDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerGoalsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.GoalAssist;
 import com.mp.footballtournamentsandleaguesmanager.service.GoalAssistService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/goalAssist")
 public class GoalAssistController {
     private final GoalAssistService goalAssistService;
-
-    @Autowired
-    public GoalAssistController(GoalAssistService goalAssistService) {
-        this.goalAssistService = goalAssistService;
-    }
 
     @PostMapping("/add")
     public ResponseEntity<GoalAssist> addGoalAssist(@RequestBody GoalAssist goalAssist){

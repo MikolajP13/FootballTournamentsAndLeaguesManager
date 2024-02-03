@@ -1,9 +1,17 @@
 package com.mp.footballtournamentsandleaguesmanager.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Substitutions")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Substitution {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,67 +29,6 @@ public class Substitution {
     @JoinColumn(name = "exiting_player_id", nullable = false)
     private Player exitingPlayer;
     private int minute;
-
-    public Substitution() {
-    }
-
-    public Substitution(Long id, Match match, Team team, Player enteringPlayer, Player exitingPlayer, int minute) {
-        this.id = id;
-        this.match = match;
-        this.team = team;
-        this.enteringPlayer = enteringPlayer;
-        this.exitingPlayer = exitingPlayer;
-        this.minute = minute;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Match getMatch() {
-        return match;
-    }
-
-    public void setMatch(Match match) {
-        this.match = match;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    public Player getEnteringPlayer() {
-        return enteringPlayer;
-    }
-
-    public void setEnteringPlayer(Player enteringPlayer) {
-        this.enteringPlayer = enteringPlayer;
-    }
-
-    public Player getExitingPlayer() {
-        return exitingPlayer;
-    }
-
-    public void setExitingPlayer(Player exitingPlayer) {
-        this.exitingPlayer = exitingPlayer;
-    }
-
-    public int getMinute() {
-        return minute;
-    }
-
-    public void setMinute(int minute) {
-        this.minute = minute;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Substitution{");

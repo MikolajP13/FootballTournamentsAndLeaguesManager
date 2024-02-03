@@ -1,4 +1,4 @@
-package com.mp.footballtournamentsandleaguesmanager.service;
+package com.mp.footballtournamentsandleaguesmanager.utils;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueStandingDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.StandingDTO;

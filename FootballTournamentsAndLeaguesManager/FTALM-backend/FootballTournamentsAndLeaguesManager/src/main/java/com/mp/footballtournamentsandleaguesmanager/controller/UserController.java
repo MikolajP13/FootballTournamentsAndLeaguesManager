@@ -3,7 +3,7 @@ package com.mp.footballtournamentsandleaguesmanager.controller;
 import com.mp.footballtournamentsandleaguesmanager.model.User;
 import com.mp.footballtournamentsandleaguesmanager.service.AuthService;
 import com.mp.footballtournamentsandleaguesmanager.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,16 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
     private final AuthService authService;
-
-    @Autowired
-    public UserController(UserService userService, AuthService authService) {
-        this.userService = userService;
-        this.authService = authService;
-    }
 
     @PostMapping("/login")
     public ResponseEntity<Boolean> userLogin(@RequestBody User user){

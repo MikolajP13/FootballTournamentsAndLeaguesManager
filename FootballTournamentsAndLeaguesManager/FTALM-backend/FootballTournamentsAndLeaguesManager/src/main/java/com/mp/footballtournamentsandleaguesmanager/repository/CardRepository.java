@@ -1,6 +1,5 @@
 package com.mp.footballtournamentsandleaguesmanager.repository;
 
-import com.mp.footballtournamentsandleaguesmanager.DTO.CardDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerCardsDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.TeamCardsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Card;

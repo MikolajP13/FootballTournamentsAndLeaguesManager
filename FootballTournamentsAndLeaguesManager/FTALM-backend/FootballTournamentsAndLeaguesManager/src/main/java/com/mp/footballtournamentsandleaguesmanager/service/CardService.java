@@ -8,7 +8,7 @@ import com.mp.footballtournamentsandleaguesmanager.model.Team;
 import com.mp.footballtournamentsandleaguesmanager.repository.CardRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.PlayerRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -17,18 +17,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class CardService {
     private final CardRepository cardRepository;
     private final PlayerRepository playerRepository;
     private final TeamRepository teamRepository;
-
-    @Autowired
-    public CardService(CardRepository cardRepository, PlayerRepository playerRepository,
-                       TeamRepository teamRepository) {
-        this.cardRepository = cardRepository;
-        this.playerRepository = playerRepository;
-        this.teamRepository = teamRepository;
-    }
 
     public Card addCard(Card card){
         return cardRepository.save(card);

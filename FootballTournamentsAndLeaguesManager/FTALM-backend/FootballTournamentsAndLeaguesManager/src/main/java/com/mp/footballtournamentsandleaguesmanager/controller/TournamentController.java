@@ -5,7 +5,7 @@ import com.mp.footballtournamentsandleaguesmanager.DTO.TournamentTeamDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Tournament;
 import com.mp.footballtournamentsandleaguesmanager.model.TournamentLeagueBase;
 import com.mp.footballtournamentsandleaguesmanager.service.TournamentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/tournament")
 public class TournamentController {
     private final TournamentService tournamentService;
-
-    @Autowired
-    public TournamentController(TournamentService tournamentService) {
-        this.tournamentService = tournamentService;
-    }
 
     @GetMapping("/find/{tournamentId}")
     public ResponseEntity<TournamentDTO> getTournamentById(@PathVariable Long tournamentId){

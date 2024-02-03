@@ -1,12 +1,20 @@
 package com.mp.footballtournamentsandleaguesmanager.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.sql.Date;
 
 @MappedSuperclass
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class TournamentLeagueBase {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,75 +28,6 @@ public class TournamentLeagueBase {
     private Date endDate;
     private int numberOfTeams;
     private Status status;
-
-    public TournamentLeagueBase() {
-    }
-
-    public TournamentLeagueBase(Long id, User user, String name, Date startDate, Date endDate, int numberOfTeams, Status status) {
-        this.id = id;
-        this.user = user;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.numberOfTeams = numberOfTeams;
-        this.status = status;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String leagueName) {
-        this.name = leagueName;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public int getNumberOfTeams() {
-        return numberOfTeams;
-    }
-
-    public void setNumberOfTeams(int numberOfTeams) {
-        this.numberOfTeams = numberOfTeams;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 
     @Override
     public String toString() {

@@ -1,9 +1,10 @@
 package com.mp.footballtournamentsandleaguesmanager.controller;
 
+import com.mp.footballtournamentsandleaguesmanager.DTO.IncompletePlayerDataDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Player;
 import com.mp.footballtournamentsandleaguesmanager.service.PlayerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/player")
 public class PlayerController {
     private final PlayerService playerService;
-
-    @Autowired
-    public PlayerController(PlayerService playerService) {
-        this.playerService = playerService;
-    }
 
     @GetMapping("/find/{playerId}")
     public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Long playerId){
@@ -37,8 +34,13 @@ public class PlayerController {
         return new ResponseEntity<>(newPlayer, HttpStatus.CREATED);
     }
 
+    @PatchMapping("/{playerId}/update")
+    public ResponseEntity<PlayerDTO> updatePlayer(@PathVariable Long playerId, @RequestBody IncompletePlayerDataDTO incompletePlayerDataDTO) {
+        return new ResponseEntity<>(playerService.updatePlayer(playerId, incompletePlayerDataDTO), HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete/{playerId}")
-    public ResponseEntity<String> deletePlayerById(@PathVariable Long playerId){
-        return playerService.deletePlayerById(playerId) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    public ResponseEntity<Boolean> deletePlayerById(@PathVariable Long playerId){
+        return playerService.deletePlayerById(playerId) ? ResponseEntity.ok(true) : ResponseEntity.ok(false);
     }
 }

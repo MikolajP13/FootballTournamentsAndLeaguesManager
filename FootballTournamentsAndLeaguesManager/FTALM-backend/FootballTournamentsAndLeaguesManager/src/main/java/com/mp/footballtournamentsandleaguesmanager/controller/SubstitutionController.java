@@ -3,7 +3,7 @@ package com.mp.footballtournamentsandleaguesmanager.controller;
 import com.mp.footballtournamentsandleaguesmanager.DTO.SubstitutionDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Substitution;
 import com.mp.footballtournamentsandleaguesmanager.service.SubstitutionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/substitution")
 public class SubstitutionController {
     private final SubstitutionService substitutionService;
-
-    @Autowired
-    public SubstitutionController(SubstitutionService substitutionService) {
-        this.substitutionService = substitutionService;
-    }
 
     @PostMapping("/add")
     public ResponseEntity<Substitution> addSubstitution(@RequestBody Substitution substitution){

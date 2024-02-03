@@ -1,21 +1,21 @@
 package com.mp.footballtournamentsandleaguesmanager.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "LeagueStandings")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class LeagueStanding extends Standing{
     @ManyToOne
     @JoinColumn(name = "league_id", nullable = false)
     private League league;
-
-    public LeagueStanding() { }
-
-    public LeagueStanding(Team team, int matches, int points, int goalsFor, int goalsAgainst, int wins,
-                          int draws, int losses, League league) {
-        super(team, matches, points, goalsFor, goalsAgainst, wins, draws, losses);
-        this.league = league;
-    }
 
     public League getLeague() {
         return league;

@@ -2,19 +2,15 @@ package com.mp.footballtournamentsandleaguesmanager.controller;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.TeamsMatchDTO;
 import com.mp.footballtournamentsandleaguesmanager.service.TeamsMatchService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/teamsMatch")
 public class TeamsMatchController {
     private final TeamsMatchService teamsMatchService;
-
-    @Autowired
-    public TeamsMatchController(TeamsMatchService teamsMatchService) {
-        this.teamsMatchService = teamsMatchService;
-    }
 
     @PostMapping("/addLeagueMatch")
     public ResponseEntity<String> addTeamsToMatchInLeague(@RequestBody TeamsMatchDTO teamsMatchDTO){

@@ -1,35 +1,23 @@
 package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueStandingDTO;
-import com.mp.footballtournamentsandleaguesmanager.business.TeamComparator;
+import com.mp.footballtournamentsandleaguesmanager.utils.StandingMapper;
+import com.mp.footballtournamentsandleaguesmanager.utils.TeamComparator;
 import com.mp.footballtournamentsandleaguesmanager.model.LeagueStanding;
-import com.mp.footballtournamentsandleaguesmanager.repository.LeagueRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.LeagueStandingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class LeagueStandingService {
-    private final Random random = new Random();
+
     private final LeagueStandingRepository leagueStandingRepository;
     private final MatchService matchService;
-    private final LeagueRepository leagueRepository;
     private final CardService cardService;
-    private static final int POINTS_FOR_WIN = 3;
-    private static final int POINTS_FOR_DRAW = 1;
-
-    @Autowired
-    public LeagueStandingService(LeagueStandingRepository leagueStandingRepository, MatchService matchService,
-                                 LeagueRepository leagueRepository,
-                                 CardService cardService) {
-        this.leagueStandingRepository = leagueStandingRepository;
-        this.matchService = matchService;
-        this.leagueRepository = leagueRepository;
-        this.cardService = cardService;
-    }
 
     public List<LeagueStanding> addLeagueStanding(List<LeagueStanding> leagueStandings) {
         return leagueStandingRepository.saveAll(leagueStandings);
