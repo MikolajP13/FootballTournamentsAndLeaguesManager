@@ -36,7 +36,7 @@ public class StandingMapper {
     }
 
     public static <T extends Standing, D extends StandingDTO> T updateStandingAndReturn(T standing, D standingDTO) {
-        standing.setMatches(standingDTO.getMatches() + 1);
+        standing.setMatches(standing.getMatches() + 1);
         standing.setGoalsFor(standing.getGoalsFor() + standingDTO.getGoalsFor());
         standing.setGoalsAgainst(standing.getGoalsAgainst() + standingDTO.getGoalsAgainst());
 

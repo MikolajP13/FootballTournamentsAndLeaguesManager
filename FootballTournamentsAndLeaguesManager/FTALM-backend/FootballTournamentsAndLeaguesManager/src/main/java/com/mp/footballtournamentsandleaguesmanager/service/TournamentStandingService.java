@@ -38,6 +38,7 @@ public class TournamentStandingService {
 
         return tournamentStandingList.stream()
                 .map(this::convertToDTO)
+                .peek(e -> e.setTeamForm(this.matchService.findLastFiveMatchesByTeamIdAndTournamentId(tournamentId, e.getTeamId(), e.getGroupId())))
                 .collect(Collectors.toList());
     }
 

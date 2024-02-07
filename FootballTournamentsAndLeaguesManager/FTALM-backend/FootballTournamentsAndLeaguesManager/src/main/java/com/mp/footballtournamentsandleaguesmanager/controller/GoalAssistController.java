@@ -76,4 +76,14 @@ public class GoalAssistController {
     public ResponseEntity<List<PlayerAssistsDTO>> getPlayersAssistsByLeagueId(@PathVariable Long leagueId){
         return new ResponseEntity<>(goalAssistService.getPlayersAssistsByLeagueId(leagueId), HttpStatus.OK);
     }
+
+    @GetMapping("/getPlayersGoals/tournament/{tournamentId}")
+    public ResponseEntity<List<PlayerGoalsDTO>> getPlayersGoalsByTournamentId(@PathVariable Long tournamentId){
+        return new ResponseEntity<>(goalAssistService.getPlayersGoalsByTournamentId(tournamentId), HttpStatus.OK);
+    }
+
+    @GetMapping("/getPlayersAssists/tournament/{tournamentId}")
+    public ResponseEntity<List<PlayerAssistsDTO>> getPlayersAssistsByTournamentId(@PathVariable Long tournamentId){
+        return new ResponseEntity<>(goalAssistService.getPlayersAssistsByTournamentId(tournamentId), HttpStatus.OK);
+    }
 }

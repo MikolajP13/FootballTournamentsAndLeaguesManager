@@ -73,6 +73,16 @@ public class CardController {
         return new ResponseEntity<>(cardService.getPlayersRedCardsByLeagueId(leagueId), HttpStatus.OK);
     }
 
+    @GetMapping("/getPlayersYellowCards/tournament/{tournamentId}")
+    public ResponseEntity<List<PlayerCardsDTO>> getPlayersYellowCardsByTournamentId(@PathVariable Long tournamentId){
+        return new ResponseEntity<>(cardService.getPlayersYellowCardsByTournamentId(tournamentId), HttpStatus.OK);
+    }
+
+    @GetMapping("/getPlayersRedCards/tournament/{tournamentId}")
+    public ResponseEntity<List<PlayerCardsDTO>> getPlayersRedCardsByTournamentId(@PathVariable Long tournamentId){
+        return new ResponseEntity<>(cardService.getPlayersRedCardsByTournamentId(tournamentId), HttpStatus.OK);
+    }
+
     @GetMapping("/getTeamCards/league/{leagueId}/team/{teamId}")
     public ResponseEntity<TeamCardsDTO> getCardsOverallByLeagueIdAndTeamId(@PathVariable Long leagueId, @PathVariable Long teamId){
         return new ResponseEntity<>(cardService.getCardsOverallByLeagueIdAndTeamId(leagueId, teamId), HttpStatus.OK);

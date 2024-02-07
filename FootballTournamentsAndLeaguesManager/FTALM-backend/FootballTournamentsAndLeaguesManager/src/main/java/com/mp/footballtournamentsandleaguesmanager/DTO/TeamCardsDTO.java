@@ -4,12 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public class TeamCardsDTO {
     private Long teamId;
     private String teamName;
     private Long yellowCards;
     private Long redCards;
+
+    public TeamCardsDTO(Long teamId, String teamName, Long yellowCards, Long redCards) {
+        this.teamId = teamId;
+        this.teamName = teamName;
+        this.yellowCards = yellowCards;
+        this.redCards = redCards;
+    }
 
     @Override
     public String toString() {

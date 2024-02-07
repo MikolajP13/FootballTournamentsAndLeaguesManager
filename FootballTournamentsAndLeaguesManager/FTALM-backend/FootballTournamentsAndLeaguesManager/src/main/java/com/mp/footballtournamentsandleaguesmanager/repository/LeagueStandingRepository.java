@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface LeagueStandingRepository extends JpaRepository<LeagueStanding, Long> {
     Optional<List<LeagueStanding>> getLeagueStandingByLeagueId(Long leagueId);
-    Optional<List<LeagueStanding>> getLeagueStandingsByLeagueIdOrderByGoalsFor(Long leagueId);
-    Optional<List<LeagueStanding>> getLeagueStandingsByLeagueIdOrderByWins(Long leagueId);
-    Optional<List<LeagueStanding>> getLeagueStandingsByLeagueIdOrderByLosses(Long leagueId);
+    Optional<List<LeagueStanding>> getLeagueStandingsByLeagueIdOrderByGoalsForDesc(Long leagueId);
+    Optional<List<LeagueStanding>> getLeagueStandingsByLeagueIdOrderByWinsDesc(Long leagueId);
+    Optional<List<LeagueStanding>> getLeagueStandingsByLeagueIdOrderByLossesDesc(Long leagueId);
     Optional<LeagueStanding> findByLeagueIdAndTeamId(Long leagueId, Long teamId);
 }

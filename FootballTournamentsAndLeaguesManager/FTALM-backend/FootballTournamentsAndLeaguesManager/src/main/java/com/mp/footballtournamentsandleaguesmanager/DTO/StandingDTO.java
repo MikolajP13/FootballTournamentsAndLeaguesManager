@@ -2,6 +2,8 @@ package com.mp.footballtournamentsandleaguesmanager.DTO;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class StandingDTO {
     private Long id;
@@ -14,4 +16,5 @@ public class StandingDTO {
     private int wins;
     private int draws;
     private int losses;
+    private List<String> teamForm;
 }

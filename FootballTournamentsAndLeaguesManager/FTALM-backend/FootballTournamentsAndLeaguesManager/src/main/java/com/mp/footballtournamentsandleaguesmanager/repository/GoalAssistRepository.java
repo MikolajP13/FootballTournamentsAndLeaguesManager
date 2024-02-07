@@ -32,5 +32,21 @@ public interface GoalAssistRepository extends JpaRepository<GoalAssist, Long> {
             "GROUP BY p.id, t.id " +
             "ORDER BY COUNT(g.id) DESC")
     Optional<List<PlayerAssistsDTO>> getPlayersAssistsByLeagueId(Long leagueId);
-
+    @Query("SELECT new com.mp.footballtournamentsandleaguesmanager.DTO.PlayerGoalsDTO(p.id, " +
+            "p.firstName, p.lastName, t.id, t.name, COUNT(g.id)) " +
+            "FROM GoalAssist g INNER JOIN g.match m INNER JOIN g.team t INNER JOIN g.scorerPlayer p " +
+            "WHERE m.tournament.id = :tournamentId " +
+            "GROUP BY p.id, t.id " +
+            "ORDER BY COUNT(g.id) DESC")
+    Optional<List<PlayerGoalsDTO>> getPlayersGoalsByTournamentId(Long tournamentId);
+    @Query("SELECT new com.mp.footballtournamentsandleaguesmanager.DTO.PlayerAssistsDTO(" +
+            "p.id, p.firstName, p.lastName, t.id, t.name, COUNT(g.id)) " +
+            "FROM GoalAssist g " +
+            "JOIN Team t ON g.team.id = t.id " +
+            "JOIN Match m ON g.match.id = m.id " +
+            "JOIN Player p ON g.assistPlayerId = p.id " +
+            "WHERE m.tournament.id = :tournamentId " +
+            "GROUP BY p.id, t.id " +
+            "ORDER BY COUNT(g.id) DESC")
+    Optional<List<PlayerAssistsDTO>> getPlayersAssistsByTournamentId(Long tournamentId);
 }

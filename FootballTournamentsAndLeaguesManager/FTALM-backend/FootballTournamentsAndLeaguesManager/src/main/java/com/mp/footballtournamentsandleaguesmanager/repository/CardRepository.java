@@ -35,6 +35,26 @@ public interface CardRepository extends JpaRepository<Card, Long> {
             "ORDER BY " +
             "SUM(CASE WHEN c.cardType = 2 THEN 1 ELSE 0 END) DESC")
     Optional<List<PlayerCardsDTO>> getPlayersRedCardsByLeagueId(Long leagueId);
+    @Query("SELECT new com.mp.footballtournamentsandleaguesmanager.DTO.PlayerCardsDTO(p.id, " +
+            "p.firstName, p.lastName, t.id, t.name, " +
+            "SUM(CASE WHEN c.cardType = 0 THEN 1 ELSE 0 END), " +
+            "SUM(CASE WHEN c.cardType = 2 THEN 1 ELSE 0 END)) " +
+            "FROM Card c INNER JOIN c.match m INNER JOIN c.team t INNER JOIN c.player p " +
+            "WHERE m.tournament.id = :tournamentId " +
+            "GROUP BY p.id, t.id " +
+            "ORDER BY " +
+            "SUM(CASE WHEN c.cardType = 0 THEN 1 ELSE 0 END) DESC")
+    Optional<List<PlayerCardsDTO>> getPlayersYellowCardsByTournamentId(Long tournamentId);
+    @Query("SELECT new com.mp.footballtournamentsandleaguesmanager.DTO.PlayerCardsDTO(p.id, " +
+            "p.firstName, p.lastName, t.id, t.name, " +
+            "SUM(CASE WHEN c.cardType = 0 THEN 1 ELSE 0 END), " +
+            "SUM(CASE WHEN c.cardType = 2 THEN 1 ELSE 0 END)) " +
+            "FROM Card c INNER JOIN c.match m INNER JOIN c.team t INNER JOIN c.player p " +
+            "WHERE m.tournament.id = :tournamentId " +
+            "GROUP BY p.id, t.id " +
+            "ORDER BY " +
+            "SUM(CASE WHEN c.cardType = 2 THEN 1 ELSE 0 END) DESC")
+    Optional<List<PlayerCardsDTO>> getPlayersRedCardsByTournamentId(Long tournamentId);
     @Query("SELECT new com.mp.footballtournamentsandleaguesmanager.DTO.TeamCardsDTO(t.id, t.name, " +
             "SUM(CASE WHEN c.cardType = 0 THEN 1 ELSE 0 END), " +
             "SUM(CASE WHEN c.cardType = 2 THEN 1 ELSE 0 END)) " +

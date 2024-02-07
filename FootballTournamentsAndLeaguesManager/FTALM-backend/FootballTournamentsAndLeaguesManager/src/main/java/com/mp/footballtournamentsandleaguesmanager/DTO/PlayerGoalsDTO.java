@@ -10,4 +10,13 @@ public class PlayerGoalsDTO {
     private Long teamId;
     private String teamName;
     private Long goals;
+
+    public PlayerGoalsDTO(Long playerId, String firstName, String lastName, Long teamId, String teamName, Long goals) {
+        this.playerId = playerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.teamId = teamId;
+        this.teamName = teamName;
+        this.goals = goals;
+    }
 }

@@ -1,10 +1,10 @@
 package com.mp.footballtournamentsandleaguesmanager.controller;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.MatchDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.MatchEventDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Match;
 import com.mp.footballtournamentsandleaguesmanager.service.MatchService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -81,5 +81,10 @@ public class MatchController {
     public ResponseEntity<MatchDTO> updateMatch(@PathVariable Long matchId, @RequestBody MatchDTO matchDTO){
         Match updatedMatch = matchService.updateMatch(matchId, matchDTO);
         return ResponseEntity.ok(matchService.convertToDTO(updatedMatch));
+    }
+
+    @PatchMapping("/update-players-statistics")
+    public ResponseEntity<Boolean> updatePlayersStatistics(@RequestBody List<MatchEventDTO> matchEventList) {
+        return ResponseEntity.ok(matchService.updatePlayersStatistics(matchEventList));
     }
 }

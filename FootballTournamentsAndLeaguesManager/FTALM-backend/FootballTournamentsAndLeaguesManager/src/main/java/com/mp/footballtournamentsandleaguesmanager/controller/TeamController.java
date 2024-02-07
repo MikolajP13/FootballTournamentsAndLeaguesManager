@@ -76,10 +76,20 @@ public class TeamController {
         return ResponseEntity.ok(teamService.countTeamsByTournamentsId(tournamentId));
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseEntity<Team> addTeam(@RequestBody Team team){
         Team newTeam = teamService.addTeam(team);
         return new ResponseEntity<>(newTeam, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{teamId}/remove-from-league/{leagueId}")
+    public ResponseEntity<Boolean> removeTeamFromLeague(@PathVariable Long teamId, @PathVariable Long leagueId) {
+        return teamService.removeTeamFromLeague(teamId, leagueId) ? ResponseEntity.ok(true) : ResponseEntity.ok(false);
+    }
+
+    @DeleteMapping("/{teamId}/remove-from-tournament/{tournamentId}")
+    public ResponseEntity<Boolean> removeTeamFromTournament(@PathVariable Long teamId, @PathVariable Long tournamentId) {
+        return teamService.removeTeamFromTournament(teamId, tournamentId) ? ResponseEntity.ok(true) : ResponseEntity.ok(false);
     }
 
     @DeleteMapping("/delete/{teamId}")

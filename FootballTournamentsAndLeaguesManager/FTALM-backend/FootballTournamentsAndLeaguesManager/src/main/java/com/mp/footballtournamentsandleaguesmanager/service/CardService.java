@@ -81,6 +81,16 @@ public class CardService {
         return optionalPlayerCardsDTOList.orElse(Collections.emptyList());
     }
 
+    public List<PlayerCardsDTO> getPlayersYellowCardsByTournamentId(Long tournamentId){
+        Optional<List<PlayerCardsDTO>> optionalPlayerCardsDTOList = cardRepository.getPlayersYellowCardsByTournamentId(tournamentId);
+        return optionalPlayerCardsDTOList.orElse(Collections.emptyList());
+    }
+
+    public List<PlayerCardsDTO> getPlayersRedCardsByTournamentId(Long tournamentId){
+        Optional<List<PlayerCardsDTO>> optionalPlayerCardsDTOList = cardRepository.getPlayersRedCardsByTournamentId(tournamentId);
+        return optionalPlayerCardsDTOList.orElse(Collections.emptyList());
+    }
+
     public TeamCardsDTO getCardsOverallByLeagueIdAndTeamId(Long leagueId, Long teamId){
         Optional<TeamCardsDTO> optionalTeamCardsDTO = cardRepository.getCardsOverallByLeagueIdAndTeamId(leagueId, teamId);
         Team team = teamRepository.findById(teamId).orElseThrow();

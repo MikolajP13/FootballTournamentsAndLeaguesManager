@@ -11,14 +11,13 @@ import com.mp.footballtournamentsandleaguesmanager.repository.TournamentReposito
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class PlayerService {
+    private final List<Player.PositionDetail> POSITION_ORDER = Arrays.asList(Player.PositionDetail.values());
     private final PlayerRepository playerRepository;
     private final TournamentRepository tournamentRepository;
     private final LeagueRepository leagueRepository;
@@ -29,6 +28,8 @@ public class PlayerService {
     public List<PlayerDTO> getAllPlayersByTeamId(Long teamId){
         Optional<List<Player>> playersOptional = playerRepository.findAllByTeamId(teamId);
         List<Player> players = playersOptional.orElse(Collections.emptyList());
+        players.sort(Comparator.comparing(p -> POSITION_ORDER.indexOf(p.getPositionDetail()), Comparator.reverseOrder()));
+
         return players.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());

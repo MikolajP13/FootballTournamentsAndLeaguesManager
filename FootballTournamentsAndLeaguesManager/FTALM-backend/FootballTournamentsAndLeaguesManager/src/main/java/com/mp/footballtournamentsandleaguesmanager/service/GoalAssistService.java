@@ -88,6 +88,16 @@ public class GoalAssistService {
         return optionalPlayerAssistsDTOList.orElse(Collections.emptyList());
     }
 
+    public List<PlayerGoalsDTO> getPlayersGoalsByTournamentId(Long tournamentId) {
+        Optional<List<PlayerGoalsDTO>> optionalGoalScorerDTOList = goalAssistRepository.getPlayersGoalsByTournamentId(tournamentId);
+        return optionalGoalScorerDTOList.orElse(Collections.emptyList());
+    }
+
+    public List<PlayerAssistsDTO> getPlayersAssistsByTournamentId(Long tournamentId){
+        Optional<List<PlayerAssistsDTO>> optionalPlayerAssistsDTOList = goalAssistRepository.getPlayersAssistsByTournamentId(tournamentId);
+        return optionalPlayerAssistsDTOList.orElse(Collections.emptyList());
+    }
+
     public GoalAssistDTO convertToDTO(GoalAssist goalAssist){
         Optional<Player> assistPlayerOptional = Optional.empty();
         GoalAssistDTO dto = new GoalAssistDTO();

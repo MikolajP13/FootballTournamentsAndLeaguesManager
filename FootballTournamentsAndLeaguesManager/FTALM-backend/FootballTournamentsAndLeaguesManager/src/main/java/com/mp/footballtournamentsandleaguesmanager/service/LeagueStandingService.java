@@ -42,27 +42,28 @@ public class LeagueStandingService {
 
         return leagueStandingList.stream()
                 .map(this::convertToDTO)
-                .collect(Collectors.toList());
+                .peek(e -> e.setTeamForm(this.matchService.findLastFiveMatchesByTeamIdInLeagueId(leagueId, e.getTeamId())))
+                .toList();
     }
 
-    public List<LeagueStandingDTO> getLeagueStandingsByLeagueIdOrderByGoalsFor(Long leagueId){
-        Optional<List<LeagueStanding>> optionalLeagueStandingList = leagueStandingRepository.getLeagueStandingsByLeagueIdOrderByGoalsFor(leagueId);
+    public List<LeagueStandingDTO> getLeagueStandingsByLeagueIdOrderByGoalsForDesc(Long leagueId){
+        Optional<List<LeagueStanding>> optionalLeagueStandingList = leagueStandingRepository.getLeagueStandingsByLeagueIdOrderByGoalsForDesc(leagueId);
         List<LeagueStanding> leagueStandingDTOList = optionalLeagueStandingList.orElse(Collections.emptyList());
         return leagueStandingDTOList.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<LeagueStandingDTO> getLeagueStandingsByLeagueIdOrderByWins(Long leagueId){
-        Optional<List<LeagueStanding>> optionalLeagueStandingList = leagueStandingRepository.getLeagueStandingsByLeagueIdOrderByWins(leagueId);
+    public List<LeagueStandingDTO> getLeagueStandingsByLeagueIdOrderByWinsDesc(Long leagueId){
+        Optional<List<LeagueStanding>> optionalLeagueStandingList = leagueStandingRepository.getLeagueStandingsByLeagueIdOrderByWinsDesc(leagueId);
         List<LeagueStanding> leagueStandingList = optionalLeagueStandingList.orElse(Collections.emptyList());
         return leagueStandingList.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<LeagueStandingDTO> getLeagueStandingsByLeagueIdOrderByLosses(Long leagueId){
-        Optional<List<LeagueStanding>> optionalLeagueStandingList = leagueStandingRepository.getLeagueStandingsByLeagueIdOrderByLosses(leagueId);
+    public List<LeagueStandingDTO> getLeagueStandingsByLeagueIdOrderByLossesDesc(Long leagueId){
+        Optional<List<LeagueStanding>> optionalLeagueStandingList = leagueStandingRepository.getLeagueStandingsByLeagueIdOrderByLossesDesc(leagueId);
         List<LeagueStanding> leagueStandingList = optionalLeagueStandingList.orElse(Collections.emptyList());
         return leagueStandingList.stream()
                 .map(this::convertToDTO)
