@@ -14,6 +14,7 @@ export class ConfirmationPopupComponent {
   id: number;
   object: string;
   warning: boolean = false;
+  disable: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<ConfirmationPopupComponent>, private teamService: TeamService, 
     private tournamentService: TournamentService, private leagueService: LeagueService,
@@ -22,6 +23,7 @@ export class ConfirmationPopupComponent {
     this.object = data.objectName;
     this.id = data.id;
     this.warning = data.warning;
+    this.disable = data.disable;
   }
 
   ngOnInit() {

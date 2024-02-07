@@ -73,7 +73,7 @@
           <div *ngIf="event.details.cardType == 'YELLOW' || event.details.cardType == 'SECOND_YELLOW'" class="square-small yellow">
             <div *ngIf="event.details.cardType == 'SECOND_YELLOW'" class="square-small-second-yellow"></div>
           </div>
-          <div *ngIf="event.details.cardType == 'RED'" class="square red"></div>
+          <div *ngIf="event.details.cardType == 'RED'" class="square-small red"></div>
           <span class="event-minute"> {{event.details.minute}}' </span>
         </div>
         <div class="container" *ngIf="event.type === SUBSTITUTION_EVENT_ID">
@@ -100,7 +100,7 @@
           <div *ngIf="event.details.cardType == 'YELLOW' || event.details.cardType == 'SECOND_YELLOW'" class="square-small yellow">
             <div *ngIf="event.details.cardType == 'SECOND_YELLOW'" class="square-small-second-yellow"></div>
           </div>
-          <div *ngIf="event.details.cardType == 'RED'" class="square red"></div>
+          <div *ngIf="event.details.cardType == 'RED'" class="square-small red"></div>
           <span> {{event.details.playerFirstName.substring(0, 1)}}. {{event.details.playerLastName}} </span>
         </div>
         <div class="container" *ngIf="event.type === SUBSTITUTION_EVENT_ID">

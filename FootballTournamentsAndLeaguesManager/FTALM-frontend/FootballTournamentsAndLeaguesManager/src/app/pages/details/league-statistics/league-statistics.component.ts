@@ -60,6 +60,9 @@ export class LeagueStatisticsComponent {
     this.fetchPlayersYellowCardsData(this.leagueId);
     this.fetchPlayersRedCardsData(this.leagueId);
 
+    this.fetchTeamsGoalsDataSource(this.leagueId);
+    this.fetchTeamsWinsDataSource(this.leagueId);
+    this.fetchTeamsLossesDataSource(this.leagueId);
   }
 
   ngAfterViewInit() {

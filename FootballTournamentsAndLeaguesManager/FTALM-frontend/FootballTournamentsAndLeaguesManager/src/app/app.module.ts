@@ -68,6 +68,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DeletePlayerPopupComponent } from './pages/popups/delete-player-popup/delete-player-popup.component';
 import { EditPlayerPopupComponent } from './pages/popups/edit-player-popup/edit-player-popup.component';
+import { TeamRemoveInformationComponent } from './pages/popups/team-remove-information/team-remove-information.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { EditPlayerPopupComponent } from './pages/popups/edit-player-popup/edit-
     TournamentBracketComponent,
     TournamentMatchComponent,
     DeletePlayerPopupComponent,
-    EditPlayerPopupComponent
+    EditPlayerPopupComponent,
+    TeamRemoveInformationComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Match } from 'src/app/models/Match/match';
+import { MatchEvent } from 'src/app/models/MatchEvent/matchEvent';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -54,6 +55,10 @@ export class MatchService {
 
   public updateMatch(matchId: number, match: Match): Observable<Match> {
     return this.httpClient.put<Match>(`${this.apiServerBaseUrl}/match/update/${matchId}`, match);
+  }
+
+  public updatePlayerStatistics(matchEvent: MatchEvent[]): Observable<boolean> {
+    return this.httpClient.patch<boolean>(`${this.apiServerBaseUrl}/match/update-players-statistics`, matchEvent);
   }
 
 }

@@ -9,6 +9,10 @@ import { TournamentService } from '../../../services/tournamentService/tournamen
 import { Tournament, TournamentTeam } from 'src/app/models/Tournament/tournament';
 import { PlayerService } from 'src/app/services/playerService/player.service';
 import { Player } from 'src/app/models/Player/player';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { TeamRemoveInformationComponent } from '../../popups/team-remove-information/team-remove-information.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tournament-teams',
@@ -29,9 +33,11 @@ export class TournamentTeamsComponent {
   maximumNumberOfTeams!: number;
 
   displayedColumns: string[] = ['teamName', 'established', 'numberOfPlayers', 'details', 'remove'];
-  tournamentTeamDataSource: Team[] = [];
+  tournamentTeamDataSource: MatTableDataSource<Team> = new MatTableDataSource();
 
-  constructor(private teamService: TeamService, private tournamentService: TournamentService, 
+  @ViewChild('tournamentTeamsPaginator', {static: true}) tournamentTeamsPaginator: MatPaginator | null = null;
+
+  constructor(private teamService: TeamService, private tournamentService: TournamentService, private dialog: MatDialog,
     private playerService: PlayerService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() { 
@@ -46,6 +52,10 @@ export class TournamentTeamsComponent {
 
     this.getCurrentTournament(parseInt(this.tournamentId));
     this.fetchTournamentTeamsData(parseInt(this.tournamentId));
+  }
+
+  ngAfterViewInit() {
+    this.tournamentTeamDataSource.paginator = this.tournamentTeamsPaginator;
   }
 
   filter(): void {
@@ -78,7 +88,21 @@ export class TournamentTeamsComponent {
   }
 
   removeTeam(team: Team) { 
-    console.log(team);
+    if(team.id)
+      this.teamService.removeTeamFromTournament(team.id, parseInt(this.tournamentId)).subscribe(result => { 
+        const dialogRef = this.dialog.open(TeamRemoveInformationComponent, {
+          data: { 
+            competitonName: this.tournament.name,
+            teamName: team.name,
+            warning: result
+          }});
+
+        dialogRef.afterClosed().subscribe(result => {
+          if(result === 'success'){
+            window.location.reload();
+          }
+        });
+      });
   }
 
   getCurrentTournament(tournamentId: number){
@@ -86,7 +110,6 @@ export class TournamentTeamsComponent {
       if(tournament.numberOfTeams)
         this.maximumNumberOfTeams = tournament.numberOfTeams;
 
-      console.log(tournament);
       this.tournament = tournament;
     });
   }
@@ -97,14 +120,14 @@ export class TournamentTeamsComponent {
 
   private fetchTournamentTeamsData(teamId: number) {
     this.teamService.findAllTeamsInTournamentByTournamentId(teamId).subscribe((teams: Team[]) => {
-        this.tournamentTeamDataSource = [...this.tournamentTeamDataSource, ...teams];
-        this.tournamentTeamDataSource.forEach(team => {
+        this.tournamentTeamDataSource.data = [...this.tournamentTeamDataSource.data, ...teams];
+        this.tournamentTeamDataSource.data.forEach(team => {
           if (team.id)
             this.playerService.getAllPlayersByTeamId(team.id).subscribe((players: Player[]) => {
               team.numberOfPlayers = players.length;
             });     
         });
-        this.numberOfTeams = this.tournamentTeamDataSource.length;
+        this.numberOfTeams = this.tournamentTeamDataSource.data.length;
     });
   }
 

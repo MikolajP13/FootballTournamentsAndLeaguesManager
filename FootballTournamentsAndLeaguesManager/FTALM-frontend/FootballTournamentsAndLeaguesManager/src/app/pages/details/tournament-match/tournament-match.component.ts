@@ -16,6 +16,7 @@ import { SnackBarComponent } from 'src/app/shared-components/snack-bar/snack-bar
 import { TournamentStandingService } from '../../../services/tournamentStandingService/tournament-standing.service';
 import { TournamentStanding } from 'src/app/models/TournamentStanding/tournamentStanding';
 import { faFutbol } from '@fortawesome/free-regular-svg-icons';
+import { EventType, MatchEvent } from 'src/app/models/MatchEvent/matchEvent';
 
 @Component({
   selector: 'app-tournament-match',
@@ -194,31 +195,42 @@ export class TournamentMatchComponent {
     var goalAssistEvents = this.events.filter(e => e.type === this.GOAL_ASSIST_EVENT_ID);
     var cardEvents = this.events.filter(e => e.type === this.CARD_EVENT_ID);
     var substitutionEvents = this.events.filter(e => e.type === this.SUBSTITUTION_EVENT_ID);
+    let events: MatchEvent[] = [];
 
     if(goalAssistEvents.length > 0) {
       this.goalAssistService.addGoalAssists(goalAssistEvents).subscribe();
+      goalAssistEvents.forEach(e => events.push({
+        firstPlayerId: e.scorerPlayer.id,
+        secondPlayerId: e.assistPlayerId, 
+        event: EventType.GOAL
+      }));
     }
-
+    
     if(cardEvents.length > 0) {
       this.cardService.addCards(cardEvents).subscribe();
+      console.log(cardEvents);
+      cardEvents.forEach(e => events.push({
+        firstPlayerId: e.player.id,
+        event: e.cardType === 0 ? EventType.YELLOW_CARD : (e.cardType === 1 ? EventType.SECOND_YELLOW_CARD : EventType.RED_CARD)
+      }));
     }
-
+    
     if(substitutionEvents.length > 0) {
       this.substitutionService.addSubstitutions(substitutionEvents).subscribe();
     }
-
+    
     if(this.match?.id) {
       this.matchService.updateMatch(this.match.id, updatedMatchData).subscribe();
-
+      
       if(this.tournamentId && this.match?.homeTeamId && this.match?.awayTeamId 
-          && this.match?.matchweek && this.match?.matchweek > 0) {
-        var homeTeamWin: number = 0; 
-        var awayTeamWin: number = 0; 
-        var draw: number = 0; 
-        var homeTeamLose: number = 0; 
+        && this.match?.matchweek && this.match?.matchweek > 0) {
+          var homeTeamWin: number = 0; 
+          var awayTeamWin: number = 0; 
+          var draw: number = 0; 
+          var homeTeamLose: number = 0; 
         var awayTeamLose: number = 0;
         let goalBalanceForHomeTeam: number = this.homeTeamScore - this.awayTeamScore;
-
+        
         if(goalBalanceForHomeTeam > 0){
           homeTeamWin = 1;
           awayTeamLose = 1;
@@ -234,28 +246,30 @@ export class TournamentMatchComponent {
           goalsAgainst: this.awayTeamScore,
           wins: homeTeamWin,
           draws: draw,
-          losses: homeTeamLose
+          losses: homeTeamLose,
+          teamForm: []
         }
-
+        
         var tournamentStandingForAwayTeam: TournamentStanding = {
           goalsFor: this.awayTeamScore,
           goalsAgainst: this.homeTeamScore,
           wins: awayTeamWin,
           draws: draw,
-          losses: awayTeamLose
+          losses: awayTeamLose,
+          teamForm: []
         }
-
+        
         this.tournamentStandingService.updateTournamentStanding(this.tournamentId, this.match.matchweek, this.match.homeTeamId, tournamentStandingForHomeTeam).subscribe();
         this.tournamentStandingService.updateTournamentStanding(this.tournamentId, this.match.matchweek, this.match.awayTeamId, tournamentStandingForAwayTeam).subscribe();
-      
+        
       } else if (this.tournamentId && this.match?.homeTeamId && this.match?.awayTeamId) {
         // Create match for next round
       }
 
     }
-
-    this.navigateToMatches();
+    this.matchService.updatePlayerStatistics(events).subscribe();
     
+    this.navigateToMatches();
   }
 
   isEventValid(homeTeamEvent: boolean): boolean {

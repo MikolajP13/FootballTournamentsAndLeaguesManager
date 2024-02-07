@@ -21,6 +21,7 @@ export class LeagueAboutComponent {
   private static BLANK_TEAM_NAME: string = 'Blank Team';
   leagueId!: number;
   objectName: string = 'league';
+  league!: League;
   leagueCanBeStarted: boolean = false;
   leagueCanBeDeletedWithWarning: boolean = false;
   teams: Team[] = [];
@@ -33,6 +34,10 @@ export class LeagueAboutComponent {
       this.leagueId = params['leagueId'];
     });
 
+    this.leagueService.findLeagueById(this.leagueId).subscribe(league => {
+      this.league = league;
+    });
+
     this.leagueService.getLeagueStatus(this.leagueId).subscribe(status => {
       if(status === Status.NOT_STARTED || status === Status.FINISHED)
         this.leagueCanBeDeletedWithWarning = false;
@@ -42,10 +47,10 @@ export class LeagueAboutComponent {
 
     this.leagueService.getNumberOfTeams(this.leagueId).subscribe(result1 => {
       this.teamService.countTeamsByLeagueId(this.leagueId).subscribe(result2 => {
-        if (result1 === result2)
+        if (result1 === result2 && this.league.status == Status.NOT_STARTED)
           this.leagueCanBeStarted = true;
         else
-          this.leagueCanBeStarted = true; //false; ONLY TEMPORARY!!!!!!!!!!!!!
+          this.leagueCanBeStarted = false;
       });
     });
   }
@@ -101,7 +106,8 @@ export class LeagueAboutComponent {
         goalsAgainst: 0,
         wins: 0,
         draws: 0,
-        losses: 0
+        losses: 0,
+        teamForm: [],
       });
     });
 

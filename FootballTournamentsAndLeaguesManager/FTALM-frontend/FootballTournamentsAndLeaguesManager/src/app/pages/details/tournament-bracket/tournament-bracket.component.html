@@ -71,14 +71,13 @@
                   </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="form">
+                <ng-container matColumnDef="teamForm">
                   <mat-header-cell *matHeaderCellDef> Form </mat-header-cell>
                   <mat-cell *matCellDef="let team">
-                    <ng-container *ngFor="let f of formArray"> 
-                      <!-- team.formArray -->
-                      <span class="team-form-icon" *ngIf="f === 'w'"> <i class="bi bi-check-circle-fill"></i> </span>
-                      <span class="team-form-icon" *ngIf="f === 'd'"> <i class="bi bi-dash-circle-fill"></i> </span>
-                      <span class="team-form-icon" *ngIf="f === 'l'"> <i class="bi bi-x-circle-fill"></i> </span>
+                    <ng-container *ngFor="let f of team.teamForm"> 
+                      <span class="team-form-icon" *ngIf="f === 'W'"> <i class="bi bi-check-circle-fill"></i> </span>
+                      <span class="team-form-icon" *ngIf="f === 'D'"> <i class="bi bi-dash-circle-fill"></i> </span>
+                      <span class="team-form-icon" *ngIf="f === 'L'"> <i class="bi bi-x-circle-fill"></i> </span>
                     </ng-container>
                   </mat-cell>
                 </ng-container>
@@ -114,7 +113,7 @@
                           <span>Date: {{ match.date | date: 'dd-MM-yyyy HH:mm' }}</span>
                         </div>
                         <div class="match-buttons">
-                          <i class="bi bi-pencil-square" *ngIf="!match.matchProtocolCreated" (click)="fillMatchProtocol(match)"></i>
+                          <!-- <i class="bi bi-pencil-square" *ngIf="!match.matchProtocolCreated" (click)="fillMatchProtocol(match)"></i> -->
                           <i class="bi bi-info-square" *ngIf="match.matchProtocolCreated" (click)="showMatchDetails(match)"></i>
                         </div>
                       </div>
@@ -135,14 +134,14 @@
                 <div class="team top win">
                   {{match.homeTeamName}}
                   <div class="score">
-                    <span *ngIf="match.homeTeamScore"> {{match.homeTeamScore}} </span>
+                    <span> {{match.homeTeamScore}} </span>
                     <span *ngIf="match.homeTeamScore === null"> - </span>
                   </div>
                 </div>
                 <div class="team bot loss">
                   {{match.awayTeamName}}
                   <div class="score">
-                    <span *ngIf="match.awayTeamScore"> {{match.awayTeamScore}} </span>
+                    <span> {{match.awayTeamScore}} </span>
                     <span *ngIf="match.awayTeamScore === null"> - </span>
                   </div>
                 </div>
@@ -178,14 +177,14 @@
           <div class="team top win">
             {{match.homeTeamName}}
             <div class="score">
-              <span *ngIf="match.homeTeamScore"> {{match.homeTeamScore}} </span>
+              <span> {{match.homeTeamScore}} </span>
               <span *ngIf="match.homeTeamScore === null"> - </span>
             </div>
           </div>
           <div class="team bot loss">
             {{match.awayTeamName}}
             <div class="score">
-              <span *ngIf="match.awayTeamScore"> {{match.awayTeamScore}} </span>
+              <span> {{match.awayTeamScore}} </span>
               <span *ngIf="match.awayTeamScore === null"> - </span>
             </div>
           </div>

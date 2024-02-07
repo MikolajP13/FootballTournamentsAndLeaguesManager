@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Tournament, Type } from 'src/app/models/Tournament/tournament';
 import { TournamentStanding } from 'src/app/models/TournamentStanding/tournamentStanding';
 import { TeamService } from 'src/app/services/teamService/team.service';
@@ -27,11 +27,9 @@ export class TournamentBracketComponent {
   tournamentGroupMatchesDataSource: Match[][] = [];
   tournamentBracketMatchesDataSource: Map<number, Match[]> = new Map<number, Match[]>;
 
-  displayedColumns: string[] = ['position', 'teamName', 'matches', 'won', 'drawn', 'lost', 'goalsForAgainst', 'goalDifference', 'points', 'form'];
+  displayedColumns: string[] = ['position', 'teamName', 'matches', 'won', 'drawn', 'lost', 'goalsForAgainst', 'goalDifference', 'points', 'teamForm'];
 
-  formArray: string[] = ['w', 'w', 'l', 'd', 'l'];
-
-  constructor(private route: ActivatedRoute, private tournamentService: TournamentService,
+  constructor(private route: ActivatedRoute, private router: Router, private tournamentService: TournamentService,
     private teamService: TeamService, private tournamentStandingService: TournamentStandingService,
     private matchService: MatchService) { }
 
@@ -117,7 +115,6 @@ export class TournamentBracketComponent {
         });
       });
     });
-
   }
 
   convertGroupIdToLetter(groupId: number | undefined): string {
@@ -127,12 +124,8 @@ export class TournamentBracketComponent {
 
 
   //TODO: Remove duplication [league matches functions]
-  fillMatchProtocol(match: Match){
-
-  }
-
-  showMatchDetails(match: Match){
-
+  showMatchDetails(selectedMatch: Match){
+    this.router.navigate([`/tournament/${this.tournamentId}/match-details/` + selectedMatch.id])
   }
 
   calculateMatchesPerRound(numberOfTeams: number, roundNumber: number): number {

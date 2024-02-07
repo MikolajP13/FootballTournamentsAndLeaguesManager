@@ -68,4 +68,5 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" class="players-row"></mat-row>
   </mat-table>
+  <mat-paginator #paginatorTeamPlayers [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
 </div>

@@ -33,7 +33,6 @@ export class TournamentStatisticsComponent {
   @ViewChild('paginatorPlayersYellowCards', { static: true }) paginatorPlayersYellowCards: MatPaginator | null = null;
   @ViewChild('paginatorPlayersRedCards', { static: true }) paginatorPlayersRedCards: MatPaginator | null = null;
 
-
   constructor(private route: ActivatedRoute, private goalAssistService: GoalAssistService, 
     private cardService: CardService) { }
 
@@ -56,26 +55,26 @@ export class TournamentStatisticsComponent {
     this.playersRedCardsDataSource.paginator = this.paginatorPlayersRedCards;
   }
 
-  fetchPlayersGoalsData(leagueId: number): void {
-    this.goalAssistService.getPlayersGoalsByLeagueId(leagueId).subscribe((playerGoals: PlayerGoals[]) => {
+  fetchPlayersGoalsData(tournamentId: number): void {
+    this.goalAssistService.getPlayersGoalsByTournamentId(tournamentId).subscribe((playerGoals: PlayerGoals[]) => {
       this.playersGoalsDataSource.data = [...playerGoals];
     });
   }
 
   fetchPlayersAssistsData(leagueId: number): void {
-    this.goalAssistService.getPlayersAssistsByLeagueId(leagueId).subscribe((playerAssists: PlayerAssists[]) => {
+    this.goalAssistService.getPlayersAssistsByTournamentId(leagueId).subscribe((playerAssists: PlayerAssists[]) => {
       this.playersAssistsDataSource.data = [...playerAssists];
     });
   }
 
   fetchPlayersYellowCardsData(leagueId: number): void {
-    this.cardService.getPlayersYellowCardsByLeagueId(leagueId).subscribe((playersYellowCards: PlayerCards[]) => {
+    this.cardService.getPlayersYellowCardsByTournamentId(leagueId).subscribe((playersYellowCards: PlayerCards[]) => {
       this.playersYellowCardsDataSource.data = [...playersYellowCards].filter(player => player.yellowCards > 0);
     });
   }
 
   fetchPlayersRedCardsData(leagueId: number): void {
-    this.cardService.getPlayersRedCardsByLeagueId(leagueId).subscribe((playerRedCards: PlayerCards[]) => {
+    this.cardService.getPlayersRedCardsByTournamentId(leagueId).subscribe((playerRedCards: PlayerCards[]) => {
       this.playersRedCardsDataSource.data = [...playerRedCards].filter(player => player.redCards > 0);
     });
   }

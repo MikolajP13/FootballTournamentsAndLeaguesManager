@@ -56,6 +56,14 @@ export class TeamService {
     return this.httpClient.post<Team>(`${this.apiServerUrl}/team/add`, team);
   }
 
+  removeTeamFromLeague(teamId: number, leagueId: number): Observable<Boolean> {
+    return this.httpClient.delete<Boolean>(`${this.apiServerUrl}/team/${teamId}/remove-from-league/${leagueId}`);
+  }
+
+  removeTeamFromTournament(teamId: number, tournamentId: number): Observable<Boolean> {
+    return this.httpClient.delete<Boolean>(`${this.apiServerUrl}/team/${teamId}/remove-from-tournament/${tournamentId}`);
+  }
+
   deleteTam(teamId: number): Observable<Boolean> {
     return this.httpClient.delete<Boolean>(`${this.apiServerUrl}/team/delete/${teamId}`);
   }

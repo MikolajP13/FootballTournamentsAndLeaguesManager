@@ -15,6 +15,8 @@ import { SubstitutionService } from '../../../services/substitutionService/subst
 import { MatchWeekNumberService } from '../../../services/matchweekService/match-week-number.service';
 import { LeagueStandingService } from 'src/app/services/leagueStandingService/league-standing.service';
 import { LeagueStanding } from 'src/app/models/LeagueStanding/leagueStanding';
+import { faFutbol } from '@fortawesome/free-regular-svg-icons';
+import { EventType, MatchEvent } from 'src/app/models/MatchEvent/matchEvent';
 
 @Component({
   selector: 'app-league-match',
@@ -22,6 +24,8 @@ import { LeagueStanding } from 'src/app/models/LeagueStanding/leagueStanding';
   styleUrls: ['./league-match.component.css']
 })
 export class LeagueMatchComponent {
+  footballIcon = faFutbol;
+
   GOAL_ASSIST_EVENT_ID: string = 'G';
   CARD_EVENT_ID: string = 'C';
   SUBSTITUTION_EVENT_ID: string = 'S';
@@ -181,19 +185,31 @@ export class LeagueMatchComponent {
     var updatedMatchData: Match = {
       homeTeamScore: this.homeTeamScore,
       awayTeamScore: this.awayTeamScore,
-      matchProtocolCreated: false, // TEMP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      matchProtocolCreated: true,
       date: new Date(Date.now())
     }
     var goalAssistEvents = this.events.filter(e => e.type === this.GOAL_ASSIST_EVENT_ID);
     var cardEvents = this.events.filter(e => e.type === this.CARD_EVENT_ID);
     var substitutionEvents = this.events.filter(e => e.type === this.SUBSTITUTION_EVENT_ID);
-
+    let events: MatchEvent[] = [];
+    
     if(goalAssistEvents.length > 0) {
       this.goalAssistService.addGoalAssists(goalAssistEvents).subscribe();
+      console.log(goalAssistEvents);
+      goalAssistEvents.forEach(e => events.push({
+        firstPlayerId: e.scorerPlayer.id,
+        secondPlayerId: e.assistPlayerId, 
+        event: EventType.GOAL
+      }));
     }
 
     if(cardEvents.length > 0) {
       this.cardService.addCards(cardEvents).subscribe();
+      console.log(cardEvents);
+      cardEvents.forEach(e => events.push({
+        firstPlayerId: e.player.id,
+        event: e.cardType === 0 ? EventType.YELLOW_CARD : (e.cardType === 1 ? EventType.SECOND_YELLOW_CARD : EventType.RED_CARD)
+      }));
     }
 
     if(substitutionEvents.length > 0) {
@@ -226,7 +242,8 @@ export class LeagueMatchComponent {
           goalsAgainst: this.awayTeamScore,
           wins: homeTeamWin,
           draws: draw,
-          losses: homeTeamLose
+          losses: homeTeamLose,
+          teamForm: []
         }
 
         var leagueStandingForAwayTeam: LeagueStanding = {
@@ -234,16 +251,17 @@ export class LeagueMatchComponent {
           goalsAgainst: this.homeTeamScore,
           wins: awayTeamWin,
           draws: draw,
-          losses: awayTeamLose
+          losses: awayTeamLose,
+          teamForm: []
         }
 
         this.leagueStandingService.updateLeagueStanding(this.leagueId, this.match.homeTeamId, leagueStandingForHomeTeam).subscribe();
         this.leagueStandingService.updateLeagueStanding(this.leagueId, this.match.awayTeamId, leagueStandingForAwayTeam).subscribe();
       }
     }
+    this.matchService.updatePlayerStatistics(events).subscribe();
 
     this.navigateToMatches();
-    
   }
 
   isEventValid(homeTeamEvent: boolean): boolean {

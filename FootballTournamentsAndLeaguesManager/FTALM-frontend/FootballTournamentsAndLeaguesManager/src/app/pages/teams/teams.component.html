@@ -28,10 +28,10 @@
       <ng-container matColumnDef="league" >
         <mat-header-cell *matHeaderCellDef> League </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <span *ngIf="element.isInLeague">
+          <span *ngIf="element.inLeague">
             <i class="bi bi-check-circle-fill"></i>
           </span> 
-          <span *ngIf="!element.isInLeague">
+          <span *ngIf="!element.inLeague">
             <i class="bi bi-x-circle-fill"></i>
           </span> 
         </mat-cell>
@@ -40,10 +40,10 @@
       <ng-container matColumnDef="tournament" >
         <mat-header-cell *matHeaderCellDef> Tournament </mat-header-cell>
         <mat-cell *matCellDef="let element" >
-          <span *ngIf="element.isInTournament">
+          <span *ngIf="element.inTournament">
             <i class="bi bi-check-circle-fill"></i>
           </span> 
-          <span *ngIf="!element.isInTournament">
+          <span *ngIf="!element.inTournament">
             <i class="bi bi-x-circle-fill"></i>
           </span> 
         </mat-cell>

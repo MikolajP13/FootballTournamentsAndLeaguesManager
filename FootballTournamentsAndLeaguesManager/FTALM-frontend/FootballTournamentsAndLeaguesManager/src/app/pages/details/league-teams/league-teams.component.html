@@ -72,5 +72,6 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;" class="league-teams-row"></mat-row>
       </mat-table>
+      <mat-paginator #leagueTeamsPaginator [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
     </div>
 </div>

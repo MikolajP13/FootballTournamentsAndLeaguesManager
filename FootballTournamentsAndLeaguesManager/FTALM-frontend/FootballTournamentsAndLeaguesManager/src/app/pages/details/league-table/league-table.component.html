@@ -69,14 +69,13 @@
         </mat-cell>
       </ng-container>
   
-      <ng-container matColumnDef="form">
+      <ng-container matColumnDef="teamForm">
         <mat-header-cell *matHeaderCellDef> Form </mat-header-cell>
         <mat-cell *matCellDef="let team">
-          <ng-container *ngFor="let f of formArray"> 
-            <!-- team.formArray -->
-            <span class="team-form-icon" *ngIf="f === 'w'"> <i class="bi bi-check-circle-fill"></i> </span>
-            <span class="team-form-icon" *ngIf="f === 'd'"> <i class="bi bi-dash-circle-fill"></i> </span>
-            <span class="team-form-icon" *ngIf="f === 'l'"> <i class="bi bi-x-circle-fill"></i> </span>
+          <ng-container *ngFor="let f of team.teamForm"> 
+            <span class="team-form-icon" *ngIf="f === 'W'"> <i class="bi bi-check-circle-fill"></i> </span>
+            <span class="team-form-icon" *ngIf="f === 'D'"> <i class="bi bi-dash-circle-fill"></i> </span>
+            <span class="team-form-icon" *ngIf="f === 'L'"> <i class="bi bi-x-circle-fill"></i> </span>
           </ng-container>
         </mat-cell>
       </ng-container>

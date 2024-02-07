@@ -12,4 +12,5 @@ export class TournamentStanding {
   wins!: number
   draws!: number
   losses!: number
+  teamForm!: string[];
 }

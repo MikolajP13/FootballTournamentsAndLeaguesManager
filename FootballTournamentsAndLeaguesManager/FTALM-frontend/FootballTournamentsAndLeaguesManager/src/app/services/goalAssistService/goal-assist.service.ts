@@ -58,5 +58,12 @@ export class GoalAssistService {
     return this.httpClient.get<PlayerAssists[]>(`${this.apiServerUrl}/goalAssist/getPlayersAssists/league/${leagueId}`);
   }
 
+  getPlayersGoalsByTournamentId(tournamentId: number): Observable<PlayerGoals[]> {
+    return this.httpClient.get<PlayerGoals[]>(`${this.apiServerUrl}/goalAssist/getPlayersGoals/tournament/${tournamentId}`);
+  }
+
+  getPlayersAssistsByTournamentId(tournamentId: number): Observable<PlayerAssists[]> {
+    return this.httpClient.get<PlayerAssists[]>(`${this.apiServerUrl}/goalAssist/getPlayersAssists/tournament/${tournamentId}`);
+  }
   
 }

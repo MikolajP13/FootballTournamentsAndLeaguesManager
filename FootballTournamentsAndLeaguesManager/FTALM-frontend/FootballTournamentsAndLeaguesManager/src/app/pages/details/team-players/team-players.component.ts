@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Player } from 'src/app/models/Player/player';
 import { PlayerService } from '../../../services/playerService/player.service';
@@ -7,6 +7,8 @@ import { AddPlayerPopupComponent } from '../../popups/add-player-popup/add-playe
 import { PlayerDetailsPopupComponent } from '../../popups/player-details-popup/player-details-popup.component';
 import { DeletePlayerPopupComponent } from '../../popups/delete-player-popup/delete-player-popup.component';
 import { EditPlayerPopupComponent } from '../../popups/edit-player-popup/edit-player-popup.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-team-players',
@@ -17,8 +19,10 @@ export class TeamPlayersComponent {
   teamId!: number;
   positionOrder = ['GK', 'LB', 'LCB', 'CB', 'RCB', 'RB', 'LM', 'CDM', 'CM', 'RM', 'LW', 'CAM', 'RW', 'LF', 'CF', 'RF'];
 
-  teamPlayersDataSource: Player[] = [];
+  teamPlayersDataSource: MatTableDataSource<Player> = new MatTableDataSource();
   displayedColumns: string[] = ['position', 'positionDetail', 'fullName', 'doBAndAge', 'height', 'foot', 'joined', 'details' , 'edit', 'delete'];
+
+  @ViewChild('paginatorTeamPlayers', {static: true}) paginatorTeamPlayers: MatPaginator | null = null;
 
   constructor(private playerService: PlayerService, private route: ActivatedRoute, private dialog: MatDialog) { }
 
@@ -30,10 +34,13 @@ export class TeamPlayersComponent {
     this.fetchTeamPlayersData(this.teamId);
   }
 
+  ngAfterViewInit() {
+    this.teamPlayersDataSource.paginator = this.paginatorTeamPlayers; 
+  }
+
   fetchTeamPlayersData(teamId: number) {
     this.playerService.getAllPlayersByTeamId(teamId).subscribe((players: Player[]) => {
-      this.teamPlayersDataSource = [...players];
-      this.sortTeamDataSource();
+      this.teamPlayersDataSource.data = [...players];
       this.processPlayerDetails();
     });
   }
@@ -49,7 +56,6 @@ export class TeamPlayersComponent {
   }
 
   showPlayerDetails(player: Player) {
-    // console.log(player.id); TODO
     this.dialog.open(PlayerDetailsPopupComponent, {data: player});
   }
   
@@ -75,23 +81,13 @@ export class TeamPlayersComponent {
   private fetchLastPlayerData(){
     this.playerService.getAllPlayersByTeamId(this.teamId).subscribe((players: Player[]) => {
       const lastPlayer = players[players.length-1];
-      this.teamPlayersDataSource = [...this.teamPlayersDataSource, lastPlayer];
-      this.sortTeamDataSource();
+      this.teamPlayersDataSource.data = [...this.teamPlayersDataSource.data, lastPlayer];
       this.processPlayerDetails();
     });
   }
 
-  private sortTeamDataSource(){
-    this.teamPlayersDataSource.sort((p1, p2) => {
-      if(p1.positionDetail && p2.positionDetail){
-        return this.positionOrder.indexOf(p1.positionDetail) - this.positionOrder.indexOf(p2.positionDetail);
-      }else 
-        return 0;
-    });
-  }
-
   private processPlayerDetails(){
-    this.teamPlayersDataSource.forEach(player => {
+    this.teamPlayersDataSource.data.forEach(player => {
       if(player.dateOfBirth){
         player.age = this.calculateAge(player.dateOfBirth);
       }

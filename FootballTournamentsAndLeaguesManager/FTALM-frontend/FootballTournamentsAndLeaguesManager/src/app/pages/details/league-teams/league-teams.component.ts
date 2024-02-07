@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { League, LeagueTeam } from 'src/app/models/League/league';
 import { Player } from 'src/app/models/Player/player';
@@ -9,6 +10,9 @@ import { LeagueService } from 'src/app/services/leagueService/league.service';
 import { PlayerService } from 'src/app/services/playerService/player.service';
 import { TeamService } from 'src/app/services/teamService/team.service';
 import { UserService } from 'src/app/services/userService/user.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { TeamRemoveInformationComponent } from '../../popups/team-remove-information/team-remove-information.component';
 
 @Component({
   selector: 'app-league-teams',
@@ -29,9 +33,11 @@ export class LeagueTeamsComponent {
   maximumNumberOfTeams!: number;
 
   displayedColumns: string[] = ['teamName', 'established', 'numberOfPlayers', 'details', 'remove'];
-  leagueTeamDataSource: Team[] = [];
+  leagueTeamDataSource: MatTableDataSource<Team> = new MatTableDataSource();
 
-  constructor(private teamService: TeamService, private leagueService: LeagueService, 
+  @ViewChild('leagueTeamsPaginator', {static: true}) leagueTeamsPaginator: MatPaginator | null = null;
+
+  constructor(private teamService: TeamService, private leagueService: LeagueService, private dialog: MatDialog,
     private playerService: PlayerService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() { 
@@ -46,6 +52,10 @@ export class LeagueTeamsComponent {
 
     this.getCurrentLeague(parseInt(this.leagueId));
     this.fetchLeagueTeamsData(parseInt(this.leagueId));
+  }
+
+  ngAfterViewInit() {
+    this.leagueTeamDataSource.paginator = this.leagueTeamsPaginator;
   }
 
   filter(): void {
@@ -78,7 +88,21 @@ export class LeagueTeamsComponent {
   }
 
   removeTeam(team: Team) {
-    console.log(team);
+    if(team.id)
+      this.teamService.removeTeamFromLeague(team.id, parseInt(this.leagueId)).subscribe(result => { 
+        const dialogRef = this.dialog.open(TeamRemoveInformationComponent, {
+            data: { 
+              competitonName: this.league.name,
+              teamName: team.name,
+              warning: result
+            }});
+        
+        dialogRef.afterClosed().subscribe(result => {
+          if(result === 'success'){
+            window.location.reload();
+          }
+        });
+      });
   }
 
   getCurrentLeague(tournamentId: number){
@@ -96,14 +120,14 @@ export class LeagueTeamsComponent {
 
   private fetchLeagueTeamsData(teamId: number) {
     this.teamService.findAllTeamsInLeagueByLeagueId(teamId).subscribe((teams: Team[]) => {
-        this.leagueTeamDataSource = [...this.leagueTeamDataSource, ...teams];
-        this.leagueTeamDataSource.forEach(team => {
+        this.leagueTeamDataSource.data = [...this.leagueTeamDataSource.data, ...teams];
+        this.leagueTeamDataSource.data.forEach(team => {
           if (team.id)
             this.playerService.getAllPlayersByTeamId(team.id).subscribe((players: Player[]) => {
               team.numberOfPlayers = players.length;
             });     
         });
-        this.numberOfTeams = this.leagueTeamDataSource.length;
+        this.numberOfTeams = this.leagueTeamDataSource.data.length;
     });
   }
 

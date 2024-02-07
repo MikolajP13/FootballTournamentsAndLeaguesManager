@@ -47,10 +47,10 @@ export class TournamentAboutComponent {
 
     this.tournamentService.getNumberOfTeams(this.tournamentId).subscribe(result1 => {
       this.teamService.countTeamsByTournamentId(this.tournamentId).subscribe(result2 => {
-        if (result1 === result2)
+        if (result1 === result2 && this.tournament.status === Status.NOT_STARTED)
           this.tournamentCanBeStarted = true;
         else
-          this.tournamentCanBeStarted = true; //false; ONLY TEMPORARY!!!!!!!!!!!!!
+          this.tournamentCanBeStarted = false;
       });
     });
   }
@@ -72,8 +72,7 @@ export class TournamentAboutComponent {
       status: Status.IN_PROGRESS
     }
 
-    //TODO: tournament can only be started once!!
-    // this.tournamentCanBeStarted = false;
+    this.tournamentCanBeStarted = false;
 
     this.tournamentService.updateTournamentStatusByTournamentId(this.tournamentId, updatedStatus).subscribe();
 
@@ -101,7 +100,8 @@ export class TournamentAboutComponent {
               goalsAgainst: 0,
               wins: 0,
               draws: 0,
-              losses: 0
+              losses: 0,
+              teamForm: []
             });
           }
 

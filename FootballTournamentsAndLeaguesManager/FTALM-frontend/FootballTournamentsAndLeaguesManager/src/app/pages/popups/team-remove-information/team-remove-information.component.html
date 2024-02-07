@@ -1,0 +1,20 @@
+<div class="confirmation-form-body">
+  <div class="confirmation-header">
+    <span *ngIf="warning">Information</span>
+    <span *ngIf="!warning">Error</span>
+    <button mat-icon-button class="close-button" (click)="closePopup()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="confirmation-text">
+    <p *ngIf="warning" class="info">
+      Team {{ teamName }} has been removed from {{ competitionName }}.
+    </p>
+    <div *ngIf="!warning">
+      <p class="error">Unable to remove team {{ teamName }}</p>
+      <p class="info">
+        The team cannot be removed from {{ competitionName }} because the competition is currently in progress or has already finished.
+      </p>
+    </div>
+  </div>
+</div>

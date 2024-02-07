@@ -55,6 +55,14 @@ export class CardService {
     return this.httpClient.get<PlayerCards[]>(`${this.apiServerUrl}/card/getPlayersRedCards/league/${leagueId}`);
   }
 
+  getPlayersYellowCardsByTournamentId(tournamentId: number): Observable<PlayerCards[]> {
+    return this.httpClient.get<PlayerCards[]>(`${this.apiServerUrl}/card/getPlayersYellowCards/tournament/${tournamentId}`);
+  }
+
+  getPlayersRedCardsByTournamentId(tournamentId: number): Observable<PlayerCards[]>{
+    return this.httpClient.get<PlayerCards[]>(`${this.apiServerUrl}/card/getPlayersRedCards/tournament/${tournamentId}`);
+  }
+
   getCardsOverallByLeagueIdAndTeamId(leagueId: number, teamId: number): Observable<TeamCards> {
     return this.httpClient.get<TeamCards>(`${this.apiServerUrl}/card/getTeamCards/league/${leagueId}/team/${teamId}`);
   }
