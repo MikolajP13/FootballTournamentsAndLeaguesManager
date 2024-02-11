@@ -61,4 +61,12 @@ export class MatchService {
     return this.httpClient.patch<boolean>(`${this.apiServerBaseUrl}/match/update-players-statistics`, matchEvent);
   }
 
+  public getAllPlayedMatchesByTeamId(teamId: number): Observable<Match[]> {
+    return this.httpClient.get<Match[]>(`${this.apiServerBaseUrl}/match/all/played/team/${teamId}`);
+  }
+
+  public getUpcomingMatchesByTeamId(teamId: number): Observable<Match[]> {
+    return this.httpClient.get<Match[]>(`${this.apiServerBaseUrl}/match/upcoming/team/${teamId}`);
+  }
+  
 }

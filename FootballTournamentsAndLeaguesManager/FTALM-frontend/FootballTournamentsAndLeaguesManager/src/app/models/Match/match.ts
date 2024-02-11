@@ -7,8 +7,12 @@ export class Match {
   awayTeamName?: string
   homeTeamScore?: number | null
   awayTeamScore?: number | null
-  tournament?: {id?: number}
-  league?: { id?: number }
+  tournament?: {id?: number, name?: string}
+  tournamentId?: number
+  tournamentName?: string
+  leagueId?: number
+  leagueName?: string
+  league?: { id?: number, name?: string}
   matchweek?: number // in case of tournament with group stage this will be a group identifier
   round?: number | null
   matchProtocolCreated?: boolean

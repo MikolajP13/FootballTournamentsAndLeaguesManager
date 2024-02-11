@@ -36,4 +36,8 @@ export class LeagueStandingService {
     return this.httpClient.get<LeagueStanding[]>(`${this.apiServerBaseUrl}/leagueStanding/getTeamsLosses/${leagueId}`);
   }
 
+  getAllByTeamId(teamId: number): Observable<LeagueStanding[]> {
+    return this.httpClient.get<LeagueStanding[]>(`${this.apiServerBaseUrl}/leagueStanding/all/team/${teamId}`);
+  }
+  
 }

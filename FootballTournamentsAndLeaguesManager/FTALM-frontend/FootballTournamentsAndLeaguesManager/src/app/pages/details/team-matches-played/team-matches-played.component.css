@@ -1,0 +1,29 @@
+.filter-container {
+  margin: 1% 3%;
+}
+
+.played-matches-container {
+  margin: 0% 3%;
+}
+
+.match-row:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
+mat-header-cell {
+  justify-content: center;
+}
+
+mat-cell {
+  font-family: var(--font);
+  justify-content: center;
+}
+
+.competition-name-cell {
+  justify-content: left !important;
+}
+
+.mat-column-details {
+  flex: 0 0 8% !important;
+}

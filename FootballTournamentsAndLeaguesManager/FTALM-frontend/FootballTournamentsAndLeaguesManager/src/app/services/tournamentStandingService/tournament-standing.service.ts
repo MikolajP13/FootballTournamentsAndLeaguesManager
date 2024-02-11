@@ -24,4 +24,8 @@ export class TournamentStandingService {
     return this.httpClient.put<TournamentStanding>(`${this.apiServerBaseUrl}/tournamentStanding/update/tournament/${tournamentId}/group/${groupId}/team/${teamId}`, tournamentStanding);
   }
 
+  getAllByTeamId(teamId: number): Observable<TournamentStanding[]> {
+    return this.httpClient.get<TournamentStanding[]>(`${this.apiServerBaseUrl}/tournamentStanding/all/team/${teamId}`);
+  }
+  
 }

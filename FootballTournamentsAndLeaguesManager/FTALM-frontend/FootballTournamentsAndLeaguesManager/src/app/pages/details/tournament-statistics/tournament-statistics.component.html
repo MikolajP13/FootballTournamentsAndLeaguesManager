@@ -6,13 +6,8 @@
 
           <ng-container matColumnDef="rank">
             <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-            <mat-cell *matCellDef="let player; let i = index">
-              <ng-container *ngIf="i === 0 || player.goals != playersGoalsDataSource.data[i-1].goals; else sameRank">
-                {{ i + 1 }}
-              </ng-container>
-              <ng-template #sameRank>
-                {{ i }}
-              </ng-template>
+            <mat-cell *matCellDef="let player">
+              {{ player.rank }}
             </mat-cell>
           </ng-container>
 
@@ -43,13 +38,8 @@
 
           <ng-container matColumnDef="rank">
             <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-            <mat-cell *matCellDef="let player; let i = index">
-              <ng-container *ngIf="i === 0 || player.assists != playersAssistsDataSource.data[i-1].assists; else sameRank">
-                {{ i + 1 }}
-              </ng-container>
-              <ng-template #sameRank>
-                {{ i }}
-              </ng-template>
+            <mat-cell *matCellDef="let player">
+              {{ player.rank }}
             </mat-cell>
           </ng-container>
 
@@ -81,14 +71,8 @@
 
           <ng-container matColumnDef="rank">
             <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-            <mat-cell *matCellDef="let player; let i = index">
-              <ng-container
-                *ngIf="i === 0 || player.yellowCards != playersYellowCardsDataSource.data[i-1].yellowCards; else sameRank">
-                {{ i + 1 }}
-              </ng-container>
-              <ng-template #sameRank>
-                {{ i }}
-              </ng-template>
+            <mat-cell *matCellDef="let player">
+              {{ player.rank }}
             </mat-cell>
           </ng-container>
 
@@ -120,14 +104,8 @@
 
           <ng-container matColumnDef="rank">
             <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-            <mat-cell *matCellDef="let player; let i = index">
-              <ng-container
-                *ngIf="i === 0 || player.redCards != playersRedCardsDataSource.data[i-1].redCards; else sameRank">
-                {{ i + 1 }}
-              </ng-container>
-              <ng-template #sameRank>
-                {{ i }}
-              </ng-template>
+            <mat-cell *matCellDef="let player">
+              {{ player.rank }}
             </mat-cell>
           </ng-container>
 

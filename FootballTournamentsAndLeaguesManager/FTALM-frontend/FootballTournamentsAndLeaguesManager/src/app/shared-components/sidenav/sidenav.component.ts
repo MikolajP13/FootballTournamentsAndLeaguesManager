@@ -58,11 +58,11 @@ export class SidenavComponent {
   }
 
   showTeamPlayedMatches(){
-    this.router.navigate([`/team/${this.id}/matches`]);
+    this.router.navigate([`/team/${this.id}/matches/played`]);
   }
 
   showTeamUpcomingMatches(){
-    this.router.navigate([`/team/${this.id}/matches`]);
+    this.router.navigate([`/team/${this.id}/matches/upcoming`]);
   }
 
   showTeamPlayers(){

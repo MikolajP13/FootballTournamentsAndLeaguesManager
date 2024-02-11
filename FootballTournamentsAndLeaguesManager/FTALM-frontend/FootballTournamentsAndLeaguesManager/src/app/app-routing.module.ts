@@ -11,7 +11,6 @@ import { LeaguesComponent } from './pages/leagues/leagues.component';
 import { TeamsComponent } from './pages/teams/teams.component';
 import { TeamDetailsComponent } from './pages/details/team-details/team-details.component';
 import { TeamPlayersComponent } from './pages/details/team-players/team-players.component';
-import { TeamMatchesComponent } from './pages/details/team-matches/team-matches.component';
 import { TeamStatisticsComponent } from './pages/details/team-statistics/team-statistics.component';
 import { TeamAboutComponent } from './pages/details/team-about/team-about.component';
 import { TournamentAboutComponent } from './pages/details/tournament-about/tournament-about.component';
@@ -28,6 +27,8 @@ import { TournamentMatchesComponent } from './pages/details/tournament-matches/t
 import { TournamentMatchDetailsComponent } from './pages/details/tournament-match-details/tournament-match-details.component';
 import { TournamentMatchComponent } from './pages/details/tournament-match/tournament-match.component';
 import { TournamentStatisticsComponent } from './pages/details/tournament-statistics/tournament-statistics.component';
+import { TeamMatchesPlayedComponent } from './pages/details/team-matches-played/team-matches-played.component';
+import { TeamMatchesUpcomingComponent } from './pages/details/team-matches-upcoming/team-matches-upcoming.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -50,7 +51,8 @@ const routes: Routes = [
   {path: "league/:leagueId/statistics", component: LeagueStatisticsComponent, canActivate: [authGuard]},
   {path: "teams", component: TeamsComponent, canActivate: [authGuard]},
   {path: "team/:teamId", component: TeamDetailsComponent, canActivate: [authGuard]},
-  {path: "team/:teamId/matches", component: TeamMatchesComponent, canActivate: [authGuard]},
+  {path: "team/:teamId/matches/played", component: TeamMatchesPlayedComponent, canActivate: [authGuard]},
+  {path: "team/:teamId/matches/upcoming", component: TeamMatchesUpcomingComponent, canActivate: [authGuard]},
   {path: "team/:teamId/players", component: TeamPlayersComponent, canActivate: [authGuard]},
   {path: "team/:teamId/statistics", component: TeamStatisticsComponent, canActivate: [authGuard]},
   {path: "team/:teamId/about", component: TeamAboutComponent, canActivate: [authGuard]},

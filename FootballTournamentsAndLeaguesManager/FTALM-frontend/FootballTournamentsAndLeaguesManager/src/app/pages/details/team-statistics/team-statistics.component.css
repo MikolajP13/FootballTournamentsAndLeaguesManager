@@ -1,11 +1,44 @@
 .statistics-container {
-  margin: 20px;
+  margin: 1% 3%;
 }
 
 .league-statistics-container {
-  margin-bottom: 15px;
+  margin: 1% 0 4% 0;
 }
 
 .tournaments-statistics-container {
-  margin-bottom: 15px;
+  margin: 1% 0;
+}
+
+mat-header-cell {
+  justify-content: center;
+}
+
+mat-cell {
+  font-family: var(--font);
+  justify-content: center;
+}
+
+.competition-name-cell {
+  justify-content: left !important;
+  flex: 0 0 20% !important;
+}
+
+.mat-column-playedMatches {
+  text-align: center !important;
+  flex: 0 0 8% !important;
+}
+
+.mat-column-win,
+.mat-column-draw,
+.mat-column-loss {
+  flex: 0 0 6% !important;
+}
+
+.mat-column-goalsForAgainst,
+.mat-column-goalDifference,
+.mat-column-points,
+.mat-column-groupPoints,
+.mat-column-rank {
+  flex: 0 0 13.5% !important;
 }

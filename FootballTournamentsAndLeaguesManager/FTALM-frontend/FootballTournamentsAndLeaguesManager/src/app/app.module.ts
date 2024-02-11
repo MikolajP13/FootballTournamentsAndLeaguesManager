@@ -28,7 +28,6 @@ import { TeamDetailsComponent } from './pages/details/team-details/team-details.
 import { CreateTeamPopupComponent } from './pages/popups/create-team-popup/create-team-popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TeamPlayersComponent } from './pages/details/team-players/team-players.component';
-import { TeamMatchesComponent } from './pages/details/team-matches/team-matches.component';
 import { TeamStatisticsComponent } from './pages/details/team-statistics/team-statistics.component';
 import { TeamAboutComponent } from './pages/details/team-about/team-about.component';
 import { AddPlayerPopupComponent } from './pages/popups/add-player-popup/add-player-popup.component';
@@ -69,6 +68,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DeletePlayerPopupComponent } from './pages/popups/delete-player-popup/delete-player-popup.component';
 import { EditPlayerPopupComponent } from './pages/popups/edit-player-popup/edit-player-popup.component';
 import { TeamRemoveInformationComponent } from './pages/popups/team-remove-information/team-remove-information.component';
+import { TeamMatchesPlayedComponent } from './pages/details/team-matches-played/team-matches-played.component';
+import { TeamMatchesUpcomingComponent } from './pages/details/team-matches-upcoming/team-matches-upcoming.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -87,7 +89,6 @@ import { TeamRemoveInformationComponent } from './pages/popups/team-remove-infor
     TeamDetailsComponent,
     CreateTeamPopupComponent,
     TeamPlayersComponent,
-    TeamMatchesComponent,
     TeamStatisticsComponent,
     TeamAboutComponent,
     AddPlayerPopupComponent,
@@ -112,7 +113,9 @@ import { TeamRemoveInformationComponent } from './pages/popups/team-remove-infor
     TournamentMatchComponent,
     DeletePlayerPopupComponent,
     EditPlayerPopupComponent,
-    TeamRemoveInformationComponent
+    TeamRemoveInformationComponent,
+    TeamMatchesPlayedComponent,
+    TeamMatchesUpcomingComponent
   ],
   imports: [
     BrowserModule,
@@ -144,6 +147,7 @@ import { TeamRemoveInformationComponent } from './pages/popups/team-remove-infor
     MatStepperModule,
     MatPaginatorModule,
     FontAwesomeModule,
+    MatSortModule
     
   ],
   providers: [SidenavService, SnackBarComponent, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, {provide: MAT_SNACK_BAR_DATA, useValue: { duration: 1500 }}],

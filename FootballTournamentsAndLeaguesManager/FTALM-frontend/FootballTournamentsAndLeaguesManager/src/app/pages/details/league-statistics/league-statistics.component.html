@@ -8,14 +8,8 @@
 
               <ng-container matColumnDef="rank">
                 <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-                <mat-cell *matCellDef="let player; let i = index">
-                  <ng-container
-                    *ngIf="i === 0 || player.goals != playersGoalsDataSource.data[i-1].goals; else sameRank">
-                    {{ i + 1 }}
-                  </ng-container>
-                  <ng-template #sameRank>
-                    {{ i }}
-                  </ng-template>
+                <mat-cell *matCellDef="let player">
+                  {{ player.rank }}
                 </mat-cell>
               </ng-container>
 
@@ -47,14 +41,8 @@
 
               <ng-container matColumnDef="rank">
                 <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-                <mat-cell *matCellDef="let player; let i = index">
-                  <ng-container
-                    *ngIf="i === 0 || player.assists != playersAssistsDataSource.data[i-1].assists; else sameRank">
-                    {{ i + 1 }}
-                  </ng-container>
-                  <ng-template #sameRank>
-                    {{ i }}
-                  </ng-template>
+                <mat-cell *matCellDef="let player">
+                  {{ player.rank }}
                 </mat-cell>
               </ng-container>
 
@@ -86,14 +74,8 @@
 
               <ng-container matColumnDef="rank">
                 <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-                <mat-cell *matCellDef="let player; let i = index">
-                  <ng-container
-                    *ngIf="i === 0 || player.yellowCards != playersYellowCardsDataSource.data[i-1].yellowCards; else sameRank">
-                    {{ i + 1 }}
-                  </ng-container>
-                  <ng-template #sameRank>
-                    {{ i }}
-                  </ng-template>
+                <mat-cell *matCellDef="let player">
+                  {{ player.rank }}
                 </mat-cell>
               </ng-container>
 
@@ -125,14 +107,8 @@
 
               <ng-container matColumnDef="rank">
                 <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-                <mat-cell *matCellDef="let player; let i = index">
-                  <ng-container
-                    *ngIf="i === 0 || player.redCards != playersRedCardsDataSource.data[i-1].redCards; else sameRank">
-                    {{ i + 1 }}
-                  </ng-container>
-                  <ng-template #sameRank>
-                    {{ i }}
-                  </ng-template>
+                <mat-cell *matCellDef="let player">
+                  {{ player.rank }}
                 </mat-cell>
               </ng-container>
 
@@ -163,18 +139,13 @@
     <mat-tab label="Teams Stats">
       <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="1500ms">
         <mat-tab label="Goals">
-          <div class="stats-goals-container">
+          <div class="team-stats-goals-container">
             <mat-table [dataSource]="teamsGoalsDataSource" class="mat-elevation-z8">
 
               <ng-container matColumnDef="rank">
                 <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-                <mat-cell *matCellDef="let team; let i = index">
-                  <ng-container *ngIf="i === 0 || team.goalsFor != teamsGoalsDataSource.data[i-1].goalsFor; else sameRank">
-                    {{ i + 1 }}
-                  </ng-container>
-                  <ng-template #sameRank>
-                    {{ i }}
-                  </ng-template>
+                <mat-cell *matCellDef="let team">
+                  {{ team.rank }}
                 </mat-cell>
               </ng-container>
 
@@ -185,7 +156,7 @@
 
               <ng-container matColumnDef="goals">
                 <mat-header-cell *matHeaderCellDef> Goals </mat-header-cell>
-                <mat-cell *matCellDef="let team"> {{ team.goalsFor }} </mat-cell>
+                <mat-cell *matCellDef="let team"> {{ team.goals }} </mat-cell>
               </ng-container>
 
               <mat-header-row *matHeaderRowDef="teamsGoalsDisplayedColumns"></mat-header-row>
@@ -195,18 +166,13 @@
           </div>
         </mat-tab>
         <mat-tab label="Wins">
-          <div class="stats-wins-container">
+          <div class="team-stats-wins-container">
             <mat-table [dataSource]="teamsWinsDataSource" class="mat-elevation-z8">
 
               <ng-container matColumnDef="rank">
                 <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-                <mat-cell *matCellDef="let team; let i = index">
-                  <ng-container *ngIf="i === 0 || team.wins != teamsGoalsDataSource.data[i-1].wins; else sameRank">
-                    {{ i + 1 }}
-                  </ng-container>
-                  <ng-template #sameRank>
-                    {{ i }}
-                  </ng-template>
+                <mat-cell *matCellDef="let team">
+                  {{ team.rank }}
                 </mat-cell>
               </ng-container>
 
@@ -227,18 +193,13 @@
           </div>
         </mat-tab>
         <mat-tab label="Losses">
-          <div class="stats-losses-container">
+          <div class="team-stats-losses-container">
             <mat-table [dataSource]="teamsLossesDataSource" class="mat-elevation-z8">
 
               <ng-container matColumnDef="rank">
                 <mat-header-cell *matHeaderCellDef> Rank </mat-header-cell>
-                <mat-cell *matCellDef="let team; let i = index">
-                  <ng-container *ngIf="i === 0 || team.losses != teamsGoalsDataSource.data[i-1].losses; else sameRank">
-                    {{ i + 1 }}
-                  </ng-container>
-                  <ng-template #sameRank>
-                    {{ i }}
-                  </ng-template>
+                <mat-cell *matCellDef="let team">
+                  {{ team.rank }}
                 </mat-cell>
               </ng-container>
 

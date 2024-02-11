@@ -2,13 +2,36 @@
 .stats-assists-container,
 .stats-yellow-cards-container,
 .stats-red-cards-container,
-.stats-wins-container,
-.stats-losses-container {
+.team-stats-goals-container,
+.team-stats-wins-container,
+.team-stats-losses-container {
   margin: 1% 3% 1% 3%;
 }
 
 .mat-column-rank {
   flex: 0 0 5% !important;
+}
+
+.mat-column-player,
+.mat-column-team {
+  flex: 0 0 40% !important;
+}
+
+.mat-column-goals,
+.mat-column-assists,
+.mat-column-yellowCards,
+.mat-column-redCards,
+.mat-column-goals,
+.mat-column-wins,
+.mat-column-losses {
+  justify-content: center;
+  flex: 0 0 15% !important;
+}
+
+.team-stats-goals-container .mat-column-team,
+.team-stats-wins-container .mat-column-team,
+.team-stats-losses-container .mat-column-team {
+  flex: 0 0 80% !important;
 }
 
 mat-header-cell {

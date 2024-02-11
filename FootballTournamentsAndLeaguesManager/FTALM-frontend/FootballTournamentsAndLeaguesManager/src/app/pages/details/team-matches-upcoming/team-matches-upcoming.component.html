@@ -1,0 +1,38 @@
+<div class="filter-container">
+  <mat-form-field>
+    <mat-label>Filter by Competition</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search Competition Name" #input />
+  </mat-form-field>
+</div>
+
+<div class="upcoming-matches-container">
+  <mat-table [dataSource]="teamUpcomingMatchesDataSource" class="mat-elevation-z8" matSort>
+
+    <ng-container matColumnDef="competitionName">
+      <mat-header-cell *matHeaderCellDef class="competition-name-cell"> Competition </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="competition-name-cell">
+        <span *ngIf="element.tournamentName">{{element.tournamentName}}</span>
+        <span *ngIf="element.leagueName">{{element.leagueName}}</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="homeTeamName">
+      <mat-header-cell *matHeaderCellDef> Home Team </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.homeTeamName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="result">
+      <mat-header-cell *matHeaderCellDef> Match Result </mat-header-cell>
+      <mat-cell *matCellDef="let element"> - : - </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="awayTeamName">
+      <mat-header-cell *matHeaderCellDef> Away team </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.awayTeamName}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="match-row"></mat-row>
+  </mat-table>
+  <mat-paginator #teamMatchesPaginator [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+</div>
