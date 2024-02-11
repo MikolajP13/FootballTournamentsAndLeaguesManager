@@ -1,6 +1,8 @@
 package com.mp.footballtournamentsandleaguesmanager.controller;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueStandingDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueTeamStatisticsDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.TeamStatisticsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.LeagueStanding;
 import com.mp.footballtournamentsandleaguesmanager.repository.LeagueStandingRepository;
 import com.mp.footballtournamentsandleaguesmanager.service.LeagueStandingService;
@@ -40,20 +42,25 @@ public class LeagueStandingController {
     }
 
     @GetMapping("/getTeamsGoalsFor/{leagueId}")
-    public ResponseEntity<List<LeagueStandingDTO>> getLeagueStandingsByLeagueIdOrderByGoalsForDesc(@PathVariable Long leagueId){
-        List<LeagueStandingDTO> leagueStandingDTOList = this.leagueStandingService.getLeagueStandingsByLeagueIdOrderByGoalsForDesc(leagueId);
+    public ResponseEntity<List<LeagueTeamStatisticsDTO>> getLeagueStandingsByLeagueIdOrderByGoalsForDesc(@PathVariable Long leagueId){
+        List<LeagueTeamStatisticsDTO> leagueStandingDTOList = this.leagueStandingService.getLeagueStandingsByLeagueIdOrderByGoalsForDesc(leagueId);
         return ResponseEntity.ok(leagueStandingDTOList);
     }
 
     @GetMapping("/getTeamsWins/{leagueId}")
-    public ResponseEntity<List<LeagueStandingDTO>> getLeagueStandingsByLeagueIdOrderByWinsDesc(@PathVariable Long leagueId){
-        List<LeagueStandingDTO>leagueStandingDTOList = this.leagueStandingService.getLeagueStandingsByLeagueIdOrderByWinsDesc(leagueId);
+    public ResponseEntity<List<LeagueTeamStatisticsDTO>> getLeagueStandingsByLeagueIdOrderByWinsDesc(@PathVariable Long leagueId){
+        List<LeagueTeamStatisticsDTO>leagueStandingDTOList = this.leagueStandingService.getLeagueStandingsByLeagueIdOrderByWinsDesc(leagueId);
         return ResponseEntity.ok(leagueStandingDTOList);
     }
 
     @GetMapping("/getTeamsLosses/{leagueId}")
-    public ResponseEntity<List<LeagueStandingDTO>> getLeagueStandingsByLeagueIdOrderByLossesDesc(@PathVariable Long leagueId){
-        List<LeagueStandingDTO> leagueStandingDTOList = this.leagueStandingService.getLeagueStandingsByLeagueIdOrderByLossesDesc(leagueId);
+    public ResponseEntity<List<LeagueTeamStatisticsDTO>> getLeagueStandingsByLeagueIdOrderByLossesDesc(@PathVariable Long leagueId){
+        List<LeagueTeamStatisticsDTO> leagueStandingDTOList = this.leagueStandingService.getLeagueStandingsByLeagueIdOrderByLossesDesc(leagueId);
         return ResponseEntity.ok(leagueStandingDTOList);
+    }
+
+    @GetMapping("/all/team/{teamId}")
+    public ResponseEntity<List<TeamStatisticsDTO>> getAllByTeamId(@PathVariable Long teamId) {
+        return ResponseEntity.ok(leagueStandingService.getAllByTeamId(teamId));
     }
 }

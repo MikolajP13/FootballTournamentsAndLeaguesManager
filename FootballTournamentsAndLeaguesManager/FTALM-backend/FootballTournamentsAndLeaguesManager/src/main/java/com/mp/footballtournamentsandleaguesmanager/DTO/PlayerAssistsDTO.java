@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class PlayerAssistsDTO {
     private Long playerId;
+    private int rank;
     private String firstName;
     private String lastName;
     private Long teamId;

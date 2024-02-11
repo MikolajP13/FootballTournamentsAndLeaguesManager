@@ -15,7 +15,9 @@ public class MatchDTO {
     private Integer homeTeamScore;
     private Integer awayTeamScore;
     private Long tournamentId;
+    private String tournamentName;
     private Long leagueId;
+    private String leagueName;
     private int matchweek;
     private int round;
     private boolean isMatchProtocolCreated;

@@ -2,6 +2,7 @@ package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.CardDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerCardsDTO;
+import com.mp.footballtournamentsandleaguesmanager.DTO.PlayerGoalsDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.TeamCardsDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.Card;
 import com.mp.footballtournamentsandleaguesmanager.model.Team;
@@ -73,22 +74,34 @@ public class CardService {
 
     public List<PlayerCardsDTO> getPlayersYellowCardsByLeagueId(Long leagueId){
         Optional<List<PlayerCardsDTO>> optionalPlayerCardsDTOList = cardRepository.getPlayersYellowCardsByLeagueId(leagueId);
-        return optionalPlayerCardsDTOList.orElse(Collections.emptyList());
+        List<PlayerCardsDTO> playerYellowCards = optionalPlayerCardsDTOList.orElse(Collections.emptyList());
+        this.setYellowCardRanks(playerYellowCards);
+
+        return playerYellowCards;
     }
 
     public List<PlayerCardsDTO> getPlayersRedCardsByLeagueId(Long leagueId){
         Optional<List<PlayerCardsDTO>> optionalPlayerCardsDTOList = cardRepository.getPlayersRedCardsByLeagueId(leagueId);
-        return optionalPlayerCardsDTOList.orElse(Collections.emptyList());
+        List<PlayerCardsDTO> playerRedCards = optionalPlayerCardsDTOList.orElse(Collections.emptyList());
+        this.setRedCardRanks(playerRedCards);
+
+        return playerRedCards;
     }
 
     public List<PlayerCardsDTO> getPlayersYellowCardsByTournamentId(Long tournamentId){
         Optional<List<PlayerCardsDTO>> optionalPlayerCardsDTOList = cardRepository.getPlayersYellowCardsByTournamentId(tournamentId);
-        return optionalPlayerCardsDTOList.orElse(Collections.emptyList());
+        List<PlayerCardsDTO> playerYellowCards = optionalPlayerCardsDTOList.orElse(Collections.emptyList());
+        this.setYellowCardRanks(playerYellowCards);
+
+        return playerYellowCards;
     }
 
     public List<PlayerCardsDTO> getPlayersRedCardsByTournamentId(Long tournamentId){
         Optional<List<PlayerCardsDTO>> optionalPlayerCardsDTOList = cardRepository.getPlayersRedCardsByTournamentId(tournamentId);
-        return optionalPlayerCardsDTOList.orElse(Collections.emptyList());
+        List<PlayerCardsDTO> playerRedCards = optionalPlayerCardsDTOList.orElse(Collections.emptyList());
+        this.setRedCardRanks(playerRedCards);
+
+        return playerRedCards;
     }
 
     public TeamCardsDTO getCardsOverallByLeagueIdAndTeamId(Long leagueId, Long teamId){
@@ -101,6 +114,36 @@ public class CardService {
         Optional<Card> optionalCard = cardRepository.getCardByPlayerIdAndMatchId(playerId, matchId);
         Card card = optionalCard.orElse(null);
         return card != null ? convertToDTO(card) : null;
+    }
+
+    private void setYellowCardRanks(List<PlayerCardsDTO> list) {
+        int rank = 0;
+        Long previousPlayerStatistic = -1L;
+
+        for (PlayerCardsDTO player : list) {
+            if (player.getYellowCards().equals(previousPlayerStatistic)) {
+                player.setRank(rank);
+            } else {
+                rank++;
+                player.setRank(rank);
+                previousPlayerStatistic = player.getYellowCards();
+            }
+        }
+    }
+
+    private void setRedCardRanks(List<PlayerCardsDTO> list) {
+        int rank = 0;
+        Long previousPlayerStatistic = -1L;
+
+        for (PlayerCardsDTO player : list) {
+            if (player.getRedCards().equals(previousPlayerStatistic)) {
+                player.setRank(rank);
+            } else {
+                rank++;
+                player.setRank(rank);
+                previousPlayerStatistic = player.getRedCards();
+            }
+        }
     }
 
     public CardDTO convertToDTO(Card card){

@@ -87,4 +87,14 @@ public class MatchController {
     public ResponseEntity<Boolean> updatePlayersStatistics(@RequestBody List<MatchEventDTO> matchEventList) {
         return ResponseEntity.ok(matchService.updatePlayersStatistics(matchEventList));
     }
+
+    @GetMapping("/all/played/team/{teamId}")
+    public ResponseEntity<List<MatchDTO>> getAllPlayedMatchesByTeamId(@PathVariable Long teamId) {
+        return ResponseEntity.ok(matchService.getAllPlayedMatchesByTeamId(teamId));
+    }
+
+    @GetMapping("/upcoming/team/{teamId}")
+    public ResponseEntity<List<MatchDTO>> getUpcomingMatchesByTeamId(@PathVariable Long teamId) {
+        return ResponseEntity.ok(matchService.getUpcomingMatchesByTeamId(teamId));
+    }
 }

@@ -7,9 +7,7 @@ import com.mp.footballtournamentsandleaguesmanager.model.GoalAssist;
 import com.mp.footballtournamentsandleaguesmanager.model.Player;
 import com.mp.footballtournamentsandleaguesmanager.repository.GoalAssistRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.PlayerRepository;
-import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -80,22 +78,64 @@ public class GoalAssistService {
 
     public List<PlayerGoalsDTO> getPlayersGoalsByLeagueId(Long leagueId) {
         Optional<List<PlayerGoalsDTO>> optionalGoalScorerDTOList = goalAssistRepository.getPlayersGoalsByLeagueId(leagueId);
-        return optionalGoalScorerDTOList.orElse(Collections.emptyList());
+        List<PlayerGoalsDTO> playerGoals = optionalGoalScorerDTOList.orElse(Collections.emptyList());
+        this.setGoalRanks(playerGoals);
+
+        return playerGoals;
     }
 
     public List<PlayerAssistsDTO> getPlayersAssistsByLeagueId(Long leagueId){
         Optional<List<PlayerAssistsDTO>> optionalPlayerAssistsDTOList = goalAssistRepository.getPlayersAssistsByLeagueId(leagueId);
-        return optionalPlayerAssistsDTOList.orElse(Collections.emptyList());
+        List<PlayerAssistsDTO> playerAssists = optionalPlayerAssistsDTOList.orElse(Collections.emptyList());
+        this.setAssistRanks(playerAssists);
+
+        return playerAssists;
     }
 
     public List<PlayerGoalsDTO> getPlayersGoalsByTournamentId(Long tournamentId) {
         Optional<List<PlayerGoalsDTO>> optionalGoalScorerDTOList = goalAssistRepository.getPlayersGoalsByTournamentId(tournamentId);
-        return optionalGoalScorerDTOList.orElse(Collections.emptyList());
+        List<PlayerGoalsDTO> playerGoals = optionalGoalScorerDTOList.orElse(Collections.emptyList());
+        this.setGoalRanks(playerGoals);
+
+        return playerGoals;
     }
 
     public List<PlayerAssistsDTO> getPlayersAssistsByTournamentId(Long tournamentId){
         Optional<List<PlayerAssistsDTO>> optionalPlayerAssistsDTOList = goalAssistRepository.getPlayersAssistsByTournamentId(tournamentId);
-        return optionalPlayerAssistsDTOList.orElse(Collections.emptyList());
+        List<PlayerAssistsDTO> playerAssists = optionalPlayerAssistsDTOList.orElse(Collections.emptyList());
+        this.setAssistRanks(playerAssists);
+
+        return playerAssists;
+    }
+
+    private void setGoalRanks(List<PlayerGoalsDTO> list) {
+        int rank = 0;
+        Long previousPlayerStatistic = -1L;
+
+        for (PlayerGoalsDTO player : list) {
+            if (player.getGoals().equals(previousPlayerStatistic)) {
+                player.setRank(rank);
+            } else {
+                rank++;
+                player.setRank(rank);
+                previousPlayerStatistic = player.getGoals();
+            }
+        }
+    }
+
+    private void setAssistRanks(List<PlayerAssistsDTO> list) {
+        int rank = 0;
+        Long previousPlayerStatistic = -1L;
+
+        for (PlayerAssistsDTO player : list) {
+            if (player.getAssists().equals(previousPlayerStatistic)) {
+                player.setRank(rank);
+            } else {
+                rank++;
+                player.setRank(rank);
+                previousPlayerStatistic = player.getAssists();
+            }
+        }
     }
 
     public GoalAssistDTO convertToDTO(GoalAssist goalAssist){

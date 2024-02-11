@@ -31,4 +31,27 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
             "ORDER BY m.date DESC " +
             "LIMIT 5")
     Optional<List<Match>> findLastFiveMatchesByTeamIdAndTournamentId(Long tournamentId, Long teamId, int groupId);
+
+    @Query("SELECT m FROM Match m " +
+            "WHERE (m.homeTeamId = :teamId " +
+            "OR m.awayTeamId = :teamId) " +
+            "AND m.isMatchProtocolCreated = true " +
+            "ORDER BY m.date DESC")
+    Optional<List<Match>> getAllPlayedMatchesByTeamId(Long teamId);
+
+    @Query("SELECT m FROM Match m " +
+            "WHERE (m.homeTeamId = :teamId " +
+            "OR m.awayTeamId = :teamId) " +
+            "AND m.isMatchProtocolCreated = false " +
+            "ORDER BY m.id DESC " +
+            "LIMIT 20")
+    Optional<List<Match>> getUpcomingMatchesByTeamId(Long teamId);
+
+    @Query("SELECT m.round FROM Match m " +
+            "WHERE (m.homeTeamId = :teamId " +
+            "OR m.awayTeamId = :teamId) " +
+            "AND m.tournament.id = :tournamentId " +
+            "ORDER BY m.round DESC " +
+            "LIMIT 1")
+    Optional<Integer> getMaxRoundByTournamentIdAndTeamId(Long tournamentId, Long teamId);
 }

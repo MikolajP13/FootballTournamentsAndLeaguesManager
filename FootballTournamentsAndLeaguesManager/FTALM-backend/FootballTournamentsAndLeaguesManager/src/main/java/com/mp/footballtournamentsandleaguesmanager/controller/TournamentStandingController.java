@@ -1,5 +1,6 @@
 package com.mp.footballtournamentsandleaguesmanager.controller;
 
+import com.mp.footballtournamentsandleaguesmanager.DTO.TeamStatisticsDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.TournamentStandingDTO;
 import com.mp.footballtournamentsandleaguesmanager.model.TournamentStanding;
 import com.mp.footballtournamentsandleaguesmanager.service.TournamentStandingService;
@@ -37,5 +38,10 @@ public class TournamentStandingController {
         TournamentStanding updatedTournamentStanding = tournamentStandingService.updateTournamentStanding(tournamentId, groupId, teamId, tournamentStandingDTO);
         TournamentStandingDTO updatedTournamentStandingDTO = tournamentStandingService.convertToDTO(updatedTournamentStanding);
         return ResponseEntity.ok(updatedTournamentStandingDTO);
+    }
+
+    @GetMapping("/all/team/{teamId}")
+    public ResponseEntity<List<TeamStatisticsDTO>> getAllByTeamId(@PathVariable Long teamId) {
+        return ResponseEntity.ok(tournamentStandingService.getAllByTeamId(teamId));
     }
 }

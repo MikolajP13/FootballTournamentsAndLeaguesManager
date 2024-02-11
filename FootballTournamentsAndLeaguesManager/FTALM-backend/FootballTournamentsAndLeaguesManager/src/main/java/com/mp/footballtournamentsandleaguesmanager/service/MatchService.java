@@ -112,6 +112,11 @@ public class MatchService {
         return true;
     }
 
+    public int getMaxRoundByTournamentIdAndTeamId(Long tournamentId, Long teamId) {
+        Optional<Integer> optionalInteger = this.matchRepository.getMaxRoundByTournamentIdAndTeamId(tournamentId, teamId);
+        return optionalInteger.orElse(-1);
+    }
+
     private void updatePlayerGoalsAssistsStatistic(Long scorerPlayerId, Long assistPlayerId) {
         Optional<Player> optionalScorerPlayer = playerRepository.findById(scorerPlayerId);
         Optional<Player> optionalAssistPlayer = Optional.empty();
@@ -195,6 +200,24 @@ public class MatchService {
         return teamForm;
     }
 
+    public List<MatchDTO> getAllPlayedMatchesByTeamId(Long teamId) {
+        Optional<List<Match>> optionalMatches = matchRepository.getAllPlayedMatchesByTeamId(teamId);
+        List<Match> matches = optionalMatches.orElse(Collections.emptyList());
+
+        return matches.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<MatchDTO> getUpcomingMatchesByTeamId(Long teamId) {
+        Optional<List<Match>> optionalMatches = matchRepository.getUpcomingMatchesByTeamId(teamId);
+        List<Match> matches = optionalMatches.orElse(Collections.emptyList());
+
+        return matches.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
     public MatchDTO convertToDTO(Match match) {
         MatchDTO dto = new MatchDTO();
 
@@ -215,11 +238,13 @@ public class MatchService {
         else
             dto.setAwayTeamName("Blank Team");
 
-        if (match.getTournament() != null)
+        if (match.getTournament() != null) {
             dto.setTournamentId(match.getTournament().getId());
-        else
+            dto.setTournamentName(match.getTournament().getName());
+        } else {
             dto.setLeagueId(match.getLeague().getId());
-
+            dto.setLeagueName(match.getLeague().getName());
+        }
         dto.setMatchweek(match.getMatchweek());
         dto.setRound(match.getRound());
         dto.setMatchProtocolCreated(match.isMatchProtocolCreated());
