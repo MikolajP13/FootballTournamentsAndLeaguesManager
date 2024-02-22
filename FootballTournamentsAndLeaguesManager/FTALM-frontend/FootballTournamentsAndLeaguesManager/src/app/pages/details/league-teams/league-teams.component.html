@@ -27,7 +27,8 @@
         </mat-autocomplete>
       </mat-form-field>
       <div class="button-container">
-        <button mat-raised-button (click)="addTeamToLeague()" [disabled]="!isTeamSelected && numberOfTeams < maximumNumberOfTeams">Add team</button>
+        <button mat-raised-button (click)="addTeamToLeague()" 
+          [disabled]="!isTeamSelected && numberOfTeams < maximumNumberOfTeams">Add team</button>
       </div>
     </form>
 

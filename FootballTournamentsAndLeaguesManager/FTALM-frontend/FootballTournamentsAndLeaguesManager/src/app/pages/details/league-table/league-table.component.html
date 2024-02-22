@@ -9,7 +9,17 @@
       <ng-container matColumnDef="position">
         <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
         <mat-cell *matCellDef="let team; let i = index">
-            {{ i + 1 }}
+            <span *ngIf="team.leagueStandingType === 'CHAMPION'">
+              <i class="bi bi-arrow-up-circle" matTooltip="Champions Group"></i>
+              {{ i + 1 }}
+            </span>
+            <span *ngIf="team.leagueStandingType === 'RELEGATION'">
+              <i class="bi bi-arrow-down-circle" matTooltip="Relegation Group"></i>
+              {{ i + 1 }}
+            </span>
+            <span *ngIf="team.leagueStandingType === 'NORMAL' ">
+              {{ i + 1 }}
+            </span>
         </mat-cell>
       </ng-container>
   

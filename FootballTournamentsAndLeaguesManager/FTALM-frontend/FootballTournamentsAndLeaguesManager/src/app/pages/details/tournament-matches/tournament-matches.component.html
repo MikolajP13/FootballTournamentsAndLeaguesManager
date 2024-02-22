@@ -12,17 +12,17 @@
   <div *ngIf="selectedView === 'groupStage' && tournamentType === groupAndKnockout">
     <div class="tournament-matchweek-info">
       <h3>
-        <i class="bi bi-chevron-left" [ngClass]="{'matchweek-first-or-last': groupNumber === 1}"
-          (click)="groupNumber > 1 && previousRoundOrGroup(false)"></i>
+        <i class="bi bi-chevron-left" [ngClass]="{'matchweek-first-or-last': groupNumber === 0}"
+          (click)="groupNumber > 0 && previousRoundOrGroup(false)"></i>
         <span class="group">Group</span>
-        <span class="group" *ngIf="groupNumber === 1"> A </span>
-        <span class="group" *ngIf="groupNumber === 2"> B </span>
-        <span class="group" *ngIf="groupNumber === 3"> C </span>
-        <span class="group" *ngIf="groupNumber === 4"> D </span>
-        <span class="group" *ngIf="groupNumber === 5"> E </span>
-        <span class="group" *ngIf="groupNumber === 6"> F </span>
-        <span class="group" *ngIf="groupNumber === 7"> G </span>
-        <span class="group" *ngIf="groupNumber === 8"> H </span>
+        <span class="group" *ngIf="groupNumber === 0"> A </span>
+        <span class="group" *ngIf="groupNumber === 1"> B </span>
+        <span class="group" *ngIf="groupNumber === 2"> C </span>
+        <span class="group" *ngIf="groupNumber === 3"> D </span>
+        <span class="group" *ngIf="groupNumber === 4"> E </span>
+        <span class="group" *ngIf="groupNumber === 5"> F </span>
+        <span class="group" *ngIf="groupNumber === 6"> G </span>
+        <span class="group" *ngIf="groupNumber === 7"> H </span>
         <i class="bi bi-chevron-right" [ngClass]="{'matchweek-first-or-last': groupNumber === lastGroupNumber}"
           *ngIf="lastGroupNumber" (click)="groupNumber < lastGroupNumber && nextRoundOrGroup(false)"></i>
       </h3>
@@ -33,14 +33,14 @@
           <div *ngFor="let groupNumber of groups">
             <button mat-menu-item (click)="jumpToRoundOrGroup(groupNumber, false)">
               Group
-              <span *ngIf="groupNumber === 1"> A </span>
-              <span *ngIf="groupNumber === 2"> B </span>
-              <span *ngIf="groupNumber === 3"> C </span>
-              <span *ngIf="groupNumber === 4"> D </span>
-              <span *ngIf="groupNumber === 5"> E </span>
-              <span *ngIf="groupNumber === 6"> F </span>
-              <span *ngIf="groupNumber === 7"> G </span>
-              <span *ngIf="groupNumber === 8"> H </span>
+              <span *ngIf="groupNumber === 0"> A </span>
+              <span *ngIf="groupNumber === 1"> B </span>
+              <span *ngIf="groupNumber === 2"> C </span>
+              <span *ngIf="groupNumber === 3"> D </span>
+              <span *ngIf="groupNumber === 4"> E </span>
+              <span *ngIf="groupNumber === 5"> F </span>
+              <span *ngIf="groupNumber === 6"> G </span>
+              <span *ngIf="groupNumber === 7"> H </span>
             </button>
           </div>
         </mat-menu>

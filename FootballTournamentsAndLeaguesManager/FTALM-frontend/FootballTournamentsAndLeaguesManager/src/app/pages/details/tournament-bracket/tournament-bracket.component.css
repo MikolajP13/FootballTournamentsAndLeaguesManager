@@ -221,6 +221,11 @@ mat-cell {
   background: #EEE;
 }
 
+.score {
+  width: 10px;
+  text-align: center;
+}
+
 .team.win {
   background-color: #B8F2B8;
 }

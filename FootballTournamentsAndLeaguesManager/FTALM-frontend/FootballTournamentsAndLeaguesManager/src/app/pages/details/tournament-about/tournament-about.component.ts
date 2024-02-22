@@ -65,62 +65,9 @@ export class TournamentAboutComponent {
     });
   }
 
-  startTournament() {
-
-    // update tournament status to IN_PROGRESS
-    const updatedStatus: Tournament = {
-      status: Status.IN_PROGRESS
-    }
-
+  startTournament() {    
     this.tournamentCanBeStarted = false;
-
-    this.tournamentService.updateTournamentStatusByTournamentId(this.tournamentId, updatedStatus).subscribe();
-
-    this.teamService.findAllTeamsInTournamentByTournamentId(this.tournamentId).subscribe((teams: Team[]) =>{
-      var tournamentMatches: Match[] = [];
-
-      // shuffle teams
-      this.teams = StandingsUtils.shuffle(teams);
-
-      // if tournament type is group and knockout then create league standings and group matches
-      if(this.tournament.type?.replaceAll('_', ' ') == Type.GROUP_AND_KNOCKOUT.valueOf().toUpperCase()) {
-        let tournamentStanding: TournamentStanding[] = [];
-        let tournamentStageGroupMatches: Match[] = [];
-        const numberOfGroups = Math.floor(this.teams.length/4);
-
-        for (let i = 0; i < numberOfGroups; i++) {
-          for (let j = 0; j < 4; j++) {
-            tournamentStanding.push({
-              tournament: {id: this.tournamentId},
-              groupId: i + 1,
-              team: {id: this.teams[j] ? (this.teams[j].id || 0) : 0},
-              matches: 0,
-              points: 0,
-              goalsFor: 0,
-              goalsAgainst: 0,
-              wins: 0,
-              draws: 0,
-              losses: 0,
-              teamForm: []
-            });
-          }
-
-          // create tournament group fixtures => function(teams, competitionId, isTournament, isRematch)
-          var groupMatches: Match[] = StandingsUtils.generateRoundRobinSchedule(this.teams.splice(0, 4), this.tournamentId, true, i+1, false);
-          tournamentStageGroupMatches = tournamentStageGroupMatches.concat(groupMatches);
-        }
-        
-        tournamentMatches = tournamentStageGroupMatches;
-        this.tournamentStandingService.addTournamentStanding(tournamentStanding).subscribe();
-
-      } else { 
-        // standard tournament mode start with matches in round number 1
-        tournamentMatches = StandingsUtils.generateTournamentPairs(this.teams, this.tournamentId);
-      }
-
-      this.matchService.createMatches(tournamentMatches).subscribe();
-
-    });
+    this.tournamentService.startTournament(this.tournamentId).subscribe();
   }
 
 }

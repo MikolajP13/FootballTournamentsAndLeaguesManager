@@ -33,6 +33,9 @@ public class Team {
     private boolean isInLeague;
     private boolean isInTournament;
 
+    public Team(String name) {
+        this.name = name;
+    }
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Team{");

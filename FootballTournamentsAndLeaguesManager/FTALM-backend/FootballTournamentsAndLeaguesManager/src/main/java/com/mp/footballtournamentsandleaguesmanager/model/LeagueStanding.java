@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 @Entity
 @Table(name = "LeagueStandings")
 @NoArgsConstructor
@@ -16,6 +18,7 @@ public class LeagueStanding extends Standing{
     @ManyToOne
     @JoinColumn(name = "league_id", nullable = false)
     private League league;
+    private LeagueStandingType leagueStandingType;
 
     public League getLeague() {
         return league;
@@ -23,5 +26,9 @@ public class LeagueStanding extends Standing{
 
     public void setLeague(League league) {
         this.league = league;
+    }
+
+    public enum LeagueStandingType {
+        NORMAL, CHAMPION, RELEGATION
     }
 }

@@ -72,4 +72,15 @@ public class TournamentController {
     public ResponseEntity<String> deleteTournamentById(@PathVariable Long tournamentId){
         return tournamentService.deleteTournamentById(tournamentId) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/finish/{tournamentId}")
+    public ResponseEntity<Boolean> checkAndTryCompleteTournament(@PathVariable Long tournamentId) {
+        return this.tournamentService.checkAndTryCompleteTournament(tournamentId) ? ResponseEntity.ok().body(true) : ResponseEntity.ok(false);
+    }
+
+    @GetMapping("/start/{tournamentId}")
+    public ResponseEntity<Boolean> startTournament(@PathVariable Long tournamentId){
+
+        return ResponseEntity.ok(this.tournamentService.startTournament(tournamentId));
+    }
 }

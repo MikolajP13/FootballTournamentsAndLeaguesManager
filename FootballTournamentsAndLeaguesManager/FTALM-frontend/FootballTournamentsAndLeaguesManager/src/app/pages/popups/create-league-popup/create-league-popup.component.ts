@@ -55,7 +55,7 @@ export class CreateLeaguePopupComponent {
       type: typeId as unknown as Type
     }
 
-    this.leagueService.addLeague(league).subscribe(result => { });
+    this.leagueService.addLeague(league).subscribe();
 
     this.dialogRef.close('success');
   }

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class MatchWeekNumberService {
   matchWeekNumber: number = 1;
   roundNumber: number = 1;
-  groupNumber: number = 1;
+  groupNumber: number = 0;
   
   constructor() { }
 }

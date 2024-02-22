@@ -17,8 +17,8 @@ export class TournamentMatchesComponent {
   tournamentId!: number;
   tournamentType!: string;
   numberOfTeams!: number;
-  roundNumber: number = 1 ;
-  groupNumber: number = 1 ;
+  roundNumber: number = 0 ;
+  groupNumber: number = 0 ;
   lastGroupNumber?: number;
   lastRoundNumber?: number;
   tournamentBracketStageMatchesData: Match[] = [];
@@ -46,18 +46,18 @@ export class TournamentMatchesComponent {
     this.matchService.getTournamentMatchesByTournamentId(this.tournamentId).subscribe((matches: Match[]) => {
 
       if (this.tournamentType === this.groupAndKnockout) {
-        this.tournamentGroupStageMatchesData = matches.filter(match => match.matchweek !== 0);
+        this.tournamentGroupStageMatchesData = matches.filter(match => match.matchweek || 0 >= 0 && match.round === 0);
         this.tournamentBracketStageMatchesData = matches.filter(match => match.round !== 0);
         this.lastGroupNumber = this.getLastGroupNumber();
-        this.lastRoundNumber = Math.log2(this.lastGroupNumber*2); // two teams from each group will play in the bracket stage
-        this.groups = [...Array(this.lastGroupNumber).keys()].map(i => i + 1);
+        this.lastRoundNumber = Math.log2((this.lastGroupNumber+1)*2); // two teams from each group will play in the bracket stage
+        this.groups = [...Array(this.lastGroupNumber+1).keys()];
       
       } else if (this.tournamentType === this.singleElimination) {
         this.tournamentBracketStageMatchesData = matches;
         this.lastRoundNumber = Math.log2(this.numberOfTeams);
       }
       
-      this.rounds = [...Array(this.lastRoundNumber).keys()].map(i => i + 1);
+      this.rounds = [...Array(this.lastRoundNumber).keys()].map(i => i+1);
 
     });
   }

@@ -11,6 +11,14 @@
   background-color: aliceblue;
 }
 
+.mat-column-postion {
+  flex: 0 0 3% !important;
+}
+
+.mat-column-teamName {
+  flex: 0 0 34% !important;
+}
+
 .mat-column-won,
 .mat-column-drawn,
 .mat-column-lost {
@@ -37,6 +45,17 @@
 .bi-x-circle-fill {
   color: red;
 }
+
+.bi-arrow-up-circle {
+  color: green;
+  margin-right: 5px;
+}
+
+.bi-arrow-down-circle {
+  color: red;
+  margin-right: 5px;
+}
+
 
 mat-header-cell {
   justify-content: center;

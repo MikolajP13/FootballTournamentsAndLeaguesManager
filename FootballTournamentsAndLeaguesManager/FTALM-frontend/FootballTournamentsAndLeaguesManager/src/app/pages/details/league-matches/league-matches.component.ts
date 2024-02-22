@@ -31,9 +31,14 @@ export class LeagueMatchesComponent {
     this.matchService.getLeagueMatchesByLeagueId(this.leagueId).subscribe((match: Match[]) => {
       this.leagueMatchesData = [...match];
       this.lastMatchWeekNumber = this.getLastMatchWeekNumber();
-      this.matchweeks = [...Array(this.lastMatchWeekNumber).keys()].map(i => i + 1);
+      if (match.length > 0)
+        this.matchweeks = [...Array(this.lastMatchWeekNumber).keys()].map(i => i + 1);
     });
 
+  }
+
+  ngAfterViewInit() {
+    this.lastMatchWeekNumber = this.getLastMatchWeekNumber();
   }
 
   previousMatchWeek(): void {

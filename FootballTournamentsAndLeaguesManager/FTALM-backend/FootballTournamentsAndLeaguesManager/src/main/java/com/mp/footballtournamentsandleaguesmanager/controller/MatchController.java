@@ -97,4 +97,5 @@ public class MatchController {
     public ResponseEntity<List<MatchDTO>> getUpcomingMatchesByTeamId(@PathVariable Long teamId) {
         return ResponseEntity.ok(matchService.getUpcomingMatchesByTeamId(teamId));
     }
+
 }

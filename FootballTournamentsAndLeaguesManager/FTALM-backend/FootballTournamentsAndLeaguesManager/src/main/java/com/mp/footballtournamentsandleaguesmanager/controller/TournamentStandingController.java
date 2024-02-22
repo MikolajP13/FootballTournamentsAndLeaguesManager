@@ -35,6 +35,7 @@ public class TournamentStandingController {
                                                                           @PathVariable int groupId,
                                                                           @PathVariable Long teamId,
                                                                           @RequestBody TournamentStandingDTO tournamentStandingDTO){
+        System.out.println("controller");
         TournamentStanding updatedTournamentStanding = tournamentStandingService.updateTournamentStanding(tournamentId, groupId, teamId, tournamentStandingDTO);
         TournamentStandingDTO updatedTournamentStandingDTO = tournamentStandingService.convertToDTO(updatedTournamentStanding);
         return ResponseEntity.ok(updatedTournamentStandingDTO);

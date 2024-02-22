@@ -64,4 +64,13 @@ export class LeagueService {
   updateLeagueStatusByLeagueId(leagueId: number, leagueStatus: League): Observable<League>{
     return this.httpClient.put<League>(`${this.apiServerUrl}/league/updateStatus/${leagueId}`, leagueStatus);
   }
+
+  startLeague(leagueId: number): Observable<Boolean> {
+    return this.httpClient.get<Boolean>(`${this.apiServerUrl}/league/start/${leagueId}`);
+  }
+
+  checkAndTryCompleteLeague(leagueId: number): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.apiServerUrl}/league/finish/${leagueId}`);
+  }
+
 }

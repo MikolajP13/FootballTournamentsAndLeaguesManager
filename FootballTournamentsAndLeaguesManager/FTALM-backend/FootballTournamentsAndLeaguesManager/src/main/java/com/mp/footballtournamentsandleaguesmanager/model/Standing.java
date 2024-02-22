@@ -25,4 +25,15 @@ public class Standing {
     private int wins;
     private int draws;
     private int losses;
+
+    public Standing(Team team, int matches, int points, int goalsFor, int goalsAgainst, int wins, int draws, int losses) {
+        this.team = team;
+        this.matches = matches;
+        this.points = points;
+        this.goalsFor = goalsFor;
+        this.goalsAgainst = goalsAgainst;
+        this.wins = wins;
+        this.draws = draws;
+        this.losses = losses;
+    }
 }

@@ -54,4 +54,41 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
             "ORDER BY m.round DESC " +
             "LIMIT 1")
     Optional<Integer> getMaxRoundByTournamentIdAndTeamId(Long tournamentId, Long teamId);
+
+    @Query("SELECT COUNT(*) FROM Match m " +
+            "WHERE m.awayTeamId IS NOT NULL " +
+            "AND m.homeTeamId IS NOT NULL " +
+            "AND m.round = 1 " +
+            "AND m.league.id = :leagueId")
+    Optional<Integer> getNumberOfMatchesInSplitModeLeague(Long leagueId);
+
+    @Query("SELECT COUNT(*) FROM Match m " +
+            "WHERE m.awayTeamId IS NOT NULL " +
+            "AND m.homeTeamId IS NOT NULL " +
+            "AND m.round = :round " +
+            "AND m.isMatchProtocolCreated = FALSE " +
+            "AND m.league.id = :leagueId")
+    Optional<Integer> getNumberOfMatchesInLeagueInSelectedRoundWithoutCreatedMatchProtocol(Long leagueId, int round);
+
+    @Query("SELECT COUNT(*) FROM Match m " +
+            "WHERE m.awayTeamId IS NOT NULL " +
+            "AND m.homeTeamId IS NOT NULL " +
+            "AND m.round = :round " +
+            "AND m.isMatchProtocolCreated = FALSE " +
+            "AND m.tournament.id = :tournamentId")
+    Optional<Integer> getNumberOfMatchesInTournamentInSelectedRoundWithoutCreatedMatchProtocol(Long tournamentId, int round);
+
+    @Query("SELECT COUNT(*) FROM Match m " +
+            "WHERE m.awayTeamId IS NOT NULL " +
+            "AND m.homeTeamId IS NOT NULL " +
+            "AND m.round = :round " +
+            "AND m.tournament.id = :tournamentId")
+    Optional<Integer> getNumberOfMatchesInTournamentBySelectedRound(Long tournamentId, int round);
+
+    @Query("SELECT m FROM Match m " +
+            "WHERE m.awayTeamId IS NOT NULL " +
+            "AND m.homeTeamId IS NOT NULL " +
+            "AND m.round = :round " +
+            "AND m.tournament.id = :tournamentId")
+    Optional<List<Match>> getMatchesInTournamentBySelectedRound(Long tournamentId, int round);
 }

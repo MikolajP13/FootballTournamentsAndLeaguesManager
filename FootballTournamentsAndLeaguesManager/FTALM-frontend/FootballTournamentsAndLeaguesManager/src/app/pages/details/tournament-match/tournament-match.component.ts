@@ -17,6 +17,7 @@ import { TournamentStandingService } from '../../../services/tournamentStandingS
 import { TournamentStanding } from 'src/app/models/TournamentStanding/tournamentStanding';
 import { faFutbol } from '@fortawesome/free-regular-svg-icons';
 import { EventType, MatchEvent } from 'src/app/models/MatchEvent/matchEvent';
+import { TournamentService } from 'src/app/services/tournamentService/tournament.service';
 
 @Component({
   selector: 'app-tournament-match',
@@ -55,7 +56,7 @@ export class TournamentMatchComponent {
 
   constructor(private route: ActivatedRoute, private matchService: MatchService, private playerService: PlayerService, 
     private goalAssistService: GoalAssistService, private cardService: CardService, private substitutionService: SubstitutionService, 
-    private tournamentStandingService: TournamentStandingService, private snackBar: SnackBarComponent,
+    private tournamentStandingService: TournamentStandingService, private snackBar: SnackBarComponent, private tournamentService: TournamentService,
     private matchWeekNumberService: MatchWeekNumberService, private router: Router) {}
 
   // DUPLICATE CODE NEED TO BE REMOVED
@@ -190,7 +191,8 @@ export class TournamentMatchComponent {
       homeTeamScore: this.homeTeamScore,
       awayTeamScore: this.awayTeamScore,
       matchProtocolCreated: true,
-      date: new Date(Date.now())
+      date: new Date(Date.now()),
+      tournamentId: this.tournamentId
     }
     var goalAssistEvents = this.events.filter(e => e.type === this.GOAL_ASSIST_EVENT_ID);
     var cardEvents = this.events.filter(e => e.type === this.CARD_EVENT_ID);
@@ -208,7 +210,6 @@ export class TournamentMatchComponent {
     
     if(cardEvents.length > 0) {
       this.cardService.addCards(cardEvents).subscribe();
-      console.log(cardEvents);
       cardEvents.forEach(e => events.push({
         firstPlayerId: e.player.id,
         event: e.cardType === 0 ? EventType.YELLOW_CARD : (e.cardType === 1 ? EventType.SECOND_YELLOW_CARD : EventType.RED_CARD)
@@ -221,9 +222,8 @@ export class TournamentMatchComponent {
     
     if(this.match?.id) {
       this.matchService.updateMatch(this.match.id, updatedMatchData).subscribe();
-      
       if(this.tournamentId && this.match?.homeTeamId && this.match?.awayTeamId 
-        && this.match?.matchweek && this.match?.matchweek > 0) {
+        && this.match?.matchweek !== undefined && this.match?.matchweek >= 0) {
           var homeTeamWin: number = 0; 
           var awayTeamWin: number = 0; 
           var draw: number = 0; 
@@ -258,16 +258,15 @@ export class TournamentMatchComponent {
           losses: awayTeamLose,
           teamForm: []
         }
-        
-        this.tournamentStandingService.updateTournamentStanding(this.tournamentId, this.match.matchweek, this.match.homeTeamId, tournamentStandingForHomeTeam).subscribe();
-        this.tournamentStandingService.updateTournamentStanding(this.tournamentId, this.match.matchweek, this.match.awayTeamId, tournamentStandingForAwayTeam).subscribe();
-        
-      } else if (this.tournamentId && this.match?.homeTeamId && this.match?.awayTeamId) {
-        // Create match for next round
-      }
 
+        if (this.match.round === 0) {
+          this.tournamentStandingService.updateTournamentStanding(this.tournamentId, this.match.matchweek, this.match.homeTeamId, tournamentStandingForHomeTeam).subscribe();
+          this.tournamentStandingService.updateTournamentStanding(this.tournamentId, this.match.matchweek, this.match.awayTeamId, tournamentStandingForAwayTeam).subscribe();
+        }
+        this.matchService.updatePlayerStatistics(events).subscribe();
+        this.tournamentService.checkAndTryCompleteTournament(this.tournamentId).subscribe();
+      }
     }
-    this.matchService.updatePlayerStatistics(events).subscribe();
     
     this.navigateToMatches();
   }
@@ -341,7 +340,7 @@ export class TournamentMatchComponent {
         this.matchWeekNumberService.roundNumber = this.match?.round;
     }
     
-    this.router.navigate([`/tournament/${this.tournamentId}/matches/`])
+    this.router.navigate([`/tournament/${this.tournamentId}/matches/`]);
   }
 
 }

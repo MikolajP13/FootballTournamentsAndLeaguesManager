@@ -31,10 +31,10 @@ public class TournamentLeagueBase {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("League{");
+        final StringBuilder sb = new StringBuilder("TournamentLeagueBase{");
         sb.append("id=").append(id);
         sb.append(", user=").append(user);
-        sb.append(", leagueName='").append(name).append('\'');
+        sb.append(", competitionName='").append(name).append('\'');
         sb.append(", startDate=").append(startDate);
         sb.append(", numberOfTeams=").append(numberOfTeams);
         sb.append(", status=").append(status);

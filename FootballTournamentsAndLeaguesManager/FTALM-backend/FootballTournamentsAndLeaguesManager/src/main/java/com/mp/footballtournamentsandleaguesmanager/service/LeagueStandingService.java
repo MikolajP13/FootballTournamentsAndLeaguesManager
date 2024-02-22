@@ -4,8 +4,10 @@ import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueStandingDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueTeamStatisticsDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.LeagueTeamStatisticsDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.TeamStatisticsDTO;
+import com.mp.footballtournamentsandleaguesmanager.model.League;
 import com.mp.footballtournamentsandleaguesmanager.model.Tournament;
 import com.mp.footballtournamentsandleaguesmanager.model.TournamentStanding;
+import com.mp.footballtournamentsandleaguesmanager.repository.LeagueRepository;
 import com.mp.footballtournamentsandleaguesmanager.utils.StandingMapper;
 import com.mp.footballtournamentsandleaguesmanager.utils.TeamComparator;
 import com.mp.footballtournamentsandleaguesmanager.model.LeagueStanding;
@@ -24,6 +26,7 @@ public class LeagueStandingService {
     private final LeagueStandingRepository leagueStandingRepository;
     private final MatchService matchService;
     private final CardService cardService;
+    private final LeagueRepository leagueRepository;
 
     public List<LeagueStanding> addLeagueStanding(List<LeagueStanding> leagueStandings) {
         return leagueStandingRepository.saveAll(leagueStandings);
@@ -36,11 +39,51 @@ public class LeagueStandingService {
     }
 
     public List<LeagueStandingDTO> getLeagueStandingByLeagueId(Long leagueId){
+        Optional<League> leagueOptional = leagueRepository.findById(leagueId);
+
+        if (leagueOptional.isEmpty())
+            throw new RuntimeException();
+
+        League league = leagueOptional.get();
         Optional<List<LeagueStanding>> optionalLeagueStandingList = leagueStandingRepository.getLeagueStandingByLeagueId(leagueId);
         List<LeagueStanding> leagueStandingList = optionalLeagueStandingList.orElse(Collections.emptyList());
 
-        if(!leagueStandingList.isEmpty()){
-            if(matchService.countAllByLeagueIdAndIsMatchProtocolCreated(leagueId, true) == 0)
+        if (league.getType().equals(League.LeagueType.STANDARD_MODE)) {
+            return getLeagueStandingDTOS(leagueId, leagueStandingList);
+        } else if (league.getType().equals(League.LeagueType.SPLIT_MODE)) {
+            boolean isAfterSplit = leagueStandingList.stream().noneMatch(ls -> ls.getLeagueStandingType().equals(LeagueStanding.LeagueStandingType.NORMAL));
+
+            if (!isAfterSplit) {
+                return getLeagueStandingDTOS(leagueId, leagueStandingList);
+            } else {
+                List<LeagueStanding> leagueStandingChampionList = new ArrayList<>();
+                List<LeagueStanding> leagueStandingRelegateList = new ArrayList<>();
+
+                for (LeagueStanding ls : leagueStandingList) {
+                    if (ls.getLeagueStandingType().equals(LeagueStanding.LeagueStandingType.CHAMPION))
+                        leagueStandingChampionList.add(ls);
+                    else if(ls.getLeagueStandingType().equals(LeagueStanding.LeagueStandingType.RELEGATION))
+                        leagueStandingRelegateList.add(ls);
+                }
+
+                leagueStandingChampionList.sort(new TeamComparator<>(leagueId, matchService, cardService));
+                leagueStandingRelegateList.sort(new TeamComparator<>(leagueId, matchService, cardService));
+
+                leagueStandingChampionList.addAll(leagueStandingRelegateList);
+
+                return leagueStandingChampionList.stream()
+                        .map(this::convertToDTO)
+                        .peek(e -> e.setTeamForm(this.matchService.findLastFiveMatchesByTeamIdInLeagueId(leagueId, e.getTeamId())))
+                        .toList();
+            }
+        }
+
+        return Collections.emptyList();
+    }
+
+    private List<LeagueStandingDTO> getLeagueStandingDTOS(Long leagueId, List<LeagueStanding> leagueStandingList) {
+        if (!leagueStandingList.isEmpty()) {
+            if (matchService.countAllByLeagueIdAndIsMatchProtocolCreated(leagueId, true) == 0)
                 leagueStandingList.sort(Comparator.comparing(t -> t.getTeam().getName()));
             else
                 leagueStandingList.sort(new TeamComparator<>(leagueId, matchService, cardService));

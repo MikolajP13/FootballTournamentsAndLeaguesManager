@@ -6,7 +6,7 @@ import { Player } from 'src/app/models/Player/player';
 import { MatchService } from 'src/app/services/matchService/match.service';
 import { PlayerService } from 'src/app/services/playerService/player.service';
 import { Card, CardType } from 'src/app/models/Card/card';
-import { forkJoin } from 'rxjs';
+import { concat, forkJoin } from 'rxjs';
 import { SnackBarComponent } from 'src/app/shared-components/snack-bar/snack-bar.component';
 import { Substitution } from '../../../models/Substitution/substitution';
 import { GoalAssistService } from 'src/app/services/goalAssistService/goal-assist.service';
@@ -17,6 +17,7 @@ import { LeagueStandingService } from 'src/app/services/leagueStandingService/le
 import { LeagueStanding } from 'src/app/models/LeagueStanding/leagueStanding';
 import { faFutbol } from '@fortawesome/free-regular-svg-icons';
 import { EventType, MatchEvent } from 'src/app/models/MatchEvent/matchEvent';
+import { LeagueService } from 'src/app/services/leagueService/league.service';
 
 @Component({
   selector: 'app-league-match',
@@ -55,7 +56,7 @@ export class LeagueMatchComponent {
 
   constructor(private route: ActivatedRoute, private matchService: MatchService, private playerService: PlayerService, 
     private goalAssistService: GoalAssistService, private cardService: CardService, private substitutionService: SubstitutionService, 
-    private leagueStandingService: LeagueStandingService, private snackBar: SnackBarComponent,
+    private leagueStandingService: LeagueStandingService, private snackBar: SnackBarComponent, private leagueService: LeagueService,
     private matchWeekNumberService: MatchWeekNumberService, private router: Router) {}
 
   ngOnInit(): void { 
@@ -186,7 +187,8 @@ export class LeagueMatchComponent {
       homeTeamScore: this.homeTeamScore,
       awayTeamScore: this.awayTeamScore,
       matchProtocolCreated: true,
-      date: new Date(Date.now())
+      date: new Date(Date.now()),
+      leagueId: this.leagueId
     }
     var goalAssistEvents = this.events.filter(e => e.type === this.GOAL_ASSIST_EVENT_ID);
     var cardEvents = this.events.filter(e => e.type === this.CARD_EVENT_ID);
@@ -195,7 +197,6 @@ export class LeagueMatchComponent {
     
     if(goalAssistEvents.length > 0) {
       this.goalAssistService.addGoalAssists(goalAssistEvents).subscribe();
-      console.log(goalAssistEvents);
       goalAssistEvents.forEach(e => events.push({
         firstPlayerId: e.scorerPlayer.id,
         secondPlayerId: e.assistPlayerId, 
@@ -205,7 +206,6 @@ export class LeagueMatchComponent {
 
     if(cardEvents.length > 0) {
       this.cardService.addCards(cardEvents).subscribe();
-      console.log(cardEvents);
       cardEvents.forEach(e => events.push({
         firstPlayerId: e.player.id,
         event: e.cardType === 0 ? EventType.YELLOW_CARD : (e.cardType === 1 ? EventType.SECOND_YELLOW_CARD : EventType.RED_CARD)
@@ -257,10 +257,10 @@ export class LeagueMatchComponent {
 
         this.leagueStandingService.updateLeagueStanding(this.leagueId, this.match.homeTeamId, leagueStandingForHomeTeam).subscribe();
         this.leagueStandingService.updateLeagueStanding(this.leagueId, this.match.awayTeamId, leagueStandingForAwayTeam).subscribe();
+        this.matchService.updatePlayerStatistics(events).subscribe();
+        this.leagueService.checkAndTryCompleteLeague(this.leagueId).subscribe();
       }
     }
-    this.matchService.updatePlayerStatistics(events).subscribe();
-
     this.navigateToMatches();
   }
 
@@ -327,8 +327,8 @@ export class LeagueMatchComponent {
 
   navigateToMatches(): void {
     if(this.match?.matchweek) {
-      this.router.navigate([`/league/${this.leagueId}/matches/`])
       this.matchWeekNumberService.matchWeekNumber = this.match?.matchweek;
+      this.router.navigate([`/league/${this.leagueId}/matches/`]).then(() => window.location.reload());
     }
   }
 

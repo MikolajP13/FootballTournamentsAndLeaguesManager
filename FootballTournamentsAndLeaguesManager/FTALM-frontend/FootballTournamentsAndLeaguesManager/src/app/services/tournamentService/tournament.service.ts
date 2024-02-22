@@ -49,4 +49,12 @@ export class TournamentService {
     return this.httpClient.put<Tournament>(`${this.apiServerUrl}/tournament/updateStatus/${tournamentId}`, tournamentStatus);
   }
 
+  startTournament(tournamentId: number): Observable<Boolean>{
+    return this.httpClient.get<Boolean>(`${this.apiServerUrl}/tournament/start/${tournamentId}`);
+  }
+
+  checkAndTryCompleteTournament(tournamentId: number): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.apiServerUrl}/tournament/finish/${tournamentId}`);
+  }
+
 }

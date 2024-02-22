@@ -43,8 +43,13 @@ export class TournamentBracketComponent {
     });
 
     this.teamService.countTeamsByTournamentId(this.tournamentId).subscribe(result => {
-      const requests = [];
-      this.numberOfTeams = result;
+      const requests = [];      
+
+      if (this.tournament.type?.toString() === 'GROUP_AND_KNOCKOUT')
+        this.numberOfTeams = result / 2;
+      else
+        this.numberOfTeams = result;
+
       this.numberOfRounds = Array.from({ length: Math.log2(this.numberOfTeams) }, (_, index) => index+1);
       
       this.matchService.getTournamentMatchesForBracketStage(this.tournamentId).subscribe(matches => {
@@ -98,7 +103,7 @@ export class TournamentBracketComponent {
 
       result /= 4;
     
-      for (let i = 1; i <= result; i++) {
+      for (let i = 0; i < result; i++) {
         const standingRequest = this.tournamentStandingService.getTournamentStandingByTournamentIdAndGroupId(this.tournamentId, i);
         const matchesRequest = this.matchService.getTournamentMatchesByRoundAndGroup(this.tournamentId, TournamentBracketComponent.TOURNAMENT_GROUP_ROUND, i);
         requests.push(
@@ -119,11 +124,9 @@ export class TournamentBracketComponent {
 
   convertGroupIdToLetter(groupId: number | undefined): string {
     if(groupId === undefined) return '';
-    return String.fromCharCode('A'.charCodeAt(0) + groupId - 1);
+    return String.fromCharCode('A'.charCodeAt(0) + groupId);
   }
 
-
-  //TODO: Remove duplication [league matches functions]
   showMatchDetails(selectedMatch: Match){
     this.router.navigate([`/tournament/${this.tournamentId}/match-details/` + selectedMatch.id])
   }

@@ -81,4 +81,13 @@ public class LeagueController {
         return leagueService.deleteLeagueById(leagueId) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/finish/{leagueId}")
+    public ResponseEntity<Boolean> checkAndTryCompleteLeague(@PathVariable Long leagueId) {
+        return this.leagueService.checkAndTryCompleteLeague(leagueId) ? ResponseEntity.ok().body(true) : ResponseEntity.ok(false);
+    }
+
+    @GetMapping("/start/{leagueId}")
+    public ResponseEntity<Boolean> startLeague(@PathVariable Long leagueId){
+        return ResponseEntity.ok(this.leagueService.startLeague(leagueId));
+    }
 }

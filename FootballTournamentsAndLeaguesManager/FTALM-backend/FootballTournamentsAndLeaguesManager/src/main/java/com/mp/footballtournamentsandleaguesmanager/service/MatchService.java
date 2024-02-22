@@ -2,12 +2,12 @@ package com.mp.footballtournamentsandleaguesmanager.service;
 
 import com.mp.footballtournamentsandleaguesmanager.DTO.MatchDTO;
 import com.mp.footballtournamentsandleaguesmanager.DTO.MatchEventDTO;
-import com.mp.footballtournamentsandleaguesmanager.model.Match;
-import com.mp.footballtournamentsandleaguesmanager.model.Player;
+import com.mp.footballtournamentsandleaguesmanager.model.*;
 import com.mp.footballtournamentsandleaguesmanager.repository.MatchRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.PlayerRepository;
 import com.mp.footballtournamentsandleaguesmanager.repository.TeamRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ public class MatchService {
     private final MatchRepository matchRepository;
     private final TeamRepository teamRepository;
     private final PlayerRepository playerRepository;
+    private final ApplicationContext applicationContext;
     private final static String TEAM_WIN = "W";
     private final static String TEAM_DRAW = "D";
     private final static String TEAM_LOSS = "L";
@@ -45,7 +46,19 @@ public class MatchService {
         matchToUpdate.setAwayTeamScore(matchDTO.getAwayTeamScore());
         matchToUpdate.setHomeTeamScore(matchDTO.getHomeTeamScore());
         matchToUpdate.setMatchProtocolCreated(matchDTO.isMatchProtocolCreated());
-        return matchRepository.save(matchToUpdate);
+        matchRepository.save(matchToUpdate);
+
+        if (matchDTO.getTournamentId() != null) {
+            TournamentService tournamentService = applicationContext.getBean(TournamentService.class);
+            tournamentService.checkAndTryCompleteTournament(matchDTO.getTournamentId());
+        } else if (matchDTO.getLeagueId() != null) {
+            LeagueService leagueService = applicationContext.getBean(LeagueService.class);
+            leagueService.checkAndTryCompleteLeague(matchDTO.getLeagueId());
+        } else {
+            throw new RuntimeException();
+        }
+
+        return matchToUpdate;
     }
 
     public List<MatchDTO> getAllByLeagueId(Long leagueId){
@@ -73,7 +86,7 @@ public class MatchService {
     }
 
     public List<MatchDTO> getAllByTournamentIdAndRoundIsGreaterThanEqual(Long tournamentId, int firstRound) {
-        Optional<List<Match>> optionalList = matchRepository.getAllByTournamentIdAndRoundIsGreaterThanEqual(tournamentId, firstRound);
+        Optional<List<Match>> optionalList = this.matchRepository.getAllByTournamentIdAndRoundIsGreaterThanEqual(tournamentId, firstRound);
         List<Match> matchList = optionalList.orElse(Collections.emptyList());
 
         return matchList.stream()

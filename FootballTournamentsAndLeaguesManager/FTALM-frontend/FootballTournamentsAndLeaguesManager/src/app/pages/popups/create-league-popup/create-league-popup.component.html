@@ -11,10 +11,10 @@
       <label for="league-name-field">League name</label>
       <input type="text" [(ngModel)]="name" name="name" (ngModelChange)="onInputChange('name', name)" (focus)="isCompetitionNameFocused = true" (blur)="isCompetitionNameFocused = false" required>
       <div class="error-form" *ngIf="isCompetitionNameFocused && leagueForm.controls['name'].errors?.['required']">
-        Tournament name is required.
+        League name is required.
       </div>
       <div class="error-form" [hidden]="isCompetitionNameCorrect" *ngIf="isCompetitionNameFocused && form.controls['name'].errors?.['invalidCompetitionName']">
-        Invalid tournament name.
+        Invalid league name.
       </div>
     </div>
     <div class="form-field">
@@ -47,7 +47,7 @@
       </mat-radio-group>
     </div>
     <div class="button-container">
-      <button mat-raised-button type="submit" [disabled]="!isAddTournamentButtonEnable || !isStartDateCorrect || !isTypeSelected">Create tournament</button>
+      <button mat-raised-button type="submit" [disabled]="!isAddTournamentButtonEnable || !isStartDateCorrect || !isTypeSelected">Create league</button>
       <button mat-raised-button type="button" (click)="closePopup()">Cancel</button>
     </div>
   </form>

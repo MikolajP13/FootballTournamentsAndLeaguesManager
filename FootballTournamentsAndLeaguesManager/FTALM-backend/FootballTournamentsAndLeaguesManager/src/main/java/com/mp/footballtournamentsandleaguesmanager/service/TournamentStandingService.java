@@ -46,7 +46,6 @@ public class TournamentStandingService {
 
     public TournamentStanding updateTournamentStanding(Long tournamentId, int groupId, Long teamId, TournamentStandingDTO tournamentStandingDTO){
         TournamentStanding tournamentStandingToUpdate = this.tournamentStandingRepository.findByTournamentIdAndGroupIdAndTeamId(tournamentId, groupId, teamId).orElseThrow();
-
         return tournamentStandingRepository.save(StandingMapper.updateStandingAndReturn(tournamentStandingToUpdate, tournamentStandingDTO));
     }
 
