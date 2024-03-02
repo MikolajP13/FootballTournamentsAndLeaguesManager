@@ -11,7 +11,7 @@ import java.util.List;
 
 @Configuration
 public class CorsConfig {
-    //testing CORS security
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
