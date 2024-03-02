@@ -38,7 +38,7 @@ export class LoginComponent {
       error: () => { 
         var errorForm = document.getElementById("login-error-form");
         errorForm!.style.display = 'block';
-        console.log("Ivalid username/password or account not enabled."); 
+        console.log("Invalid username/password or account not enabled."); 
       },
       complete: () => {
         if(userEmailAddress !== null) {

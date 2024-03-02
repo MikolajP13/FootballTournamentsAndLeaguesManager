@@ -98,9 +98,8 @@ export class LeagueTeamsComponent {
             }});
         
         dialogRef.afterClosed().subscribe(result => {
-          if(result === 'success'){
+          if (result.removed)
             window.location.reload();
-          }
         });
       });
   }

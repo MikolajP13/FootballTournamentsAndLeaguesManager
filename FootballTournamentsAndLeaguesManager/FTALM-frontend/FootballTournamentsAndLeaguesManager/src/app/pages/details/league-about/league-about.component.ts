@@ -65,6 +65,7 @@ export class LeagueAboutComponent {
   }
 
   startLeague() {
+    this.leagueCanBeStarted = false;
     this.leagueService.startLeague(this.leagueId).subscribe();
   }
 }

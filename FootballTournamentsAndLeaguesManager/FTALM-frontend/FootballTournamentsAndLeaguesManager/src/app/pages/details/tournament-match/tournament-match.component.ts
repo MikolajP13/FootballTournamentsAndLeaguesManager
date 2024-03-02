@@ -113,15 +113,25 @@ export class TournamentMatchComponent {
       this.events.push(goalAssist);
       teamName === this.match?.homeTeamName ? this.homeTeamScore += 1 : this.awayTeamScore += 1;
 
-    }else if(selectedEventType === 'Card') {
+    } else if(selectedEventType === 'Card') {
+      var possiblyRedCard = [];
+      let cardTypeForPlayer: CardType;
 
-      var possiblyRedCard = this.events.filter(e => e.type === this.CARD_EVENT_ID 
-        && e.player.id === firstPlayer?.id 
-        && e.cardType === 0);
+      if (playerCard === Object.keys(CardType).indexOf("YELLOW")) {
+        possiblyRedCard = this.events.filter(e => e.type === this.CARD_EVENT_ID 
+          && e.player.id === firstPlayer?.id 
+          && e.cardType === 0);
+      }
+
+      if (possiblyRedCard.length === 0) {
+        cardTypeForPlayer = playerCard as unknown as number === 1 ? 2 as unknown as CardType : 0 as unknown as CardType;
+      } else {
+        cardTypeForPlayer = 1 as unknown as CardType;
+      }
 
       var card: Card = {
         player: firstPlayer,
-        // 0 is yellow card, 2 is second yellow, 3 is red card
+        // 0 is yellow card, 1 is second yellow, 2 is red card
         cardType: playerCard === 0 as unknown as CardType ? 
           (possiblyRedCard.length === 1 ? 1 as unknown as CardType : playerCard as CardType) : 2 as unknown as CardType,
         match: {
@@ -314,7 +324,7 @@ export class TournamentMatchComponent {
     if(player?.id) {
       redCardEvent = this.events.filter(e => e.type === this.CARD_EVENT_ID 
         && e.player.id === player.id 
-        && e.cardType === 1);
+        && (e.cardType === 1 || e.cardType === 2));
 
       substitutionEvent = this.events.filter(e => e.type === this.SUBSTITUTION_EVENT_ID 
         && e.exitingPlayer.id === player.id);  

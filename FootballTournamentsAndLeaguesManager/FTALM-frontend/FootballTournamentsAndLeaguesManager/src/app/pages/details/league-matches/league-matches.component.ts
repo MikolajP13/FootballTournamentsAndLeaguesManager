@@ -21,7 +21,8 @@ export class LeagueMatchesComponent {
   constructor(private route: ActivatedRoute, private router: Router, private matchService: MatchService, 
     public matchweekNumberService: MatchWeekNumberService) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    console.log(this.route.url)
     this.route.params.subscribe(params => {
       this.leagueId = params['leagueId'];
     });

@@ -25,8 +25,8 @@ export class TeamRemoveInformationComponent {
 
   closePopup(){
     if (this.warning)
-      this.dialogRef.close('success');
+      this.dialogRef.close({text: 'success', removed: true});
     else
-      this.dialogRef.close();
+      this.dialogRef.close({text: 'success', removed: false});
   }
 }
