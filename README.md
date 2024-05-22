@@ -32,8 +32,9 @@ This application is designed to streamline the process of managing football comp
 ## Technologies
 ![Static Badge](https://img.shields.io/badge/SPRING-green?style=for-the-badge&logo=spring&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/SPRING%20BOOT-green?style=for-the-badge&logo=springboot&logoColor=white)
-![Static Badge](https://img.shields.io/badge/ANGULAR-red?style=for-the-badge&logo=angular&logoColor=white) 
-![Static Badge](https://img.shields.io/badge/CSS-blue?style=for-the-badge&logo=css3&logoColor=white) 
-![Static Badge](https://img.shields.io/badge/HTML5-red?style=for-the-badge&logo=html5&logoColor=white) 
-![Static Badge](https://img.shields.io/badge/TYPESCRIPT-blue?style=for-the-badge&logo=TYPESCRIPT&logoColor=white)
-![Static Badge](https://img.shields.io/badge/MySQL-blue?style=for-the-badge&logo=mysql&logoColor=white)
+![Static Badge](https://img.shields.io/badge/angular-%230F0F11?style=for-the-badge&logo=angular&logoColor=white&color=%230F0F11)
+![Static Badge](https://img.shields.io/badge/css-%231572B6?style=for-the-badge&logo=css3&logoColor=white&color=%231572B6)
+![Static Badge](https://img.shields.io/badge/html5-%23E34F26?style=for-the-badge&logo=html5&logoColor=white&color=%23E34F26)
+![Static Badge](https://img.shields.io/badge/Typescript-%233178C6?style=for-the-badge&logo=typescript&logoColor=white&color=%233178C6)
+![Static Badge](https://img.shields.io/badge/mysql-%234479A1?style=for-the-badge&logo=mysql&logoColor=white&color=%234479A1)
+
